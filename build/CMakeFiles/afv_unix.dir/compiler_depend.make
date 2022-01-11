@@ -968,7 +968,791 @@ CMakeFiles/afv_unix.dir/src/application.cpp.o: ../src/application.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wchar_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_dev_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mode_t.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mode_t.h \
+  ../extern/afv-native/include/afv-native/Client.h \
+  ../extern/afv-native/include/afv-native/afv/RadioSimulation.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/memory \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__availability \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/type_traits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstddef \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/version \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/typeinfo \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/exception \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/base.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__debug \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iosfwd \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mbstate_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_va_list.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctermid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_off_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_clock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_time_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timespec.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/__wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wint_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctype_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/runetype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__undef_macros \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdlib \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdint \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/new \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/utility \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstring \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iterator \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__functional_base \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdexcept \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/allocator_traits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/pointer_traits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/utilities.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/atomic \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/chrono \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctime \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/climits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/syslimits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/pthread_impl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mach_port_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cassert \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__hash_table \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/algorithm \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/functional \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bit \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cmath \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__node_handle \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/optional \
+  ../extern/afv-native/include/afv-native/utility.h \
+  ../extern/afv-native/include/afv-native/afv/EffectResources.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string_view \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__string \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwchar \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctrans_t.h \
+  ../extern/afv-native/include/afv-native/audio/RecordedSampleSource.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleStorage.h \
+  ../extern/afv-native/include/afv-native/audio/audio_params.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleSource.h \
+  ../extern/afv-native/include/afv-native/audio/SourceStatus.h \
+  ../extern/afv-native/include/afv-native/afv/RemoteVoiceSource.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/mutex \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__mutex_base \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
+  ../extern/afv-native/extern/speex/speex_jitter.h \
+  ../extern/afv-native/extern/speex/speexdsp_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_char.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_short.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_caddr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_blkcnt_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_blksize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_gid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_in_addr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_in_port_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ino_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ino64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_nlink_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_useconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_suseconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_def.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_setsize.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_set.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_clr.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_zero.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_isset.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_copy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
+  ../extern/afv-native/extern/opus/include/opus.h \
+  ../extern/afv-native/extern/opus/include/opus_types.h \
+  ../extern/afv-native/extern/opus/include/opus_defines.h \
+  ../extern/afv-native/include/afv-native/afv/dto/interfaces/IAudio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
+  ../extern/afv-native/include/afv-native/util/monotime.h \
+  ../extern/afv-native/include/afv-native/afv/RollingAverage.h \
+  ../extern/afv-native/include/afv-native/afv/VoiceCompressionSink.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleSink.h \
+  ../extern/afv-native/include/afv-native/afv/dto/voice_server/AudioRxOnTransceivers.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/versioning.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sysdep.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdbool.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdbool.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arpa/inet.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet/in.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/socket.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/net/net_kev.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sa_family_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_socklen_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_iovec_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet6/in6.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/other/endian.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/version_number.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/make.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/test.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/gnu.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/_prefix.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/_cassert.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/macos.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/ios.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/os_detected.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/bsdi.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/dragonfly.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/free.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/open.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/net.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/android.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/TargetConditionals.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ostream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_xlocale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/__wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/streambuf \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/nl_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_nl_item.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iomanip \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/istream \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/fbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_define.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_exception.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_exception.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/uio.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version_master.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/type.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/carray.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/carray.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/char_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/char_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/deque.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/deque.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/float.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/float.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/list.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/list \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tree \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/pair.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/pair.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/set.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/set.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/set \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/string.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/string.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/wstring.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/wstring.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/library.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/add.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/dec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/inc.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/while.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/error.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/auto_rec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/iif.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_iif.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/adt.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_binary.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/check.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/compl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/eat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitand.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/detail/while.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/expand.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/overload.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/rem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/detail/is_single_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/div.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/detail/div_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/sub.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/not.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mod.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mul.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/data.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/detail/get_data.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_1.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty_variadic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/is_begin_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/detail/is_begin_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/detail/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/not_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/deduce_d.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_z.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/limits.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/assert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/line.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/iterate.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/slot.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/detail/def.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/stringize.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/apply.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_unary.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/identity.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/intercept.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/local.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/self.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/append.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/at.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/rest_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_i.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/for.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/detail/for.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/filter.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/first_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_product.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/and.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitnor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitxor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/nor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/or.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/xor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/remove_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_r.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_a_default.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_defaults.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat_from_to.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/max.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/min.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/filter.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/first_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/split.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_i.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_product.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/rest_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/subseq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/binary_transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/detail/is_single_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/variadic_seq_to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/wstringize.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_convert_helper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/chrono.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/chrono.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/forward_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/forward_list.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/forward_list \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/reference_wrapper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/reference_wrapper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/shared_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/shared_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/timespec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/timespec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unique_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unique_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_set.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_set.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_set \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/optional.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/optional.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/string_view.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/string_view.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/carray_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/carray_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/vector_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/vector_byte.hpp \
+  ../extern/afv-native/include/afv-native/afv/dto/domain/RxTransceiver.h \
+  ../extern/afv-native/include/afv-native/audio/OutputMixer.h \
+  ../extern/afv-native/include/afv-native/audio/PinkNoiseGenerator.h \
+  ../extern/afv-native/include/afv-native/audio/WhiteNoiseGenerator.h \
+  ../extern/afv-native/include/afv-native/audio/SineToneSource.h \
+  ../extern/afv-native/include/afv-native/audio/SpeexPreprocessor.h \
+  ../extern/afv-native/extern/speex/speex_preprocess.h \
+  ../extern/afv-native/include/afv-native/Log.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdarg \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/sstream \
+  ../extern/afv-native/include/afv-native/audio/SimpleCompressorEffect.h \
+  ../extern/afv-native/include/afv-native/audio/VHFFilterSource.h \
+  ../extern/afv-native/include/afv-native/audio/BiQuadFilter.h \
+  ../extern/afv-native/include/afv-native/audio/IFilter.h \
+  ../extern/afv-native/include/afv-native/cryptodto/UDPChannel.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/visibility.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event-config.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timeval64.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_select.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/util.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netdb.h \
+  ../extern/afv-native/include/afv-native/cryptodto/Channel.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evp.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslconf.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslv.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/ossl_typ.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/e_os2.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/symhacks.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bio.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/crypto.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/safestack.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/stack.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/cryptoerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bioerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evperr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objects.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/obj_mac.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1err.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bn.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bnerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objectserr.h \
+  ../extern/afv-native/include/afv-native/cryptodto/params.h \
+  ../extern/afv-native/include/afv-native/cryptodto/SequenceTest.h \
+  ../extern/afv-native/include/afv-native/cryptodto/dto/ICryptoDTO.h \
+  ../extern/afv-native/include/afv-native/event/EventCallbackTimer.h \
+  ../extern/afv-native/include/afv-native/event/EventTimer.h \
+  ../extern/afv-native/include/afv-native/util/ChainedCallback.h \
+  ../extern/afv-native/include/afv-native/event.h \
+  ../extern/afv-native/include/afv-native/afv/APISession.h \
+  ../extern/afv-native/include/afv-native/afv/dto/Station.h \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/numeric \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/adl_serializer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/from_json.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/valarray \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/exceptions.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/position_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_scope.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/cpp_future.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/type_traits.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iterator_traits.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/void_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/detected.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json_fwd.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/value_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_json.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/byte_container_with_subtype.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/hash.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/binary_reader.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/input_adapters.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/json_sax.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/lexer.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/clocale \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/is_sax.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/parser.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/internal_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iter_impl.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_pointer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_ref.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/binary_writer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/output_adapters.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/serializer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_chars.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/ordered_map.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_unscope.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+  ../extern/afv-native/include/afv-native/http/TransferManager.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curl.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curlver.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/system.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/easy.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/multi.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/urlapi.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/options.h \
+  ../extern/afv-native/include/afv-native/http/Request.h \
+  ../extern/afv-native/include/afv-native/http/http.h \
+  ../extern/afv-native/include/afv-native/http/RESTRequest.h \
+  ../extern/afv-native/include/afv-native/afv/VoiceSession.h \
+  ../extern/afv-native/include/afv-native/afv/dto/VoiceServerConnectionData.h \
+  ../extern/afv-native/include/afv-native/cryptodto/dto/ChannelConfig.h \
+  ../extern/afv-native/include/afv-native/afv/dto/PostCallsignResponse.h \
+  ../extern/afv-native/include/afv-native/afv/dto/Transceiver.h \
+  ../extern/afv-native/include/afv-native/audio/AudioDevice.h \
+  ../extern/afv-native/include/afv-native/http/EventTransferManager.h
 
 CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   ../extern/imgui/imgui.h \
@@ -1062,6 +1846,21 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/TargetConditionals.h \
   ../src/style.h \
   ../src/application.h \
+  ../extern/afv-native/include/afv-native/Client.h \
+  ../extern/afv-native/include/afv-native/afv/RadioSimulation.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/memory \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__availability \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/type_traits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstddef \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/version \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/typeinfo \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/exception \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/base.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__debug \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iosfwd \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mbstate_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_stdio.h \
@@ -1069,14 +1868,102 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctermid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_off_t.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_main.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_stdinc.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_config.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_platform.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityMacros.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/begin_code.h \
-  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/close_code.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_clock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_time_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timespec.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/__wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wint_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctype_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/runetype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__undef_macros \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdlib \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdint \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/new \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/utility \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstring \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iterator \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__functional_base \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdexcept \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/allocator_traits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/pointer_traits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/utilities.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/atomic \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/chrono \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctime \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/climits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/syslimits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/pthread_impl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mach_port_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cassert \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__hash_table \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/algorithm \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/functional \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bit \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cmath \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__node_handle \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/optional \
+  ../extern/afv-native/include/afv-native/utility.h \
+  ../extern/afv-native/include/afv-native/afv/EffectResources.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string_view \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__string \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwchar \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctrans_t.h \
+  ../extern/afv-native/include/afv-native/audio/RecordedSampleSource.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleStorage.h \
+  ../extern/afv-native/include/afv-native/audio/audio_params.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleSource.h \
+  ../extern/afv-native/include/afv-native/audio/SourceStatus.h \
+  ../extern/afv-native/include/afv-native/afv/RemoteVoiceSource.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/mutex \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__mutex_base \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
+  ../extern/afv-native/extern/speex/speex_jitter.h \
+  ../extern/afv-native/extern/speex/speexdsp_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_char.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_short.h \
@@ -1091,8 +1978,6 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ino64_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_key_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_nlink_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_clock_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_time_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_useconds_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_suseconds_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_def.h \
@@ -1102,40 +1987,660 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_zero.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_isset.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_copy.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wchar.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wchar.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mbstate_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/time.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timespec.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_wctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/__wctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wint_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctype_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/runetype.h \
+  ../extern/afv-native/extern/opus/include/opus.h \
+  ../extern/afv-native/extern/opus/include/opus_types.h \
+  ../extern/afv-native/extern/opus/include/opus_defines.h \
+  ../extern/afv-native/include/afv-native/afv/dto/interfaces/IAudio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
+  ../extern/afv-native/include/afv-native/util/monotime.h \
+  ../extern/afv-native/include/afv-native/afv/RollingAverage.h \
+  ../extern/afv-native/include/afv-native/afv/VoiceCompressionSink.h \
+  ../extern/afv-native/include/afv-native/audio/ISampleSink.h \
+  ../extern/afv-native/include/afv-native/afv/dto/voice_server/AudioRxOnTransceivers.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/versioning.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/cpp_config_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sysdep.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdbool.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdbool.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arpa/inet.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet/in.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/socket.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/net/net_kev.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sa_family_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_socklen_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_iovec_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet6/in6.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/other/endian.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/version_number.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/make.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/test.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/gnu.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/_prefix.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/_cassert.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/macos.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/ios.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/os_detected.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/bsdi.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/dragonfly.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/free.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/open.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/net.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/android.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/pack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ostream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_xlocale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/__wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/streambuf \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/nl_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_nl_item.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/detail/cpp11_zone_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iomanip \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/istream \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/check_container_size_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/iterator_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/fbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/null_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_define.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_exception.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_exception.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/create_object_visitor_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_parse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/x3_unpack.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/sbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/vrefbuffer_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/uio.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version_master.h \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/type.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/array_ref_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/carray.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/carray.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/char_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/char_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/deque.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/deque.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/ext_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/int_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/fixint_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/float.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/float.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/list.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/list \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tree \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/nil_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/pair.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/pair.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/meta_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/v4raw_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/set.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/set.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/set \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_msgpack_tuple_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/size_equal_only_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/string.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/string.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/wstring.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/wstring.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/library.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/add.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/dec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/config.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/inc.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/while.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/error.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/auto_rec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/iif.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_iif.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/adt.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_binary.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/check.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/compl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/eat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitand.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/detail/while.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bool.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/expand.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/overload.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/rem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/detail/is_single_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/div.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/detail/div_base.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/sub.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/not.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mod.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mul.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/data.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/detail/get_data.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_1.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty_variadic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/is_begin_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/detail/is_begin_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/detail/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/not_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/deduce_d.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_z.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater_equal.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/limits.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/assert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/line.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/iterate.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/slot.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/detail/def.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/stringize.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/apply.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_unary.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/identity.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/intercept.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/local.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/self.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/append.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/at.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/rest_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_i.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/for.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/detail/for.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/filter.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/first_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_product.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/and.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitnor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitxor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/nor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/or.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/xor.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren_if.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/remove_parens.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_r.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_a_default.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_defaults.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_binary_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_params.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat_from_to.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/max.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/min.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/cat.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_left.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/elem.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/size.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/enum.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/filter.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/first_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/split.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_right.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/reverse.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/is_empty.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_i.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_product.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/rest_n.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/subseq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/binary_transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/detail/is_single_return.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/transform.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/variadic_seq_to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/insert.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_back.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_front.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/remove.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/replace.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_seq.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/wstringize.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/define_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_array_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_map_decl.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_convert_helper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_unsigned_char.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/chrono.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/chrono.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/forward_list.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/forward_list.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/forward_list \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/reference_wrapper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/reference_wrapper.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/shared_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/shared_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/timespec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/timespec.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/tuple.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unique_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unique_ptr.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_map.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_set.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_set.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_set \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/optional.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/optional.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/string_view.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/string_view.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/carray_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/carray_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/vector_byte.hpp \
+  /Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/vector_byte.hpp \
+  ../extern/afv-native/include/afv-native/afv/dto/domain/RxTransceiver.h \
+  ../extern/afv-native/include/afv-native/audio/OutputMixer.h \
+  ../extern/afv-native/include/afv-native/audio/PinkNoiseGenerator.h \
+  ../extern/afv-native/include/afv-native/audio/WhiteNoiseGenerator.h \
+  ../extern/afv-native/include/afv-native/audio/SineToneSource.h \
+  ../extern/afv-native/include/afv-native/audio/SpeexPreprocessor.h \
+  ../extern/afv-native/extern/speex/speex_preprocess.h \
+  ../extern/afv-native/include/afv-native/Log.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdarg \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/sstream \
+  ../extern/afv-native/include/afv-native/audio/SimpleCompressorEffect.h \
+  ../extern/afv-native/include/afv-native/audio/VHFFilterSource.h \
+  ../extern/afv-native/include/afv-native/audio/BiQuadFilter.h \
+  ../extern/afv-native/include/afv-native/audio/IFilter.h \
+  ../extern/afv-native/include/afv-native/cryptodto/UDPChannel.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/visibility.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event-config.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timeval64.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_select.h \
+  /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/util.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netdb.h \
+  ../extern/afv-native/include/afv-native/cryptodto/Channel.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evp.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslconf.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslv.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/ossl_typ.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/e_os2.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/symhacks.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bio.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/crypto.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/safestack.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/stack.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/cryptoerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bioerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evperr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objects.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/obj_mac.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1err.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bn.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bnerr.h \
+  /Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objectserr.h \
+  ../extern/afv-native/include/afv-native/cryptodto/params.h \
+  ../extern/afv-native/include/afv-native/cryptodto/SequenceTest.h \
+  ../extern/afv-native/include/afv-native/cryptodto/dto/ICryptoDTO.h \
+  ../extern/afv-native/include/afv-native/event/EventCallbackTimer.h \
+  ../extern/afv-native/include/afv-native/event/EventTimer.h \
+  ../extern/afv-native/include/afv-native/util/ChainedCallback.h \
+  ../extern/afv-native/include/afv-native/event.h \
+  ../extern/afv-native/include/afv-native/afv/APISession.h \
+  ../extern/afv-native/include/afv-native/afv/dto/Station.h \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/numeric \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/adl_serializer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/from_json.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/valarray \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/exceptions.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/position_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_scope.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/cpp_future.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/type_traits.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iterator_traits.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/void_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/detected.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json_fwd.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/value_t.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_json.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/byte_container_with_subtype.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/hash.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/binary_reader.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/input_adapters.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/json_sax.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/lexer.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/clocale \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/is_sax.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/parser.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/internal_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iter_impl.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_pointer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_ref.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/binary_writer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/output_adapters.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/serializer.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_chars.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/ordered_map.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_unscope.hpp \
+  /Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+  ../extern/afv-native/include/afv-native/http/TransferManager.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curl.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curlver.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/system.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/easy.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/multi.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/urlapi.h \
+  /Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/options.h \
+  ../extern/afv-native/include/afv-native/http/Request.h \
+  ../extern/afv-native/include/afv-native/http/http.h \
+  ../extern/afv-native/include/afv-native/http/RESTRequest.h \
+  ../extern/afv-native/include/afv-native/afv/VoiceSession.h \
+  ../extern/afv-native/include/afv-native/afv/dto/VoiceServerConnectionData.h \
+  ../extern/afv-native/include/afv-native/cryptodto/dto/ChannelConfig.h \
+  ../extern/afv-native/include/afv-native/afv/dto/PostCallsignResponse.h \
+  ../extern/afv-native/include/afv-native/afv/dto/Transceiver.h \
+  ../extern/afv-native/include/afv-native/audio/AudioDevice.h \
+  ../extern/afv-native/include/afv-native/http/EventTransferManager.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_platform.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityMacros.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/close_code.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/inttypes.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/inttypes.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/math.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/math.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/type_traits \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstddef \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/version \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__undef_macros \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_inttypes.h \
   /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_atomic.h \
   /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_audio.h \
@@ -1183,99 +2688,1443 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
   /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_opengl_glext.h
 
 
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_opengl_glext.h:
+
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_opengl.h:
 
-../src/application.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_inttypes.h:
 
-../src/application.cpp:
+../extern/afv-native/include/afv-native/afv/dto/Transceiver.h:
 
-../extern/imgui/imgui_widgets.cpp:
+../extern/afv-native/include/afv-native/afv/dto/PostCallsignResponse.h:
 
-../extern/imgui/imgui_tables.cpp:
+../extern/afv-native/include/afv-native/afv/VoiceSession.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_locale.h:
+../extern/afv-native/include/afv-native/http/RESTRequest.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_version.h:
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/options.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_timer.h:
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/multi.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_metal.h:
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/easy.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_messagebox.h:
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/system.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_log.h:
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curlver.h:
+
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/curl.h:
+
+../extern/afv-native/include/afv-native/http/TransferManager.h:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_unscope.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/ordered_map.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/serializer.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/json_reverse_iterator.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iter_impl.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/primitive_iterator.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/internal_iterator.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/parser.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/clocale:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/lexer.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/json_sax.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/input_adapters.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/binary_reader.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/byte_container_with_subtype.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/value_t.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json_fwd.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iterator_traits.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/type_traits.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/thirdparty/hedley/hedley.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/macro_scope.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/input/position_t.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/exceptions.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/valarray:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/from_json.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/adl_serializer.hpp:
+
+../extern/afv-native/include/afv-native/event.h:
+
+../extern/afv-native/include/afv-native/cryptodto/dto/ICryptoDTO.h:
+
+../extern/afv-native/include/afv-native/cryptodto/SequenceTest.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objectserr.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bn.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1err.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/obj_mac.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/objects.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/stack.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/safestack.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/crypto.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bio.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/ossl_typ.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslv.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evp.h:
+
+../extern/afv-native/include/afv-native/cryptodto/Channel.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netdb.h:
+
+/Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/util.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timeval64.h:
+
+../extern/afv-native/include/afv-native/cryptodto/dto/ChannelConfig.h:
+
+/Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/visibility.h:
+
+../extern/afv-native/include/afv-native/cryptodto/UDPChannel.h:
+
+../extern/afv-native/include/afv-native/audio/IFilter.h:
+
+../extern/afv-native/include/afv-native/audio/VHFFilterSource.h:
+
+../extern/afv-native/include/afv-native/audio/SimpleCompressorEffect.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdarg:
+
+../extern/afv-native/include/afv-native/Log.h:
+
+../extern/afv-native/include/afv-native/audio/SpeexPreprocessor.h:
+
+../extern/afv-native/include/afv-native/audio/SineToneSource.h:
+
+../extern/afv-native/include/afv-native/audio/PinkNoiseGenerator.h:
+
+../extern/afv-native/include/afv-native/afv/APISession.h:
+
+../extern/afv-native/include/afv-native/audio/OutputMixer.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/vector_byte.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/carray_byte.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/string_view.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/optional.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/optional.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_set:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_set.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unique_ptr.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/timespec.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/shared_ptr.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/shared_ptr.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/reference_wrapper.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/forward_list:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/chrono.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/chrono.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_unsigned_char.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_unsigned_char.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array_char.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/wstringize.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_array_decl.hpp:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_hints.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_haptic.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/remove.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_filesystem.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_back.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_touch.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_back.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_quit.h:
+../extern/afv-native/include/afv-native/afv/dto/domain/RxTransceiver.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_sensor.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_types.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_joystick.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_1.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_mouse.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_array.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_scancode.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/insert.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_keyboard.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/detail/is_single_return.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_blendmode.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/subseq.hpp:
 
-/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/arm_neon.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/remove.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/replace.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_back.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/rest_n.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_i.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdlib.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/first_n.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/max.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_a_default.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/cpp_future.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_select.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_binary_params.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_params.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/reference_wrapper.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_params_with_defaults.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/enum.hpp:
+
+../extern/afv-native/include/afv-native/Client.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/xor.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/sbuffer_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/pthread_impl.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/size.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_metal.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_tuple.hpp:
+
+../extern/afv-native/include/afv-native/audio/BiQuadFilter.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_product.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int16_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each_i.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/rest_n.hpp:
+
+../extern/afv-native/include/afv-native/util/ChainedCallback.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/at.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array_char.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_unpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/not.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/append.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/meta_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/self.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration.hpp:
+
+../extern/afv-native/include/afv-native/afv/dto/Station.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wchar.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdbool.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/map_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/intercept.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/slot.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/binary_transform.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/iterate.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_if.hpp:
+
+../extern/imgui/imgui_impl_sdl.cpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_platform.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/limits.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater_equal.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/equal.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/and.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_seq.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_seq.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_list.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/size.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/reverse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/timespec.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/replace.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/remove.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_front.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ratio:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/transform.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_map.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/array_ref_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/pop_back.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/vector_byte.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/deduce_d.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wctype.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mach_port_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/detail/is_empty.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/raw_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/is_begin_parens.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty_variadic.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_left.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unordered_map.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/is_empty.hpp:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdint.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/if.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma_if.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/insert.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_power.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/cat.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/elem.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_convert_helper.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mul.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less_equal.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/elem.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/size.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/overload.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/json.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bool.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/detail/while.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/math.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitand.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/binary_writer.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_return.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_right.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/carray_byte.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_tuple.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/time.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_msgpack_tuple_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_right.hpp:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/__stddef_max_align_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/eat.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/gnu.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/check.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/algorithm:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_log.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_binary.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/expr_iif.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/error.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/replace.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/cat.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/config/config.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/dec.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/byte.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timeval.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/wstring.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_unsigned_char.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/hash.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_char.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/string.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/for_each.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/size_equal_only_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/errno.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/size_equal_only_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_msgpack_tuple_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/null_visitor_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/test.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_return.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/size_equal_only_decl.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_json.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ostream:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/set:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/set.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/v4raw_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp17/string_view.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/nor.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/enum.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/TargetConditionals.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/v4raw_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/raw.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_front.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/meta_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/locale.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/pair.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int16_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/seq.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/nil_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/cpp_config_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/ios.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstddef:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/cat.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/map.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/list.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_r.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/list.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/float.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/push_front.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uintmax_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/fixint_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/memory:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int_decl.hpp:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/opensslconf.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/istream:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/map_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/ext_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/deque.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/data.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/char_ptr.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/carray.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iterator:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/carray.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_intptr_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/bool.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/bool.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/array_ref.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/array_ref_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/add.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each_product.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/ext_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/array_ref.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/output/output_adapters.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/type.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_bool.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version_master.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/uio.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint64_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/vrefbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/fixint_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tree:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/vrefbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_params.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/vrefbuffer.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer.hpp:
+
+/Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event-config.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/msgpack_tuple_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/sbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_array_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/first_n.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/line.hpp:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_cpuinfo.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_endian.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/sbuffer_decl.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_syswm.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/variadic_seq_to_seq.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/is_empty.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_parse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_trailing_binary_params.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/x3_parse.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/initializer_list:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/define_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/create_object_visitor.hpp:
+
+../extern/imgui/imgui_draw.cpp:
+
+../src/application.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cassert:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_exception.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_define.h:
+
+../extern/afv-native/include/afv-native/audio/AudioDevice.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/parse_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/pop_front.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/library.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/elem.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_return.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/inc.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/parse_return.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/fold_right.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/selection/min.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/auto_rec.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/parse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor_decl.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_clipboard.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/null_visitor.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/atomic:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/iterator_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/iterator_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/iterator.hpp:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bnerr.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_loadso.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_string.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/check_container_size_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/check_container_size_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/iterator_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/v4raw_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/libkern/arm/OSByteOrder.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base_decl.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/is_sax.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/iif.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitxor.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_fwd_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/object_fwd_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdlib.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.h:
+
+../extern/afv-native/include/afv-native/afv/VoiceCompressionSink.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitor.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/close_code.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsfilcnt_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_fwd.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_sensor.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_front.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__nullptr:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_xlocale.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/forward_list.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone.hpp:
+
+../extern/imgui/imgui_impl_opengl3_loader.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_array_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/zone_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wchar.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint16_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/stdio.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctype.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_time.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__availability:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iosfwd:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdlib.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/__wctype.h:
+
+../extern/afv-native/include/afv-native/audio/ISampleSource.h:
+
+../extern/afv-native/include/afv-native/afv/dto/voice_server/AudioRxOnTransceivers.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/apply.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/null_visitor.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/define_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_mouse.h:
+
+../extern/imgui/imgui_impl_opengl3.cpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/pack_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_attr_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/open.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/reverse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/int.hpp:
+
+../extern/afv-native/extern/opus/include/opus.h:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/asn1.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/greater.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/dragonfly.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/list:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/void_t.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/library/c/_prefix.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/enum.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_null.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdint.h:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/limits.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/resource.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet6/in6.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/x3_unpack.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_array.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_uid_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/deduce_z.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/net/net_kev.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/os_detected.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/netinet/in.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sched.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sysdep.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/version_number.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int8_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/ctype.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int32_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_off_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/filter.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/less.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/identity.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/slot/detail/def.hpp:
+
+../extern/afv-native/include/afv-native/audio/ISampleSink.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_array.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/paren_if.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_locale.h:
+
+../src/main.cpp:
+
+../extern/afv-native/include/afv-native/event/EventCallbackTimer.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int8_t.h:
+
+../extern/afv-native/include/afv-native/afv/RollingAverage.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_unsigned_char.hpp:
+
+../extern/afv-native/include/afv-native/util/monotime.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/utility:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_joystick.h:
+
+../extern/afv-native/extern/speex/speex_jitter.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityInternal.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/define_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/mutex:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/types.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/adaptor_base.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_param.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bits:
+
+../extern/afv-native/include/afv-native/audio/audio_params.h:
+
+../extern/afv-native/include/afv-native/audio/ISampleStorage.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wctype.h:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_pointer.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/or.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_def.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/cpp_config_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwctype:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cwchar:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/signal.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdio:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/detail/is_begin_parens.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__string:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/map:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string_view:
+
+../extern/afv-native/include/afv-native/afv/EffectResources.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/ext.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_wctype.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/sstream:
+
+../extern/afv-native/include/afv-native/utility.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_video.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/optional:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/int_decl.hpp:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/cryptoerr.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/cpp11/unique_ptr.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_key_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/detail/is_unary.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cmath:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/reverse.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_key_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw_decl.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_version.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__hash_table:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/numeric:
+
+../extern/afv-native/include/afv-native/audio/WhiteNoiseGenerator.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/unordered_map:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/__wctype.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_blendmode.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/sched.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/errno.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/define_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/errno.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_define_map.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/climits:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/msgpack_tuple.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_audio.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_useconds_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cctype:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctime:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/chrono:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__threading_support:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/iteration/local.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_mutex.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/net.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/detail/split.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ssize_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/utilities.h:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/meta/detected.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/type_traits:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/unpack_exception.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_gesture.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/allocator_traits.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/qos.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstring:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/new:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_socklen_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/detail/cpp11_zone_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp17/byte.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/filter.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/nil_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/unpack_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sa_family_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdexcept:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tuple:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/vrefbuffer_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/fold_left.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdlib:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/size.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__debug:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/base.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/bsdi.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/assert.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/exception:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/typeinfo:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/rem.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_id_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_errno_t.h:
+
+../extern/afv-native/include/afv-native/afv/RadioSimulation.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/expand.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/make.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/raw.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/map.hpp:
+
+../src/application.cpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_locale.h:
+
+../extern/imgui/imgui_widgets.cpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted.hpp:
+
+../extern/imgui/imgui_tables.cpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/compl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__node_handle:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sigset_t.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_timer.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_messagebox.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/detail/for.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/check_container_size_decl.hpp:
+
+../extern/afv-native/include/afv-native/http/http.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/insert.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/detail/fold_left.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/types.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_haptic.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityVersions.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_filesystem.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/macos.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_touch.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/adaptor_base_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/zone_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/functional:
+
+../extern/afv-native/include/afv-native/http/Request.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sigaltstack.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_quit.h:
+
+../extern/imgui/imstb_truetype.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_rwops.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/pack.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_scancode.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_mcontext.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/float.h:
+
+../extern/afv-native/extern/opus/include/opus_types.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/versioning.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_keyboard.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_main.h:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/arm_neon.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_endian.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/version.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/android.h:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_syswm.h:
+
+../extern/imgui/imstb_textedit.h:
+
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_atomic.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/limits.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_nlink_t.h:
+
 /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/inttypes.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/streambuf:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/inttypes.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctype_t.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/object_decl.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_keycode.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_in_port_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdio.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/__wctype.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/strings.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/for_each.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_posix_availability.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timespec.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/detail/get_data.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/int_decl.hpp:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/evperr.h:
+
+/Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/event2/event.h:
+
 ../extern/imgui/imgui_impl_opengl3.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsfilcnt_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/assert.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uintmax_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale.h:
+
+../extern/afv-native/include/afv-native/event/EventTimer.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_seq.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_pixels.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_in_addr_t.h:
 
+/Users/pierre/.conan/data/libcurl/7.75.0/_/_/package/b7640208742bdad57f0bc2c5892fca2e9c046fb1/include/curl/urlapi.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/detail/cpp11_msgpack_tuple_decl.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_once_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/to_tuple.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/forward_list.hpp:
+
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_config.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__undef_macros:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_thread.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint_decl.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_cond_t.h:
 
@@ -1283,65 +4132,105 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/inttypes.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/signal.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/pop_front.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_va_list.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wchar.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_param.h:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/iterators/iteration_proxy.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_zero.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_clr.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_nlink_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/adaptor_base.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wint_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/other/endian.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/size.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_suseconds_t.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_error.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_key_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_keycode.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/create_object_visitor_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_copy.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/time.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/parse_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_stdio.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/logical/bitnor.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_iovec_t.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_gid_t.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/set.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_blksize_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/enum_shifted_binary_params.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/facilities/empty.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/size_equal_only_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/create_object_visitor.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_caddr_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/os/bsd/free.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_short.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_platform.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_config.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/cpp_config.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_rwops.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_rsize_t.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/remove_parens.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/transform.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_set.h:
 
+/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/begin_code.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/endian.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/cpp11/unordered_set.hpp:
+
 ../extern/imgui/imgui_impl_sdl.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdbool.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctermid.h:
 
 ../extern/imgui/imstb_rectpack.h:
 
-../extern/imgui/imgui_impl_opengl3_loader.h:
-
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_audio.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/fixint.hpp:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stddef.h:
 
-../extern/imgui/imgui_impl_opengl3.cpp:
-
-../extern/imgui/imstb_truetype.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/v4raw.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/limits.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/control/while.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdint.h:
 
@@ -1351,63 +4240,73 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
 
 ../extern/imgui/imgui_demo.cpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/TargetConditionals.h:
-
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_pixels.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/wstring.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/dlfcn.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/runetype.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/endian.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/comparison/not_equal.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_key_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/meta.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/elem.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/endian.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_gamecontroller.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/time.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_blkcnt_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/wait.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_char.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_def.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/ctype.h:
+../extern/afv-native/include/afv-native/afv/dto/interfaces/IAudio.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/syslimits.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/socket.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/predef/detail/_cassert.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_limits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/limits.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/limits.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bit:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/bioerr.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/object_fwd.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fsblkcnt_t.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ino64_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/string.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/limits:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_attr_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/stringize.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstddef:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/meta_decl.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/math.h:
-
-/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/__stddef_max_align_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/pack_decl.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stddef.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_types.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/signal.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/stdio.h:
+../extern/afv-native/extern/opus/include/opus_defines.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/fixint.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/tuple:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_surface.h:
 
@@ -1415,81 +4314,101 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_stdio.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/detail/cpp11_zone_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/vector_bool.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdio.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_time_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_rune_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/version:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint16_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/push_back.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_off_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cstdint:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/pack_decl.hpp:
+
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/json_ref.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_dev_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/stdlib.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int32_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_pid_t.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_assert.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wchar_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/nil_decl.hpp:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdarg.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_id_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/zone.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint64_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/reverse.hpp:
 
-/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdint.h:
+../src/style.h:
+
+../extern/afv-native/include/afv-native/afv/dto/VoiceServerConnectionData.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/msgpack_tuple_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/detail/is_single_return.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ct_rune_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_va_list.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/detail/cpp11_zone_decl.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_gesture.h:
+../extern/afv-native/include/afv-native/afv/RemoteVoiceSource.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/type_traits:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arpa/inet.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/libkern/arm/OSByteOrder.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/float.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/libkern/_OSByteOrder.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/vector_char.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int64_t.h:
+
+../extern/afv-native/include/afv-native/audio/SourceStatus.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/x3_unpack.hpp:
 
 ../extern/imgui/imgui_internal.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_rect.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_timeval.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/repeat_from_to.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/punctuation/comma.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/div.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_intmax_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_null.h:
+/Users/pierre/.conan/data/nlohmann_json/3.9.1/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/nlohmann/detail/conversions/to_chars.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/resource.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/locale.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_misc.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityMacros.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/Availability.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_isset.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_uid_t.h:
-
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_mutex.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_stdinc.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int64_t.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ino_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sigset_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityVersions.h:
-
-../src/style.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_sigaltstack.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/debug/assert.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_symbol_aliasing.h:
 
@@ -1497,158 +4416,168 @@ CMakeFiles/afv_unix.dir/src/main.cpp.o: ../src/main.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/mach/machine/_structs.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_rsize_t.h:
+../extern/afv-native/include/afv-native/cryptodto/params.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_nl_item.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/malloc/_malloc.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/arch.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int8_t.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_mcontext.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/endian.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__functional_base:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/appleapiopts.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/types.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/repetition/for.hpp:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_shape.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_power.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/zone.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/check_container_size_decl.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/appleapiopts.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/sub.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/sbuffer.hpp:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/float.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int16_t.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_clock_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/char_ptr.hpp:
+
+../extern/afv-native/include/afv-native/audio/RecordedSampleSource.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__memory/pointer_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint8_t.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/object.h:
+
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_events.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdint.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/push_back.hpp:
+
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/symhacks.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/_types.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ctype.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/deque.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_pid_t.h:
+../extern/afv-native/extern/speex/speexdsp_types.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int16_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/detail/cpp11_define_map_decl.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ssize_t.h:
-
-../extern/imgui/imstb_textedit.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_intptr_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int8_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/ext_decl.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint32_t.h:
 
-../src/main.cpp:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/Availability.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctermid.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mbstate_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_time_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_int64_t.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_opengl_glext.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__nullptr:
-
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_video.h:
-
-../extern/imgui/imgui_impl_sdl.cpp:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/adt.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_uintptr_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_blkcnt_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread/qos.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/types.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/wait.h:
+../extern/afv-native/include/afv-native/http/EventTransferManager.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_system.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/adaptor/int.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_mode_t.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/list/to_seq.hpp:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdbool.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_size_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_useconds_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/nl_types.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/AvailabilityInternal.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/detail/div_base.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/cpp_config_decl.hpp:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/pair.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/math.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/arithmetic/mod.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wchar.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/tuple/to_list.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__mutex_base:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/cdefs.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/adaptor_base.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/xlocale/_ctype.h:
 
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_render.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_u_int32_t.h:
 
-../extern/imgui/imgui_draw.cpp:
-
 /opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_hidapi.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__config:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/machine/_types.h:
-
 ../extern/imgui/imconfig.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_posix_availability.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_rune_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types.h:
-
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/close_code.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/msgpack_tuple_decl.hpp:
 
 ../extern/imgui/imgui.h:
 
+/Users/pierre/.conan/data/openssl/1.1.1m/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/include/openssl/e_os2.h:
+
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/seq/to_list.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string.h:
 
-/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdbool.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/unpack.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_main.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v1/fbuffer_decl.hpp:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_loadso.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctrans_t.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/SDL_clipboard.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/array/enum.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stdlib.h:
-
-/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/limits.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/adaptor/nil.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/float.h:
 
-/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2/begin_code.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/preprocessor/variadic/to_list.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/arm/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/signal.h:
 
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/adaptor/raw_decl.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/alloca.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/string.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_errno_t.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v2/unpack_decl.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/float.h:
+/Users/pierre/.conan/data/msgpack/3.3.0/_/_/package/ff4bb21ece53a4ae729afa61ca98735d28e5097f/include/msgpack/v3/adaptor/detail/cpp11_define_map_decl.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_ucontext.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_wint_t.h:
+../extern/afv-native/extern/speex/speex_preprocess.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iomanip:
 
 ../extern/imgui/imgui.cpp:

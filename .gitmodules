@@ -1,0 +1,3 @@
+[submodule "extern/afv-native"]
+	path = extern/afv-native
+	url = https://github.com/pierr3/afv-native

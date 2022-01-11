@@ -4,7 +4,17 @@
 namespace afv_unix::application {
 
     App::App() {
-        
+        mClient = std::make_shared<afv_native::Client>(
+            mEventBase,
+            2,
+            "AFV-Unix-TestClient");
+
+        auto m_audioDrivers = afv_native::audio::AudioDevice::getAPIs();
+        for(const auto& driver : m_audioDrivers)
+        {
+            m_audioApi = driver.first;
+            break;
+        }
     }
 
     App::~App(){
@@ -14,6 +24,11 @@ namespace afv_unix::application {
 
     // Main loop
     void App::render_frame() {
+
+        if (mClient) {
+            mPeak = mClient->getInputPeak();
+            mVu = mClient->getInputVu();
+        }
 
         #ifdef IMGUI_HAS_VIEWPORT
             ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -52,7 +67,43 @@ namespace afv_unix::application {
 
             ImGui::Text("Audio configuration");
             
+            if (ImGui::BeginCombo("Sound API", nameForAudioApi(mAudioApi).c_str())) {
+                if (ImGui::Selectable("Default", mAudioApi == 0)) {
+                    //setAudioApi(0);
+                }
+                for (const auto &item: mAudioProviders) {
+                    if (ImGui::Selectable(item.second.c_str(), mAudioApi == item.first)) {
+                        //setAudioApi(item.first);
+                    }
+                }
+                ImGui::EndCombo();
+            }
+
+            const char *currentInputDevice = "None Selected";
+
+            if (ImGui::BeginCombo("Input Device", currentInputDevice)) {
+
+                auto m_audioDrivers = afv_native::audio::AudioDevice::getCompatibleInputDevicesForApi(mAudioApi);
+                for(const auto& driver : m_audioDrivers)
+                {
+                    if (ImGui::Selectable(driver.second.name.c_str(), mInputDevice == driver.first)) {
+                        mInputDevice = driver.first;
+                    }
+                }
+
+                ImGui::EndCombo();
+            }
             
+            if (ImGui::Checkbox("Enable Input Filter", &mInputFilter)) {
+                if (mClient) {
+                    mClient->setEnableInputFilters(mInputFilter);
+                }
+            }
+            if (ImGui::Checkbox("Enable Output Effects", &mOutputEffects)) {
+                if (mClient) {
+                    mClient->setEnableOutputEffects(mOutputEffects);
+                }
+            }
 
 
             ImGui::NewLine();
@@ -74,6 +125,15 @@ namespace afv_unix::application {
 
         ImGui::End();
 
+    }
+
+    std::string App::nameForAudioApi(afv_native::audio::AudioDevice::Api apiNum) {
+        auto mIter = mAudioProviders.find(apiNum);
+        if (mIter == mAudioProviders.end()) {
+            if (apiNum == 0) return "UNSPECIFIED (default)";
+            return "INVALID";
+        }
+        return mIter->second;
     }
 
 }

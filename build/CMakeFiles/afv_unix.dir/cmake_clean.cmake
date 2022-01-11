@@ -17,8 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/afv_unix.dir/src/application.cpp.o.d"
   "CMakeFiles/afv_unix.dir/src/main.cpp.o"
   "CMakeFiles/afv_unix.dir/src/main.cpp.o.d"
-  "afv_unix"
-  "afv_unix.pdb"
+  "bin/afv_unix"
+  "bin/afv_unix.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
