@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/src/main.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/src/main.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/src/main.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_tables.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_tables.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_draw.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_draw.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_widgets.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_widgets.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_opengl3.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_opengl3.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_sdl.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_sdl.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_demo.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_demo.cpp"
+}
+]
