@@ -1,5 +1,6 @@
 #include "imgui.h"
 #include "imgui_stdlib.h"
+#include "imgui_internal.h"
 #include "afv-native/Client.h"
 #include <thread>
 #include <string>
@@ -33,12 +34,12 @@ namespace afv_unix::application {
             std::map<afv_native::audio::AudioDevice::Api,std::string> mAudioProviders;
             std::map<int,afv_native::audio::AudioDevice::DeviceInfo> mInputDevices;
             std::map<int,afv_native::audio::AudioDevice::DeviceInfo> mOutputDevices;
-            afv_native::audio::AudioDevice::Api mAudioApi;
+            afv_native::audio::AudioDevice::Api mAudioApi = 0;
             int mInputDevice;
             int mOutputDevice;
+            std::string configInputDeviceName;
+            std::string configOutputDeviceName;
 
             std::string nameForAudioApi(afv_native::audio::AudioDevice::Api apiNum);
-
-            afv_native::audio::AudioDevice::Api m_audioApi = 0;
         };
 }
