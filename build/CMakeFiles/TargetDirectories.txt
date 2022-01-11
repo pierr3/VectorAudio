@@ -1,3 +1,0 @@
-/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles/afv_unix.dir
-/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles/edit_cache.dir
-/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles/rebuild_cache.dir
