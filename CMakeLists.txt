@@ -12,6 +12,7 @@ include_directories(    ${SDL2_INCLUDE_DIRS}
 
 add_executable(afv_unix 
                 src/main.cpp
+                src/application.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp

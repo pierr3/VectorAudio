@@ -297,6 +297,30 @@ extern/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/afv_unix.dir/build.make CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.s
 .PHONY : extern/imgui/imgui_widgets.cpp.s
 
+src/application.o: src/application.cpp.o
+.PHONY : src/application.o
+
+# target to build an object file
+src/application.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/afv_unix.dir/build.make CMakeFiles/afv_unix.dir/src/application.cpp.o
+.PHONY : src/application.cpp.o
+
+src/application.i: src/application.cpp.i
+.PHONY : src/application.i
+
+# target to preprocess a source file
+src/application.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/afv_unix.dir/build.make CMakeFiles/afv_unix.dir/src/application.cpp.i
+.PHONY : src/application.cpp.i
+
+src/application.s: src/application.cpp.s
+.PHONY : src/application.s
+
+# target to generate assembly for a file
+src/application.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/afv_unix.dir/build.make CMakeFiles/afv_unix.dir/src/application.cpp.s
+.PHONY : src/application.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -351,6 +375,9 @@ help:
 	@echo "... extern/imgui/imgui_widgets.o"
 	@echo "... extern/imgui/imgui_widgets.i"
 	@echo "... extern/imgui/imgui_widgets.s"
+	@echo "... src/application.o"
+	@echo "... src/application.i"
+	@echo "... src/application.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

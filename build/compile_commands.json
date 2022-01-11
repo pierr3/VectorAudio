@@ -6,6 +6,11 @@
 },
 {
   "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
+  "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/src/application.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/src/application.cpp",
+  "file": "/Users/pierre/Documents/GitHub/AFV-Unix/src/application.cpp"
+},
+{
+  "directory": "/Users/pierre/Documents/GitHub/AFV-Unix/build",
   "command": "/usr/bin/clang++  -I/opt/homebrew/Cellar/sdl2/2.0.18/include/SDL2 -I/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui.cpp",
   "file": "/Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui.cpp"
 },

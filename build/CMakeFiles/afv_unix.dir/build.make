@@ -83,10 +83,24 @@ CMakeFiles/afv_unix.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/src/main.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/src/main.cpp -o CMakeFiles/afv_unix.dir/src/main.cpp.s
 
+CMakeFiles/afv_unix.dir/src/application.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/src/application.cpp.o: ../src/application.cpp
+CMakeFiles/afv_unix.dir/src/application.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/afv_unix.dir/src/application.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/src/application.cpp.o -MF CMakeFiles/afv_unix.dir/src/application.cpp.o.d -o CMakeFiles/afv_unix.dir/src/application.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/src/application.cpp
+
+CMakeFiles/afv_unix.dir/src/application.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/src/application.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/src/application.cpp > CMakeFiles/afv_unix.dir/src/application.cpp.i
+
+CMakeFiles/afv_unix.dir/src/application.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/src/application.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/src/application.cpp -o CMakeFiles/afv_unix.dir/src/application.cpp.s
+
 CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o: ../extern/imgui/imgui.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o: ../extern/imgui/imgui_tables.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_tables.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o: ../extern/imgui/imgui_draw.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_draw.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o: ../extern/imgui/imgui_widgets.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_widgets.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o: ../extern/imgui/imgui_impl_opengl3.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_opengl3.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o: ../extern/imgui/imgui_impl_sdl.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_impl_sdl.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.s: cmake_force
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o: CMakeFiles/afv_unix.dir/flags.make
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o: ../extern/imgui/imgui_demo.cpp
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o -MF CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o.d -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_demo.cpp
 
 CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.i: cmake_force
@@ -184,6 +198,7 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.s: cmake_force
 # Object files for target afv_unix
 afv_unix_OBJECTS = \
 "CMakeFiles/afv_unix.dir/src/main.cpp.o" \
+"CMakeFiles/afv_unix.dir/src/application.cpp.o" \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o" \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o" \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o" \
@@ -196,6 +211,7 @@ afv_unix_OBJECTS = \
 afv_unix_EXTERNAL_OBJECTS =
 
 afv_unix: CMakeFiles/afv_unix.dir/src/main.cpp.o
+afv_unix: CMakeFiles/afv_unix.dir/src/application.cpp.o
 afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui.cpp.o
 afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o
 afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_draw.cpp.o
@@ -205,7 +221,7 @@ afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o
 afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o
 afv_unix: CMakeFiles/afv_unix.dir/build.make
 afv_unix: CMakeFiles/afv_unix.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable afv_unix"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable afv_unix"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/afv_unix.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

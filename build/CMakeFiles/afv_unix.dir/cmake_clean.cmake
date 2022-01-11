@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/afv_unix.dir/extern/imgui/imgui_tables.cpp.o.d"
   "CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o"
   "CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o.d"
+  "CMakeFiles/afv_unix.dir/src/application.cpp.o"
+  "CMakeFiles/afv_unix.dir/src/application.cpp.o.d"
   "CMakeFiles/afv_unix.dir/src/main.cpp.o"
   "CMakeFiles/afv_unix.dir/src/main.cpp.o.d"
   "afv_unix"
