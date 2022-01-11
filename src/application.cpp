@@ -5,29 +5,40 @@ namespace afv_unix::application {
 
     App::App() {
         mEventBase = event_base_new();
-        mClient = std::make_shared<afv_native::Client>(mEventBase, 2, "afv-unix");
-        //mClient = new afv_native::Client(mEventBase, 2,"AFV-Unix-TestClient");
+        mClient = std::make_shared<afv_native::Client>(mEventBase, 2, "afv-unix-alpha");
 
-        // auto m_audioDrivers = afv_native::audio::AudioDevice::getAPIs();
-        // for(const auto& driver : m_audioDrivers)
-        // {
-        //     m_audioApi = driver.first;
-        //     break;
-        // }
+
+        // Load all from config
+        
+        mOutputEffects = toml::find_or<bool>(afv_unix::configuration::config, "audio", "vhf_effects", true);
+        mInputFilter = toml::find_or<bool>(afv_unix::configuration::config, "audio", "input_filters", true);
+
+        mInputDevice = toml::find_or<int>(afv_unix::configuration::config, "audio", "input_device", 0);
+        mOutputDevice = toml::find_or<int>(afv_unix::configuration::config, "audio", "output_device", 0);
+ 
+        vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
+        vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
+
+        mAudioProviders = afv_native::audio::AudioDevice::getAPIs();
+        std::string configApi = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "api", std::string("wrong_api"));
+        for(const auto& driver : mAudioProviders)
+        {
+            if (driver.second == configApi)
+                m_audioApi = driver.first;
+        }
     }
 
     App::~App(){
         
     }
 
-
     // Main loop
     void App::render_frame() {
 
-        // if (mClient) {
-        //     mPeak = mClient->getInputPeak();
-        //     mVu = mClient->getInputVu();
-        // }
+        if (mClient) {
+            mPeak = mClient->getInputPeak();
+            mVu = mClient->getInputVu();
+        }
 
         #ifdef IMGUI_HAS_VIEWPORT
             ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -38,8 +49,8 @@ namespace afv_unix::application {
             ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
             ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         #endif
-        bool open = true;
-        ImGui::Begin("MainWindow", &open, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoResize);
+
+        ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoResize);
         
         // Connect button logic
         ImGui::Button("Connect");
@@ -51,28 +62,23 @@ namespace afv_unix::application {
             ImGui::OpenPopup("Settings Panel");
 
 
-        // Modal definition 
+        // Settings modal definition 
         if (ImGui::BeginPopupModal("Settings Panel"))
         {
-
             ImGui::Text("VATSIM Details");
-            static int i0 = 123;
-            ImGui::InputInt("VATSIM ID", &i0);
+            ImGui::InputInt("VATSIM ID", &vatsim_cid);
 
-            static char password[64] = "password123";
-            ImGui::InputText("Password", password, IM_ARRAYSIZE(password), ImGuiInputTextFlags_Password);
+            ImGui::InputText("Password", &vatsim_password, ImGuiInputTextFlags_Password);
 
             ImGui::NewLine();
 
             ImGui::Text("Audio configuration");
             
             if (ImGui::BeginCombo("Sound API", nameForAudioApi(mAudioApi).c_str())) {
-                if (ImGui::Selectable("Default", mAudioApi == 0)) {
-                    //setAudioApi(0);
-                }
                 for (const auto &item: mAudioProviders) {
                     if (ImGui::Selectable(item.second.c_str(), mAudioApi == item.first)) {
                         //setAudioApi(item.first);
+                        afv_unix::configuration::config["audio"]["api"] =  item.second;
                     }
                 }
                 ImGui::EndCombo();
@@ -109,11 +115,10 @@ namespace afv_unix::application {
             }
             
             ImGui::NewLine();
-
             if (ImGui::Checkbox("Input Filter", &mInputFilter)) {
                 if (mClient) {
                     mClient->setEnableInputFilters(mInputFilter);
-                }
+                } 
             }
             ImGui::SameLine();
             if (ImGui::Checkbox("VHF Effects", &mOutputEffects)) {
@@ -129,8 +134,18 @@ namespace afv_unix::application {
                 ImGui::CloseCurrentPopup();
             ImGui::SameLine();
 
-            if (ImGui::Button("Save"))
+            if (ImGui::Button("Save")) {
+                afv_unix::configuration::config["user"]["vatsim_id"] =  vatsim_cid;
+                afv_unix::configuration::config["user"]["vatsim_password"] =  vatsim_password;
+                afv_unix::configuration::config["audio"]["input_filters"] =  mInputFilter;
+                afv_unix::configuration::config["audio"]["vhf_effects"] =  mOutputEffects;
+                afv_unix::configuration::config["audio"]["input_device"] =  mInputDevice;
+                afv_unix::configuration::config["audio"]["output_device"] =  mOutputDevice;
+
+                afv_unix::configuration::write_config_async();
                 ImGui::CloseCurrentPopup();
+            }
+                
 
             ImGui::EndPopup();
         }

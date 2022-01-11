@@ -7,6 +7,7 @@
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 #include "style.h"
+#include "config.h"
 #include "application.h"
 #include <stdio.h>
 #include <SDL.h>
@@ -95,9 +96,10 @@ int main(int, char**)
     // Our state
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    afv_unix::application::App* currentApp = new afv_unix::application::App();
-
     afv_unix::style::apply_style();
+    afv_unix::configuration::build_config();
+
+    afv_unix::application::App* currentApp = new afv_unix::application::App();
 
     SDL_SetWindowSize(window, 800, 400);
 

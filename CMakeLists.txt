@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(${CMAKE_SOURCE_DIR}/build/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 find_package(SDL2 REQUIRED)
@@ -73,8 +74,7 @@ afv-native/include/afv-native/http/TransferManager.h
 afv-native/include/afv-native/util/base64.h
 afv-native/include/afv-native/util/ChainedCallback.h
 afv-native/include/afv-native/util/monotime.h
-afv-native/include/afv-native/utility.h
-afv-native/include/afv-native/atcClient.h)
+afv-native/include/afv-native/utility.h)
 
 set(AFV_NATIVE_AUDIO_SOURCES
     afv-native/src/audio/PortAudioAudioDevice.cpp
@@ -132,7 +132,6 @@ set(AFV_NATIVE_SOURCES
     afv-native/extern/simpleSource/SimpleLimit.cpp
     afv-native/extern/simpleSource/SimpleLimit.h
     afv-native/src/audio/VHFFilterSource.cpp
-    afv-native/src/core/atcClient.cpp
     afv-native/src/NativeWrapper.cpp
     ${AFV_NATIVE_AUDIO_SOURCES})
 
@@ -142,12 +141,14 @@ include_directories(    ${SDL2_INCLUDE_DIRS}
                         ${CMAKE_SOURCE_DIR}/afv-native/extern/cpp-jwt/include
                         ${CMAKE_SOURCE_DIR}/afv-native/extern/simpleSource
                         ${CMAKE_SOURCE_DIR}/afv-native/extern
-                        ${CMAKE_SOURCE_DIR}/afv-native/include)
+                        ${CMAKE_SOURCE_DIR}/afv-native/include
+                        ${CMAKE_SOURCE_DIR}/extern)
 
 
 
 add_executable(afv_unix src/main.cpp
                 src/application.cpp
+                src/config.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
@@ -155,6 +156,7 @@ add_executable(afv_unix src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_opengl3.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_sdl.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
+                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
                 ${AFV_NATIVE_HEADERS}
                 ${AFV_NATIVE_SOURCES}
                 ${AFV_API_SOURCES})
@@ -215,8 +217,8 @@ if(APPLE)
                 ${CORE_FOUNDATION}
                 ${CORE_SERVICES})
 else()
-target_link_libraries(afv_unix
-	${OPUS_LIBARY_PATH}
-	${PORTAUDIO_LIBRARY_PATH}
-	${SPEEXDSP_LIBRARY_PATH})
+        target_link_libraries(afv_unix
+            ${OPUS_LIBARY_PATH}
+            ${PORTAUDIO_LIBRARY_PATH}
+            ${SPEEXDSP_LIBRARY_PATH})
 endif()

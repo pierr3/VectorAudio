@@ -1,4 +1,5 @@
 #include "imgui.h"
+#include "imgui_stdlib.h"
 #include "afv-native/Client.h"
 #include <thread>
 #include <string>
@@ -6,6 +7,8 @@
 #include <shared_mutex>
 #include <event2/event.h>
 #include <memory>
+#include "config.h"
+#include <iostream>
 
 namespace afv_unix::application {
     class App {
@@ -18,12 +21,14 @@ namespace afv_unix::application {
         private:
             struct event_base *mEventBase;
 
-            bool mInputFilter = true;
-            bool mOutputEffects = true;
+            bool mInputFilter;
+            bool mOutputEffects;
             float mPeak = 0.0f;
             float mVu = 0.0f;
+            int vatsim_cid;
+            std::string vatsim_password;
 
-            std::shared_ptr<afv_native::ATCClient> mClient;
+            std::shared_ptr<afv_native::Client> mClient;
 
             std::map<afv_native::audio::AudioDevice::Api,std::string> mAudioProviders;
             std::map<int,afv_native::audio::AudioDevice::DeviceInfo> mInputDevices;

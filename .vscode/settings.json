@@ -82,6 +82,9 @@
         "valarray": "cpp",
         "vector": "cpp",
         "*.tcc": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "filesystem": "cpp",
+        "*.ipp": "cpp",
+        "charconv": "cpp"
     }
 }
