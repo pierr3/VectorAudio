@@ -195,6 +195,650 @@ CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/extern/imgui/imgui_demo.cpp -o CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.s
 
+CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o: ../afv-native/src/afv/APISession.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/APISession.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/APISession.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/APISession.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o: ../afv-native/src/afv/EffectResources.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/EffectResources.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/EffectResources.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/EffectResources.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o: ../afv-native/src/afv/RadioSimulation.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RadioSimulation.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RadioSimulation.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RadioSimulation.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o: ../afv-native/src/afv/RemoteVoiceSource.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RemoteVoiceSource.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RemoteVoiceSource.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/RemoteVoiceSource.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o: ../afv-native/src/afv/VoiceCompressionSink.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceCompressionSink.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceCompressionSink.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceCompressionSink.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o: ../afv-native/src/afv/VoiceSession.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceSession.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceSession.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/VoiceSession.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o: ../afv-native/src/afv/dto/AuthRequest.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/AuthRequest.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/AuthRequest.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/AuthRequest.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o: ../afv-native/src/afv/dto/PostCallsignResponse.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/PostCallsignResponse.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/PostCallsignResponse.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/PostCallsignResponse.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o: ../afv-native/src/afv/dto/Station.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Station.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Station.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Station.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o: ../afv-native/src/afv/dto/Transceiver.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Transceiver.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Transceiver.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/Transceiver.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o: ../afv-native/src/afv/dto/VoiceServerConnectionData.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/VoiceServerConnectionData.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/VoiceServerConnectionData.cpp > CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/afv/dto/VoiceServerConnectionData.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o: ../afv-native/src/audio/AudioDevice.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/AudioDevice.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/AudioDevice.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/AudioDevice.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o: ../afv-native/src/audio/FilterSource.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/FilterSource.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/FilterSource.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/FilterSource.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o: ../afv-native/src/audio/BiQuadFilter.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/BiQuadFilter.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/BiQuadFilter.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/BiQuadFilter.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o: ../afv-native/src/audio/OutputMixer.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/OutputMixer.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/OutputMixer.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/OutputMixer.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o: ../afv-native/src/audio/RecordedSampleSource.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/RecordedSampleSource.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/RecordedSampleSource.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/RecordedSampleSource.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o: ../afv-native/src/audio/SineToneSource.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SineToneSource.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SineToneSource.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SineToneSource.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o: ../afv-native/src/audio/SinkFrameSizeAdjuster.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SinkFrameSizeAdjuster.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SinkFrameSizeAdjuster.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SinkFrameSizeAdjuster.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o: ../afv-native/src/audio/SourceFrameSizeAdjuster.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SourceFrameSizeAdjuster.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SourceFrameSizeAdjuster.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SourceFrameSizeAdjuster.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o: ../afv-native/src/audio/SpeexPreprocessor.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SpeexPreprocessor.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SpeexPreprocessor.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SpeexPreprocessor.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o: ../afv-native/src/audio/WavFile.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavFile.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavFile.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavFile.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o: ../afv-native/src/audio/WavSampleStorage.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavSampleStorage.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavSampleStorage.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/WavSampleStorage.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o: ../afv-native/src/core/Client.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Client.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Client.cpp > CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Client.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o: ../afv-native/src/core/Log.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Log.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Log.cpp > CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/Log.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o: ../afv-native/src/cryptodto/Channel.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/Channel.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/Channel.cpp > CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/Channel.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o: ../afv-native/src/cryptodto/SequenceTest.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/SequenceTest.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/SequenceTest.cpp > CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/SequenceTest.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o: ../afv-native/src/cryptodto/UDPChannel.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/UDPChannel.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/UDPChannel.cpp > CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/UDPChannel.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o: ../afv-native/src/cryptodto/dto/ChannelConfig.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/ChannelConfig.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/ChannelConfig.cpp > CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/ChannelConfig.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o: ../afv-native/src/cryptodto/dto/Header.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/Header.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/Header.cpp > CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/cryptodto/dto/Header.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o: ../afv-native/src/event/EventCallbackTimer.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventCallbackTimer.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventCallbackTimer.cpp > CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventCallbackTimer.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o: ../afv-native/src/event/EventTimer.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventTimer.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventTimer.cpp > CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/event/EventTimer.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o: ../afv-native/src/http/EventTransferManager.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/EventTransferManager.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/EventTransferManager.cpp > CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/EventTransferManager.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o: ../afv-native/src/http/TransferManager.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/TransferManager.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/TransferManager.cpp > CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/TransferManager.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o: ../afv-native/src/http/Request.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/Request.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/Request.cpp > CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/Request.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o: ../afv-native/src/http/RESTRequest.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/RESTRequest.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/RESTRequest.cpp > CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/http/RESTRequest.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o: ../afv-native/src/util/base64.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/base64.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/base64.cpp > CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/base64.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o: ../afv-native/src/util/monotime.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/monotime.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/monotime.cpp > CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/util/monotime.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o: ../afv-native/src/audio/PortAudioAudioDevice.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/PortAudioAudioDevice.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/PortAudioAudioDevice.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/PortAudioAudioDevice.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o: ../afv-native/src/audio/SimpleCompressorEffect.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SimpleCompressorEffect.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SimpleCompressorEffect.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/SimpleCompressorEffect.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o: ../afv-native/extern/simpleSource/SimpleComp.cpp
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleComp.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleComp.cpp > CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleComp.cpp -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o: ../afv-native/extern/simpleSource/SimpleEnvelope.cpp
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleEnvelope.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleEnvelope.cpp > CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleEnvelope.cpp -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o: ../afv-native/extern/simpleSource/SimpleGate.cpp
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleGate.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleGate.cpp > CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleGate.cpp -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o: ../afv-native/extern/simpleSource/SimpleLimit.cpp
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleLimit.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleLimit.cpp > CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/extern/simpleSource/SimpleLimit.cpp -o CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o: ../afv-native/src/audio/VHFFilterSource.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/VHFFilterSource.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/VHFFilterSource.cpp > CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/audio/VHFFilterSource.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o: ../afv-native/src/core/atcClient.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/atcClient.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/atcClient.cpp > CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/core/atcClient.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.s
+
+CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o: CMakeFiles/afv_unix.dir/flags.make
+CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o: ../afv-native/src/NativeWrapper.cpp
+CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o: CMakeFiles/afv_unix.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o -MF CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o.d -o CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o -c /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/NativeWrapper.cpp
+
+CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/NativeWrapper.cpp > CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.i
+
+CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pierre/Documents/GitHub/AFV-Unix/afv-native/src/NativeWrapper.cpp -o CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.s
+
 # Object files for target afv_unix
 afv_unix_OBJECTS = \
 "CMakeFiles/afv_unix.dir/src/main.cpp.o" \
@@ -205,7 +849,53 @@ afv_unix_OBJECTS = \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o" \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o" \
 "CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o" \
-"CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o"
+"CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o" \
+"CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o"
 
 # External object files for target afv_unix
 afv_unix_EXTERNAL_OBJECTS =
@@ -219,8 +909,53 @@ bin/afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_widgets.cpp.o
 bin/afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_opengl3.cpp.o
 bin/afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_impl_sdl.cpp.o
 bin/afv_unix: CMakeFiles/afv_unix.dir/extern/imgui/imgui_demo.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/APISession.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/EffectResources.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/RadioSimulation.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/RemoteVoiceSource.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceCompressionSink.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/VoiceSession.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/AuthRequest.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/PostCallsignResponse.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Station.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/Transceiver.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/afv/dto/VoiceServerConnectionData.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/AudioDevice.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/FilterSource.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/BiQuadFilter.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/OutputMixer.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/RecordedSampleSource.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/SineToneSource.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/SinkFrameSizeAdjuster.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/SourceFrameSizeAdjuster.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/SpeexPreprocessor.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/WavFile.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/WavSampleStorage.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/core/Client.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/core/Log.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/Channel.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/SequenceTest.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/UDPChannel.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/ChannelConfig.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/cryptodto/dto/Header.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/event/EventCallbackTimer.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/event/EventTimer.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/http/EventTransferManager.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/http/TransferManager.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/http/Request.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/http/RESTRequest.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/util/base64.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/util/monotime.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/PortAudioAudioDevice.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/SimpleCompressorEffect.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleComp.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleEnvelope.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleGate.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/extern/simpleSource/SimpleLimit.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/audio/VHFFilterSource.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/core/atcClient.cpp.o
+bin/afv_unix: CMakeFiles/afv_unix.dir/afv-native/src/NativeWrapper.cpp.o
 bin/afv_unix: CMakeFiles/afv_unix.dir/build.make
-bin/afv_unix: ../lib/libafv-arm64.a
 bin/afv_unix: /opt/homebrew/opt/opus/lib/libopus.a
 bin/afv_unix: /opt/homebrew/opt/portaudio/lib/libportaudio.a
 bin/afv_unix: /opt/homebrew/opt/speexdsp/lib/libspeexdsp.a
@@ -233,7 +968,7 @@ bin/afv_unix: /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f
 bin/afv_unix: /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/lib/libevent_pthreads.a
 bin/afv_unix: /Users/pierre/.conan/data/libevent/2.1.12/_/_/package/095512ed878f14a09dd732e9f6868729dd437529/lib/libevent_core.a
 bin/afv_unix: CMakeFiles/afv_unix.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/afv_unix"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/pierre/Documents/GitHub/AFV-Unix/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Linking CXX executable bin/afv_unix"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/afv_unix.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

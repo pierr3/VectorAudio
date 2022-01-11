@@ -4,17 +4,16 @@
 namespace afv_unix::application {
 
     App::App() {
-        mClient = std::make_shared<afv_native::Client>(
-            mEventBase,
-            2,
-            "AFV-Unix-TestClient");
+        mEventBase = event_base_new();
+        mClient = std::make_shared<afv_native::Client>(mEventBase, 2, "afv-unix");
+        //mClient = new afv_native::Client(mEventBase, 2,"AFV-Unix-TestClient");
 
-        auto m_audioDrivers = afv_native::audio::AudioDevice::getAPIs();
-        for(const auto& driver : m_audioDrivers)
-        {
-            m_audioApi = driver.first;
-            break;
-        }
+        // auto m_audioDrivers = afv_native::audio::AudioDevice::getAPIs();
+        // for(const auto& driver : m_audioDrivers)
+        // {
+        //     m_audioApi = driver.first;
+        //     break;
+        // }
     }
 
     App::~App(){
@@ -25,10 +24,10 @@ namespace afv_unix::application {
     // Main loop
     void App::render_frame() {
 
-        if (mClient) {
-            mPeak = mClient->getInputPeak();
-            mVu = mClient->getInputVu();
-        }
+        // if (mClient) {
+        //     mPeak = mClient->getInputPeak();
+        //     mVu = mClient->getInputVu();
+        // }
 
         #ifdef IMGUI_HAS_VIEWPORT
             ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -93,18 +92,35 @@ namespace afv_unix::application {
 
                 ImGui::EndCombo();
             }
+
+            const char *currentOutputDevice = "None Selected";
+
+            if (ImGui::BeginCombo("Output Device", currentInputDevice)) {
+
+                auto m_audioDrivers = afv_native::audio::AudioDevice::getCompatibleOutputDevicesForApi(mAudioApi);
+                for(const auto& driver : m_audioDrivers)
+                {
+                    if (ImGui::Selectable(driver.second.name.c_str(), mOutputDevice == driver.first)) {
+                        mOutputDevice = driver.first;
+                    }
+                }
+
+                ImGui::EndCombo();
+            }
             
-            if (ImGui::Checkbox("Enable Input Filter", &mInputFilter)) {
+            ImGui::NewLine();
+
+            if (ImGui::Checkbox("Input Filter", &mInputFilter)) {
                 if (mClient) {
                     mClient->setEnableInputFilters(mInputFilter);
                 }
             }
-            if (ImGui::Checkbox("Enable Output Effects", &mOutputEffects)) {
+            ImGui::SameLine();
+            if (ImGui::Checkbox("VHF Effects", &mOutputEffects)) {
                 if (mClient) {
                     mClient->setEnableOutputEffects(mOutputEffects);
                 }
             }
-
 
             ImGui::NewLine();
             ImGui::NewLine();
@@ -112,7 +128,9 @@ namespace afv_unix::application {
             if (ImGui::Button("Cancel"))
                 ImGui::CloseCurrentPopup();
             ImGui::SameLine();
-            ImGui::Button("Save");
+
+            if (ImGui::Button("Save"))
+                ImGui::CloseCurrentPopup();
 
             ImGui::EndPopup();
         }

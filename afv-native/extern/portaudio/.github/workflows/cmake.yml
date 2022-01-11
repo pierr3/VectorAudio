@@ -1,0 +1,52 @@
+name: CMake
+on:
+  push:
+    branches:
+      - xpilot
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        kind: ["linux", "windows", "macos"]
+        include:
+          - kind: linux
+            os: ubuntu-latest
+          - kind: windows
+            os: windows-latest
+          - kind: macos
+            os: macos-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: cmake --build . --config $BUILD_TYPE
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+        with:
+          name: ${{ matrix.kind }}
+          path: ${{github.workspace}}/build/libportaudio.a
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          name: ${{ matrix.kind }}
+          path: ${{github.workspace}}/build/${{env.BUILD_TYPE}}/portaudio_static_x64.lib

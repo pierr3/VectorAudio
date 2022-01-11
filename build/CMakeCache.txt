@@ -224,9 +224,6 @@ afv_unix_BINARY_DIR:STATIC=/Users/pierre/Documents/GitHub/AFV-Unix/build
 //Value Computed by CMake
 afv_unix_IS_TOP_LEVEL:STATIC=ON
 
-//Dependencies for the target
-afv_unix_LIB_DEPENDS:STATIC=general;-L/opt/homebrew/Cellar/sdl2/2.0.18/lib  -lSDL2;
-
 //Value Computed by CMake
 afv_unix_SOURCE_DIR:STATIC=/Users/pierre/Documents/GitHub/AFV-Unix
 

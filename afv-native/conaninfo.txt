@@ -1,0 +1,155 @@
+[settings]
+    arch=armv8
+    build_type=Release
+    compiler=apple-clang
+    compiler.libcxx=libc++
+    compiler.version=13.0
+    os=Macos
+
+[requires]
+    libcurl/7.Y.Z
+    libevent/2.Y.Z
+    msgpack/3.Y.Z
+    nlohmann_json/3.Y.Z
+    openssl/1.Y.Z
+
+[options]
+    audio_library=portaudio
+    build_examples=False
+    build_tests=False
+    fPIC=True
+    shared=False
+
+[full_settings]
+    arch=armv8
+    build_type=Release
+    compiler=apple-clang
+    compiler.libcxx=libc++
+    compiler.version=13.0
+    os=Macos
+
+[full_requires]
+    libcurl/7.75.0:b7640208742bdad57f0bc2c5892fca2e9c046fb1
+    libevent/2.1.12:095512ed878f14a09dd732e9f6868729dd437529
+    msgpack/3.3.0:ff4bb21ece53a4ae729afa61ca98735d28e5097f
+    nlohmann_json/3.9.1:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    openssl/1.1.1m:095512ed878f14a09dd732e9f6868729dd437529
+    zlib/1.2.11:095512ed878f14a09dd732e9f6868729dd437529
+
+[full_options]
+    audio_library=portaudio
+    build_examples=False
+    build_tests=False
+    fPIC=True
+    shared=False
+    libcurl:fPIC=True
+    libcurl:shared=False
+    libcurl:with_brotli=False
+    libcurl:with_c_ares=False
+    libcurl:with_cookies=True
+    libcurl:with_crypto_auth=True
+    libcurl:with_dict=True
+    libcurl:with_docs=False
+    libcurl:with_file=True
+    libcurl:with_ftp=True
+    libcurl:with_gopher=True
+    libcurl:with_http=True
+    libcurl:with_imap=True
+    libcurl:with_ipv6=True
+    libcurl:with_largemaxwritesize=False
+    libcurl:with_ldap=False
+    libcurl:with_libidn=False
+    libcurl:with_libmetalink=False
+    libcurl:with_libpsl=False
+    libcurl:with_librtmp=False
+    libcurl:with_libssh2=False
+    libcurl:with_mqtt=True
+    libcurl:with_nghttp2=False
+    libcurl:with_ntlm=True
+    libcurl:with_ntlm_wb=True
+    libcurl:with_pop3=True
+    libcurl:with_proxy=True
+    libcurl:with_rtsp=True
+    libcurl:with_smb=True
+    libcurl:with_smtp=True
+    libcurl:with_ssl=openssl
+    libcurl:with_symbol_hiding=False
+    libcurl:with_telnet=True
+    libcurl:with_tftp=True
+    libcurl:with_unix_sockets=True
+    libcurl:with_verbose_debug=True
+    libcurl:with_zlib=True
+    libcurl:with_zstd=False
+    libevent:disable_threads=False
+    libevent:fPIC=True
+    libevent:shared=False
+    libevent:with_openssl=False
+    msgpack:c_api=True
+    msgpack:cpp_api=True
+    msgpack:fPIC=True
+    msgpack:shared=False
+    msgpack:with_boost=False
+    openssl:386=False
+    openssl:enable_weak_ssl_ciphers=False
+    openssl:fPIC=True
+    openssl:no_aria=False
+    openssl:no_asm=False
+    openssl:no_async=False
+    openssl:no_bf=False
+    openssl:no_blake2=False
+    openssl:no_camellia=False
+    openssl:no_cast=False
+    openssl:no_chacha=False
+    openssl:no_cms=False
+    openssl:no_comp=False
+    openssl:no_ct=False
+    openssl:no_deprecated=False
+    openssl:no_des=False
+    openssl:no_dgram=False
+    openssl:no_dh=False
+    openssl:no_dsa=False
+    openssl:no_dso=False
+    openssl:no_ec=False
+    openssl:no_ecdh=False
+    openssl:no_ecdsa=False
+    openssl:no_engine=False
+    openssl:no_filenames=False
+    openssl:no_gost=False
+    openssl:no_hmac=False
+    openssl:no_idea=False
+    openssl:no_md4=False
+    openssl:no_md5=False
+    openssl:no_mdc2=False
+    openssl:no_ocsp=False
+    openssl:no_pinshared=False
+    openssl:no_rc2=False
+    openssl:no_rfc3779=False
+    openssl:no_rmd160=False
+    openssl:no_rsa=False
+    openssl:no_seed=False
+    openssl:no_sha=False
+    openssl:no_sm2=False
+    openssl:no_sm3=False
+    openssl:no_sm4=False
+    openssl:no_sock=False
+    openssl:no_srp=False
+    openssl:no_srtp=False
+    openssl:no_sse2=False
+    openssl:no_ssl=False
+    openssl:no_ssl3=False
+    openssl:no_stdio=False
+    openssl:no_tests=False
+    openssl:no_threads=False
+    openssl:no_tls1=False
+    openssl:no_ts=False
+    openssl:no_whirlpool=False
+    openssl:openssldir=None
+    openssl:shared=False
+    zlib:fPIC=True
+    zlib:shared=False
+
+[recipe_hash]
+
+
+[env]
+

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "compressor.h": "c",
+        "snd.h": "c"
+    }
+}

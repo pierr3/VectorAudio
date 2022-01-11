@@ -10,7 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
-  "../extern/afv-native/conanbuildinfo.cmake"
+  "conanbuildinfo.cmake"
   "/opt/homebrew/Cellar/cmake/3.22.1/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.22.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
   "/opt/homebrew/Cellar/cmake/3.22.1/share/cmake/Modules/CMakeGenericSystem.cmake"
