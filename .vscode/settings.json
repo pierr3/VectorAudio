@@ -85,6 +85,7 @@
         "stop_token": "cpp",
         "filesystem": "cpp",
         "*.ipp": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "__functional_03": "cpp"
     }
 }

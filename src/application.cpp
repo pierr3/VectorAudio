@@ -11,8 +11,6 @@ namespace afv_unix::application {
         
         mOutputEffects = toml::find_or<bool>(afv_unix::configuration::config, "audio", "vhf_effects", true);
         mInputFilter = toml::find_or<bool>(afv_unix::configuration::config, "audio", "input_filters", true);
-
-        mOutputDevice = toml::find_or<int>(afv_unix::configuration::config, "audio", "output_device", 0);
  
         vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
         vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
@@ -41,7 +39,63 @@ namespace afv_unix::application {
                 mOutputDevice = driver.first;
         }
 
-        afv_native::setLogger(nullptr);
+        mClient->ClientEventCallback.addCallback(nullptr, [&](afv_native::ClientEventType evt, void* data)
+        {
+            switch(evt)
+            {
+            case afv_native::ClientEventType::APIServerError:
+                if(data != nullptr) {
+                    auto error = *reinterpret_cast<afv_native::afv::APISessionError*>(data);
+                    switch(error) {
+                    case afv_native::afv::APISessionError::BadPassword:
+                    case afv_native::afv::APISessionError::RejectedCredentials:
+                        std::cout << "APISession" << "Error connecting to voice server. Please check your VATSIM credentials and try again." << std::endl;
+                        break;
+                    case afv_native::afv::APISessionError::ConnectionError:
+                        std::cout <<"APISession"<< "Error initiating voice server connection."<< std::endl;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                break;
+            case afv_native::ClientEventType::VoiceServerChannelError:
+                if(data != nullptr) {
+                    int error = *reinterpret_cast<int*>(data);
+                    std::cout <<"VoiceServer"<< "Voice server error: "<< std::endl;
+                    //emit notificationPosted((int)NotificationType::Error, QString("Voice server error: %s").arg(error));
+                }
+                break;
+            case afv_native::ClientEventType::VoiceServerError:
+                if(data != nullptr) {
+                    auto error = *reinterpret_cast<afv_native::afv::VoiceSessionError*>(data);
+                    switch(error) {
+                    case afv_native::afv::VoiceSessionError::BadResponseFromAPIServer:
+                        std::cout <<"VoiceServerError"<< "Voice server error: BadResponseFromAPIServer"<< std::endl;
+                        break;
+                    case afv_native::afv::VoiceSessionError::Timeout:
+                        std::cout <<"VoiceServerError" << "Voice server error: Timeout"<< std::endl;
+                        break;
+                    case afv_native::afv::VoiceSessionError::UDPChannelError:
+                        std::cout <<"VoiceServerError"<< "Voice server error: UDPChannelError"<< std::endl;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                break;
+            case afv_native::ClientEventType::VoiceServerConnected:
+                std::cout <<"Connection"<< "Connected to voice server."<< std::endl;
+                break;
+            case afv_native::ClientEventType::VoiceServerDisconnected:
+                std::cout <<"Connection"<< "Disconnected from voice server."<< std::endl;
+                break;
+            default:
+                break;
+            }
+        });
+
+        //afv_native::setLogger(nullptr);
 
     }
 
@@ -77,16 +131,23 @@ namespace afv_unix::application {
                 mClient->setAudioApi(mAudioApi);
                 mClient->setAudioInputDevice(mInputDevices.at(mInputDevice).id);
                 mClient->setAudioOutputDevice(mOutputDevices.at(mOutputDevice).id);
-                //mClient->setRadioState(0, mCom1Freq);
+                mClient->setRadioState(0, 5000);
+                mClient->setRadioState(1, 5000);
+
+                mClient->setClientPosition(48.784108, 2.2925447, 100, 100);
 
                 mClient->setTxRadio(0);
                 mClient->setRadioGain(0, 1.0f);
-                mClient->setCredentials(std::to_string(vatsim_cid), vatsim_password);
-                mClient->setCallsign("PF_OBS");
+                mClient->setRadioGain(1, 1.0f);
+                mClient->setCredentials(std::string("1259058"), vatsim_password);
+                mClient->setCallsign("ACCFR1");
                 mClient->setEnableInputFilters(mInputFilter);
                 mClient->setEnableOutputEffects(mOutputEffects);
                 mClient->startAudio();
-                mClient->connect();
+                if (!mClient->connect()) {
+                    std::cout << "Connection failed!" << std::endl;
+
+                };
             }
         } else {
             ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(4 / 7.0f, 0.6f, 0.6f));
@@ -208,9 +269,9 @@ namespace afv_unix::application {
         ImGui::SameLine();
 
         const ImVec4 red(1.0, 0.0, 0.0, 1.0), green(0.0, 1.0, 0.0, 1.0);
-        ImGui::TextColored(mClient->isAPIConnected() ? green : red, "API Server Connection");ImGui::SameLine();
+        ImGui::TextColored(mClient->isAPIConnected() ? green : red, "API Server Connection");ImGui::SameLine(); ImGui::Text(" | "); ImGui::SameLine();
         ImGui::TextColored(mClient->isVoiceConnected() ? green : red, "Voice Server Connection");
-        
+
         ImGui::SliderFloat("Input VU", &mVu, -60.0f, 0.0f);
         ImGui::SliderFloat("Input Peak", &mPeak, -60.0f, 0.0f);
 

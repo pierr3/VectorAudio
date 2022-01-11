@@ -1,6 +1,7 @@
 #include "imgui.h"
 #include "imgui_stdlib.h"
 #include "imgui_internal.h"
+#include "afv-native/afv/APISession.h"
 #include "afv-native/Client.h"
 #include <thread>
 #include <string>
