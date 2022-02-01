@@ -50,6 +50,13 @@ namespace afv_unix::application {
 
         ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoResize);
         
+        // Callsign Field
+        ImGui::PushItemWidth(100.0f);
+        ImGui::Text(std::string(std::string("Callsign: ") + shared::callsign).c_str());
+        ImGui::PopItemWidth();
+        ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
+        ImGui::SameLine();
+
         // Connect button logic
 
         if (!mClient->IsVoiceConnected()) {
@@ -59,26 +66,27 @@ namespace afv_unix::application {
                 mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
                 mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
             
+                // TODO: Pull from datafile
                 mClient->SetClientPosition(48.784108, 2.2925447, 100, 100);
 
-                //mClient->setTxRadio(0);
-                //mClient->setRadioGain(0, 1.0f);
-                //mClient->setRadioGain(1, 1.0f);
-                mClient->SetCredentials(std::string("1259058"), afv_unix::shared::vatsim_password);
-                mClient->SetCallsign("ACCFR1");
+                mClient->SetCredentials(std::to_string(afv_unix::shared::vatsim_cid), afv_unix::shared::vatsim_password);
+                mClient->SetCallsign(afv_unix::shared::callsign);
                 mClient->SetEnableInputFilters(afv_unix::shared::mInputFilter);
                 mClient->SetEnableOutputEffects(afv_unix::shared::mOutputEffects);
 
                 if (!mClient->Connect()) {
                     std::cout << "Connection failed!" << std::endl;
                 };
+
+                mClient->AddFrequency(119250000);
+                mClient->SetRx(119250000, true);
             }
         } else {
             ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(4 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(4 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(4 / 7.0f, 0.8f, 0.8f));
             if (ImGui::Button("Disconnect")) {
-                mClient->StopAudio();
+                mClient->Disconnect();
             }
             ImGui::PopStyleColor(3);
         }
