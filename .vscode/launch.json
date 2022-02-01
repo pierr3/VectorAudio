@@ -8,10 +8,10 @@
             "name": "(lldb) Launch",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/afv_unix",
+            "program": "${workspaceFolder}/build/afv_unix",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build/bin/",
+            "cwd": "${workspaceFolder}/build/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb"

@@ -141,6 +141,7 @@ int main(int, char**)
     }
 
     // Cleanup
+    delete currentApp;
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
