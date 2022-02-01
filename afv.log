@@ -1,0 +1,4 @@
+Tue Feb  1 23:56:27 2022: APISession: /Users/pierre/Documents/GitHub/afv-native/src/afv/APISession.cpp(204): got error from API server: Response Code 403
+Tue Feb  1 23:56:27 2022: afv_native::ATCClient: /Users/pierre/Documents/GitHub/afv-native/src/core/AtcClient.cpp(200): Got error from AFV API Server.  Disconnecting session
+Tue Feb  1 23:56:33 2022: APISession: /Users/pierre/Documents/GitHub/afv-native/src/afv/APISession.cpp(204): got error from API server: Response Code 403
+Tue Feb  1 23:56:33 2022: afv_native::ATCClient: /Users/pierre/Documents/GitHub/afv-native/src/core/AtcClient.cpp(200): Got error from AFV API Server.  Disconnecting session

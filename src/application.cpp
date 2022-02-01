@@ -77,9 +77,6 @@ namespace afv_unix::application {
                 if (!mClient->Connect()) {
                     std::cout << "Connection failed!" << std::endl;
                 };
-
-                mClient->AddFrequency(119250000);
-                mClient->SetRx(119250000, true);
             }
         } else {
             ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(4 / 7.0f, 0.6f, 0.6f));
@@ -108,12 +105,114 @@ namespace afv_unix::application {
         }
         
         afv_unix::modals::settings::render(mClient);
-        
+
         ImGui::SameLine();
 
         const ImVec4 red(1.0, 0.0, 0.0, 1.0), green(0.0, 1.0, 0.0, 1.0);
         ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API Server Connection");ImGui::SameLine(); ImGui::Text(" | "); ImGui::SameLine();
         ImGui::TextColored(mClient->IsVoiceConnected() ? green : red, "Voice Server Connection");
+
+        ImGui::NewLine();
+
+                //
+        // Main area
+        //
+
+        ImGui::BeginGroup();
+        ImGuiTableFlags flags = ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
+            | ImGuiTableFlags_ScrollY;
+        if (ImGui::BeginTable("stations_table", 6, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
+        {
+            // Display headers so we can inspect their interaction with borders.
+            // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
+
+            ImGui::TableSetupColumn("Callsign");
+            ImGui::TableSetupColumn("Frequency");
+            ImGui::TableSetupColumn("Transceivers");
+            ImGui::TableSetupColumn("M");
+            ImGui::TableSetupColumn("RX");
+            ImGui::TableSetupColumn("TX");
+            ImGui::TableHeadersRow();
+        
+            for(auto &el : shared::FetchedStations) {
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(el.callsign.c_str());
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(std::to_string(el.freq).c_str());
+
+                ImGui::TableNextColumn();
+                // If we don't have a transceiver count, we try to fetch it
+                if (el.transceivers < 0) {
+                    int remoteCount = mClient->GetTransceiverCountForStation(el.callsign);
+                    if (remoteCount > 0) {
+                        el.transceivers = remoteCount;
+                    }
+                }
+                ImGui::TextUnformatted(std::to_string(el.transceivers/1000).c_str());
+
+                ImGui::TableNextColumn();
+                if (ImGui::Button("Select")) {
+                    mClient->AddFrequency(el.freq);
+                    mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                }
+
+                ImGui::TableNextColumn();
+
+                if (mClient->GetRxActive(el.freq)) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+                }
+                if (ImGui::Button("RX")) {
+                    mClient->SetRx(el.freq, !mClient->GetRxActive(el.freq));
+                }
+                if (mClient->GetRxActive(el.freq))
+                    ImGui::PopStyleColor(3);
+
+                if (mClient->GetTxActive(el.freq)) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+                }
+                ImGui::TableNextColumn();
+                if (ImGui::Button("TX")) {
+                    mClient->SetTx(el.freq, !mClient->GetTxActive(el.freq));
+                }
+                if (mClient->GetTxActive(el.freq))
+                    ImGui::PopStyleColor(3);
+
+                ImGui::TableNextRow();
+            }
+
+            //ImGui::Button(buf, ImVec2(-FLT_MIN, 0.0f));
+
+            ImGui::EndTable();
+        }
+        ImGui::EndGroup();
+
+        ImGui::SameLine();
+
+        ImGui::BeginGroup();
+
+        ImGui::PushItemWidth(-1.0f);
+        ImGui::Text("Fetch station");
+        ImGui::InputText("Callsign", &shared::station_add_callsign);
+        ImGui::InputFloat("Frequency", &shared::station_add_frequency, 0.025f, 0.0f);
+        ImGui::PopItemWidth();
+
+        if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0f))) {
+            shared::StationElement el;
+            el.callsign = shared::station_add_callsign;
+            el.freq = shared::station_add_frequency*1000000;
+            shared::FetchedStations.push_back(el);
+
+            mClient->FetchTransceiverInfo(el.callsign);
+
+            shared::station_add_callsign = "";
+            shared::station_add_frequency = 118.0f;
+        }
+
+        ImGui::EndGroup();
 
         ImGui::End();
 
