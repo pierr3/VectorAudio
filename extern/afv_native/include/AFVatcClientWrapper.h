@@ -41,6 +41,7 @@ namespace afv_native::api {
 
             AFV_NATIVE_EXPORT void StartAudio();
             AFV_NATIVE_EXPORT void StopAudio();
+            AFV_NATIVE_EXPORT bool IsAudioRunning();
 
             AFV_NATIVE_EXPORT void SetTx(unsigned int freq, bool active);
             AFV_NATIVE_EXPORT void SetRx(unsigned int freq, bool active);
@@ -51,4 +52,4 @@ namespace afv_native::api {
 
             AFV_NATIVE_EXPORT void AddFrequency(unsigned int freq);
     };
-};
+}

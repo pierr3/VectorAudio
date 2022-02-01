@@ -1,3 +1,4 @@
+#pragma once
 #include "imgui.h"
 #include "imgui_stdlib.h"
 #include "imgui_internal.h"
@@ -9,6 +10,8 @@
 #include <memory>
 #include "config.h"
 #include <iostream>
+#include "modals/settings.h"
+#include "shared.h"
 
 namespace afv_unix::application {
     class App {
@@ -19,18 +22,7 @@ namespace afv_unix::application {
             void render_frame();
 
         private:
-            bool mInputFilter;
-            bool mOutputEffects;
-            float mPeak = 0.0f;
-            float mVu = 0.0f;
-            int vatsim_cid;
-            std::string vatsim_password;
-
             afv_native::api::atcClient* mClient;
-
-            unsigned int mAudioApi = 0;
-            std::string configAudioApi;
-            std::string configInputDeviceName;
-            std::string configOutputDeviceName;
+            
         };
 }

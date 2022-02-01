@@ -15,6 +15,7 @@ find_package(OpenGL REQUIRED)
 
 include_directories(    ${SDL2_INCLUDE_DIRS}
                         ${OPENGL_INCLUDE_DIRS}
+                        ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv_native/include
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern)
