@@ -245,7 +245,7 @@ namespace afv_unix::application {
                     }
                 }
 
-                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::rating > 1) {
+                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::facility > 0) {
                     if (freqActive) {
                         mClient->SetTx(el.freq, !txState);
                     }
@@ -260,18 +260,35 @@ namespace afv_unix::application {
                     ImGui::PopStyleColor(3);
 
                 ImGui::TableNextColumn();
-                ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-                ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-                if (ImGui::Button("XC")) {
-                    //TODO: Implement XC
+
+                bool xcState = mClient->GetXcState(el.freq);
+                if (xcState) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
                 }
-                ImGui::PopItemFlag();
-                ImGui::PopStyleVar();
+                if (ImGui::Button(std::string("XC##").append(el.callsign).c_str())) {
+                    if (freqActive) {
+                        mClient->SetXc(el.freq, !xcState);
+                    }
+                    else {
+                        mClient->AddFrequency(el.freq);
+                        mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                        if (shared::datafile::facility > 0)
+                            mClient->SetTx(el.freq, true);
+                        mClient->SetRx(el.freq, true);
+                        mClient->SetXc(el.freq, true);
+                    }
+                }
+
+                if (xcState)
+                    ImGui::PopStyleColor(3);
 
                 ImGui::TableNextColumn();
                 if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
                     mClient->SetRx(el.freq, false);
                     mClient->SetTx(el.freq, false);
+                    mClient->SetXc(el.freq, false);
                     shared::StationsPendingRemoval.push_back(el.freq);
                 }
 

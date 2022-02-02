@@ -38,7 +38,7 @@ namespace afv_unix::data_file {
                             if (controller["cid"] == afv_unix::shared::vatsim_cid) {
                                 
                                 afv_unix::shared::datafile::callsign = controller["callsign"].get<std::string>();
-                                afv_unix::shared::datafile::rating = controller["rating"].get<int>();
+                                afv_unix::shared::datafile::facility = controller["facility"].get<int>();
                                 afv_unix::shared::datafile::frequency = std::atof(controller["frequency"].get<std::string>().c_str())*1000000;
                                 afv_unix::shared::datafile::is_connected = true;
                                 return;

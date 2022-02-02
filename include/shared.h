@@ -40,7 +40,7 @@ namespace afv_unix::shared {
 
     // Thread unsafe stuff
     namespace datafile {
-        inline int rating = 0;
+        inline int facility = 0;
         inline bool is_connected = false;
 
         inline std::string callsign = "Not connected";
