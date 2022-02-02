@@ -10,8 +10,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-find_package(SDL2 REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(SFML 2.5 COMPONENTS system window graphics)
 
 include_directories(    ${SDL2_INCLUDE_DIRS}
                         ${OPENGL_INCLUDE_DIRS}
@@ -27,8 +27,7 @@ add_executable(afv_unix src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_widgets.cpp
-                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_opengl3.cpp
-                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_sdl.cpp
+                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp)
 
@@ -36,7 +35,7 @@ if (APPLE)
     set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/arm64/libafv.dylib)
 endif()
 
-target_link_libraries(afv_unix ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${AFV_LIB})
+target_link_libraries(afv_unix ${OPENGL_LIBRARIES} sfml-system sfml-window sfml-graphics ${AFV_LIB})
 
 install(TARGETS afv_unix
     RUNTIME DESTINATION ${INSTALL_DIR})
