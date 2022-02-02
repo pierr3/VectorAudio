@@ -11,6 +11,8 @@ namespace afv_unix::shared {
         int transceivers = -1;
     };
 
+    const std::string client_name = "VectorAudio/0.1.0";
+
     inline bool mInputFilter;
     inline bool mOutputEffects;
     inline float mPeak = 60.0f;
@@ -33,6 +35,8 @@ namespace afv_unix::shared {
     // Temp inputs
     inline std::string station_add_callsign = "";
     inline float station_add_frequency = 118.0;
+
+    inline std::vector<int> StationsPendingRemoval;
 
     // Thread unsafe stuff
     namespace datafile {

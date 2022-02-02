@@ -91,6 +91,7 @@
         "queue": "cpp",
         "random": "cpp",
         "memory_resource": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "future": "cpp"
     }
 }

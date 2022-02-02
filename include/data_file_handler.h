@@ -55,8 +55,7 @@ namespace afv_unix::data_file {
                 //TODO Add logging
             }
 
-
-            std::this_thread::sleep_for(30s);
+            std::this_thread::sleep_for(15s);
         }
     }
 }

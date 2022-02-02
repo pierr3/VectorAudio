@@ -4,7 +4,7 @@
 namespace afv_unix::application {
 
     App::App() {
-        mClient = new afv_native::api::atcClient("AFV Unix Alpha", afv_unix::configuration::get_resource_folder());
+        mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
 
         // Load all from config
         
@@ -35,6 +35,8 @@ namespace afv_unix::application {
     // Main loop
     void App::render_frame() {
 
+
+        // AFV stuff
         if (mClient) {
             afv_unix::shared::mPeak = mClient->GetInputPeak();
             afv_unix::shared::mVu = mClient->GetInputVu();
@@ -55,16 +57,23 @@ namespace afv_unix::application {
             }
         }
 
-        #ifdef IMGUI_HAS_VIEWPORT
-            ImGuiViewport* viewport = ImGui::GetMainViewport();
-            ImGui::SetNextWindowPos(viewport->GetWorkPos());
-            ImGui::SetNextWindowSize(viewport->GetWorkSize());
-            ImGui::SetNextWindowViewport(viewport->ID);
-        #else 
-            ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-            ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-        #endif
+        // Forcing removal of unused stations
+        for (auto station : shared::StationsPendingRemoval) {
+            shared::FetchedStations.erase(
+                std::remove_if(
+                    shared::FetchedStations.begin(), 
+                    shared::FetchedStations.end(),
+                    [station](shared::StationElement const & p) { return station == p.freq; }
+                ), 
+                shared::FetchedStations.end()
+            ); 
+            mClient->RemoveFrequency(station);
+        }
 
+        shared::StationsPendingRemoval.clear();
+
+        ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBringToFrontOnFocus);
         
         // Callsign Field
@@ -157,9 +166,9 @@ namespace afv_unix::application {
             // Display headers so we can inspect their interaction with borders.
             // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
 
-            ImGui::TableSetupColumn("Callsign");
-            ImGui::TableSetupColumn("Frequency");
-            ImGui::TableSetupColumn("Transceivers");
+            ImGui::TableSetupColumn("Callsign", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableSetupColumn("Frequency", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableSetupColumn("Transceivers", ImGuiTableColumnFlags_WidthStretch);
             ImGui::TableSetupColumn("STS");
             ImGui::TableSetupColumn("RX");
             ImGui::TableSetupColumn("TX");
@@ -260,9 +269,10 @@ namespace afv_unix::application {
                 ImGui::PopStyleVar();
 
                 ImGui::TableNextColumn();
-                if (ImGui::Button("X")) {
-                    //mClient->RemoveFrequency(el.freq);
-                    //TODO: Actually delete it
+                if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
+                    mClient->SetRx(el.freq, false);
+                    mClient->SetTx(el.freq, false);
+                    shared::StationsPendingRemoval.push_back(el.freq);
                 }
 
                 ImGui::TableNextRow();
