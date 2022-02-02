@@ -5,6 +5,7 @@
 #include "imgui_internal.h"
 #include <string>
 #include "shared.h"
+#include "util.h"
 
 namespace afv_unix::modals {
     class settings {
@@ -14,11 +15,16 @@ namespace afv_unix::modals {
             // Settings modal definition 
             if (ImGui::BeginPopupModal("Settings Panel"))
             {
+
+                ImGui::BeginGroup();
                 ImGui::Text("VATSIM Details");
+                ImGui::PushItemWidth(200.0f);
                 ImGui::InputInt("VATSIM ID", &afv_unix::shared::vatsim_cid);
 
                 ImGui::InputText("Password", &afv_unix::shared::vatsim_password, ImGuiInputTextFlags_Password);
-
+                ImGui::PopItemWidth();
+                ImGui::EndGroup();
+                
                 ImGui::NewLine();
 
                 ImGui::Text("Audio configuration");
@@ -77,36 +83,44 @@ namespace afv_unix::modals {
                     }
                 }
 
-                ImGui::NewLine();
 
+                ImGui::NewLine();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(5 / 7.0f, 0.6f, 0.6f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(5 / 7.0f, 0.7f, 0.7f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(5 / 7.0f, 0.8f, 0.8f));
                 const char* audioTestButtonText = mClient->IsAudioRunning() ? "Stop Audio Test" : "Start Audio Test";
-                if (ImGui::Button(audioTestButtonText, ImVec2(ImGui::GetContentRegionAvailWidth()*0.7f, 0.0f))) {
+                if (ImGui::Button(audioTestButtonText, ImVec2(-1.0f, 0.0f))) {
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
                     else
                         mClient->StartAudio();
                 }
                 ImGui::PopStyleColor(3);
+                
+                float width = (ImGui::GetContentRegionAvailWidth()*0.5f)-5.0f;
+                ImGui::ProgressBar(1-(afv_unix::shared::mVu/-60.f), ImVec2(width, 0.0f));
+                ImGui::SameLine();
+                ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-60.f), ImVec2(width, 0.0f));
 
-                ImGui::ProgressBar(1-(afv_unix::shared::mVu/-60.f), ImVec2(-80.0f, 0.0f));
-                ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
-                ImGui::Text("Input VU");
-
-                ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-60.f), ImVec2(-80.0f, 0.0f));
-                ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
-                ImGui::Text("Input Peak");
 
                 ImGui::NewLine();
+
+                std::string pttText = "Push to talk key: ";
+                shared::ptt == sf::Keyboard::Unknown ? pttText.append("Not set") : pttText.append(afv_unix::util::getKeyName(shared::ptt));
+
+                ImGui::TextUnformatted(pttText.c_str());
+                ImGui::SameLine();
+                ImGui::Checkbox("Select new key", &shared::capture_ptt_flag);
+
                 ImGui::NewLine();
 
                 if (ImGui::Button("Cancel")) {
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
                     ImGui::CloseCurrentPopup();
+
+                    shared::capture_ptt_flag = false;
                 }
                     
                 ImGui::SameLine();
@@ -122,6 +136,9 @@ namespace afv_unix::modals {
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
                     ImGui::CloseCurrentPopup();
+
+
+                    shared::capture_ptt_flag = false;
                 }
                     
 

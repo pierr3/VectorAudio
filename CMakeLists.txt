@@ -18,7 +18,11 @@ include_directories(    ${SDL2_INCLUDE_DIRS}
                         ${CMAKE_SOURCE_DIR}/extern)
 
 if (APPLE)
-    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/arm64/libafv.dylib)
+    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/apple/libafv.dylib)
+endif()
+
+if (LINUX)
+    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/linux64/libafv.a)
 endif()
 
 add_executable(afv_unix src/main.cpp

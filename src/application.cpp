@@ -4,7 +4,7 @@
 namespace afv_unix::application {
 
     App::App() {
-        mClient = new afv_native::api::atcClient("AFV Unix Alpha");
+        mClient = new afv_native::api::atcClient("AFV Unix Alpha", afv_unix::configuration::get_resource_folder());
 
         // Load all from config
         
@@ -13,6 +13,8 @@ namespace afv_unix::application {
  
         afv_unix::shared::vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
         afv_unix::shared::vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
+
+        afv_unix::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(afv_unix::configuration::config, "user", "ptt", -1));
 
         auto mAudioProviders = mClient->GetAudioApis();
         afv_unix::shared::configAudioApi = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "api", std::string("Default API"));
@@ -48,7 +50,7 @@ namespace afv_unix::application {
             ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         #endif
 
-        ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoResize);
+        ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBringToFrontOnFocus);
         
         // Callsign Field
         ImGui::PushItemWidth(100.0f);
@@ -109,7 +111,7 @@ namespace afv_unix::application {
         ImGui::SameLine();
 
         const ImVec4 red(1.0, 0.0, 0.0, 1.0), green(0.0, 1.0, 0.0, 1.0);
-        ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API");ImGui::SameLine(); ImGui::Text(" | "); ImGui::SameLine();
+        ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API");ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
         ImGui::TextColored(mClient->IsVoiceConnected() ? green : red, "Voice"); 
 
         ImGui::NewLine();

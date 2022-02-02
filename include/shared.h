@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <SFML/Window/Keyboard.hpp>
 
 namespace afv_unix::shared {
     struct StationElement {
@@ -22,6 +23,11 @@ namespace afv_unix::shared {
     inline std::string configAudioApi;
     inline std::string configInputDeviceName;
     inline std::string configOutputDeviceName;
+
+    inline bool capture_ptt_flag = false;
+
+    inline sf::Keyboard::Key ptt = sf::Keyboard::Unknown;
+    inline bool isPttOpen = false;
 
     inline std::vector<StationElement> FetchedStations;
 

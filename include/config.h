@@ -3,6 +3,7 @@
 #include <string>
 #include <thread>
 #include <iostream>
+#include <SFML/Config.hpp>
 
 namespace afv_unix {
 
@@ -13,6 +14,8 @@ namespace afv_unix {
         static inline std::string file_path = "config.toml";
 
         static void build_config();
+
+        static std::string get_resource_folder();
 
         //
         // TODO fix potential concurrency if the user changes config while still writing

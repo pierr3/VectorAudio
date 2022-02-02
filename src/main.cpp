@@ -2,6 +2,7 @@
 #include "imgui-SFML.h"
 #include "style.h"
 #include "config.h"
+#include "shared.h"
 #include "application.h"
 #include <stdio.h>
 
@@ -46,7 +47,6 @@ int main(int, char**)
     //IM_ASSERT(font != NULL);
 
     // Our state
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     afv_unix::style::apply_style();
     afv_unix::configuration::build_config();
@@ -72,13 +72,24 @@ int main(int, char**)
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            else if(event.type == sf::Event::KeyPressed) {
+
+                // Capture the new Ptt key
+                if (afv_unix::shared::capture_ptt_flag) {
+                    afv_unix::shared::ptt = event.key.code;
+
+                    afv_unix::configuration::config["user"]["ptt"] = static_cast<int>(afv_unix::shared::ptt);
+                    afv_unix::configuration::write_config_async();
+                    afv_unix::shared::capture_ptt_flag = false;
+                }
+            }
         }
 
         ImGui::SFML::Update(window, deltaClock.restart());
 
         currentApp->render_frame();
 
-        ImGui::ShowDemoWindow(NULL);
+        //ImGui::ShowDemoWindow(NULL);
 
         // Rendering
         window.clear();
