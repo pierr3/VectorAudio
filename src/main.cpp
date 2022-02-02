@@ -4,6 +4,8 @@
 #include "config.h"
 #include "shared.h"
 #include "application.h"
+#include "data_file_handler.h"
+#include <thread>
 #include <stdio.h>
 
 #include <SFML/Graphics/CircleShape.hpp>
@@ -53,6 +55,9 @@ int main(int, char**)
 
     afv_unix::application::App* currentApp = new afv_unix::application::App();
 
+    std::thread dataFileThread(afv_unix::data_file::handler);
+    dataFileThread.detach();
+
     // Main loop
     sf::Clock deltaClock;
     while (window.isOpen())
@@ -96,6 +101,9 @@ int main(int, char**)
         ImGui::SFML::Render(window);
         window.display();
     }
+
+    afv_unix::data_file::stop_flag = true;
+    //dataFileThread.join();
 
     // Cleanup
     delete currentApp;

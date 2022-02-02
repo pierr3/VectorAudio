@@ -17,7 +17,6 @@ namespace afv_unix::shared {
     inline float mVu = 60.0f;
     inline int vatsim_cid;
     inline std::string vatsim_password;
-    inline std::string callsign = "ACCFR1";
 
     inline unsigned int mAudioApi = 0;
     inline std::string configAudioApi;
@@ -34,4 +33,13 @@ namespace afv_unix::shared {
     // Temp inputs
     inline std::string station_add_callsign = "";
     inline float station_add_frequency = 118.0;
+
+    // Thread unsafe stuff
+    namespace datafile {
+        inline int rating = 0;
+        inline bool is_connected = false;
+
+        inline std::string callsign = "Not connected";
+        inline int frequency;
+    }
 }

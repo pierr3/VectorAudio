@@ -69,7 +69,7 @@ namespace afv_unix::application {
         
         // Callsign Field
         ImGui::PushItemWidth(100.0f);
-        ImGui::TextUnformatted(std::string("Callsign: ").append(shared::callsign).c_str());
+        ImGui::TextUnformatted(std::string("Callsign: ").append(shared::datafile::callsign).c_str());
         ImGui::PopItemWidth();
         ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
         ImGui::SameLine();
@@ -77,7 +77,11 @@ namespace afv_unix::application {
         // Connect button logic
 
         if (!mClient->IsVoiceConnected()) {
-            if (ImGui::Button("Connect")) {
+            if (!afv_unix::shared::datafile::is_connected) {
+                ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+                ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+            }
+            if (ImGui::Button("Connect") && afv_unix::shared::datafile::is_connected) {
                 mClient->StopAudio();
                 mClient->SetAudioApi(afv_unix::shared::mAudioApi);
                 mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
@@ -87,19 +91,29 @@ namespace afv_unix::application {
                 mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
 
                 mClient->SetCredentials(std::to_string(afv_unix::shared::vatsim_cid), afv_unix::shared::vatsim_password);
-                mClient->SetCallsign(afv_unix::shared::callsign);
+                mClient->SetCallsign(afv_unix::shared::datafile::callsign);
                 mClient->SetEnableInputFilters(afv_unix::shared::mInputFilter);
                 mClient->SetEnableOutputEffects(afv_unix::shared::mOutputEffects);
 
                 if (!mClient->Connect()) {
                     std::cout << "Connection failed!" << std::endl;
                 };
+
+                // We pre-populate the user station
+                shared::station_add_callsign = shared::datafile::callsign;
+                shared::station_add_frequency = shared::datafile::frequency/1000000.0f;
+            }
+            if (!afv_unix::shared::datafile::is_connected) {
+                ImGui::PopItemFlag();
+                ImGui::PopStyleVar();
             }
         } else {
             ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(4 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(4 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(4 / 7.0f, 0.8f, 0.8f));
-            if (ImGui::Button("Disconnect")) {
+
+            // Auto disconnect if we need
+            if (ImGui::Button("Disconnect") || !afv_unix::shared::datafile::is_connected) {
                 mClient->Disconnect();
             }
             ImGui::PopStyleColor(3);
@@ -193,8 +207,9 @@ namespace afv_unix::application {
                 }
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
-                    if (freqActive)
+                    if (freqActive) {
                         mClient->SetRx(el.freq, !rxState);
+                    }
                     else {
                         mClient->AddFrequency(el.freq);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
@@ -221,9 +236,10 @@ namespace afv_unix::application {
                     }
                 }
 
-                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str())) {
-                    if (freqActive)
+                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::rating > 1) {
+                    if (freqActive) {
                         mClient->SetTx(el.freq, !txState);
+                    }
                     else {
                         mClient->AddFrequency(el.freq);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);

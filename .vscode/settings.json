@@ -86,6 +86,11 @@
         "filesystem": "cpp",
         "*.ipp": "cpp",
         "charconv": "cpp",
-        "__functional_03": "cpp"
+        "__functional_03": "cpp",
+        "codecvt": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "memory_resource": "cpp",
+        "cinttypes": "cpp"
     }
 }
