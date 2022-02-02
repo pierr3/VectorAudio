@@ -30,3 +30,8 @@ cat > build/VectorAudio.app/Contents/Info.plist << EOF
     NSHighResolutionCapable = "false";
 }
 EOF
+
+arch=$(arch)
+
+cd build/
+zip -r "VectorAudio_$arch.zip" VectorAudio.app
