@@ -8,7 +8,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 find_package(OpenGL REQUIRED)
-find_package(SFML 2.5 COMPONENTS system window graphics)
+find_package(SFML 2.5 COMPONENTS system window graphics network)
 
 include_directories(    ${SDL2_INCLUDE_DIRS}
                         ${OPENGL_INCLUDE_DIRS}
@@ -36,6 +36,6 @@ add_executable(afv_unix src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp)
 
-target_link_libraries(afv_unix ${OPENGL_LIBRARIES} sfml-system sfml-window sfml-graphics ${AFV_LIB})
+target_link_libraries(afv_unix ${OPENGL_LIBRARIES} sfml-system sfml-window sfml-graphics sfml-network ${AFV_LIB})
 
 file(COPY ${AFV_LIB} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

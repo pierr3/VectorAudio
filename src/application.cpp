@@ -38,6 +38,21 @@ namespace afv_unix::application {
         if (mClient) {
             afv_unix::shared::mPeak = mClient->GetInputPeak();
             afv_unix::shared::mVu = mClient->GetInputVu();
+
+            // Set the Ptt if required
+            if (mClient->IsVoiceConnected() && shared::ptt != sf::Keyboard::Unknown) {
+                if (shared::isPttOpen) {
+                    if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
+                        mClient->SetPtt(false);
+                        shared::isPttOpen = false;
+                    }
+                } else {
+                    if (sf::Keyboard::isKeyPressed(shared::ptt)) {
+                        mClient->SetPtt(true);
+                        shared::isPttOpen = true;
+                    }
+                }
+            }
         }
 
         #ifdef IMGUI_HAS_VIEWPORT
@@ -165,9 +180,16 @@ namespace afv_unix::application {
 
                 bool rxState = mClient->GetRxState(el.freq);
                 if (rxState) {
-                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+                    // Yellow colour if currently being transmitted on
+                    if (mClient->GetRxActive(el.freq)) {
+                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(1 / 7.0f, 0.8f, 0.8f));
+                    } else {
+                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+                    }
                 }
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
@@ -176,19 +198,28 @@ namespace afv_unix::application {
                     else {
                         mClient->AddFrequency(el.freq);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
-                        mClient->SetRx(el.freq, !rxState);
+                        mClient->SetRx(el.freq, true);
                     }
                 }
                 if (rxState)
                     ImGui::PopStyleColor(3);
 
                 bool txState = mClient->GetTxState(el.freq);
-                if (txState) {
-                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
-                }
+
                 ImGui::TableNextColumn();
+                if (txState) {
+
+                    // Yellow colour if currently being transmitted on
+                    if (mClient->GetTxActive(el.freq)) {
+                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(1 / 7.0f, 0.8f, 0.8f));
+                    } else {
+                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
+                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+                    }
+                }
 
                 if (ImGui::Button(std::string("TX##").append(el.callsign).c_str())) {
                     if (freqActive)
@@ -196,7 +227,8 @@ namespace afv_unix::application {
                     else {
                         mClient->AddFrequency(el.freq);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
-                        mClient->SetTx(el.freq, !txState);
+                        mClient->SetTx(el.freq, true);
+                        mClient->SetRx(el.freq, true);
                     }
                 }
                 if (txState)
