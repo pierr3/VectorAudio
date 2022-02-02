@@ -52,7 +52,7 @@ namespace afv_unix::application {
         
         // Callsign Field
         ImGui::PushItemWidth(100.0f);
-        ImGui::Text(std::string("Callsign: ").append(shared::callsign).c_str());
+        ImGui::TextUnformatted(std::string("Callsign: ").append(shared::callsign).c_str());
         ImGui::PopItemWidth();
         ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
         ImGui::SameLine();
@@ -129,7 +129,7 @@ namespace afv_unix::application {
             ImGui::TableSetupColumn("Callsign");
             ImGui::TableSetupColumn("Frequency");
             ImGui::TableSetupColumn("Transceivers");
-            ImGui::TableSetupColumn("Main");
+            ImGui::TableSetupColumn("STS");
             ImGui::TableSetupColumn("RX");
             ImGui::TableSetupColumn("TX");
             ImGui::TableSetupColumn("XC");
@@ -153,9 +153,11 @@ namespace afv_unix::application {
                 ImGui::TextUnformatted(std::to_string(el.transceivers).c_str());
 
                 ImGui::TableNextColumn();
-                if (ImGui::Button("Toggle", ImVec2(-FLT_MIN, 0.0f))) {
-                    mClient->UseTransceiversFromStation(el.callsign, el.freq);
-                }
+                bool freqActive = mClient->IsFrequencyActive(el.freq);
+                if (freqActive)
+                    ImGui::TextUnformatted("LIVE");
+                else
+                    ImGui::TextUnformatted("INOP");
 
                 ImGui::TableNextColumn();
 
@@ -165,8 +167,15 @@ namespace afv_unix::application {
                     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
                     ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
                 }
-                if (ImGui::Button("RX")) {
-                    mClient->SetRx(el.freq, !rxState);
+                
+                if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
+                    if (freqActive)
+                        mClient->SetRx(el.freq, !rxState);
+                    else {
+                        mClient->AddFrequency(el.freq);
+                        mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                        mClient->SetRx(el.freq, !rxState);
+                    }
                 }
                 if (rxState)
                     ImGui::PopStyleColor(3);
@@ -179,8 +188,14 @@ namespace afv_unix::application {
                 }
                 ImGui::TableNextColumn();
 
-                if (ImGui::Button("TX")) {
-                    mClient->SetTx(el.freq, !txState);
+                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str())) {
+                    if (freqActive)
+                        mClient->SetTx(el.freq, !txState);
+                    else {
+                        mClient->AddFrequency(el.freq);
+                        mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                        mClient->SetTx(el.freq, !txState);
+                    }
                 }
                 if (txState)
                     ImGui::PopStyleColor(3);
@@ -225,7 +240,7 @@ namespace afv_unix::application {
                 shared::FetchedStations.push_back(el);
 
                 mClient->AddFrequency(el.freq);
-                mClient->FetchTransceiverInfo(el.callsign);
+                mClient->UseTransceiversFromStation(el.callsign, el.freq);
 
                 shared::station_add_callsign = "";
                 shared::station_add_frequency = 118.0f;
