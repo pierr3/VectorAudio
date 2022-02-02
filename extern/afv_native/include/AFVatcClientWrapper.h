@@ -49,6 +49,9 @@ namespace afv_native::api {
             AFV_NATIVE_EXPORT bool GetTxActive(unsigned int freq);
             AFV_NATIVE_EXPORT bool GetRxActive(unsigned int freq);
 
+            AFV_NATIVE_EXPORT bool GetTxState(unsigned int freq);
+            AFV_NATIVE_EXPORT bool GetRxState(unsigned int freq);
+
             // Use this to set the current transceivers to the transceivers from this station, pulled from the AFV database, only one at a time can be active
             AFV_NATIVE_EXPORT void UseTransceiversFromStation(std::string station, int freq);
 
@@ -61,5 +64,7 @@ namespace afv_native::api {
             AFV_NATIVE_EXPORT std::string LastTransmitOnFreq(unsigned int freq);
 
             AFV_NATIVE_EXPORT void AddFrequency(unsigned int freq);
+            AFV_NATIVE_EXPORT void RemoveFrequency(unsigned int freq);
+            AFV_NATIVE_EXPORT void IsFrequencyActive(unsigned int freq);
     };
 }

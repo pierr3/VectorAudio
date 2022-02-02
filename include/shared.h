@@ -16,7 +16,7 @@ namespace afv_unix::shared {
     inline float mVu = 60.0f;
     inline int vatsim_cid;
     inline std::string vatsim_password;
-    inline std::string callsign = "LFPB_GND";
+    inline std::string callsign = "ACCFR1";
 
     inline unsigned int mAudioApi = 0;
     inline std::string configAudioApi;

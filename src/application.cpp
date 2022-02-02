@@ -52,7 +52,7 @@ namespace afv_unix::application {
         
         // Callsign Field
         ImGui::PushItemWidth(100.0f);
-        ImGui::Text(std::string(std::string("Callsign: ") + shared::callsign).c_str());
+        ImGui::Text(std::string("Callsign: ").append(shared::callsign).c_str());
         ImGui::PopItemWidth();
         ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
         ImGui::SameLine();
@@ -67,7 +67,7 @@ namespace afv_unix::application {
                 mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
             
                 // TODO: Pull from datafile
-                mClient->SetClientPosition(48.784108, 2.2925447, 100, 100);
+                mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
 
                 mClient->SetCredentials(std::to_string(afv_unix::shared::vatsim_cid), afv_unix::shared::vatsim_password);
                 mClient->SetCallsign(afv_unix::shared::callsign);
@@ -109,19 +109,19 @@ namespace afv_unix::application {
         ImGui::SameLine();
 
         const ImVec4 red(1.0, 0.0, 0.0, 1.0), green(0.0, 1.0, 0.0, 1.0);
-        ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API Server Connection");ImGui::SameLine(); ImGui::Text(" | "); ImGui::SameLine();
-        ImGui::TextColored(mClient->IsVoiceConnected() ? green : red, "Voice Server Connection");
+        ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API");ImGui::SameLine(); ImGui::Text(" | "); ImGui::SameLine();
+        ImGui::TextColored(mClient->IsVoiceConnected() ? green : red, "Voice"); 
 
         ImGui::NewLine();
 
-                //
+        //
         // Main area
         //
 
         ImGui::BeginGroup();
         ImGuiTableFlags flags = ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
             | ImGuiTableFlags_ScrollY;
-        if (ImGui::BeginTable("stations_table", 6, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
+        if (ImGui::BeginTable("stations_table", 8, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
         {
             // Display headers so we can inspect their interaction with borders.
             // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
@@ -129,16 +129,18 @@ namespace afv_unix::application {
             ImGui::TableSetupColumn("Callsign");
             ImGui::TableSetupColumn("Frequency");
             ImGui::TableSetupColumn("Transceivers");
-            ImGui::TableSetupColumn("M");
+            ImGui::TableSetupColumn("Main");
             ImGui::TableSetupColumn("RX");
             ImGui::TableSetupColumn("TX");
+            ImGui::TableSetupColumn("XC");
+            ImGui::TableSetupColumn("R");
             ImGui::TableHeadersRow();
-        
+            
             for(auto &el : shared::FetchedStations) {
                 ImGui::TableNextColumn();
                 ImGui::TextUnformatted(el.callsign.c_str());
                 ImGui::TableNextColumn();
-                ImGui::TextUnformatted(std::to_string(el.freq).c_str());
+                ImGui::TextUnformatted(std::to_string(el.freq/1000).c_str());
 
                 ImGui::TableNextColumn();
                 // If we don't have a transceiver count, we try to fetch it
@@ -148,43 +150,58 @@ namespace afv_unix::application {
                         el.transceivers = remoteCount;
                     }
                 }
-                ImGui::TextUnformatted(std::to_string(el.transceivers/1000).c_str());
+                ImGui::TextUnformatted(std::to_string(el.transceivers).c_str());
 
                 ImGui::TableNextColumn();
-                if (ImGui::Button("Select")) {
-                    mClient->AddFrequency(el.freq);
+                if (ImGui::Button("Toggle", ImVec2(-FLT_MIN, 0.0f))) {
                     mClient->UseTransceiversFromStation(el.callsign, el.freq);
                 }
 
                 ImGui::TableNextColumn();
 
-                if (mClient->GetRxActive(el.freq)) {
+                bool rxState = mClient->GetRxState(el.freq);
+                if (rxState) {
                     ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
                     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
                     ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
                 }
                 if (ImGui::Button("RX")) {
-                    mClient->SetRx(el.freq, !mClient->GetRxActive(el.freq));
+                    mClient->SetRx(el.freq, !rxState);
                 }
-                if (mClient->GetRxActive(el.freq))
+                if (rxState)
                     ImGui::PopStyleColor(3);
 
-                if (mClient->GetTxActive(el.freq)) {
+                bool txState = mClient->GetTxState(el.freq);
+                if (txState) {
                     ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
                     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
                     ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
                 }
                 ImGui::TableNextColumn();
+
                 if (ImGui::Button("TX")) {
-                    mClient->SetTx(el.freq, !mClient->GetTxActive(el.freq));
+                    mClient->SetTx(el.freq, !txState);
                 }
-                if (mClient->GetTxActive(el.freq))
+                if (txState)
                     ImGui::PopStyleColor(3);
+
+                ImGui::TableNextColumn();
+                ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+                ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+                if (ImGui::Button("XC")) {
+                    //TODO: Implement XC
+                }
+                ImGui::PopItemFlag();
+                ImGui::PopStyleVar();
+
+                ImGui::TableNextColumn();
+                if (ImGui::Button("X")) {
+                    //mClient->RemoveFrequency(el.freq);
+                    //TODO: Actually delete it
+                }
 
                 ImGui::TableNextRow();
             }
-
-            //ImGui::Button(buf, ImVec2(-FLT_MIN, 0.0f));
 
             ImGui::EndTable();
         }
@@ -201,15 +218,18 @@ namespace afv_unix::application {
         ImGui::PopItemWidth();
 
         if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0f))) {
-            shared::StationElement el;
-            el.callsign = shared::station_add_callsign;
-            el.freq = shared::station_add_frequency*1000000;
-            shared::FetchedStations.push_back(el);
+            if (mClient->IsVoiceConnected()) {
+                shared::StationElement el;
+                el.callsign = shared::station_add_callsign;
+                el.freq = shared::station_add_frequency*1000000;
+                shared::FetchedStations.push_back(el);
 
-            mClient->FetchTransceiverInfo(el.callsign);
+                mClient->AddFrequency(el.freq);
+                mClient->FetchTransceiverInfo(el.callsign);
 
-            shared::station_add_callsign = "";
-            shared::station_add_frequency = 118.0f;
+                shared::station_add_callsign = "";
+                shared::station_add_frequency = 118.0f;
+            }
         }
 
         ImGui::EndGroup();
