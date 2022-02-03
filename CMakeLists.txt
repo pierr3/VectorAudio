@@ -21,8 +21,10 @@ if (APPLE)
     set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/apple/libafv.dylib)
 endif()
 
-if (LINUX)
-    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/linux64/libafv.a)
+if (UNIX AND NOT APPLE)
+    FIND_PACKAGE(Threads REQUIRED)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/libafv.so)
 endif()
 
 add_executable(afv_unix src/main.cpp
@@ -36,6 +38,6 @@ add_executable(afv_unix src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp)
 
-target_link_libraries(afv_unix ${OPENGL_LIBRARIES} sfml-system sfml-window sfml-graphics sfml-network ${AFV_LIB})
+target_link_libraries(afv_unix ${OPENGL_LIBRARIES} sfml-system sfml-window sfml-graphics sfml-network ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 file(COPY ${AFV_LIB} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
