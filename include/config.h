@@ -4,6 +4,7 @@
 #include <thread>
 #include <iostream>
 #include <SFML/Config.hpp>
+#include <filesystem>
 
 namespace afv_unix {
 
