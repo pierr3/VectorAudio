@@ -2,7 +2,7 @@
 #include <thread>
 #include <chrono>
 
-#include "json/json.hpp"
+#include <nlohmann/json.hpp>
 #include "shared.h"
 
 #include <SFML/Network.hpp>
