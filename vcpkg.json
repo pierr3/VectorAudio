@@ -7,6 +7,6 @@
         "nlohmann-json",
         "toml11",
         "sfml",
-        "cpp-httplib",
+        "cpp-httplib"
     ]
   }
