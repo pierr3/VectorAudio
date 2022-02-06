@@ -1,3 +1,7 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/microsoft/vcpkg
+[submodule "extern/afv-native"]
+	path = extern/afv-native
+	url = https://github.com/pierr3/afv-native
+	branch = atc-client
