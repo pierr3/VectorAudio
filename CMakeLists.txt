@@ -11,6 +11,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
+find_package(OpenGL REQUIRED)
 find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -39,12 +40,10 @@ add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp)
 
 target_link_libraries(vector_audio 
+    ${OPENGL_LIBRARY}
     OpenSSL::SSL OpenSSL::Crypto 
     sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
     afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
-
-
-#file(COPY ${AFV_LIB} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

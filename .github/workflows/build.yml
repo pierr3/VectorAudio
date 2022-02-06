@@ -18,7 +18,7 @@ jobs:
           submodules: recursive
       - name: Install SFML dependencies
         run: |
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libgl-dev
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -48,4 +48,4 @@ jobs:
           cmake -S . -B build/
       - name: Build cmake
         run: |
-          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake --build build/
