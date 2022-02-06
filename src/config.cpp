@@ -8,6 +8,9 @@ namespace afv_unix {
     toml::value configuration::config;
 
     void configuration::build_config() {
+        #ifdef NDEBUG
+            file_path = get_resource_folder() + file_path;
+        #endif
 
         if (std::filesystem::exists(file_path)) {
             afv_unix::configuration::config = toml::parse(file_path);
