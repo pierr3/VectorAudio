@@ -7,6 +7,15 @@
         "nlohmann-json",
         "toml11",
         "sfml",
-        "cpp-httplib"
+        "cpp-httplib",
+        "opus",
+        "speexdsp",
+        "portaudio",
+        "cpp-jwt",
+        "msgpack",
+        "openssl",
+        "curl",
+        "libevent",
+        "nlohmann-json"
     ]
   }

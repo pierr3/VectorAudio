@@ -9,6 +9,8 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
+
 find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -16,19 +18,13 @@ find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(toml11 CONFIG REQUIRED)
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
-                        ${CMAKE_SOURCE_DIR}/extern/afv_native/include
+                        ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
                         ${CMAKE_SOURCE_DIR}/extern/imgui
-                        ${CMAKE_SOURCE_DIR}/extern
                         ${CPP_HTTPLIB_INCLUDE_DIRS})
-
-if (APPLE)
-    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/apple/libafv.dylib)
-endif()
 
 if (UNIX AND NOT APPLE)
     find_package(Threads REQUIRED)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-    set(AFV_LIB ${CMAKE_SOURCE_DIR}/extern/afv_native/lib/libafv.so)
 endif()
 
 add_executable(vector_audio src/main.cpp
@@ -47,7 +43,8 @@ target_link_libraries(vector_audio
     sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
+    afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 
-file(COPY ${AFV_LIB} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+#file(COPY ${AFV_LIB} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
