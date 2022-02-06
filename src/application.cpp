@@ -395,8 +395,14 @@ namespace afv_unix::application {
         ImGui::PushItemWidth(-1.0f);
         ImGui::Text("ATIS Status");
         ImGui::TextUnformatted(shared::datafile::atis_callsign.c_str());
-        
         ImGui::PopItemWidth();
+
+        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+        ImGui::Button("Playback stopped", ImVec2(-FLT_MIN, 0.0f));
+        ImGui::Button("Start Recording", ImVec2(-FLT_MIN, 0.0f));
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
 
         //TODO Add ATIS management
 
