@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/afv_unix",
+            "program": "${workspaceFolder}/build/vector_audio",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/",

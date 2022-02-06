@@ -92,6 +92,8 @@
         "random": "cpp",
         "memory_resource": "cpp",
         "cinttypes": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "csignal": "cpp",
+        "regex": "cpp"
     }
 }

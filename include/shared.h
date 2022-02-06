@@ -34,6 +34,7 @@ namespace afv_unix::shared {
 
     // Temp inputs
     inline std::string station_add_callsign = "";
+    inline std::string station_auto_add_callsign = "";
     inline float station_add_frequency = 118.0;
 
     inline std::vector<int> StationsPendingRemoval;

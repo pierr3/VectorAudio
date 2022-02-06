@@ -26,10 +26,47 @@ namespace afv_unix::application {
 
         afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
         afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
+
+        // Bind the callbacks from the client
+        mClient->RaiseClientEvent(std::bind(&App::_eventCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
 
     App::~App() {
         delete mClient;
+    }
+
+    void App::_eventCallback(afv_native::ClientEventType evt, void* data, void* data2) {
+        if (evt == afv_native::ClientEventType::VccsReceived) {
+            if (data != nullptr && data2 != nullptr) {
+                // We got new VCCS stations, we can add them to our list and start getting their transceivers
+                std::map<std::string, unsigned int> stations = *reinterpret_cast<std::map<std::string, unsigned int>*>(data2);
+
+                if (mClient->IsVoiceConnected()) {
+
+                    for (auto s : stations) {
+                        shared::StationElement el;
+                        el.callsign = s.first;
+                        el.freq = s.second;
+                        shared::FetchedStations.push_back(el);
+
+                        //mClient->FetchTransceiverInfo(el.callsign);
+                        //mClient->AddFrequency(el.freq);
+                    }
+                }
+            }
+        }
+
+        if (evt == afv_native::ClientEventType::StationTransceiversUpdated) {
+            if (data != nullptr) {
+                // We just refresh the transceiver count in our display
+                std::string station = *reinterpret_cast<std::string*>(data);
+                auto it = std::find_if(shared::FetchedStations.begin(), shared::FetchedStations.end(), [station](const auto &fs){
+                    return fs.callsign == station;
+                });
+                if (it != shared::FetchedStations.end())
+                    it->transceivers = mClient->GetTransceiverCountForStation(station);
+            }
+        }
     }
 
     // Main loop
@@ -184,12 +221,6 @@ namespace afv_unix::application {
 
                 ImGui::TableNextColumn();
                 // If we don't have a transceiver count, we try to fetch it
-                if (el.transceivers < 0) {
-                    int remoteCount = mClient->GetTransceiverCountForStation(el.callsign);
-                    if (remoteCount > 0) {
-                        el.transceivers = remoteCount;
-                    }
-                }
                 ImGui::TextUnformatted(std::to_string(el.transceivers).c_str());
 
                 ImGui::TableNextColumn();
@@ -204,15 +235,10 @@ namespace afv_unix::application {
                 bool rxState = mClient->GetRxState(el.freq);
                 if (rxState) {
                     // Yellow colour if currently being transmitted on
-                    if (mClient->GetRxActive(el.freq)) {
-                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(1 / 7.0f, 0.8f, 0.8f));
-                    } else {
-                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
-                    }
+                    if (mClient->GetRxActive(el.freq))
+                        afv_unix::style::button_yellow();
+                    else
+                        afv_unix::style::button_green();
                 }
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
@@ -220,13 +246,13 @@ namespace afv_unix::application {
                         mClient->SetRx(el.freq, !rxState);
                     }
                     else {
-                        mClient->AddFrequency(el.freq);
+                        mClient->AddFrequency(el.freq, el.callsign);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
                         mClient->SetRx(el.freq, true);
                     }
                 }
                 if (rxState)
-                    ImGui::PopStyleColor(3);
+                    afv_unix::style::button_reset_colour();
 
                 bool txState = mClient->GetTxState(el.freq);
 
@@ -234,15 +260,10 @@ namespace afv_unix::application {
                 if (txState) {
 
                     // Yellow colour if currently being transmitted on
-                    if (mClient->GetTxActive(el.freq)) {
-                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(1 / 7.0f, 0.8f, 0.8f));
-                    } else {
-                        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-                        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
-                    }
+                    if (mClient->GetTxActive(el.freq))
+                        afv_unix::style::button_yellow();
+                    else
+                        afv_unix::style::button_green();
                 }
 
                 if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::facility > 0) {
@@ -250,29 +271,27 @@ namespace afv_unix::application {
                         mClient->SetTx(el.freq, !txState);
                     }
                     else {
-                        mClient->AddFrequency(el.freq);
+                        mClient->AddFrequency(el.freq, el.callsign);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
                         mClient->SetTx(el.freq, true);
                         mClient->SetRx(el.freq, true);
                     }
                 }
                 if (txState)
-                    ImGui::PopStyleColor(3);
+                    afv_unix::style::button_reset_colour();
 
                 ImGui::TableNextColumn();
 
                 bool xcState = mClient->GetXcState(el.freq);
-                if (xcState) {
-                    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
-                }
+                if (xcState)
+                    afv_unix::style::button_green();
+
                 if (ImGui::Button(std::string("XC##").append(el.callsign).c_str())) {
                     if (freqActive) {
                         mClient->SetXc(el.freq, !xcState);
                     }
                     else {
-                        mClient->AddFrequency(el.freq);
+                        mClient->AddFrequency(el.freq, el.callsign);
                         mClient->UseTransceiversFromStation(el.callsign, el.freq);
                         if (shared::datafile::facility > 0)
                             mClient->SetTx(el.freq, true);
@@ -282,7 +301,7 @@ namespace afv_unix::application {
                 }
 
                 if (xcState)
-                    ImGui::PopStyleColor(3);
+                    afv_unix::style::button_reset_colour();
 
                 ImGui::TableNextColumn();
                 if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
@@ -304,19 +323,34 @@ namespace afv_unix::application {
         ImGui::BeginGroup();
 
         ImGui::PushItemWidth(-1.0f);
-        ImGui::Text("Fetch station");
-        ImGui::InputText("Callsign", &shared::station_add_callsign);
-        ImGui::InputFloat("Frequency", &shared::station_add_frequency, 0.025f, 0.0f);
+        ImGui::Text("Add station");
+        ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign);
         ImGui::PopItemWidth();
 
         if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0f))) {
+            if (mClient->IsVoiceConnected()) {
+                mClient->FetchStationVccs(shared::station_auto_add_callsign);
+                shared::station_auto_add_callsign = "";
+            }
+        }
+
+        ImGui::NewLine();
+
+        // Manual station add
+        ImGui::PushItemWidth(-1.0f);
+        ImGui::Text("Manual add");
+        ImGui::InputText("Callsign##Manual", &shared::station_add_callsign);
+        ImGui::InputFloat("Frequency", &shared::station_add_frequency, 0.025f, 0.0f);
+        ImGui::PopItemWidth();
+
+        if (ImGui::Button("Fetch", ImVec2(-FLT_MIN, 0.0f))) {
             if (mClient->IsVoiceConnected()) {
                 shared::StationElement el;
                 el.callsign = shared::station_add_callsign;
                 el.freq = shared::station_add_frequency*1000000;
                 shared::FetchedStations.push_back(el);
 
-                mClient->AddFrequency(el.freq);
+                mClient->AddFrequency(el.freq, el.callsign);
                 mClient->UseTransceiversFromStation(el.callsign, el.freq);
 
                 shared::station_add_callsign = "";
@@ -324,7 +358,17 @@ namespace afv_unix::application {
             }
         }
 
+        ImGui::NewLine();
+
+        ImGui::PushItemWidth(-1.0f);
+        ImGui::Text("ATIS Status");
+        
+        ImGui::PopItemWidth();
+
+        //TODO Add ATIS management
+
         ImGui::EndGroup();
+
 
         ImGui::End();
 
