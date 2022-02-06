@@ -44,7 +44,7 @@ add_executable(vector_audio src/main.cpp
 
 target_link_libraries(vector_audio 
     OpenSSL::SSL OpenSSL::Crypto 
-    sfml-system sfml-window sfml-graphics sfml-network 
+    sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
