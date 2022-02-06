@@ -100,8 +100,12 @@ int main(int, char**)
         window.display();
     }
 
-    afv_unix::data_file::stop_flag = true;
-    //dataFileThread.join();
+    // Close the datafile thread
+    {
+        std::lock_guard<std::mutex> guard(afv_unix::data_file::df_m);
+        afv_unix::data_file::stop_flag = true;
+    }
+    afv_unix::data_file::df_cv.notify_all();
 
     // Cleanup
     delete currentApp;

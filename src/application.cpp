@@ -44,9 +44,7 @@ namespace afv_unix::application {
                 if (mClient->IsVoiceConnected()) {
 
                     for (auto s : stations) {
-                        shared::StationElement el;
-                        el.callsign = s.first;
-                        el.freq = s.second;
+                        shared::StationElement el = shared::StationElement::build(s.first, s.second);
                         shared::FetchedStations.push_back(el);
 
                         //mClient->FetchTransceiverInfo(el.callsign);
@@ -204,8 +202,8 @@ namespace afv_unix::application {
             // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
 
             ImGui::TableSetupColumn("Callsign", ImGuiTableColumnFlags_WidthStretch);
-            ImGui::TableSetupColumn("Frequency", ImGuiTableColumnFlags_WidthStretch);
-            ImGui::TableSetupColumn("Transceivers", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableSetupColumn("Frequency");
+            ImGui::TableSetupColumn("TCS");
             ImGui::TableSetupColumn("STS");
             ImGui::TableSetupColumn("RX");
             ImGui::TableSetupColumn("TX");
@@ -217,7 +215,7 @@ namespace afv_unix::application {
                 ImGui::TableNextColumn();
                 ImGui::TextUnformatted(el.callsign.c_str());
                 ImGui::TableNextColumn();
-                ImGui::TextUnformatted(std::to_string(el.freq/1000).c_str());
+                ImGui::TextUnformatted(el.human_freq.c_str());
 
                 ImGui::TableNextColumn();
                 // If we don't have a transceiver count, we try to fetch it
@@ -345,9 +343,7 @@ namespace afv_unix::application {
 
         if (ImGui::Button("Fetch", ImVec2(-FLT_MIN, 0.0f))) {
             if (mClient->IsVoiceConnected()) {
-                shared::StationElement el;
-                el.callsign = shared::station_add_callsign;
-                el.freq = shared::station_add_frequency*1000000;
+                shared::StationElement el = shared::StationElement::build(shared::station_add_callsign, shared::station_add_frequency*1000000);
                 shared::FetchedStations.push_back(el);
 
                 mClient->AddFrequency(el.freq, el.callsign);

@@ -7,8 +7,20 @@ namespace afv_unix::shared {
     struct StationElement {
         int freq;
         std::string callsign;
+        std::string human_freq;
 
         int transceivers = -1;
+
+        inline static StationElement build(std::string callsign, int freq) {
+            StationElement s;
+            s.callsign = callsign;
+            s.freq = freq;
+            
+            std::string temp = std::to_string(freq/1000);
+            s.human_freq = temp.substr(0, 3) + "." + temp.substr(3, 7);
+
+            return s;
+        }
     };
 
     const std::string client_name = "VectorAudio/0.1.0";

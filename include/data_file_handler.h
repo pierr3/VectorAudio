@@ -7,19 +7,28 @@
 #include "shared.h"
 
 namespace afv_unix::data_file {
-    // I know this is "bad" TODO
+    // TODO Get the overarching status file to get data file url
 
     const std::string data_feel_host = "https://data.vatsim.net";
     const std::string data_feel_url = "/v3/vatsim-data.json";
     
-    inline std::atomic<bool> stop_flag = false;
+    inline bool stop_flag = false;
+    inline std::condition_variable df_cv;
+    inline std::mutex df_m;
+
+    template<class Duration>
+    inline bool wait_for(Duration duration) {
+        std::unique_lock<std::mutex> l(df_m);
+
+        return !df_cv.wait_for(l, duration, [&]() { return stop_flag; });
+    }
 
     inline void handler() {
 
         httplib::Client cli(data_feel_host);
-
         using namespace std::chrono_literals;
-        while(!stop_flag) {
+        
+        while(afv_unix::data_file::wait_for(15s)) {
             
             auto res = cli.Get(data_feel_url.c_str());
 
@@ -55,8 +64,8 @@ namespace afv_unix::data_file {
                 std::cout << "data file request failed" << std::endl;
                 //TODO Add logging
             }
-
-            std::this_thread::sleep_for(15s);
         }
+
+        std::cout << "datafile thread is done" << std::endl;
     }
 }
