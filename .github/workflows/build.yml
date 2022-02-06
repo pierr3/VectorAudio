@@ -2,6 +2,10 @@ name: Build VectorAudio
 
 on: [push]
 
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   BUILD_TYPE: Release
 
@@ -12,9 +16,36 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Install SFML dependencies
+        run: |
+          apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
-          cmake --build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+  build-osx:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+      - name: Build cmake
+        run: |
+          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+      - name: Build cmake
+        run: |
+          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
