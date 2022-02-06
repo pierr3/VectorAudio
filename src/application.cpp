@@ -92,20 +92,46 @@ namespace afv_unix::application {
             }
         }
 
-        // Forcing removal of unused stations
-        for (auto station : shared::StationsPendingRemoval) {
-            shared::FetchedStations.erase(
-                std::remove_if(
-                    shared::FetchedStations.begin(), 
-                    shared::FetchedStations.end(),
-                    [station](shared::StationElement const & p) { return station == p.freq; }
-                ), 
-                shared::FetchedStations.end()
-            ); 
-            mClient->RemoveFrequency(station);
-        }
+        // Forcing removal of unused stations if possible, otherwise we try at the next loop
+        shared::StationsPendingRemoval.erase(
+            std::remove_if(shared::StationsPendingRemoval.begin(), shared::StationsPendingRemoval.end(),
+                [this](int const & station) { 
 
-        shared::StationsPendingRemoval.clear();
+                    // First we check if we are not receiving or transmitting on the frequency
+                    if (!this->mClient->GetRxActive(station) && !this->mClient->GetTxActive(station)) {
+                        // The frequency is free, we can remove it
+
+                        shared::FetchedStations.erase(
+                            std::remove_if(shared::FetchedStations.begin(), shared::FetchedStations.end(),
+                                [station](shared::StationElement const & p) { return station == p.freq; }
+                            ), 
+                            shared::FetchedStations.end()
+                        ); 
+                        mClient->RemoveFrequency(station);
+
+                        return true;
+                    } else {
+                        //The frequency is not free, we try again later
+                        return false;
+                    }
+                }
+            ), 
+            shared::StationsPendingRemoval.end()
+        ); 
+
+        // Changing RX status that is locked
+        shared::StationsPendingRxChange.erase(std::remove_if(shared::StationsPendingRxChange.begin(), shared::StationsPendingRxChange.end(),
+        [this](int const & station) { 
+            if (!this->mClient->GetRxActive(station)) {
+                // Frequency is free, we can change the state
+                this->mClient->SetRx(station, !this->mClient->GetRxState(station));
+                return true;
+            } else {
+                // Frequency is not free, we try again later
+                return false;
+            }
+        }), shared::StationsPendingRxChange.end());
+        
 
         ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -231,9 +257,10 @@ namespace afv_unix::application {
                 ImGui::TableNextColumn();
 
                 bool rxState = mClient->GetRxState(el.freq);
+                bool rxActive = mClient->GetRxActive(el.freq);
                 if (rxState) {
                     // Yellow colour if currently being transmitted on
-                    if (mClient->GetRxActive(el.freq))
+                    if (rxActive)
                         afv_unix::style::button_yellow();
                     else
                         afv_unix::style::button_green();
@@ -241,7 +268,13 @@ namespace afv_unix::application {
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
                     if (freqActive) {
-                        mClient->SetRx(el.freq, !rxState);
+                        // We check if we are receiving something, if that is the case we must wait till the end of transmition to change the state
+                        if (rxActive) {
+                            if (std::find(shared::StationsPendingRxChange.begin(), shared::StationsPendingRxChange.end(), el.freq) == shared::StationsPendingRxChange.end())
+                                shared::StationsPendingRxChange.push_back(el.freq);
+                        }
+                        else
+                            mClient->SetRx(el.freq, !rxState);
                     }
                     else {
                         mClient->AddFrequency(el.freq, el.callsign);
@@ -252,19 +285,21 @@ namespace afv_unix::application {
                 if (rxState)
                     afv_unix::style::button_reset_colour();
 
-                bool txState = mClient->GetTxState(el.freq);
+                
 
                 ImGui::TableNextColumn();
+                bool txState = mClient->GetTxState(el.freq);
+                bool txActive = mClient->GetTxActive(el.freq);
                 if (txState) {
 
                     // Yellow colour if currently being transmitted on
-                    if (mClient->GetTxActive(el.freq))
+                    if (txActive)
                         afv_unix::style::button_yellow();
                     else
                         afv_unix::style::button_green();
                 }
 
-                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::facility > 0) {
+                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::facility > 0 && !txActive) {
                     if (freqActive) {
                         mClient->SetTx(el.freq, !txState);
                     }

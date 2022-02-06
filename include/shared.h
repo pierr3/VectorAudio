@@ -50,6 +50,7 @@ namespace afv_unix::shared {
     inline float station_add_frequency = 118.0;
 
     inline std::vector<int> StationsPendingRemoval;
+    inline std::vector<int> StationsPendingRxChange;
 
     // Thread unsafe stuff
     namespace datafile {
