@@ -17,7 +17,6 @@ namespace afv_unix {
         static void build_config();
 
         static std::string get_resource_folder();
-
         //
         // TODO fix potential concurrency if the user changes config while still writing
         //

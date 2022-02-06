@@ -18,6 +18,8 @@ find_package(OpenSSL REQUIRED)
 find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(toml11 CONFIG REQUIRED)
 
+set(APPLE_EXTRA_LIBS "")
+
 include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
                         ${CMAKE_SOURCE_DIR}/extern/imgui
@@ -26,6 +28,10 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
 if (UNIX AND NOT APPLE)
     find_package(Threads REQUIRED)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+endif()
+
+if (APPLE)
+    set(APPLE_EXTRA_LIBS src/osx_resources.mm)
 endif()
 
 add_executable(vector_audio src/main.cpp
@@ -37,7 +43,8 @@ add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_widgets.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
-                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp)
+                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
+                ${APPLE_EXTRA_LIBS})
 
 target_link_libraries(vector_audio 
     ${OPENGL_LIBRARY}

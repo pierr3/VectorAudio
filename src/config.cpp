@@ -1,5 +1,9 @@
 #include "config.h"
 
+#ifdef SFML_SYSTEM_MACOS
+    #include "osx_resources.h"
+#endif
+
 namespace afv_unix {
     toml::value configuration::config;
 
@@ -15,7 +19,7 @@ namespace afv_unix {
             return "../resources";
         #else
             #ifdef SFML_SYSTEM_MACOS
-                return "../Resources";
+                return afv_unix::native::osx_resourcePath();
             #endif
 
             #ifdef SFML_SYSTEM_LINUX
