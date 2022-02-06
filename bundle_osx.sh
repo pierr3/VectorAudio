@@ -8,13 +8,19 @@
 # Copying all files
 #
 
+rm -r build/VectorAudio.app
+
+cd resources
+sh make_icns.sh
+cd ..
+
 mkdir -p build/VectorAudio.app/Contents/{MacOS,Resources,lib}
 cp resources/*.wav build/VectorAudio.app/Contents/Resources
 cp resources/VectorAudio.icns build/VectorAudio.app/Contents/Resources
-cp build/libafv.dylib build/VectorAudio.app/Contents/lib
+cp build/extern/afv-native/libafv.dylib build/VectorAudio.app/Contents/lib
 
-chmod +x build/afv_unix
-cp build/afv_unix build/VectorAudio.app/Contents/MacOS
+chmod +x build/vector_audio
+cp build/vector_audio build/VectorAudio.app/Contents/MacOS
 
 cat > build/VectorAudio.app/Contents/Info.plist << EOF
 {
@@ -25,15 +31,18 @@ cat > build/VectorAudio.app/Contents/Info.plist << EOF
 	CFBundleShortVersionString = "1";
 	CFBundleInfoDictionaryVersion = "6.0";
 	CFBundlePackageType = "APPL";
-	CFBundleExecutable = "afv_unix";
+	CFBundleExecutable = "vector_audio";
 	CFBundleIconFile = "VectorAudio.icns";
     NSHighResolutionCapable = "false";
 }
 EOF
 
-install_name_tool -add_rpath "@executable_path/../lib" build/VectorAudio.app/Contents/MacOS/afv_unix
+install_name_tool -add_rpath "@executable_path/../lib" build/VectorAudio.app/Contents/MacOS/vector_audio
 
 arch=$(arch)
 
 cd build/
-zip -r "VectorAudio_$arch.zip" VectorAudio.app
+zip -FSr "VectorAudio_$arch.zip" VectorAudio.app
+
+cd ..
+rm resources/VectorAudio.icns
