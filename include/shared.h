@@ -59,5 +59,9 @@ namespace afv_unix::shared {
 
         inline std::string callsign = "Not connected";
         inline int frequency;
+
+        inline std::string atis_callsign = "Not connected";
+        inline int atis_frequency;
+        inline std::vector<std::string> atis_text;
     }
 }

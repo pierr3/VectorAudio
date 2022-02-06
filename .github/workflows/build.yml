@@ -24,7 +24,7 @@ jobs:
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
-          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake --build build/
   build-osx:
     runs-on: macos-latest
     steps:
@@ -36,7 +36,7 @@ jobs:
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
-          cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake --build build/
       - name: Bundle macOs
         run: |
           bundle_osx.sh
@@ -48,7 +48,7 @@ jobs:
           submodules: recursive
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/
       - name: Build cmake
         run: |
           cmake --build build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}

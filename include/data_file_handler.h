@@ -51,6 +51,22 @@ namespace afv_unix::data_file {
                                 break;
                             }
                         }
+
+                        for(auto atis : j3["atis"]) {
+                            if (atis["cid"] == afv_unix::shared::vatsim_cid) {
+                                
+                                afv_unix::shared::datafile::atis_callsign = atis["callsign"].get<std::string>();
+                                afv_unix::shared::datafile::atis_frequency = std::atof(atis["frequency"].get<std::string>().c_str())*1000000;
+                                if (atis["text_atis"].is_array()) {
+                                    afv_unix::shared::datafile::atis_text.clear();
+                                    for (auto atis_line : atis["text_atis"])
+                                        afv_unix::shared::datafile::atis_text.push_back(atis_line.get<std::string>());
+                                }
+
+                                break;
+                                //TODO: Handle ATIS disconnect
+                            }
+                        }
                         
                         if (!connected_flag)
                             afv_unix::shared::datafile::is_connected = false;

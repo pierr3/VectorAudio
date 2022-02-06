@@ -394,6 +394,7 @@ namespace afv_unix::application {
 
         ImGui::PushItemWidth(-1.0f);
         ImGui::Text("ATIS Status");
+        ImGui::TextUnformatted(shared::datafile::atis_callsign.c_str());
         
         ImGui::PopItemWidth();
 
