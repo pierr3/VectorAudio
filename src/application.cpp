@@ -273,8 +273,9 @@ namespace afv_unix::application {
                             if (std::find(shared::StationsPendingRxChange.begin(), shared::StationsPendingRxChange.end(), el.freq) == shared::StationsPendingRxChange.end())
                                 shared::StationsPendingRxChange.push_back(el.freq);
                         }
-                        else
+                        else {
                             mClient->SetRx(el.freq, !rxState);
+                        }
                     }
                     else {
                         mClient->AddFrequency(el.freq, el.callsign);

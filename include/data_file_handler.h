@@ -28,7 +28,7 @@ namespace afv_unix::data_file {
         httplib::Client cli(data_feel_host);
         using namespace std::chrono_literals;
         
-        while(afv_unix::data_file::wait_for(15s)) {
+        do {
             
             auto res = cli.Get(data_feel_url.c_str());
 
@@ -64,7 +64,7 @@ namespace afv_unix::data_file {
                 std::cout << "data file request failed" << std::endl;
                 //TODO Add logging
             }
-        }
+        } while(afv_unix::data_file::wait_for(15s));
 
         std::cout << "datafile thread is done" << std::endl;
     }
