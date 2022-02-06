@@ -1,0 +1,22 @@
+name: Build VectorAudio
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Configure cmake
+      run: |
+        cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+      
+      - name: Build cmake
+      run: |
+        cmake --build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
