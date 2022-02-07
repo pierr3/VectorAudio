@@ -4,6 +4,15 @@
     #include "osx_resources.h"
 #endif
 
+#ifdef SFML_SYSTEM_WINDOWS
+    #include <windows.h>
+#endif
+
+#ifdef SFML_SYSTEM_LINUX
+    #include <limits.h>
+    #include <unistd.h> 
+#endif
+
 namespace afv_unix {
     toml::value configuration::config;
 
@@ -26,11 +35,16 @@ namespace afv_unix {
             #endif
 
             #ifdef SFML_SYSTEM_LINUX
-                return "";
+                char result[PATH_MAX];
+                ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+                return std::string(result, (count > 0) ? count : 0);
             #endif
 
             #ifdef SFML_SYSTEM_WINDOWS
-                return "";
+                wchar_t path[MAX_PATH] = { 0 };
+                GetModuleFileNameW(NULL, path, MAX_PATH);
+                std::wstring ws(path);
+                return std::string(ws.begin(), ws.end());
             #endif
         #endif
     }
