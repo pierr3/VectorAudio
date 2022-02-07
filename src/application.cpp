@@ -397,12 +397,23 @@ namespace afv_unix::application {
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
         ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
         ImGui::Button("Broadcast stopped", ImVec2(-FLT_MIN, 0.0f));
-        ImGui::Button("Start Recording", ImVec2(-FLT_MIN, 0.0f));
-        ImGui::Button("Play back", ImVec2(-FLT_MIN, 0.0f));
         ImGui::PopItemFlag();
         ImGui::PopStyleVar();
+        
+        bool isAtisRecording = mClient->IsAtisRecording();
+        std::string bttnAtisText = isAtisRecording ? "Stop Recording" : "Start Recording";
+        if (ImGui::Button(bttnAtisText.c_str(), ImVec2(-FLT_MIN, 0.0f))) {
+            mClient->SetAtisRecording(!mClient->IsAtisRecording());
 
-         //TODO Add ATIS management
+            // If we stopped recording, we save the file
+            if (isAtisRecording && !mClient->IsAtisRecording()) {
+                mClient->SaveAtisRecording(afv_unix::configuration::get_resource_folder() + "/atis.raw");
+            }
+        }
+        
+        ImGui::Button("Play back", ImVec2(-FLT_MIN, 0.0f));
+
+        //TODO Add ATIS management
 
         ImGui::NewLine();
 
