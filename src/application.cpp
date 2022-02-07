@@ -46,9 +46,6 @@ namespace afv_unix::application {
                     for (auto s : stations) {
                         shared::StationElement el = shared::StationElement::build(s.first, s.second);
                         shared::FetchedStations.push_back(el);
-
-                        //mClient->FetchTransceiverInfo(el.callsign);
-                        //mClient->AddFrequency(el.freq);
                     }
                 }
             }
@@ -399,12 +396,19 @@ namespace afv_unix::application {
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
         ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-        ImGui::Button("Playback stopped", ImVec2(-FLT_MIN, 0.0f));
+        ImGui::Button("Broadcast stopped", ImVec2(-FLT_MIN, 0.0f));
         ImGui::Button("Start Recording", ImVec2(-FLT_MIN, 0.0f));
+        ImGui::Button("Play back", ImVec2(-FLT_MIN, 0.0f));
         ImGui::PopItemFlag();
         ImGui::PopStyleVar();
 
-        //TODO Add ATIS management
+         //TODO Add ATIS management
+
+        ImGui::NewLine();
+
+        ImGui::PushItemWidth(-1.0f);
+        ImGui::TextUnformatted("Last TX:");
+        ImGui::PopItemWidth();
 
         ImGui::EndGroup();
 
