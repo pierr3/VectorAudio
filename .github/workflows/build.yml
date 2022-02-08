@@ -46,6 +46,9 @@ jobs:
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+      - name: Link vcpkg to MSBuild
+        run: |
+          vcpkg integrate install
       - name: Build cmake
         run: |
           cmake --build build/

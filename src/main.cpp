@@ -15,6 +15,10 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
+#ifdef SFML_SYSTEM_WINDOWS
+    #pragma comment( lib, "speexdsp.lib" )
+#endif
+
 // Main code
 int main(int, char**)
 {

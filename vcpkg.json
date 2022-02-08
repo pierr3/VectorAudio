@@ -13,9 +13,8 @@
         "portaudio",
         "cpp-jwt",
         "msgpack",
-        "openssl",
         "curl",
         "libevent",
-        "nlohmann-json"
+        "spdlog"
     ]
   }
