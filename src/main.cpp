@@ -56,8 +56,7 @@ int main(int, char**)
 
     afv_unix::application::App* currentApp = new afv_unix::application::App();
 
-    std::thread dataFileThread(afv_unix::data_file::handler);
-    dataFileThread.detach();
+    auto dataFileHandler = new afv_unix::data_file::Handler();
 
     // Main loop
     sf::Clock deltaClock;
@@ -101,11 +100,7 @@ int main(int, char**)
     }
 
     // Close the datafile thread
-    {
-        std::lock_guard<std::mutex> guard(afv_unix::data_file::df_m);
-        afv_unix::data_file::stop_flag = true;
-    }
-    afv_unix::data_file::df_cv.notify_all();
+    delete dataFileHandler;
 
     // Cleanup
     delete currentApp;
