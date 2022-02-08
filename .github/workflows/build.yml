@@ -39,16 +39,21 @@ jobs:
           cmake --build build/
   build-windows:
     runs-on: windows-latest
+    env:
+      VCPKG_DEFAULT_TRIPLET: x64-windows-static
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Configure cmake
+      - name: Install vcpkg with triplet
         run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          vcpkg install --triplet=x64-windows-static 
       - name: Link vcpkg to MSBuild
         run: |
           vcpkg integrate install
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
           cmake --build build/
