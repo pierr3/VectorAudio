@@ -40,11 +40,14 @@ jobs:
   build-windows:
     runs-on: windows-latest
     env:
-      VCPKG_DEFAULT_TRIPLET: x64-windows-static
+      VCPKG_TARGET_TRIPLET: x64-windows-static
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Bootstrap vcpkg
+        run: |
+          ./vcpkg/bootstrap-vcpkg.bat 
       - name: Install vcpkg with triplet
         run: |
           vcpkg install --triplet=x64-windows-static 
@@ -53,7 +56,7 @@ jobs:
           vcpkg integrate install
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVCPKG_TARGET_TRIPLET=x64-windows-static
       - name: Build cmake
         run: |
           cmake --build build/
