@@ -317,7 +317,7 @@ namespace afv_unix::application {
                 if (xcState)
                     afv_unix::style::button_green();
 
-                if (ImGui::Button(std::string("XC##").append(el.callsign).c_str())) {
+                if (ImGui::Button(std::string("XC##").append(el.callsign).c_str()) && shared::datafile::facility > 0) {
                     if (freqActive) {
                         mClient->SetXc(el.freq, !xcState);
                     }
@@ -336,9 +336,6 @@ namespace afv_unix::application {
 
                 ImGui::TableNextColumn();
                 if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
-                    mClient->SetRx(el.freq, false);
-                    mClient->SetTx(el.freq, false);
-                    mClient->SetXc(el.freq, false);
                     shared::StationsPendingRemoval.push_back(el.freq);
                 }
 
@@ -394,24 +391,49 @@ namespace afv_unix::application {
         ImGui::TextUnformatted(shared::datafile::atis_callsign.c_str());
         ImGui::PopItemWidth();
 
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-        ImGui::Button("Broadcast stopped", ImVec2(-FLT_MIN, 0.0f));
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-        
+        if (!mClient->IsVoiceConnected() || shared::datafile::atis_callsign.size() == 0) {
+            ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
+        }
+
+        bool atisPlayingBack = mClient->IsAtisPlayingBack();
+        std::string bttnAtisPlayback = atisPlayingBack ? "Broadcast active" : "Broadcast stopped";
+        if (atisPlayingBack)
+            afv_unix::style::button_green();
+
+        if (ImGui::Button(bttnAtisPlayback.c_str(), ImVec2(-FLT_MIN, 0.0f))) {
+            if (!atisPlayingBack)
+                mClient->StartAtisPlayback(shared::datafile::atis_callsign, shared::datafile::atis_frequency);
+            else
+                mClient->StopAtisPlayback();
+        }
+
+        if (atisPlayingBack)
+            afv_unix::style::button_reset_colour();
+
         bool isAtisRecording = mClient->IsAtisRecording();
         std::string bttnAtisText = isAtisRecording ? "Stop Recording" : "Start Recording";
         if (ImGui::Button(bttnAtisText.c_str(), ImVec2(-FLT_MIN, 0.0f))) {
             mClient->SetAtisRecording(!mClient->IsAtisRecording());
-
-            // If we stopped recording, we save the file
-            if (isAtisRecording && !mClient->IsAtisRecording()) {
-                mClient->SaveAtisRecording(afv_unix::configuration::get_resource_folder() + "/atis.raw");
-            }
         }
         
-        ImGui::Button("Play back", ImVec2(-FLT_MIN, 0.0f));
+        bool listeningInAtis = mClient->IsAtisListening();
+        if (listeningInAtis)
+            afv_unix::style::button_yellow();
+
+        if (ImGui::Button("Listen in", ImVec2(-FLT_MIN, 0.0f))) {
+            if (mClient->IsVoiceConnected() && shared::datafile::atis_callsign.size() > 0 && atisPlayingBack) {
+                mClient->SetAtisListening(!listeningInAtis);
+            }
+        }
+
+        if (listeningInAtis)
+            afv_unix::style::button_reset_colour();
+
+        if (!mClient->IsVoiceConnected() || shared::datafile::atis_callsign.size() == 0) {
+            ImGui::PopItemFlag();
+            ImGui::PopStyleVar();
+        }
 
         //TODO Add ATIS management
 
