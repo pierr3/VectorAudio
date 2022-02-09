@@ -6,6 +6,7 @@
 #include "style.h"
 #include "config.h"
 #include "shared.h"
+#include "updater.h"
 #include "application.h"
 #include "data_file_handler.h"
 #include <thread>
@@ -62,6 +63,8 @@ int main(int, char**)
 
     spdlog::info("Starting Vector Audio...");
 
+    auto updaterInstance = new afv_unix::updater();
+
     afv_unix::application::App* currentApp = new afv_unix::application::App();
 
     auto dataFileHandler = new afv_unix::data_file::Handler();
@@ -97,7 +100,13 @@ int main(int, char**)
 
         ImGui::SFML::Update(window, deltaClock.restart());
 
-        currentApp->render_frame();
+        if (!updaterInstance->need_update())
+            currentApp->render_frame();
+        else {
+            if (updaterInstance->draw()) {
+                window.close();
+            }
+        }
 
         //ImGui::ShowDemoWindow(NULL);
 

@@ -9,16 +9,18 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-execute_process(
-			COMMAND git -C ${PROJECT_SOURCE_DIR} rev-parse --short HEAD
-			RESULT_VARIABLE VECTOR_GIT_VERSION_CMD
-			OUTPUT_VARIABLE VECTOR_GIT_VERSION
-			OUTPUT_STRIP_TRAILING_WHITESPACE)
+add_definitions(-DVECTOR_VERSION="f3b679c")
 
-if (VECTOR_GIT_VERSION_CMD EQUAL 0)
-    add_definitions(-DVECTOR_VERSION="${VECTOR_GIT_VERSION}")
-else()
-    add_definitions(-DVECTOR_VERSION="dev")
+if(APPLE)
+    execute_process(
+        COMMAND arch
+        RESULT_VARIABLE VECTOR_ARCH_CMD
+        OUTPUT_VARIABLE VECTOR_ARCH
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+    if (VECTOR_ARCH_CMD EQUAL 0)
+        add_definitions(-DVECTOR_ARCH="${VECTOR_ARCH}")
+    endif()
 endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
@@ -36,6 +38,7 @@ set(APPLE_EXTRA_LIBS "")
 include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
                         ${CMAKE_SOURCE_DIR}/extern/imgui
+                        ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
                         ${CPP_HTTPLIB_INCLUDE_DIRS})
 
 if (UNIX AND NOT APPLE)
@@ -58,6 +61,7 @@ add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
+                ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS})
 
 target_link_libraries(vector_audio 

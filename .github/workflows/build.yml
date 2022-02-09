@@ -37,3 +37,11 @@ jobs:
       - name: Build cmake
         run: |
           cmake --build build/
+      - name: Bundle OSX
+        run: |
+          ./bundle_osx.sh
+      - name: Archive build result
+        uses: actions/upload-artifact@v2
+        with:
+          name: VectorAudio_osx
+          path: build/VectorAudio_x64.dmg

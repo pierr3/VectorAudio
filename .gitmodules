@@ -5,3 +5,6 @@
 	path = extern/afv-native
 	url = https://github.com/pierr3/afv-native
 	branch = atc-client
+[submodule "extern/PlatformFolders"]
+	path = extern/PlatformFolders
+	url = https://github.com/sago007/PlatformFolders.git
