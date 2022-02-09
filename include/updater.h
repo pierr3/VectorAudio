@@ -17,24 +17,16 @@ namespace afv_unix {
             updater();
 
             bool need_update();
-            bool draw();
+            void draw();
 
         private:
-            void _downloader();
-
             bool mNeedUpdate;
-
-            bool mRequestClose = false;
-
-            float downloadProgress = 0.f;
-            bool isDownloading = false;
 
             std::string mBaseUrl = "https://raw.githubusercontent.com";
             std::string mVersionUrl = "/pierr3/VectorAudio/main/VERSION";
             std::string mNewVersion = "";
 
-            std::string mArtefactBaseUrl = "https://github.com";
-            std::string mArtefactFileUrl = "/pierr3/vector_audio/releases/latest/download/";
+            std::string mArtefactFileUrl = "https://github.com/pierr3/VectorAudio/releases/latest";
             httplib::Client cli;
     };
     

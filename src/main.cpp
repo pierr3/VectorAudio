@@ -102,11 +102,8 @@ int main(int, char**)
 
         if (!updaterInstance->need_update())
             currentApp->render_frame();
-        else {
-            if (updaterInstance->draw()) {
-                window.close();
-            }
-        }
+        else
+            updaterInstance->draw();
 
         //ImGui::ShowDemoWindow(NULL);
 
