@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: VectorAudio_osx
-          path: build/VectorAudio_x64.dmg
+          path: build/VectorAudio_i386.dmg
