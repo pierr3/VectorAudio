@@ -379,7 +379,7 @@ namespace afv_unix::application {
             }
         }
 
-        ImGui::NewLine();
+        /*ImGui::NewLine();
 
         // Manual station add
         ImGui::PushItemWidth(-1.0f);
@@ -399,7 +399,7 @@ namespace afv_unix::application {
                 shared::station_add_callsign = "";
                 shared::station_add_frequency = 118.0f;
             }
-        }
+        }*/
 
         ImGui::NewLine();
 
@@ -446,9 +446,11 @@ namespace afv_unix::application {
 
         ImGui::NewLine();
 
-        ImGui::PushItemWidth(-1.0f);
-        ImGui::TextUnformatted("Last TX:");
-        ImGui::PopItemWidth();
+        //ImGui::PushItemWidth(-1.0f);
+        //ImGui::TextUnformatted("Last RX: [Not implemented]");
+        //ImGui::PopItemWidth();
+
+        ImGui::TextUnformatted(afv_unix::shared::client_name.c_str());
 
         ImGui::EndGroup();
 

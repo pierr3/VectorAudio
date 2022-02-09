@@ -9,6 +9,18 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+execute_process(
+			COMMAND git -C ${PROJECT_SOURCE_DIR} rev-parse --short HEAD
+			RESULT_VARIABLE VECTOR_GIT_VERSION_CMD
+			OUTPUT_VARIABLE VECTOR_GIT_VERSION
+			OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+if (VECTOR_GIT_VERSION_CMD EQUAL 0)
+    add_definitions(-DVECTOR_VERSION="${VECTOR_GIT_VERSION}")
+else()
+    add_definitions(-DVECTOR_VERSION="dev")
+endif()
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
 find_package(OpenGL REQUIRED)

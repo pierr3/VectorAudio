@@ -23,7 +23,7 @@ namespace afv_unix::shared {
         }
     };
 
-    const std::string client_name = "VectorAudio/0.1.0";
+    const std::string client_name = "VectorAudio/"+std::string(VECTOR_VERSION);
 
     inline bool mInputFilter;
     inline bool mOutputEffects;
