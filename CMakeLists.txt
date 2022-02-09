@@ -17,6 +17,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(toml11 CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
 set(APPLE_EXTRA_LIBS "")
 
@@ -52,5 +53,6 @@ target_link_libraries(vector_audio
     sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
+    fmt::fmt-header-only
     afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})

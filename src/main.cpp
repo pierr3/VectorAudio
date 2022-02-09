@@ -2,6 +2,7 @@
 
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "spdlog/spdlog.h"
 #include "style.h"
 #include "config.h"
 #include "shared.h"
@@ -56,7 +57,10 @@ int main(int, char**)
     // Our state
 
     afv_unix::style::apply_style();
+    afv_unix::configuration::build_logger();
     afv_unix::configuration::build_config();
+
+    spdlog::info("Starting Vector Audio...");
 
     afv_unix::application::App* currentApp = new afv_unix::application::App();
 

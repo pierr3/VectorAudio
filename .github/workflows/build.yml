@@ -37,20 +37,3 @@ jobs:
       - name: Build cmake
         run: |
           cmake --build build/
-  build-windows:
-    runs-on: windows-latest
-    env:
-      VCPKG_TARGET_TRIPLET: x64-windows-static
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - name: Configure cmake
-        run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVCPKG_TARGET_TRIPLET=x64-windows-static
-      - name: Link vcpkg to MSBuild
-        run: |
-          vcpkg integrate install
-      - name: Build cmake
-        run: |
-          cmake --build build/

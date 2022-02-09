@@ -15,6 +15,7 @@ namespace afv_unix::data_file {
             inline Handler(){
                 dataFileThread = std::thread(&Handler::_thread, this);
                 dataFileThread.detach();
+                spdlog::info("Created data file thread");
             };
 
             inline virtual ~Handler(){
@@ -53,6 +54,7 @@ namespace afv_unix::data_file {
                             if (j3["controllers"].is_array()) {
                                 
                                 bool connected_flag = false;
+                                bool atis_connected_flag = false;
 
                                 for(auto controller : j3["controllers"]) {
                                     if (controller["cid"] == afv_unix::shared::vatsim_cid) {
@@ -76,25 +78,35 @@ namespace afv_unix::data_file {
                                             for (auto atis_line : atis["text_atis"])
                                                 afv_unix::shared::datafile::atis_text.push_back(atis_line.get<std::string>());
                                         }
-
+                                        atis_connected_flag = true;
                                         break;
-                                        //TODO: Handle ATIS disconnect
                                     }
                                 }
                                 
-                                if (!connected_flag)
+                                if (!connected_flag && afv_unix::shared::datafile::is_connected) {
                                     afv_unix::shared::datafile::is_connected = false;
+                                    spdlog::info("Detected client disconnecting from network");
+                                }
+
+                                if (!atis_connected_flag && afv_unix::shared::datafile::is_atis_connected) {
+                                    afv_unix::shared::datafile::is_atis_connected = false;
+                                    afv_unix::shared::datafile::atis_callsign = "";
+                                    afv_unix::shared::datafile::atis_frequency = 0;
+                                    spdlog::info("Detected atis disconnecting from network");
+                                }
+                                    
                             }
-                        } catch (std::exception exc) {
-                            //TODO: Handle error
+                        } catch (std::exception &exc) {
+                            spdlog::error("Couldn't parse datafile json, error {}", exc.what());
                         }
                     }
                     else
                     {
-                        std::cout << "data file request failed" << std::endl;
-                        //TODO Add logging
+                        spdlog::error("Couldn't download data file, error {}", res->status);
                     }
                 } while(this->wait_for(15s));
+
+                spdlog::info("Data file thread terminated.");
             }
 
             template<class Duration>

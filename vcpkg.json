@@ -15,6 +15,7 @@
         "msgpack",
         "curl",
         "libevent",
+        "fmt",
         "spdlog"
     ]
   }

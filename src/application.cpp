@@ -6,27 +6,32 @@ namespace afv_unix::application {
     App::App() {
         mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
 
+        spdlog::info("Created afv_native client.");
+
         // Load all from config
-        
-        afv_unix::shared::mOutputEffects = toml::find_or<bool>(afv_unix::configuration::config, "audio", "vhf_effects", true);
-        afv_unix::shared::mInputFilter = toml::find_or<bool>(afv_unix::configuration::config, "audio", "input_filters", true);
- 
-        afv_unix::shared::vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
-        afv_unix::shared::vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
+        try {
+            afv_unix::shared::mOutputEffects = toml::find_or<bool>(afv_unix::configuration::config, "audio", "vhf_effects", true);
+            afv_unix::shared::mInputFilter = toml::find_or<bool>(afv_unix::configuration::config, "audio", "input_filters", true);
+    
+            afv_unix::shared::vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
+            afv_unix::shared::vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
 
-        afv_unix::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(afv_unix::configuration::config, "user", "ptt", -1));
+            afv_unix::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(afv_unix::configuration::config, "user", "ptt", -1));
 
-        auto mAudioProviders = mClient->GetAudioApis();
-        afv_unix::shared::configAudioApi = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "api", std::string("Default API"));
-        for(const auto& driver : mAudioProviders)
-        {
-            if (driver.second == afv_unix::shared::configAudioApi)
-                afv_unix::shared::mAudioApi = driver.first;
+            auto mAudioProviders = mClient->GetAudioApis();
+            afv_unix::shared::configAudioApi = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "api", std::string("Default API"));
+            for(const auto& driver : mAudioProviders)
+            {
+                if (driver.second == afv_unix::shared::configAudioApi)
+                    afv_unix::shared::mAudioApi = driver.first;
+            }
+
+            afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
+            afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
+        } catch (toml::exception &exc) {
+            spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
-
-        afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
-        afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
-
+        
         // Bind the callbacks from the client
         mClient->RaiseClientEvent(std::bind(&App::_eventCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
@@ -163,7 +168,7 @@ namespace afv_unix::application {
                 mClient->SetEnableOutputEffects(afv_unix::shared::mOutputEffects);
 
                 if (!mClient->Connect()) {
-                    std::cout << "Connection failed!" << std::endl;
+                    spdlog::error("Failled to connect");
                 };
 
                 // We pre-populate the user station
@@ -181,9 +186,21 @@ namespace afv_unix::application {
 
             // Auto disconnect if we need
             if (ImGui::Button("Disconnect") || !afv_unix::shared::datafile::is_connected) {
+                if (mClient->IsAtisPlayingBack())
+                    mClient->StopAtisPlayback();
                 mClient->Disconnect();
             }
             ImGui::PopStyleColor(3);
+
+            // If we're connected and the ATIS is not playing playing back, we add the frequency
+            if (!mClient->IsAtisPlayingBack() && afv_unix::shared::datafile::is_atis_connected) {
+                mClient->StartAtisPlayback(shared::datafile::atis_callsign, shared::datafile::atis_frequency);
+            }
+
+            // Disconnect the ATIS if it disconnected
+            if (mClient->IsAtisPlayingBack() && !afv_unix::shared::datafile::is_atis_connected) {
+                mClient->StopAtisPlayback();
+            }
         }
 
         ImGui::SameLine();
@@ -401,21 +418,13 @@ namespace afv_unix::application {
         if (atisPlayingBack)
             afv_unix::style::button_green();
 
-        if (ImGui::Button(bttnAtisPlayback.c_str(), ImVec2(-FLT_MIN, 0.0f))) {
-            if (!atisPlayingBack)
-                mClient->StartAtisPlayback(shared::datafile::atis_callsign, shared::datafile::atis_frequency);
-            else
-                mClient->StopAtisPlayback();
-        }
+        ImGui::Button(bttnAtisPlayback.c_str(), ImVec2(-FLT_MIN, 0.0f));
+
+        //mClient->StartAtisPlayback(shared::datafile::atis_callsign, shared::datafile::atis_frequency);
+        //mClient->StopAtisPlayback();
 
         if (atisPlayingBack)
             afv_unix::style::button_reset_colour();
-
-        bool isAtisRecording = mClient->IsAtisRecording();
-        std::string bttnAtisText = isAtisRecording ? "Stop Recording" : "Start Recording";
-        if (ImGui::Button(bttnAtisText.c_str(), ImVec2(-FLT_MIN, 0.0f))) {
-            mClient->SetAtisRecording(!mClient->IsAtisRecording());
-        }
         
         bool listeningInAtis = mClient->IsAtisListening();
         if (listeningInAtis)
@@ -434,8 +443,6 @@ namespace afv_unix::application {
             ImGui::PopItemFlag();
             ImGui::PopStyleVar();
         }
-
-        //TODO Add ATIS management
 
         ImGui::NewLine();
 
