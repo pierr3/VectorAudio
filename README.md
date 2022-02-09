@@ -19,6 +19,16 @@ See releases for test builds
 
 OpenGL, SFML 2.5, afv-native (atc-client branch), imgui, toml.hpp, nlohmann.json
 
+# Build
+
+```sh
+git submodule init
+git pull --recurse-submodules
+mkdir build/ && cd build/
+cmake ..
+make
+```
+
 # imgui version
 
 v1.86
