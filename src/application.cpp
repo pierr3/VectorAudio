@@ -49,8 +49,12 @@ namespace afv_unix::application {
                 if (mClient->IsVoiceConnected()) {
 
                     for (auto s : stations) {
+                        if (s.second % 25000 != 0)
+                            s.second += 5000;
                         shared::StationElement el = shared::StationElement::build(s.first, s.second);
-                        shared::FetchedStations.push_back(el);
+
+                        if(!_frequencyExists(el.freq))
+                            shared::FetchedStations.push_back(el);
                     }
                 }
             }
@@ -74,8 +78,14 @@ namespace afv_unix::application {
                 bool found = *reinterpret_cast<bool*>(data);
                 if (found) {
                     auto station = *reinterpret_cast<std::pair<std::string, unsigned int>*>(data2);
+
+                    if (station.second % 25000 != 0)
+                        station.second += 5000;
+
                     shared::StationElement el = shared::StationElement::build(station.first, station.second);
-                    shared::FetchedStations.push_back(el);
+                    
+                    if(!_frequencyExists(el.freq))
+                        shared::FetchedStations.push_back(el);
                 } else {
                     // TODO: Prompt user the station was not found
                 }
