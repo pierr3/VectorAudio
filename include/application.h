@@ -10,6 +10,8 @@
 #include <shared_mutex>
 #include <memory>
 #include <functional>
+#include <algorithm>
+#include <numeric>
 #include "config.h"
 #include <iostream>
 #include "modals/settings.h"

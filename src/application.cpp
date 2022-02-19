@@ -28,6 +28,7 @@ namespace afv_unix::application {
 
             afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
             afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
+            afv_unix::shared::configSpeakerDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "speaker_device", std::string(""));
         } catch (toml::exception &exc) {
             spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
@@ -158,6 +159,7 @@ namespace afv_unix::application {
             }
         }), shared::StationsPendingRxChange.end());
         
+        std::vector<std::string> ReceivedCallsigns;
 
         ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -182,6 +184,7 @@ namespace afv_unix::application {
                 mClient->SetAudioApi(afv_unix::shared::mAudioApi);
                 mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
                 mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
+                mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
             
                 // TODO: Pull from datafile
                 mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
@@ -254,6 +257,15 @@ namespace afv_unix::application {
         ImGui::TextColored(mClient->IsAPIConnected() ? green : red, "API");ImGui::SameLine(); ImGui::Text("|"); ImGui::SameLine();
         ImGui::TextColored(mClient->IsVoiceConnected() ? green : red, "Voice"); 
 
+        /*ImGui::SameLine(); ImGui::Text(" | ");  ImGui::SameLine();
+
+        ImGui::PushItemWidth(200.f);
+        if (ImGui::SliderFloat("Radio Gain", &shared::RadioGain, 0.0f, 2.0f)) {
+            if (mClient->IsVoiceConnected())
+                mClient->SetRadiosGain(shared::RadioGain);
+        }
+        ImGui::PopItemWidth();*/
+
         ImGui::NewLine();
 
         //
@@ -263,7 +275,7 @@ namespace afv_unix::application {
         ImGui::BeginGroup();
         ImGuiTableFlags flags = ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
             | ImGuiTableFlags_ScrollY;
-        if (ImGui::BeginTable("stations_table", 8, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
+        if (ImGui::BeginTable("stations_table", 9, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
         {
             // Display headers so we can inspect their interaction with borders.
             // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
@@ -275,6 +287,7 @@ namespace afv_unix::application {
             ImGui::TableSetupColumn("RX");
             ImGui::TableSetupColumn("TX");
             ImGui::TableSetupColumn("XC");
+            ImGui::TableSetupColumn("SPKR");
             ImGui::TableSetupColumn("R");
             ImGui::TableHeadersRow();
             
@@ -327,8 +340,14 @@ namespace afv_unix::application {
                 if (rxState)
                     afv_unix::style::button_reset_colour();
 
-                
 
+                // If we are receiving on this frequency, we get the latest transmit callsign
+                if (rxState) {
+                    auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
+                    if (receivedCld.size() > 0)
+                        ReceivedCallsigns.push_back(receivedCld);
+                }
+                
                 ImGui::TableNextColumn();
                 bool txState = mClient->GetTxState(el.freq);
                 bool txActive = mClient->GetTxActive(el.freq);
@@ -377,6 +396,22 @@ namespace afv_unix::application {
 
                 if (xcState)
                     afv_unix::style::button_reset_colour();
+
+
+                bool isOnSpeaker = !mClient->GetOnHeadset(el.freq);
+
+                ImGui::TableNextColumn();
+                if (isOnSpeaker)
+                    style::button_green();
+
+                if (ImGui::Button(std::string("O##").append(el.callsign).c_str())) {
+                    if (freqActive) {
+                        mClient->SetOnHeadset(el.freq, isOnSpeaker ? true : false);
+                    }
+                }
+
+                if (isOnSpeaker)
+                    style::button_reset_colour();
 
                 ImGui::TableNextColumn();
                 if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
@@ -474,9 +509,15 @@ namespace afv_unix::application {
 
         ImGui::NewLine();
 
-        //ImGui::PushItemWidth(-1.0f);
-        //ImGui::TextUnformatted("Last RX: [Not implemented]");
-        //ImGui::PopItemWidth();
+
+        std::string RxList = "Last RX: ";
+        RxList.append(ReceivedCallsigns.empty() ? "" : std::accumulate( ++ReceivedCallsigns.begin(), ReceivedCallsigns.end(), *ReceivedCallsigns.begin(), 
+            [](auto& a, auto& b) { return a + ", " + b; }));
+        ImGui::PushItemWidth(-1.0f);
+        ImGui::TextWrapped("%s", RxList.c_str());
+        ImGui::PopItemWidth();
+
+        ImGui::NewLine();
 
         ImGui::TextUnformatted(afv_unix::shared::client_name.c_str());
 

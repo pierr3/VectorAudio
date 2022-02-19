@@ -72,7 +72,7 @@ namespace afv_unix {
         auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(configuration::get_resource_folder() + "vector_audio.log", 1024*1024*10, 3);
         sinks.push_back(rotating_sink);
         
-        auto logger = std::make_shared<spdlog::async_logger>("vectorlogger", sinks.begin(), sinks.end(), 
+        auto logger = std::make_shared<spdlog::async_logger>("vectorlogger", rotating_sink, 
             spdlog::thread_pool(), spdlog::async_overflow_policy::block);
         spdlog::register_logger(logger);
     }

@@ -69,6 +69,20 @@ namespace afv_unix::modals {
 
                     ImGui::EndCombo();
                 }
+
+                if (ImGui::BeginCombo("Speaker Device", afv_unix::shared::configSpeakerDeviceName.c_str())) {
+
+                    auto m_audioDrivers = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+                    for(const auto& driver : m_audioDrivers)
+                    {
+                        if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configSpeakerDeviceName == driver)) {
+                            afv_unix::shared::configSpeakerDeviceName = driver;
+                            afv_unix::configuration::config["audio"]["speaker_device"] =  afv_unix::shared::configSpeakerDeviceName;
+                        }
+                    }
+
+                    ImGui::EndCombo();
+                }
                 
                 ImGui::NewLine();
                 if (ImGui::Checkbox("Input Filter", &afv_unix::shared::mInputFilter)) {
@@ -89,7 +103,7 @@ namespace afv_unix::modals {
                 ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(5 / 7.0f, 0.6f, 0.6f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(5 / 7.0f, 0.7f, 0.7f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(5 / 7.0f, 0.8f, 0.8f));
-                const char* audioTestButtonText = mClient->IsAudioRunning() ? "Stop Audio Test" : "Start Audio Test";
+                const char* audioTestButtonText = mClient->IsAudioRunning() ? "Stop Mic Test" : "Start Mic Test";
                 if (ImGui::Button(audioTestButtonText, ImVec2(-1.0f, 0.0f))) {
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
@@ -98,10 +112,12 @@ namespace afv_unix::modals {
                 }
                 ImGui::PopStyleColor(3);
                 
-                float width = (ImGui::GetContentRegionAvailWidth()*0.5f)-5.0f;
-                ImGui::ProgressBar(1-(afv_unix::shared::mVu/-60.f), ImVec2(width, 0.0f));
-                ImGui::SameLine();
-                ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-60.f), ImVec2(width, 0.0f));
+                //float width = (ImGui::GetContentRegionAvailWidth()*0.5f)-5.0f;
+                //ImGui::ProgressBar(1-(afv_unix::shared::mVu/-40.f), ImVec2(width, 0.0f));
+                //ImGui::SameLine();
+                ImGui::PushStyleColor(ImGuiCol_PlotHistogram, (ImVec4)ImColor(0, 200, 100));
+                ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-40.f), ImVec2(-1.f, 7.f), "");
+                ImGui::PopStyleColor();
 
 
                 ImGui::NewLine();

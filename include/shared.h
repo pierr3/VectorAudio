@@ -36,6 +36,7 @@ namespace afv_unix::shared {
     inline std::string configAudioApi;
     inline std::string configInputDeviceName;
     inline std::string configOutputDeviceName;
+    inline std::string configSpeakerDeviceName;
 
     inline bool capture_ptt_flag = false;
 
@@ -51,6 +52,8 @@ namespace afv_unix::shared {
 
     inline std::vector<int> StationsPendingRemoval;
     inline std::vector<int> StationsPendingRxChange;
+
+    inline float RadioGain = 1.0f;
 
     // Thread unsafe stuff
     namespace datafile {
