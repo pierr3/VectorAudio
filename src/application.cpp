@@ -318,6 +318,11 @@ namespace afv_unix::application {
                         afv_unix::style::button_yellow();
                     else
                         afv_unix::style::button_green();
+
+                    // If we are receiving on this frequency, we get the latest transmit callsign and add it
+                    auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
+                    if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end())
+                        ReceivedCallsigns.push_back(receivedCld);
                 }
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
@@ -339,14 +344,6 @@ namespace afv_unix::application {
                 }
                 if (rxState)
                     afv_unix::style::button_reset_colour();
-
-
-                // If we are receiving on this frequency, we get the latest transmit callsign
-                if (rxState) {
-                    auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
-                    if (receivedCld.size() > 0)
-                        ReceivedCallsigns.push_back(receivedCld);
-                }
                 
                 ImGui::TableNextColumn();
                 bool txState = mClient->GetTxState(el.freq);

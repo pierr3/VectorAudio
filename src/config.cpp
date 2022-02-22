@@ -62,18 +62,15 @@ namespace afv_unix {
     void configuration::build_logger() {
         spdlog::init_thread_pool(8192, 1);
 
-        std::vector<spdlog::sink_ptr> sinks;
-
-        #ifndef NDEBUG
-            auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt >();
-            sinks.push_back(stdout_sink);
+        auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>("VectorAudio", configuration::get_resource_folder() + "vector_audio.log", 1024*1024*10, 3);
+        
+        #ifdef NDEBUG
+            spdlog::set_level(spdlog::level::info);
+        #else
+            spdlog::set_level(spdlog::level::trace);
         #endif
-        
-        auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(configuration::get_resource_folder() + "vector_audio.log", 1024*1024*10, 3);
-        sinks.push_back(rotating_sink);
-        
-        auto logger = std::make_shared<spdlog::async_logger>("vectorlogger", rotating_sink, 
-            spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-        spdlog::register_logger(logger);
+
+        spdlog::flush_on(spdlog::level::info);
+        spdlog::set_default_logger(async_rotating_file_logger);
     }
 }
