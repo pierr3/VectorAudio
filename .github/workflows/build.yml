@@ -31,12 +31,24 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Configure cmake
+      - name: Configure cmake (intel)
         run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
-      - name: Build cmake
+          cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
+      - name: Build cmake (intel)
         run: |
-          cmake --build build/
+          cmake --build build_intel/
+      - name: Configure cmake (arm64)
+        run: |
+          cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx
+      - name: Build cmake (arm64)
+        run: |
+          cmake --build build_arm64/
+      - name: Create Universal Binary
+        run: |
+          mkdir build/
+          mkdir build/extern/afv-native/
+          lipo -create build_intel/extern/afv-native/libafv.dylib build_arm64/extern/afv-native/libafv.dylib -output build/extern/afv-native/libafv.dylib
+          lipo -create build_intel/vector_audio build_arm64/vector_audio -output build/vector_audio
       - name: Bundle OSX
         run: |
           ./bundle_osx.sh
