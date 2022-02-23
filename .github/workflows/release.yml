@@ -83,12 +83,7 @@ jobs:
       - name: Create DMG
         run: |
           brew install create-dmg
-          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-Installer.dmg" "build/VectorAudio.app"
-      - name: Archive build result
-        uses: actions/upload-artifact@v2
-        with:
-          name: VectorAudio_macOs_Installer
-          path: VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg
+          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg" "build/VectorAudio.app"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
