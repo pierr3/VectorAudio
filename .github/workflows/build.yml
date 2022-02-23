@@ -34,7 +34,7 @@ jobs:
       - name: Create universal build folder
         run: |
           mkdir build/
-          mkdir build/extern/afv-native/
+          mkdir -p build/extern/afv-native/
       - name: Configure cmake (intel)
         run: |
           cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
