@@ -39,10 +39,4 @@ EOF
 
 install_name_tool -add_rpath "@executable_path/../lib" build/VectorAudio.app/Contents/MacOS/vector_audio
 
-arch=$(arch)
-
-cd build/
-hdiutil create -volname "Vector Audio"  -srcfolder VectorAudio.app -ov -format UDZO "VectorAudio_$arch"
-
-cd ..
 rm resources/VectorAudio.icns

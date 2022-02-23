@@ -1,6 +1,9 @@
-name: Build VectorAudio
+name: Release Vector Audio
 
-on: [push]
+on:
+  push:
+    tags:        
+      - v*
 
 concurrency: 
   group: ${{ github.ref }}
@@ -8,6 +11,7 @@ concurrency:
 
 env:
   BUILD_TYPE: Release
+  VECTOR_SECRET: Dev
 
 jobs:
   build-linux:
@@ -16,28 +20,40 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Install SFML dependencies
         run: |
           sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
           cmake --build build/
+      - name: Bundle Linux
+        run: |
+          ./bundle_linux.sh
+          mv VectorAudio_Linux.zip VectorAudio_${{ env.RELEASE_VERSION }}_Linux.zip
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio_${{ env.RELEASE_VERSION }}_Linux.zip
   build-osx:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Create universal build folder
         run: |
           mkdir build/
           mkdir -p build/extern/afv-native/
       - name: Configure cmake (intel)
         run: |
-          cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
+          cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (intel)
         run: |
           cmake --build build_intel/
@@ -48,7 +64,7 @@ jobs:
           rm -rf build_intel/
       - name: Configure cmake (arm64)
         run: |
-          cmake -S . -B build_arm64/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx
+          cmake -S . -B build_arm64/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (arm64)
         run: |
           cmake --build build_arm64/
@@ -64,8 +80,16 @@ jobs:
       - name: Bundle OSX
         run: |
           ./bundle_osx.sh
+      - name: Create DMG
+        run: |
+          brew install create-dmg
+          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-Installer.dmg" "build/VectorAudio.app"
       - name: Archive build result
         uses: actions/upload-artifact@v2
         with:
-          name: VectorAudio_osx
-          path: build/VectorAudio_i386.dmg
+          name: VectorAudio_macOs_Installer
+          path: VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg

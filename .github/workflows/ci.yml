@@ -1,0 +1,52 @@
+name: Vector Audio CI
+
+on: [push]
+
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUILD_TYPE: Release
+  VECTOR_SECRET: Dev
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install SFML dependencies
+        run: |
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake
+        run: |
+          cmake --build build/
+  build-osx-x86:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Configure cmake (intel)
+        run: |
+          cmake -S . -B build_intel/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake (intel)
+        run: |
+          cmake --build build_intel/
+  build-osx-arm64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Configure cmake (arm64)
+        run: |
+          cmake -S . -B build_arm64/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake (arm64)
+        run: |
+          cmake --build build_arm64/
