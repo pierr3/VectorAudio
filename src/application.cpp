@@ -279,14 +279,19 @@ namespace afv_unix::application {
             | ImGuiTableFlags_ScrollY;
         if (ImGui::BeginTable("stations_table", 3, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
         {
-            int counter = 0;
+            int counter = -1;
             for(auto &el : shared::FetchedStations) {
+
+                if (counter == -1 || counter == 4) {
+                    counter = 1;
+                    ImGui::TableNextRow();
+                }
+                ImGui::TableSetColumnIndex(counter-1);
 
                 float HalfHeight = ImGui::GetContentRegionAvailWidth()*0.2f;
                 ImVec2 HalfSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.5f, HalfHeight);
                 ImVec2 QuarterSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.25f, HalfHeight);
                 
-
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.f);
                 ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor(14, 17, 22));
@@ -305,13 +310,33 @@ namespace afv_unix::application {
                 //
                 if (freqActive)
                     afv_unix::style::button_green();
-
-                ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+                // Disable the hover colour for this item
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor(14, 17, 22));
                 size_t callsignSize = el.callsign.length()/2;
                 std::string padded_freq = std::string(callsignSize - std::min(callsignSize, el.human_freq.length()/2), ' ') + el.human_freq;
                 std::string btnText = el.callsign + "\n" + padded_freq;
-                ImGui::Button(btnText.c_str(), HalfSize); ImGui::SameLine(0.f, 0.01f);
-                ImGui::PopItemFlag();
+                if (ImGui::Button(btnText.c_str(), HalfSize)) 
+                    ImGui::OpenPopup(el.callsign.c_str());
+                ImGui::SameLine(0.f, 0.01f);
+                ImGui::PopStyleColor();
+
+                //
+                // Frequency management popup
+                //
+                if (ImGui::BeginPopup(el.callsign.c_str()))
+                {
+                    ImGui::TextUnformatted(el.callsign.c_str());
+                    ImGui::Separator();
+                    if (ImGui::Selectable(std::string("Force Refresh##").append(el.callsign).c_str())) 
+                    {
+                        mClient->FetchTransceiverInfo(el.callsign);
+                    }
+                    if (ImGui::Selectable(std::string("Delete##").append(el.callsign).c_str()))
+                    {
+                        shared::StationsPendingRemoval.push_back(el.freq);
+                    }
+                    ImGui::EndPopup();
+                }
 
                 if (freqActive)
                     afv_unix::style::button_reset_colour();
@@ -432,17 +457,6 @@ namespace afv_unix::application {
                 ImGui::PopStyleColor();
                 ImGui::PopStyleVar(2);
 
-                /*
-                ImGui::TableNextColumn();
-                if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
-                    shared::StationsPendingRemoval.push_back(el.freq);
-                }*/
-
-                if (counter % 4 == 0)
-                    ImGui::TableNextRow();
-                else
-                    ImGui::TableNextColumn();
-                
                 counter++;
             }
 
