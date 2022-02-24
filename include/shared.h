@@ -44,6 +44,7 @@ namespace afv_unix::shared {
     inline bool isPttOpen = false;
 
     inline std::vector<StationElement> FetchedStations;
+    inline bool bootUpVccs = false;
 
     // Temp inputs
     inline std::string station_add_callsign = "";

@@ -87,8 +87,23 @@ namespace afv_unix::application {
                     
                     if(!_frequencyExists(el.freq))
                         shared::FetchedStations.push_back(el);
+
+                    if (shared::bootUpVccs) 
+                    {
+                        // Automatically set TX, RX and XC on this station
+                        this->mClient->AddFrequency(el.freq, el.callsign);
+                        this->mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                        this->mClient->SetRx(station.second, true);
+                        if (shared::datafile::facility > 0) {
+                            this->mClient->SetTx(station.second, true);
+                            this->mClient->SetXc(station.second, true);
+                        }
+                        this->mClient->FetchStationVccs(station.first);
+                        shared::bootUpVccs = false;
+                    }
                 } else {
                     // TODO: Prompt user the station was not found
+                    spdlog::warn("Station not found in AFV database through search");
                 }
             }
         }
@@ -117,6 +132,13 @@ namespace afv_unix::application {
                     }
                 }
             }
+
+            if (mClient->IsAPIConnected() && shared::FetchedStations.size() == 0 && !shared::bootUpVccs) {
+                // We pre-fetch the user station and get ready to populate the VCCS
+                shared::bootUpVccs = true;
+                std::string strippedCallsign = shared::datafile::callsign.substr(0, shared::datafile::callsign.find("_"));
+                mClient->SearchStation(strippedCallsign, shared::datafile::frequency);
+            } 
         }
 
         // Forcing removal of unused stations if possible, otherwise we try at the next loop
@@ -197,13 +219,6 @@ namespace afv_unix::application {
                 if (!mClient->Connect()) {
                     spdlog::error("Failled to connect");
                 };
-
-                // We pre-fetch the user station
-                std::string strippedCallsign = shared::datafile::callsign.substr(0, shared::datafile::callsign.find("_"));
-                mClient->SearchStation(strippedCallsign, shared::datafile::frequency);
-
-                //shared::station_add_callsign = shared::datafile::callsign;
-                //shared::station_add_frequency = shared::datafile::frequency/1000000.0f;
             }
             if (!afv_unix::shared::datafile::is_connected) {
                 ImGui::PopItemFlag();
