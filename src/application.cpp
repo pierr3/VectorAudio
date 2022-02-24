@@ -272,60 +272,65 @@ namespace afv_unix::application {
         // Main area
         //
 
+
+        //TODO: Dynamically resize the table based on window size
         ImGui::BeginGroup();
-        ImGuiTableFlags flags = ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
+        ImGuiTableFlags flags =  ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
             | ImGuiTableFlags_ScrollY;
-        if (ImGui::BeginTable("stations_table", 9, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
+        if (ImGui::BeginTable("stations_table", 3, flags, ImVec2(ImGui::GetContentRegionAvailWidth()*0.8f, 0.0f)))
         {
-            // Display headers so we can inspect their interaction with borders.
-            // (Headers are not the main purpose of this section of the demo, so we are not elaborating on them too much. See other sections for details)
-
-            ImGui::TableSetupColumn("Callsign", ImGuiTableColumnFlags_WidthStretch);
-            ImGui::TableSetupColumn("Frequency");
-            ImGui::TableSetupColumn("TCS");
-            ImGui::TableSetupColumn("STS");
-            ImGui::TableSetupColumn("RX");
-            ImGui::TableSetupColumn("TX");
-            ImGui::TableSetupColumn("XC");
-            ImGui::TableSetupColumn("SPKR");
-            ImGui::TableSetupColumn("R");
-            ImGui::TableHeadersRow();
-            
+            int counter = 0;
             for(auto &el : shared::FetchedStations) {
-                ImGui::TableNextColumn();
-                ImGui::TextUnformatted(el.callsign.c_str());
-                ImGui::TableNextColumn();
-                ImGui::TextUnformatted(el.human_freq.c_str());
 
-                ImGui::TableNextColumn();
-                // If we don't have a transceiver count, we try to fetch it
-                ImGui::TextUnformatted(std::to_string(el.transceivers).c_str());
+                float HalfHeight = ImGui::GetContentRegionAvailWidth()*0.2f;
+                ImVec2 HalfSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.5f, HalfHeight);
+                ImVec2 QuarterSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.25f, HalfHeight);
+                
 
-                ImGui::TableNextColumn();
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.f);
+                ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor(14, 17, 22));
+
+                // Polling all data
                 bool freqActive = mClient->IsFrequencyActive(el.freq);
-                if (freqActive)
-                    ImGui::TextUnformatted("LIVE");
-                else
-                    ImGui::TextUnformatted("INOP");
-
-                ImGui::TableNextColumn();
-
                 bool rxState = mClient->GetRxState(el.freq);
                 bool rxActive = mClient->GetRxActive(el.freq);
-                if (rxState) {
-                    // Yellow colour if currently being transmitted on
-                    if (rxActive)
-                        afv_unix::style::button_yellow();
-                    else
-                        afv_unix::style::button_green();
+                bool txState = mClient->GetTxState(el.freq);
+                bool txActive = mClient->GetTxActive(el.freq);
+                bool xcState = mClient->GetXcState(el.freq);
+                bool isOnSpeaker = !mClient->GetOnHeadset(el.freq);
 
-                    // If we are receiving on this frequency, we get the latest transmit callsign and add it
+                //
+                // Frequency button
+                //
+                if (freqActive)
+                    afv_unix::style::button_green();
+
+                ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+                size_t callsignSize = el.callsign.length()/2;
+                std::string padded_freq = std::string(callsignSize - std::min(callsignSize, el.human_freq.length()/2), ' ') + el.human_freq;
+                std::string btnText = el.callsign + "\n" + padded_freq;
+                ImGui::Button(btnText.c_str(), HalfSize); ImGui::SameLine(0.f, 0.01f);
+                ImGui::PopItemFlag();
+
+                if (freqActive)
+                    afv_unix::style::button_reset_colour();
+
+                //
+                // RX Button
+                //
+                if (rxState) 
+                {
+                    // Set button colour
+                    rxActive ? afv_unix::style::button_yellow() : afv_unix::style::button_green();
+
                     auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
                     if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end())
                         ReceivedCallsigns.push_back(receivedCld);
                 }
                 
-                if (ImGui::Button(std::string("RX##").append(el.callsign).c_str())) {
+                if (ImGui::Button(std::string("RX##").append(el.callsign).c_str(), HalfSize)) 
+                {
                     if (freqActive) {
                         // We check if we are receiving something, if that is the case we must wait till the end of transmition to change the state
                         if (rxActive) {
@@ -342,22 +347,73 @@ namespace afv_unix::application {
                         mClient->SetRx(el.freq, true);
                     }
                 }
+
                 if (rxState)
                     afv_unix::style::button_reset_colour();
+
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 3.f);
+
+                // New line
+
+                //
+                // XC
+                //
+
+                if (xcState)
+                    afv_unix::style::button_green();
+
+                if (ImGui::Button(std::string("XC##").append(el.callsign).c_str(), QuarterSize) && shared::datafile::facility > 0) 
+                {
+                    if (freqActive) {
+                        mClient->SetXc(el.freq, !xcState);
+                    }
+                    else {
+                        mClient->AddFrequency(el.freq, el.callsign);
+                        mClient->UseTransceiversFromStation(el.callsign, el.freq);
+                        mClient->SetTx(el.freq, true);
+                        mClient->SetRx(el.freq, true);
+                        mClient->SetXc(el.freq, true);
+                    }
+                } 
+
+                if (xcState)
+                    afv_unix::style::button_reset_colour();
+
+                ImGui::SameLine(0.f, 0.01f);
+
+                //
+                // Speaker device
+                //
                 
-                ImGui::TableNextColumn();
-                bool txState = mClient->GetTxState(el.freq);
-                bool txActive = mClient->GetTxActive(el.freq);
-                if (txState) {
+                if (isOnSpeaker)
+                    afv_unix::style::button_green();
 
-                    // Yellow colour if currently being transmitted on
-                    if (txActive)
-                        afv_unix::style::button_yellow();
-                    else
-                        afv_unix::style::button_green();
+                std::string transceiverCount = std::to_string(el.transceivers);
+                if (transceiverCount.length() == 1)
+                    transceiverCount = " " + transceiverCount;
+
+                std::string speakerString = el.transceivers == -1 ? "XX" : transceiverCount;
+                speakerString.append("\nSPK##");
+                speakerString.append(el.callsign);
+                if (ImGui::Button(speakerString.c_str(), QuarterSize)) 
+                {
+                    if (freqActive)
+                        mClient->SetOnHeadset(el.freq, isOnSpeaker ? true : false);
                 }
+                
+                if (isOnSpeaker)
+                    afv_unix::style::button_reset_colour();
 
-                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str()) && shared::datafile::facility > 0 && !txActive) {
+                ImGui::SameLine(0.f, 0.01f);
+
+                //
+                // TX
+                //
+
+                if (txState)
+                    txActive ? afv_unix::style::button_yellow() : afv_unix::style::button_green();
+
+                if (ImGui::Button(std::string("TX##").append(el.callsign).c_str(), HalfSize) && shared::datafile::facility > 0) {
                     if (freqActive) {
                         mClient->SetTx(el.freq, !txState);
                     }
@@ -368,59 +424,35 @@ namespace afv_unix::application {
                         mClient->SetRx(el.freq, true);
                     }
                 }
+
                 if (txState)
                     afv_unix::style::button_reset_colour();
 
-                ImGui::TableNextColumn();
 
-                bool xcState = mClient->GetXcState(el.freq);
-                if (xcState)
-                    afv_unix::style::button_green();
+                ImGui::PopStyleColor();
+                ImGui::PopStyleVar(2);
 
-                if (ImGui::Button(std::string("XC##").append(el.callsign).c_str()) && shared::datafile::facility > 0) {
-                    if (freqActive) {
-                        mClient->SetXc(el.freq, !xcState);
-                    }
-                    else {
-                        mClient->AddFrequency(el.freq, el.callsign);
-                        mClient->UseTransceiversFromStation(el.callsign, el.freq);
-                        if (shared::datafile::facility > 0)
-                            mClient->SetTx(el.freq, true);
-                        mClient->SetRx(el.freq, true);
-                        mClient->SetXc(el.freq, true);
-                    }
-                }
-
-                if (xcState)
-                    afv_unix::style::button_reset_colour();
-
-
-                bool isOnSpeaker = !mClient->GetOnHeadset(el.freq);
-
-                ImGui::TableNextColumn();
-                if (isOnSpeaker)
-                    style::button_green();
-
-                if (ImGui::Button(std::string("O##").append(el.callsign).c_str())) {
-                    if (freqActive) {
-                        mClient->SetOnHeadset(el.freq, isOnSpeaker ? true : false);
-                    }
-                }
-
-                if (isOnSpeaker)
-                    style::button_reset_colour();
-
+                /*
                 ImGui::TableNextColumn();
                 if (ImGui::Button(std::string("X##").append(el.callsign).c_str())) {
                     shared::StationsPendingRemoval.push_back(el.freq);
-                }
+                }*/
 
-                ImGui::TableNextRow();
+                if (counter % 4 == 0)
+                    ImGui::TableNextRow();
+                else
+                    ImGui::TableNextColumn();
+                
+                counter++;
             }
 
             ImGui::EndTable();
         }
         ImGui::EndGroup();
+
+        //
+        // Side pannel settings
+        //
 
         ImGui::SameLine();
 
@@ -438,28 +470,6 @@ namespace afv_unix::application {
                 shared::station_auto_add_callsign = "";
             }
         }
-
-        /*ImGui::NewLine();
-
-        // Manual station add
-        ImGui::PushItemWidth(-1.0f);
-        ImGui::Text("Manual add");
-        ImGui::InputText("Callsign##Manual", &shared::station_add_callsign);
-        ImGui::InputFloat("Frequency", &shared::station_add_frequency, 0.025f, 0.0f);
-        ImGui::PopItemWidth();
-
-        if (ImGui::Button("Fetch", ImVec2(-FLT_MIN, 0.0f))) {
-            if (mClient->IsVoiceConnected()) {
-                shared::StationElement el = shared::StationElement::build(shared::station_add_callsign, shared::station_add_frequency*1000000);
-                shared::FetchedStations.push_back(el);
-
-                mClient->AddFrequency(el.freq, el.callsign);
-                mClient->UseTransceiversFromStation(el.callsign, el.freq);
-
-                shared::station_add_callsign = "";
-                shared::station_add_frequency = 118.0f;
-            }
-        }*/
 
         ImGui::NewLine();
 

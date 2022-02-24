@@ -9,7 +9,7 @@ namespace afv_unix::style {
     };
 
     inline static void button_green() {
-        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(2 / 7.0f, 0.6f, 0.6f));
+        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor(30, 140, 45));
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
     };
