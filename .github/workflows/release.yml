@@ -34,11 +34,11 @@ jobs:
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh
-          mv VectorAudio_Linux.zip VectorAudio_${{ env.RELEASE_VERSION }}_Linux.zip
+          mv VectorAudio_Linux.zip VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.zip
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio_${{ env.RELEASE_VERSION }}_Linux.zip
+          files: VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.zip
   build-osx:
     runs-on: macos-latest
     steps:
