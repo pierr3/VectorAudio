@@ -9,7 +9,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_definitions(-DVECTOR_VERSION="b48ab8e")
+add_definitions(-DVECTOR_VERSION="0.2.0")
 
 if(APPLE)
     execute_process(
