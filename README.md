@@ -1,7 +1,7 @@
 # AFV-Unix
  An Audio-For-VATSIM ATC Client for macOs and Linux (audio only)
 
- ![screengrab of application](https://i.imgur.com/bFkTspr.png)
+ ![screengrab of application](https://i.imgur.com/IumERC2.png)
 
 # Releases
 

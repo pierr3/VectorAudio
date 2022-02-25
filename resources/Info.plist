@@ -1,0 +1,12 @@
+{
+	CFBundleName = "Vector Audio";
+	CFBundleDisplayName = "Vector Audio";
+	CFBundleIndentifier = "org.vector.audio";
+	CFBundleVersion = 1;
+	"CFBundleShortVersionString" = 1;
+	"CFBundleInfoDictionaryVersion" = "6.0";
+	CFBundlePackageType = APPL;
+	CFBundleExecutable = "vector_audio";
+	CFBundleIconFile = "VectorAudio.icns";
+	"NSHighResolutionCapable" = false;
+}
