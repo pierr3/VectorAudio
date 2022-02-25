@@ -97,6 +97,30 @@ namespace afv_unix::modals {
                     }
                 }
 
+                if (ImGui::BeginCombo("Radio Hardware", afv_unix::util::getHardwareName(afv_unix::shared::hardware).c_str())) {
+
+
+                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Schmid_ED_137B).c_str(), 
+                        afv_unix::shared::hardware == afv_native::HardwareType::Schmid_ED_137B)) 
+                    {
+                        afv_unix::shared::hardware = afv_native::HardwareType::Schmid_ED_137B;
+                    }
+
+                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Garex_220).c_str(), 
+                        afv_unix::shared::hardware == afv_native::HardwareType::Garex_220)) 
+                    {
+                        afv_unix::shared::hardware = afv_native::HardwareType::Garex_220;
+                    }
+
+                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Rockwell_Collins_2100).c_str(), 
+                        afv_unix::shared::hardware == afv_native::HardwareType::Rockwell_Collins_2100)) 
+                    {
+                        afv_unix::shared::hardware = afv_native::HardwareType::Rockwell_Collins_2100;
+                    }
+
+                    ImGui::EndCombo();
+                }
+
 
                 ImGui::NewLine();
 
@@ -118,7 +142,6 @@ namespace afv_unix::modals {
                 ImGui::PushStyleColor(ImGuiCol_PlotHistogram, (ImVec4)ImColor(0, 200, 100));
                 ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-40.f), ImVec2(-1.f, 7.f), "");
                 ImGui::PopStyleColor();
-
 
                 ImGui::NewLine();
 
@@ -146,7 +169,7 @@ namespace afv_unix::modals {
                     afv_unix::configuration::config["user"]["vatsim_password"] =  afv_unix::shared::vatsim_password;
                     afv_unix::configuration::config["audio"]["input_filters"] =  afv_unix::shared::mInputFilter;
                     afv_unix::configuration::config["audio"]["vhf_effects"] =  afv_unix::shared::mOutputEffects;
-
+                    afv_unix::configuration::config["audio"]["hardware_type"] =  static_cast<int>(afv_unix::shared::hardware);
 
                     afv_unix::configuration::write_config_async();
                     if (mClient->IsAudioRunning())

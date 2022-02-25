@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
+#include <afv-native/hardwareType.h>
 
 namespace afv_unix::shared {
     struct StationElement {
@@ -53,6 +54,10 @@ namespace afv_unix::shared {
 
     inline std::vector<int> StationsPendingRemoval;
     inline std::vector<int> StationsPendingRxChange;
+
+    inline afv_native::HardwareType hardware = afv_native::HardwareType::Schmid_ED_137B;
+
+    inline const std::vector<std::string> AvailableHardware = { "Smid ED-137B", "Rockwell Collins 2100", "Garex 220" };
 
     inline float RadioGain = 1.0f;
 

@@ -29,6 +29,8 @@ namespace afv_unix::application {
             afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
             afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
             afv_unix::shared::configSpeakerDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "speaker_device", std::string(""));
+
+            afv_unix::shared::hardware = static_cast<afv_native::HardwareType>(toml::find_or<int>(afv_unix::configuration::config, "audio", "hardware_type", 0));
         } catch (toml::exception &exc) {
             spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
@@ -111,7 +113,6 @@ namespace afv_unix::application {
 
     // Main loop
     void App::render_frame() {
-
 
         // AFV stuff
         if (mClient) {
@@ -207,6 +208,7 @@ namespace afv_unix::application {
                 mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
                 mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
                 mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
+                mClient->SetHardware(afv_unix::shared::hardware);
             
                 // TODO: Pull from datafile
                 mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
@@ -287,8 +289,6 @@ namespace afv_unix::application {
         // Main area
         //
 
-
-        //TODO: Dynamically resize the table based on window size
         ImGui::BeginGroup();
         ImGuiTableFlags flags =  ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody
             | ImGuiTableFlags_ScrollY;

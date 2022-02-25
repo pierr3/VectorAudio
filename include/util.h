@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Window/Keyboard.hpp>
 #include <string>
+#include <afv-native/hardwareType.h>
 
 namespace afv_unix::util {
         
@@ -212,6 +213,17 @@ namespace afv_unix::util {
                     return "F15";
             case sf::Keyboard::Pause:
                     return "Pause";
+            }
+    }
+
+    inline static std::string getHardwareName(const afv_native::HardwareType hardware) {
+            switch(hardware) {
+                case afv_native::HardwareType::Garex_220:
+                        return "Garex 220";
+                case afv_native::HardwareType::Rockwell_Collins_2100:
+                        return "Rockwell Collins 2100";
+                case afv_native::HardwareType::Schmid_ED_137B:
+                        return "Schmid ED-137B";
             }
     }
 }
