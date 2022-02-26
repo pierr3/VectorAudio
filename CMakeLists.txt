@@ -52,7 +52,6 @@ endif()
 
 if (WIN32)
     find_library(AFV_LIB speexdsp.lib)
-    target_link_libraries(vector_audio ${AFV_LIB})
 endif()
 
 add_executable(vector_audio src/main.cpp

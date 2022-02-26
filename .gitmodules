@@ -1,6 +1,3 @@
-[submodule "vcpkg"]
-	path = vcpkg
-	url = https://github.com/microsoft/vcpkg
 [submodule "extern/afv-native"]
 	path = extern/afv-native
 	url = https://github.com/pierr3/afv-native
@@ -8,3 +5,6 @@
 [submodule "extern/PlatformFolders"]
 	path = extern/PlatformFolders
 	url = https://github.com/sago007/PlatformFolders.git
+[submodule "vcpkg"]
+	path = vcpkg
+	url = https://github.com/pierr3/vcpkg

@@ -59,12 +59,9 @@ section "install"
 	# Files added here should be removed by the uninstaller (see section "uninstall")
 	file "vector_audio.exe"
 	file "favicon.ico"
-    file "libafv.dll"
-    file "AC_Bus_f32.wav"
-    file "Click_f32.wav"
-    file "Crackle_f32.wav"
-    file "HF_WhiteNoise_f32.wav"
-    file "WhiteNoise_f32.wav"
+	file /r *.wav
+	file /r *.dll
+
 	# Add any other files for the install directory (license files, app data, etc) here
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
@@ -110,18 +107,12 @@ section "uninstall"
 	# Remove files
 	delete $INSTDIR\vector_audio.exe
 	delete $INSTDIR\favicon.ico
-    delete $INSTDIR\libafv.dll
-    delete $INSTDIR\AC_Bus_f32.wav
-    delete $INSTDIR\Click_f32.wav
-    delete $INSTDIR\Crackle_f32.wav
-    delete $INSTDIR\HF_WhiteNoise_f32.wav
-    delete $INSTDIR\WhiteNoise_f32.wav
  
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
  
-	# Try to remove the install directory - this will only happen if it is empty
-	rmDir $INSTDIR
+	# Try to remove the install directory
+	rmDir /r $INSTDIR
  
 	# Remove uninstaller information from the registry
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
