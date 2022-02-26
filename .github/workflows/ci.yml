@@ -1,6 +1,9 @@
 name: Vector Audio CI
 
-on: [push]
+on:
+  push:
+    tags-ignore:
+      - '**'
 
 concurrency: 
   group: ${{ github.ref }}

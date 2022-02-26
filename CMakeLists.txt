@@ -50,6 +50,11 @@ if (APPLE)
     set(APPLE_EXTRA_LIBS src/osx_resources.mm)
 endif()
 
+if (WIN32)
+    find_library(AFV_LIB speexdsp.lib)
+    target_link_libraries(vector_audio ${AFV_LIB})
+endif()
+
 add_executable(vector_audio src/main.cpp
                 src/application.cpp
                 src/config.cpp
@@ -73,3 +78,8 @@ target_link_libraries(vector_audio
     fmt::fmt-header-only
     afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+
+if (WIN32)
+	file(COPY ${AFV_LIB}
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+endif()
