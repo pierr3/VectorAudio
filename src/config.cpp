@@ -5,9 +5,7 @@
 #endif
 
 #ifdef SFML_SYSTEM_WINDOWS
-    #pragma comment(lib, "Shlwapi.lib")
     #include <windows.h>
-    #include <Shlwapi.h>
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
@@ -45,11 +43,11 @@ namespace afv_unix {
             #endif
 
             #ifdef SFML_SYSTEM_WINDOWS
-                wchar_t path[MAX_PATH] = { 0 };
-                GetModuleFileNameW(NULL, path, MAX_PATH);
-                PathRemoveFileSpecA(path);
-                std::wstring ws(path);
-                return std::string(ws.begin(), ws.end()) + std::string("/");
+                char buffer[MAX_PATH];
+                GetModuleFileNameA(NULL, buffer, MAX_PATH);
+                std::string::size_type pos = std::string(buffer).find_last_of("\\/");
+                
+                return std::string(buffer).substr(0, pos);
             #endif
         #endif
     }
