@@ -68,6 +68,10 @@ add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS})
 
+if (WIN32)
+    set_target_properties(vector_audio PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+endif()
+
 target_link_libraries(vector_audio 
     ${OPENGL_LIBRARY}
     OpenSSL::SSL OpenSSL::Crypto 
@@ -77,8 +81,3 @@ target_link_libraries(vector_audio
     fmt::fmt-header-only
     afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
-
-if (WIN32)
-	file(COPY ${AFV_LIB}
-	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-endif()

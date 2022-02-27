@@ -39,6 +39,41 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.zip
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake
+        run: |
+          cmake --build build/
+      - name: Prepare windows installer
+        run: |
+          mkdir installer
+          cp resources/*.wav installer/
+          cp resources/favicon.ico installer/
+          cp LICENSE installer/
+          cp build/Release/vector_audio.exe installer/
+          cp build/Release/*.dll installer/
+          cp build/extern/afv-native/Release/*.dll installer/
+          cp build/vcpkg_installed/x64-windows/bin/speexdsp.dll installer/
+          mv installer/speexdsp.dll installer/libspeexdsp.dll
+          cp bundle_windows.nsi installer/install.nsi
+      - name: Create installer
+        uses: joncloud/makensis-action@v3.6
+      - name: Rename installer
+        run: |
+          mv installer/VectorAudio-installer.exe VectorAudio-${{ env.RELEASE_VERSION }}-Installer.exe
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio-${{ env.RELEASE_VERSION }}-Installer.exe
   build-osx:
     runs-on: macos-latest
     steps:

@@ -45,8 +45,9 @@ namespace afv_unix {
             #ifdef SFML_SYSTEM_WINDOWS
                 wchar_t path[MAX_PATH] = { 0 };
                 GetModuleFileNameW(NULL, path, MAX_PATH);
+                PathCchRemoveFileSpec(path, sizeof(path)/sizeof(wchar_t));
                 std::wstring ws(path);
-                return std::string(ws.begin(), ws.end());
+                return std::string(ws.begin(), ws.end()) + std::string("/");
             #endif
         #endif
     }
