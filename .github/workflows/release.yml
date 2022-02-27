@@ -67,7 +67,9 @@ jobs:
           mv installer/speexdsp.dll installer/libspeexdsp.dll
           cp bundle_windows.nsi installer/install.nsi
       - name: Create installer
-        uses: joncloud/makensis-action@v3.6
+        run: |
+          cd installer/
+          makensis install.nsi
       - name: Rename installer
         run: |
           mv installer/VectorAudio-installer.exe VectorAudio-${{ env.RELEASE_VERSION }}-Installer.exe
