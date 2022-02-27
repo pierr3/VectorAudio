@@ -52,12 +52,13 @@ jobs:
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
-          cmake --build build/
+          cmake --build build/ --config Release
       - name: Prepare windows installer
         run: |
           mkdir installer
           cp resources/*.wav installer/
           cp resources/favicon.ico installer/
+          cp resources/icon_win.png installer/
           cp LICENSE installer/
           cp build/Release/vector_audio.exe installer/
           cp build/Release/*.dll installer/

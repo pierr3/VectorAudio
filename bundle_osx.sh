@@ -18,6 +18,7 @@ mkdir -p build/VectorAudio.app/Contents/{MacOS,Resources,Frameworks}
 cp resources/*.wav build/VectorAudio.app/Contents/Resources
 cp resources/VectorAudio.icns build/VectorAudio.app/Contents/Resources
 cp build/extern/afv-native/libafv.dylib build/VectorAudio.app/Contents/Frameworks
+cp resources/icon_mac.png build/VectorAudio.app/Contents/Resources
 
 chmod +x build/vector_audio
 cp build/vector_audio build/VectorAudio.app/Contents/MacOS

@@ -17,15 +17,28 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#ifdef SFML_SYSTEM_WINDOWS
-    #pragma comment( lib, "speexdsp.lib" )
-#endif
-
 // Main code
 int main(int, char**)
 {
-    sf::RenderWindow window(sf::VideoMode(800, 400), "VECTOR Audio");
+    afv_unix::configuration::build_logger();
+    sf::RenderWindow window(sf::VideoMode(800, 400), "Vector Audio");
     window.setFramerateLimit(60);
+
+    auto image = sf::Image{};
+    
+    #ifdef SFML_SYSTEM_WINDOWS
+        std::string iconName = "icon_win.png";
+    #else
+        std::string iconName = "icon_mac.png";
+    #endif
+    
+    if (!image.loadFromFile(afv_unix::configuration::get_resource_folder() + iconName))
+    {
+        spdlog::error("Could not load application icon");
+    } else {
+        window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
+    }
+    
 
     ImGui::SFML::Init(window);    
 
@@ -58,7 +71,6 @@ int main(int, char**)
     // Our state
 
     afv_unix::style::apply_style();
-    afv_unix::configuration::build_logger();
     afv_unix::configuration::build_config();
 
     spdlog::info("Starting Vector Audio...");

@@ -60,6 +60,7 @@ section "install"
 	# Files added here should be removed by the uninstaller (see section "uninstall")
 	file "vector_audio.exe"
 	file "favicon.ico"
+	file "icon_win.png"
 	file /r *.wav
 	file /r *.dll
 
