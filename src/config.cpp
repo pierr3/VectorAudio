@@ -47,7 +47,7 @@ namespace afv_unix {
                 GetModuleFileNameA(NULL, buffer, MAX_PATH);
                 std::string::size_type pos = std::string(buffer).find_last_of("\\/");
                 
-                return std::string(buffer).substr(0, pos) + std::string("/");
+                return std::string(buffer).substr(0, pos+1);
             #endif
         #endif
     }

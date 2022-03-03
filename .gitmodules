@@ -5,6 +5,3 @@
 [submodule "extern/PlatformFolders"]
 	path = extern/PlatformFolders
 	url = https://github.com/sago007/PlatformFolders.git
-[submodule "vcpkg"]
-	path = vcpkg
-	url = https://github.com/pierr3/vcpkg
