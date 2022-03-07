@@ -75,7 +75,7 @@ namespace afv_unix::application {
             }
         }
 
-        if (evt == afv_native::ClientEventType::StationSearchReceived) {
+        if (evt == afv_native::ClientEventType::StationDataReceived) {
             if (data != nullptr && data2 != nullptr) {
                 // We just refresh the transceiver count in our display
                 bool found = *reinterpret_cast<bool*>(data);
@@ -89,20 +89,6 @@ namespace afv_unix::application {
                     
                     if(!_frequencyExists(el.freq))
                         shared::FetchedStations.push_back(el);
-
-                    if (shared::bootUpVccs) 
-                    {
-                        // Automatically set TX, RX and XC on this station
-                        this->mClient->AddFrequency(el.freq, el.callsign);
-                        this->mClient->UseTransceiversFromStation(el.callsign, el.freq);
-                        this->mClient->SetRx(station.second, true);
-                        if (shared::datafile::facility > 0) {
-                            this->mClient->SetTx(station.second, true);
-                            this->mClient->SetXc(station.second, true);
-                        }
-                        this->mClient->FetchStationVccs(station.first);
-                        shared::bootUpVccs = false;
-                    }
                 } else {
                     // TODO: Prompt user the station was not found
                     spdlog::warn("Station not found in AFV database through search");
@@ -151,8 +137,6 @@ namespace afv_unix::application {
                     this->mClient->SetXc(shared::datafile::frequency, true);
                 }
                 this->mClient->FetchStationVccs(cleanCallsign);
-                //std::string strippedCallsign = shared::datafile::callsign.substr(0, shared::datafile::callsign.find("_"));
-                //mClient->SearchStation(strippedCallsign, shared::datafile::frequency);
             } 
         }
 
@@ -250,6 +234,12 @@ namespace afv_unix::application {
                 if (mClient->IsAtisPlayingBack())
                     mClient->StopAtisPlayback();
                 mClient->Disconnect();
+
+                // Cleanup everything
+                for (auto f : shared::FetchedStations)
+                    mClient->RemoveFrequency(f.freq);
+
+                shared::FetchedStations.clear();
             }
             ImGui::PopStyleColor(3);
 
@@ -508,7 +498,7 @@ namespace afv_unix::application {
 
         if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0f))) {
             if (mClient->IsVoiceConnected()) {
-                mClient->SearchStation(shared::station_auto_add_callsign);
+                mClient->GetStation(shared::station_auto_add_callsign);
                 mClient->FetchStationVccs(shared::station_auto_add_callsign);
                 shared::station_auto_add_callsign = "";
             }
