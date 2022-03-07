@@ -135,10 +135,24 @@ namespace afv_unix::application {
             }
 
             if (mClient->IsAPIConnected() && shared::FetchedStations.size() == 0 && !shared::bootUpVccs) {
-                // We pre-fetch the user station and get ready to populate the VCCS
+                // We force add the current user frequency
                 shared::bootUpVccs = true;
-                std::string strippedCallsign = shared::datafile::callsign.substr(0, shared::datafile::callsign.find("_"));
-                mClient->SearchStation(strippedCallsign, shared::datafile::frequency);
+                std::string cleanCallsign = afv_unix::util::ReplaceString(shared::datafile::callsign, "__", "_");
+
+                shared::StationElement el = shared::StationElement::build(cleanCallsign, shared::datafile::frequency);
+                if(!_frequencyExists(el.freq))
+                        shared::FetchedStations.push_back(el);
+
+                this->mClient->AddFrequency(shared::datafile::frequency, cleanCallsign);
+                this->mClient->UseTransceiversFromStation(cleanCallsign, shared::datafile::frequency);
+                this->mClient->SetRx(shared::datafile::frequency, true);
+                if (shared::datafile::facility > 0) {
+                    this->mClient->SetTx(shared::datafile::frequency, true);
+                    this->mClient->SetXc(shared::datafile::frequency, true);
+                }
+                this->mClient->FetchStationVccs(cleanCallsign);
+                //std::string strippedCallsign = shared::datafile::callsign.substr(0, shared::datafile::callsign.find("_"));
+                //mClient->SearchStation(strippedCallsign, shared::datafile::frequency);
             } 
         }
 
