@@ -240,6 +240,7 @@ namespace afv_unix::application {
                     mClient->RemoveFrequency(f.freq);
 
                 shared::FetchedStations.clear();
+                shared::bootUpVccs = false;
             }
             ImGui::PopStyleColor(3);
 
