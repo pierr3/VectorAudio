@@ -40,7 +40,7 @@ int main(int, char**)
     }
     
 
-    ImGui::SFML::Init(window); 
+    ImGui::SFML::Init(window);    
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -61,8 +61,7 @@ int main(int, char**)
     // - Read 'docs/FONTS.md' for more instructions and details.
     // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
     //io.Fonts->AddFontDefault();
-    auto SpaceGroteskFont = io.Fonts->AddFontFromFileTTF(std::string(afv_unix::configuration::get_resource_folder() + "SpaceGrotesk-Regular.ttf").c_str(), 14.0f);
-    ImGui::SFML::UpdateFontTexture();
+    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
@@ -113,14 +112,10 @@ int main(int, char**)
 
         ImGui::SFML::Update(window, deltaClock.restart());
 
-        ImGui::PushFont(SpaceGroteskFont);
-
         if (!updaterInstance->need_update())
             currentApp->render_frame();
         else
             updaterInstance->draw();
-
-        ImGui::PopFont();
 
         //ImGui::ShowDemoWindow(NULL);
 
