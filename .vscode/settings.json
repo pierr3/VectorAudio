@@ -94,6 +94,7 @@
         "cinttypes": "cpp",
         "future": "cpp",
         "csignal": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "variant": "cpp"
     }
 }

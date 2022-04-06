@@ -6,6 +6,11 @@ namespace afv_unix {
     updater::updater() : mNeedUpdate(false), cli(mBaseUrl.c_str()) {
         // Check version file
         auto res = cli.Get(mVersionUrl.c_str());
+        if (!res) {
+            spdlog::error("Cannot access updater endpoint, please update manually");
+            return;
+        }
+            
         if (res->status == 200) {
             if (std::string(res->body) != std::string(VECTOR_VERSION)) {
                 mNeedUpdate = true;
