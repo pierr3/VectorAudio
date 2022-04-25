@@ -5,7 +5,7 @@
 
 # Releases
 
-See [releases](https://github.com/pierr3/VectorAudio/releases) for test builds
+See [Releases](https://github.com/pierr3/VectorAudio/releases) for test builds
 
 # Usage
 
@@ -15,11 +15,57 @@ See [releases](https://github.com/pierr3/VectorAudio/releases) for test builds
  - Use RX to receive, TX to transmit, XC to cross-couple
  - If anything acts up, delete the frequency using "X" and add it back
 
-# Dependencies
+# Installation
 
-OpenGL, SFML 2.5, afv-native (atc-client branch), imgui, toml.hpp, nlohmann.json
+## Linux
 
+Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the executable.
+
+```sh
+# Unzip the package
+unzip VectorAudio-$VERSION-Ubuntu.zip
+
+# cd into the newly created directory
+cd VectorAudio-$VERSION-Ubuntu
+
+# Make the file executable
+chmod +x vectoraudio
+
+# Run it
+./vectoraudio
+```
+## macOS
+
+VectorAudio can be installed using [Homebrew](https://brew.sh/index). Run the following commands to first install the Homebrew Tap and then the Homebrew Cask. This way the app gets upgraded when you run `brew upgrade`.
+
+```sh
+# Add the tap
+brew tap flymia/homebrew-vectoraudio
+
+# Install the cask
+brew install --cask vectoraudio
+```
+
+## Windows
+
+Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the executable. This should install VectorAudio.
 # Build
+## Dependencies
+
+`cmake` and `pkg-config` should take care of this.
+
+* OpenGL,
+* SFML 2.5
+* afv-native (atc-client branch) 
+* imgui
+* toml.hpp
+* nlohmann.json
+
+### imgui version
+
+v1.86
+
+## Build process
 
 ```sh
 git submodule init
@@ -29,6 +75,14 @@ cmake ..
 make
 ```
 
-# imgui version
+## Building on macOS
 
-v1.86
+Be sure to have the packages `pkg-config` and `cmake` installed.
+
+```sh
+brew install cmake pkg-config
+```
+
+# Contributing
+
+If you want to help with the project, you are always welcome to open a PR. 🙂
