@@ -5,7 +5,7 @@
 
 # Releases
 
-See [Releases](https://github.com/pierr3/VectorAudio/releases) for test builds
+See [releases](https://github.com/pierr3/VectorAudio/releases) for test builds
 
 # Usage
 
