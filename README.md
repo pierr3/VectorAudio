@@ -46,6 +46,8 @@ brew tap flymia/homebrew-vectoraudio
 brew install --cask vectoraudio
 ```
 
+VectorAudio ships with a universal binary, that includes x86_64 and ARM versions for the M1 (Pro/Max/Ultra).
+
 ## Windows
 
 Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the executable. This should install VectorAudio.
