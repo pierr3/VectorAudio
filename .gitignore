@@ -28,6 +28,9 @@
 
 *.log
 
+# macOS Stuff
+.DS_Store
+
 # Executables
 *.exe
 *.out
