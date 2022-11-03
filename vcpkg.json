@@ -10,7 +10,6 @@
         "cpp-httplib",
         "opus",
         "speexdsp",
-        "portaudio",
         "cpp-jwt",
         "msgpack",
         "curl",
