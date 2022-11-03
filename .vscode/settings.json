@@ -95,6 +95,11 @@
         "future": "cpp",
         "csignal": "cpp",
         "regex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "__std_stream": "cpp",
+        "any": "cpp",
+        "format": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     }
 }

@@ -30,11 +30,15 @@ namespace afv_unix::modals {
                 ImGui::Text("Audio configuration");
                 
                 if (ImGui::BeginCombo("Sound API", afv_unix::shared::configAudioApi.c_str())) {
-                    for (const auto &item: mClient->GetAudioApis()) {
+                    for (const auto &item: afv_unix::shared::availableAudioAPI) {
                         if (ImGui::Selectable(item.second.c_str(), afv_unix::shared::mAudioApi == item.first)) {
                             afv_unix::shared::mAudioApi = item.first;
-                            if (mClient)
+                            if (mClient) {
+                                // set the Audio API and update the available inputs and outputs
                                 mClient->SetAudioApi(afv_unix::shared::mAudioApi);
+                                afv_unix::shared::availableInputDevices = mClient->GetAudioInputDevices(afv_unix::shared::mAudioApi);
+                                afv_unix::shared::availableOutputDevices = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+                            }
                             afv_unix::shared::configAudioApi = item.second;
                             afv_unix::configuration::config["audio"]["api"] = item.second;
                         }
@@ -44,7 +48,7 @@ namespace afv_unix::modals {
 
                 if (ImGui::BeginCombo("Input Device", afv_unix::shared::configInputDeviceName.c_str())) {
 
-                    auto m_audioDrivers = mClient->GetAudioInputDevices(afv_unix::shared::mAudioApi);
+                    auto m_audioDrivers = afv_unix::shared::availableInputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
                         if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configInputDeviceName == driver)) {
@@ -58,7 +62,7 @@ namespace afv_unix::modals {
 
                 if (ImGui::BeginCombo("Output Device", afv_unix::shared::configOutputDeviceName.c_str())) {
 
-                    auto m_audioDrivers = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+                    auto m_audioDrivers = afv_unix::shared::availableOutputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
                         if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configOutputDeviceName == driver)) {
@@ -72,7 +76,7 @@ namespace afv_unix::modals {
 
                 if (ImGui::BeginCombo("Speaker Device", afv_unix::shared::configSpeakerDeviceName.c_str())) {
 
-                    auto m_audioDrivers = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+                    auto m_audioDrivers = afv_unix::shared::availableOutputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
                         if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configSpeakerDeviceName == driver)) {

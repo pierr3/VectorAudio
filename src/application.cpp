@@ -263,8 +263,14 @@ namespace afv_unix::application {
             ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
         }
         
-        if (ImGui::Button("Settings") && !mClient->IsVoiceConnected())
+        if (ImGui::Button("Settings") && !mClient->IsVoiceConnected()) {
+            // Update all available data
+            afv_unix::shared::availableAudioAPI = mClient->GetAudioApis();
+            afv_unix::shared::availableInputDevices = mClient->GetAudioInputDevices(afv_unix::shared::mAudioApi);
+            afv_unix::shared::availableOutputDevices = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
             ImGui::OpenPopup("Settings Panel");
+        }
+            
 
         if (mClient->IsVoiceConnected()) {
             ImGui::PopItemFlag();
