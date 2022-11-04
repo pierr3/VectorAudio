@@ -72,6 +72,7 @@ v1.86
 ```sh
 git submodule init
 git pull --recurse-submodules
+./vcpkg/bootstrap-vcpkg.sh
 mkdir build/ && cd build/
 cmake ..
 make
