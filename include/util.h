@@ -225,6 +225,8 @@ namespace afv_unix::util {
                 case afv_native::HardwareType::Schmid_ED_137B:
                         return "Schmid ED-137B";
             }
+
+            return "Unknown Hardware";
     }
 
     inline static std::string ReplaceString(std::string subject, const std::string& search,
