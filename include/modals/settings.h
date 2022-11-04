@@ -133,10 +133,17 @@ namespace afv_unix::modals {
                 ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(5 / 7.0f, 0.8f, 0.8f));
                 const char* audioTestButtonText = mClient->IsAudioRunning() ? "Stop Mic Test" : "Start Mic Test";
                 if (ImGui::Button(audioTestButtonText, ImVec2(-1.0f, 0.0f))) {
+
+
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
-                    else
+                    else {
+                        mClient->SetAudioApi(afv_unix::shared::mAudioApi);
+                        mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
+                        mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
+                        mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
                         mClient->StartAudio();
+                    }
                 }
                 ImGui::PopStyleColor(3);
                 
