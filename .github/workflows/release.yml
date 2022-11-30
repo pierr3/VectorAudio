@@ -24,7 +24,7 @@ jobs:
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Install SFML dependencies
         run: |
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev patchelf
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -34,11 +34,11 @@ jobs:
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh
-          mv VectorAudio_Linux.zip VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.zip
+          mv VectorAudio_Ubuntu.tar.gz VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.zip
+          files: VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
   build-windows:
     runs-on: windows-latest
     steps:

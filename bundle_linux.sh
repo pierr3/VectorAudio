@@ -4,18 +4,16 @@
 # Creating the linux bundle
 #
 
-#
-# Copying all files
-#
-
-
-mkdir VectorAudio_Linux
-cp resources/*.wav VectorAudio_Linux/
-cp build/extern/afv-native/libafv.so VectorAudio_Linux/
-cp LICENSE VectorAudio_Linux/
-cp resources/icon_mac.png VectorAudio_Linux
+mkdir VectorAudio_Ubuntu
+mkdir VectorAudio_Ubuntu/lib
+cp resources/*.wav VectorAudio_Ubuntu/
+cp build/extern/afv-native/libafv.so VectorAudio_Ubuntu/lib
+cp LICENSE VectorAudio_Ubuntu/
+cp resources/icon_mac.png VectorAudio_Ubuntu
 
 chmod +x build/vector_audio
-cp build/vector_audio VectorAudio_Linux/
+patchelf --set-rpath \$ORIGIN:\$ORIGIN/../lib build/vector_audio
 
-zip -r VectorAudio_Linux.zip VectorAudio_Linux/
+cp build/vector_audio VectorAudio_Ubuntu/
+
+tar -zcvf VectorAudio_Ubuntu.tar.gz VectorAudio_Ubuntu/
