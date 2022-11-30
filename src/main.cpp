@@ -21,8 +21,8 @@
 int main(int, char**)
 {
     afv_unix::configuration::build_logger();
-    sf::RenderWindow window(sf::VideoMode(800, 400), "Vector Audio");
-    window.setFramerateLimit(60);
+    sf::RenderWindow window(sf::VideoMode(800, 450), "Vector Audio");
+    window.setFramerateLimit(30);
 
     auto image = sf::Image{};
     
