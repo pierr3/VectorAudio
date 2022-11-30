@@ -73,12 +73,10 @@ v1.86
 ## Build process
 
 ```sh
-git submodule init
-git pull --recurse-submodules
+git submodule update --init --recursive
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
-mkdir build/ && cd build/
-cmake ..
-make
+mkdir -p build/ && cd build/
+cmake .. && make
 ```
 
 ## Building on macOS
