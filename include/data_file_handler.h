@@ -20,10 +20,10 @@ namespace afv_unix::data_file {
 
             inline virtual ~Handler(){
                 {
-                    std::lock_guard<std::mutex> guard(this->df_m);
-                    this->stop_flag = true;
+                    std::unique_lock<std::mutex> lk(m_);
+                    _keep_running = false;
                 }
-                this->df_cv.notify_all();
+                cv.notify_one();
 
                 if (dataFileThread.joinable())
                     dataFileThread.join();
@@ -34,21 +34,23 @@ namespace afv_unix::data_file {
             const std::string data_feel_url = "/v3/vatsim-data.json";
             
             std::thread dataFileThread;
-            bool stop_flag = false;
-            std::condition_variable df_cv;
-            std::mutex df_m;
+            bool _keep_running = true;
+            std::condition_variable cv;
+            std::mutex m_;
 
             inline void _thread() {
 
                 httplib::Client cli(data_feel_host);
                 using namespace std::chrono_literals;
-                
-                do {
+
+                std::unique_lock<std::mutex> lk(m_);
+                while(!cv.wait_for(lk, 15s, [this] { return !_keep_running; })) {
                     
                     auto res = cli.Get(data_feel_url.c_str());
                     if (res) {
                         if (res->status == 200)
                         {
+                            spdlog::debug("Successfully downloaded datafile");
                             try {
                                 auto j3 = nlohmann::json::parse(res->body);
                                 if (j3["controllers"].is_array()) {
@@ -104,20 +106,14 @@ namespace afv_unix::data_file {
                         {
                             spdlog::error("Couldn't download data file, error {}", res->status);
                         }
-                    } else 
+                    } 
+                    else 
                     {
                         spdlog::warn("Couldn't open http request for data file, skipping");
                     }
-                } while(this->wait_for(15s));
+                }
 
                 spdlog::info("Data file thread terminated.");
-            }
-
-            template<class Duration>
-            inline bool wait_for(Duration duration) {
-                std::unique_lock<std::mutex> l(df_m);
-
-                return !df_cv.wait_for(l, duration, [&]() { return stop_flag; });
             }
     };
 }
