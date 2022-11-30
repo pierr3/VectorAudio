@@ -28,3 +28,5 @@ cp resources/Info.plist build/VectorAudio.app/Contents/
 install_name_tool -add_rpath "@executable_path/../Frameworks" build/VectorAudio.app/Contents/MacOS/vector_audio
 
 rm resources/VectorAudio.icns
+
+codesign --force -s - build/VectorAudio.app
