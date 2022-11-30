@@ -61,7 +61,7 @@ jobs:
           cp build/Release/vector_audio.exe installer/
           cp build/Release/*.dll installer/
           cp build/extern/afv-native/Release/*.dll installer/
-          cp build/vcpkg_installed/x64-windows/bin/speexdsp.dll installer/
+          find build/vcpkg_installed -name 'speexdsp.dll' -exec cp "{}" installer/  \;
           mv installer/speexdsp.dll installer/libspeexdsp.dll
           cp bundle_windows.nsi installer/install.nsi
       - name: Create installer
