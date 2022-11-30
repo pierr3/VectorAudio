@@ -29,4 +29,4 @@ install_name_tool -add_rpath "@executable_path/../Frameworks" build/VectorAudio.
 
 rm resources/VectorAudio.icns
 
-codesign --force -s - build/VectorAudio.app
+codesign --force --deep -s - build/VectorAudio.app
