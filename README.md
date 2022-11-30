@@ -1,11 +1,11 @@
-# AFV-Unix
- An Audio-For-VATSIM ATC Client for macOs and Linux (audio only)
+# Vector Audio
+ A cross-platform Audio-For-VATSIM ATC Client for macOS and Linux, with untested Windows support (audio only)
 
  ![screengrab of application](https://i.imgur.com/IumERC2.png)
 
 # Releases
 
-See [releases](https://github.com/pierr3/VectorAudio/releases) for test builds
+See [releases](https://github.com/pierr3/VectorAudio/releases) for latest builds
 
 # Usage
 
@@ -29,14 +29,16 @@ unzip VectorAudio-$VERSION-Ubuntu.zip
 cd VectorAudio-$VERSION-Ubuntu
 
 # Make the file executable
-chmod +x vectoraudio
+chmod +x vector_audio
 
 # Run it
-./vectoraudio
+./vector_audio
 ```
 ## macOS
 
-VectorAudio can be installed using [Homebrew](https://brew.sh/index). Run the following commands to first install the Homebrew Tap and then the Homebrew Cask. This way the app gets upgraded when you run `brew upgrade`.
+Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and install the .app into your applications folder.
+
+Alternatively, VectorAudio can be installed using [Homebrew](https://brew.sh/index). Run the following commands to first install the Homebrew Tap and then the Homebrew Cask. This way the app gets upgraded when you run `brew upgrade`.
 
 ```sh
 # Add the tap
@@ -46,11 +48,12 @@ brew tap flymia/homebrew-vectoraudio
 brew install --cask vectoraudio
 ```
 
-VectorAudio ships with a universal binary, that includes x86_64 and ARM versions for the M1 (Pro/Max/Ultra).
+VectorAudio ships with a universal binary, that includes x86_64 and ARM versions for Apple Silicon.
 
 ## Windows
 
 Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the executable. This should install VectorAudio.
+
 # Build
 ## Dependencies
 
