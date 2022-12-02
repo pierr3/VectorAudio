@@ -81,3 +81,9 @@ target_link_libraries(vector_audio
     fmt::fmt-header-only
     afv_native
     ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+
+if (WIN32)
+    add_custom_command(TARGET vector_audio POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:vector_audio> $<TARGET_FILE_DIR:vector_audio>
+    COMMAND_EXPAND_LISTS)
+endif()
