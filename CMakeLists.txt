@@ -27,6 +27,8 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
 if (APPLE)
     find_library(APPLE_OPENGL OpenGL)
+else()
+    find_library(OpenGL REQUIRED)
 endif()
 
 find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
@@ -82,7 +84,7 @@ target_link_libraries(vector_audio
     nlohmann_json nlohmann_json::nlohmann_json
     fmt::fmt-header-only
     afv_native
-    ${APPLE_OPENGL} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    ${APPLE_OPENGL} ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD
