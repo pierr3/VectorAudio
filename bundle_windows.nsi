@@ -62,6 +62,7 @@ section "install"
 	file "icon_win.png"
 	file /r *.wav
 	file /r *.dll
+	file /r *.ttf
 
 	# Add any other files for the install directory (license files, app data, etc) here
  

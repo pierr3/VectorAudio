@@ -314,8 +314,8 @@ namespace afv_unix::application {
                 }
                 ImGui::TableSetColumnIndex(counter-1);
 
-                float HalfHeight = ImGui::GetContentRegionAvailWidth()*0.2f;
-                ImVec2 HalfSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.5f, HalfHeight);
+                float HalfHeight = ImGui::GetContentRegionAvailWidth()*0.25f;
+                ImVec2 HalfSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.50f, HalfHeight);
                 ImVec2 QuarterSize = ImVec2(ImGui::GetContentRegionAvailWidth()*0.25f, HalfHeight);
                 
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);

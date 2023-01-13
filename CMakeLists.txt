@@ -25,7 +25,10 @@ endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
-find_package(OpenGL REQUIRED)
+if (APPLE)
+    find_library(APPLE_OPENGL OpenGL)
+endif()
+
 find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -72,15 +75,14 @@ if (WIN32)
     set_target_properties(vector_audio PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
-target_link_libraries(vector_audio 
-    ${OPENGL_LIBRARY}
+target_link_libraries(vector_audio
     OpenSSL::SSL OpenSSL::Crypto 
     sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
     fmt::fmt-header-only
     afv_native
-    ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    ${APPLE_OPENGL} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD

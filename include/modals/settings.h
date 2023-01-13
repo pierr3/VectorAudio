@@ -59,7 +59,7 @@ namespace afv_unix::modals {
 
                     ImGui::EndCombo();
                 }
-
+                
                 if (ImGui::BeginCombo("Output Device", afv_unix::shared::configOutputDeviceName.c_str())) {
 
                     auto m_audioDrivers = afv_unix::shared::availableOutputDevices;
