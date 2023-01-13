@@ -12,7 +12,7 @@
 # These three must be integers
 !define VERSIONMAJOR 0
 !define VERSIONMINOR 4
-!define VERSIONBUILD 0
+!define VERSIONBUILD 1
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
 !define HELPURL "https://github.com/pierr3/VectorAudio" # "Support Information" link
@@ -25,7 +25,7 @@ RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on
 InstallDir "$PROGRAMFILES64\${APPNAME}"
 
 # rtf or txt file - remember if it is txt, it must be in the DOS text format (\r\n)
-LicenseData "LICENSE"
+LicenseData "LICENSE.txt"
 # This will be in the installer/uninstaller's title bar
 Name "${APPNAME}"
 Icon "favicon.ico"
@@ -60,6 +60,7 @@ section "install"
 	file "vector_audio.exe"
 	file "favicon.ico"
 	file "icon_win.png"
+	file "LICENSE.txt"
 	file /r *.wav
 	file /r *.dll
 	file /r *.ttf

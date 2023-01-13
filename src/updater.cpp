@@ -36,7 +36,7 @@ namespace afv_unix {
         ImGui::Separator();
 
         if (ImGui::Button("Download from GitHub")) {
-            std::system(std::string(std::string("open ") + mArtefactFileUrl).c_str());
+            std::system(std::string("open " + mArtefactFileUrl).c_str());
         }
 
         ImGui::End();

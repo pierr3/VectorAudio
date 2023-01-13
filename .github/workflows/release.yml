@@ -18,8 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
         with:
           submodules: recursive
+          python-version: '3.10'
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Install SFML dependencies
@@ -43,8 +45,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
         with:
           submodules: recursive
+          python-version: '3.10'
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -53,11 +57,12 @@ jobs:
           cmake --build build/ --config Release
       - name: Prepare windows installer
         run: |
+          python collect_licenses.py
           mkdir installer
           cp resources/*.wav installer/
           cp resources/favicon.ico installer/
           cp resources/icon_win.png installer/
-          cp LICENSE installer/
+          cp resources/LICENSE.txt installer/
           cp build/Release/vector_audio.exe installer/
           cp build/Release/*.dll installer/
           cp build/extern/afv-native/Release/*.dll installer/
@@ -77,8 +82,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
         with:
           submodules: recursive
+          python-version: '3.10'
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Create universal build folder

@@ -568,6 +568,8 @@ namespace afv_unix::application {
 
         ImGui::TextUnformatted(afv_unix::shared::client_name.c_str());
 
+        util::TextURL("Licenses", afv_unix::configuration::get_resource_folder() + "LICENSE.txt");
+
         ImGui::EndGroup();
 
 

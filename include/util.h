@@ -230,12 +230,40 @@ namespace afv_unix::util {
     }
 
     inline static std::string ReplaceString(std::string subject, const std::string& search,
-                          const std::string& replace) {
-        size_t pos = 0;
-        while ((pos = subject.find(search, pos)) != std::string::npos) {
-                subject.replace(pos, search.length(), replace);
-                pos += replace.length();
+        const std::string& replace) {
+                size_t pos = 0;
+                while ((pos = subject.find(search, pos)) != std::string::npos) {
+                        subject.replace(pos, search.length(), replace);
+                        pos += replace.length();
+                }
+                return subject;
         }
-        return subject;
+
+        inline void AddUnderLine( ImColor col_ )
+        {
+                ImVec2 min = ImGui::GetItemRectMin();
+                ImVec2 max = ImGui::GetItemRectMax();
+                min.y = max.y;
+                ImGui::GetWindowDrawList()->AddLine( min, max, col_, 1.0f );
+        }
+
+        inline void TextURL(std::string name_, std::string URL_)
+        {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered]);
+                ImGui::TextUnformatted(name_.c_str());
+                ImGui::PopStyleColor();
+
+                if (ImGui::IsItemHovered())
+                {
+                        if(ImGui::IsMouseClicked(0))
+                        {
+                                std::system(std::string("open " + URL_).c_str());
+                        }
+                        AddUnderLine( ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered]);
+                }
+                else
+                {
+                        AddUnderLine(ImGui::GetStyle().Colors[ImGuiCol_Button]);
+                }
         }
 }
