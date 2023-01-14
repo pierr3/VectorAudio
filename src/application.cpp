@@ -43,21 +43,21 @@ namespace afv_unix::application {
         // Start the API timer
         shared::currentlyTransmittingApiTimer = std::chrono::high_resolution_clock::now();
 
-        apiServer = new evpp::http::Server(2);
-        apiServer->RegisterDefaultHandler([](evpp::EventLoop* loop,
-                              const evpp::http::ContextPtr& ctx,
-                              const evpp::http::HTTPSendResponseCallback& cb) { cb(afv_unix::shared::client_name);});
-        apiServer->RegisterHandler("/transmitting",
-                           [](evpp::EventLoop* loop,
-                              const evpp::http::ContextPtr& ctx,
-                              const evpp::http::HTTPSendResponseCallback& cb) { cb(afv_unix::shared::currentlyTransmittingApiData); });
-        apiServer->Init(afv_unix::shared::apiServerPort);
-        apiServer->Start();
+        apiServer.Get("/hi", [](const httplib::Request &req, httplib::Response &res) {
+            res.set_content("hello", "text/plain");
+        });
+        apiServer.Get("/transmitting", [&](const httplib::Request &req, httplib::Response &res) {
+            res.set_content(afv_unix::shared::currentlyTransmittingApiData, "text/plain");
+        });
+
+        apiThread = std::thread([&](){
+            apiServer.listen("0.0.0.0", afv_unix::shared::apiServerPort);
+        });
+        apiThread.detach();
     }
 
     App::~App() {
-        apiServer->Stop();
-        delete apiServer;
+        apiServer.stop();
         delete mClient;
     }
 

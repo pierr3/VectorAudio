@@ -15,7 +15,6 @@
         "curl",
         "libevent",
         "fmt",
-        "spdlog",
-        "evpp"
+        "spdlog"
     ]
   }
