@@ -43,21 +43,30 @@ namespace afv_unix::application {
         // Start the API timer
         shared::currentlyTransmittingApiTimer = std::chrono::high_resolution_clock::now();
 
-        apiServer.Get("/hi", [](const httplib::Request &req, httplib::Response &res) {
-            res.set_content("hello", "text/plain");
-        });
-        apiServer.Get("/transmitting", [&](const httplib::Request &req, httplib::Response &res) {
-            res.set_content(afv_unix::shared::currentlyTransmittingApiData, "text/plain");
-        });
+        using server_t = restinio::http_server_t<>;
 
-        apiThread = std::thread([&](){
-            apiServer.listen("0.0.0.0", afv_unix::shared::apiServerPort);
-        });
-        apiThread.detach();
+		server_t server{
+			restinio::own_io_context(),
+			restinio::server_settings_t<>{}
+				.port( afv_unix::shared::apiServerPort )
+				.address("localhost")
+				.request_handler([&](auto req) {
+                    if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/" ) {
+                        return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
+                    } else {
+                        return req->create_response().set_body(afv_unix::shared::client_name).done(); 
+                    }
+                })
+		};
+
+        restinio::on_pool_runner_t< server_t > runner{
+			std::thread::hardware_concurrency(),
+			server
+		};
+		runner.start();
     }
 
     App::~App() {
-        apiServer.stop();
         delete mClient;
     }
 

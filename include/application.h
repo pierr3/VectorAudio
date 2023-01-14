@@ -18,7 +18,7 @@
 #include "shared.h"
 #include "event.h"
 #include <thread>
-#include "httplib.h"
+#include <restinio/all.hpp>
 
 
 namespace afv_unix::application {
@@ -36,8 +36,6 @@ namespace afv_unix::application {
             }
 
             afv_native::api::atcClient* mClient;
-            httplib::Server apiServer;
-            std::thread apiThread;
 
             void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
         };
