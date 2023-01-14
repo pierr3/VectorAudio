@@ -21,16 +21,15 @@ if(APPLE)
     if (VECTOR_ARCH_CMD EQUAL 0)
         add_definitions(-DVECTOR_ARCH="${VECTOR_ARCH}")
     endif()
+
+    # Suppress warnings of the deprecation of glut functions on macOS.
+    add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
 endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
-if (APPLE)
-    find_library(APPLE_OPENGL OpenGL)
-else()
-    find_library(OpenGL REQUIRED)
-endif()
 
+find_package(OpenGL REQUIRED)
 find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -44,7 +43,8 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
-                        ${CPP_HTTPLIB_INCLUDE_DIRS})
+                        ${CPP_HTTPLIB_INCLUDE_DIRS}
+                        ${OPENGL_INCLUDE_DIR})
 
 if (UNIX AND NOT APPLE)
     find_package(Threads REQUIRED)
@@ -84,7 +84,7 @@ target_link_libraries(vector_audio
     nlohmann_json nlohmann_json::nlohmann_json
     fmt::fmt-header-only
     afv_native
-    ${APPLE_OPENGL} ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD
