@@ -9,7 +9,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_definitions(-DVECTOR_VERSION="0.4.1")
+add_definitions(-DVECTOR_VERSION="0.4.0")
 
 if(APPLE)
     execute_process(
@@ -36,6 +36,7 @@ find_package(OpenSSL REQUIRED)
 find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(toml11 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
+find_package(unofficial-evpp CONFIG REQUIRED)
 
 set(APPLE_EXTRA_LIBS "")
 
@@ -83,6 +84,7 @@ target_link_libraries(vector_audio
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
     fmt::fmt-header-only
+    unofficial::evpp::evpp_static
     afv_native
     ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
@@ -91,3 +93,4 @@ if (WIN32)
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:vector_audio> $<TARGET_FILE_DIR:vector_audio>
     COMMAND_EXPAND_LISTS)
 endif()
+

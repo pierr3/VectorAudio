@@ -100,7 +100,8 @@
         "any": "cpp",
         "format": "cpp",
         "ranges": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "typeindex": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

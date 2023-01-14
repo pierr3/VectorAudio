@@ -17,6 +17,7 @@
 #include "modals/settings.h"
 #include "shared.h"
 #include "event.h"
+#include <evpp/http/http_server.h>
 
 namespace afv_unix::application {
     class App {
@@ -33,6 +34,7 @@ namespace afv_unix::application {
             }
 
             afv_native::api::atcClient* mClient;
+            evpp::http::Server* apiServer;
 
             void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
         };

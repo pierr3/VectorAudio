@@ -31,15 +31,33 @@ namespace afv_unix::application {
             afv_unix::shared::configSpeakerDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "speaker_device", std::string(""));
 
             afv_unix::shared::hardware = static_cast<afv_native::HardwareType>(toml::find_or<int>(afv_unix::configuration::config, "audio", "hardware_type", 0));
+
+            afv_unix::shared::apiServerPort = toml::find_or<int>(afv_unix::configuration::config, "general", "api_port", 49080);
         } catch (toml::exception &exc) {
             spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
         
         // Bind the callbacks from the client
         mClient->RaiseClientEvent(std::bind(&App::_eventCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
+        // Start the API timer
+        shared::currentlyTransmittingApiTimer = std::chrono::high_resolution_clock::now();
+
+        apiServer = new evpp::http::Server(2);
+        apiServer->RegisterDefaultHandler([](evpp::EventLoop* loop,
+                              const evpp::http::ContextPtr& ctx,
+                              const evpp::http::HTTPSendResponseCallback& cb) { cb(afv_unix::shared::client_name);});
+        apiServer->RegisterHandler("/transmitting",
+                           [](evpp::EventLoop* loop,
+                              const evpp::http::ContextPtr& ctx,
+                              const evpp::http::HTTPSendResponseCallback& cb) { cb(afv_unix::shared::currentlyTransmittingApiData); });
+        apiServer->Init(afv_unix::shared::apiServerPort);
+        apiServer->Start();
     }
 
     App::~App() {
+        apiServer->Stop();
+        delete apiServer;
         delete mClient;
     }
 
@@ -180,7 +198,9 @@ namespace afv_unix::application {
             }
         }), shared::StationsPendingRxChange.end());
         
+        // The live Received callsign data
         std::vector<std::string> ReceivedCallsigns;
+        std::vector<std::string> LiveReceivedCallsigns;
 
         ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -376,8 +396,12 @@ namespace afv_unix::application {
                     rxActive ? afv_unix::style::button_yellow() : afv_unix::style::button_green();
 
                     auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
-                    if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end())
+                    if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end()) {
                         ReceivedCallsigns.push_back(receivedCld);
+                    }
+                    if (rxActive && receivedCld.size() > 0 && std::find(LiveReceivedCallsigns.begin(), LiveReceivedCallsigns.end(), receivedCld) == LiveReceivedCallsigns.end()) {
+                        LiveReceivedCallsigns.push_back(receivedCld);
+                    }
                 }
                 
                 if (ImGui::Button(std::string("RX##").append(el.callsign).c_str(), HalfSize)) 
@@ -572,6 +596,16 @@ namespace afv_unix::application {
 
         ImGui::EndGroup();
 
+
+        // Clear out the old API data every 500ms
+        auto current_time = std::chrono::high_resolution_clock::now();
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(current_time - shared::currentlyTransmittingApiTimer).count() >= 500) {
+            shared::currentlyTransmittingApiData = "";
+
+            shared::currentlyTransmittingApiData.append(LiveReceivedCallsigns.empty() ? "" : std::accumulate( ++LiveReceivedCallsigns.begin(), LiveReceivedCallsigns.end(), *LiveReceivedCallsigns.begin(), 
+            [](auto& a, auto& b) { return a + "," + b; }));
+            shared::currentlyTransmittingApiTimer = current_time;
+        }
 
         ImGui::End();
 

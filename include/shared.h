@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <afv-native/hardwareType.h>
 #include <map>
+#include <chrono>
 
 namespace afv_unix::shared {
     struct StationElement {
@@ -66,7 +67,11 @@ namespace afv_unix::shared {
     inline std::map<unsigned int, std::string> availableAudioAPI;
     inline std::vector<std::string> availableInputDevices;
     inline std::vector<std::string> availableOutputDevices;
-    
+
+    inline static std::string currentlyTransmittingApiData;
+    inline static std::chrono::high_resolution_clock::time_point currentlyTransmittingApiTimer;
+
+    inline int apiServerPort = 49080;
 
     // Thread unsafe stuff
     namespace datafile {
