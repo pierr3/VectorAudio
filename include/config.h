@@ -18,6 +18,7 @@ namespace afv_unix {
         static toml::value config;
 
         static inline std::string file_path = "config.toml";
+        static inline std::string airports_db_file_path = "airports.json";
 
         static void build_config();
 

@@ -6,9 +6,9 @@ namespace afv_unix::application {
     App::App() {
         try {
             mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
-            spdlog::info("Created afv_native client.");
+            spdlog::debug("Created afv_native client.");
         } catch (std::exception ex) {
-            spdlog::critical("Could not create AFV client interface: %s", ex.what());
+            spdlog::critical("Could not create AFV client interface: {}", ex.what());
             return;
         }
 
@@ -49,10 +49,47 @@ namespace afv_unix::application {
 
         // Start the SDK server
         _buildSDKServer();
+
+        std::async(&App::_loadAirportsDatabaseAsync, this);
     }
 
     App::~App() {
         delete mClient;
+    }
+
+    void App::_loadAirportsDatabaseAsync() {
+        // if we cannot load this database, it's not that important, we will just log it.
+
+        if (!std::filesystem::exists(afv_unix::configuration::airports_db_file_path)) {
+            spdlog::warn("Could not find airport database json file");
+            return;
+        }
+
+        try {
+            // We do performance analysis here
+            auto t1 = std::chrono::high_resolution_clock::now();
+            std::ifstream f(afv_unix::configuration::airports_db_file_path);
+            nlohmann::json data = nlohmann::json::parse(f);
+
+            // Loop through all the icaos
+            for (auto& obj : data.items()) {
+                ns::Airport ar;
+                obj.value().at("icao").get_to(ar.icao);
+                obj.value().at("elevation").get_to(ar.elevation);
+                obj.value().at("lat").get_to(ar.lat);
+                obj.value().at("lon").get_to(ar.lon);
+
+                // Assumption: The user will not have time to connect by the time this is loaded, hence should be fine re concurrency
+                ns::Airport::All.insert(std::make_pair(obj.key(), ar));
+            }
+
+            auto t2 = std::chrono::high_resolution_clock::now();
+            spdlog::info("Loaded {} airports in {}", ns::Airport::All.size(), std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1));
+        } catch (nlohmann::json::exception &ex) {
+            spdlog::warn("Could parse airport database: {}", ex.what());
+            return;
+        }
+  
     }
 
     void App::_buildSDKServer() {
@@ -69,10 +106,10 @@ namespace afv_unix::application {
                     } else {
                         return req->create_response().set_body(afv_unix::shared::client_name).done(); 
                     }
-                }), 1u);
+                }), 2u);
         } catch(std::exception ex) {
             spdlog::error("Failed to created SDK http server, is the port in use?");
-            spdlog::error("%s", ex.what());
+            spdlog::error("%{}", ex.what());
         }
     }
 

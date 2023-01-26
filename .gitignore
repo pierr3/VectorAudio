@@ -53,3 +53,5 @@ build/CMakeFiles/progress.marks
 build/compile_commands.json
 build/imgui.ini
 build/Makefile
+
+config.toml

@@ -15,7 +15,7 @@ namespace afv_unix::data_file {
             inline Handler(){
                 dataFileThread = std::thread(&Handler::_thread, this);
                 dataFileThread.detach();
-                spdlog::info("Created data file thread");
+                spdlog::debug("Created data file thread");
             };
 
             inline virtual ~Handler(){
@@ -113,7 +113,7 @@ namespace afv_unix::data_file {
                     }
                 }
 
-                spdlog::info("Data file thread terminated.");
+                spdlog::debug("Data file thread terminated.");
             }
     };
 }

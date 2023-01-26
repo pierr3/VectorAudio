@@ -17,9 +17,9 @@ namespace afv_unix {
     toml::value configuration::config;
 
     void configuration::build_config() {
-        #ifdef NDEBUG
-            file_path = get_resource_folder() + file_path;
-        #endif
+        // TODO: Adjust macOS config file path to ensure it remains after an update
+        file_path = get_resource_folder() + file_path;
+        airports_db_file_path = get_resource_folder() + airports_db_file_path;
 
         if (std::filesystem::exists(file_path)) {
             afv_unix::configuration::config = toml::parse(file_path);

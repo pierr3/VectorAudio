@@ -19,6 +19,7 @@
 #include "event.h"
 #include "ns/airport.h"
 #include <thread>
+#include <fstream>
 #include <restinio/all.hpp>
 
 
@@ -41,6 +42,7 @@ namespace afv_unix::application {
 
             void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
             void _buildSDKServer();
+            void _loadAirportsDatabaseAsync();
 
             bool showWarningStationNotFound = false;
         };
