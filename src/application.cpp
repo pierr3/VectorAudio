@@ -282,8 +282,23 @@ namespace afv_unix::application {
                 mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
                 mClient->SetHardware(afv_unix::shared::hardware);
             
-                // TODO: Pull from datafile
-                mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
+                std::string clientIcao = afv_unix::shared::datafile::callsign.substr(0, afv_unix::shared::datafile::callsign.find('_'));
+                // We use the airport database for this
+                if (ns::Airport::All.find(clientIcao) != ns::Airport::All.end()) {
+                    auto clientAirport = ns::Airport::All.at(clientIcao);
+
+                    // We pad the elevation by 10 meters to simulate the client being in a tower
+                    mClient->SetClientPosition(clientAirport.lat, clientAirport.lon, 
+                        clientAirport.elevation+33, clientAirport.elevation+33);
+                    
+                    spdlog::info("Found client position in database at lat:{}, lon:{}, elev:{}", 
+                        clientAirport.lat, clientAirport.lon, clientAirport.elevation);
+                } else {
+                    spdlog::info("Client position is unknown, setting default.");
+
+                    // Default position is over Paris somewhere
+                    mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
+                }
 
                 mClient->SetCredentials(std::to_string(afv_unix::shared::vatsim_cid), afv_unix::shared::vatsim_password);
                 mClient->SetCallsign(afv_unix::shared::datafile::callsign);
