@@ -22,7 +22,11 @@ namespace afv_unix {
     }
 
     bool updater::need_update() {
-        return mNeedUpdate;
+        #ifdef NDEBUG
+            return mNeedUpdate;
+        #else
+            return false;
+        #endif
     }  
         
     void updater::draw() {

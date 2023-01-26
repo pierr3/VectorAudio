@@ -368,6 +368,19 @@ namespace afv_unix::application {
         
         afv_unix::modals::settings::render(mClient);
 
+        {
+            if (ImGui::BeginPopupModal("Station Warning"))
+            {
+                ImGui::TextUnformatted("Could not find station in database");
+                ImGui::NewLine();
+                if (ImGui::Button("Ok")) 
+                {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+        }
+
         ImGui::SameLine();
 
         const ImVec4 red(1.0, 0.0, 0.0, 1.0), green(0.0, 1.0, 0.0, 1.0);
@@ -667,6 +680,13 @@ namespace afv_unix::application {
 
         ImGui::EndGroup();
 
+
+
+        if (showWarningStationNotFound) 
+        {
+            ImGui::OpenPopup("Station Warning");
+            showWarningStationNotFound = false;
+        }
 
         // Clear out the old API data every 500ms
         auto current_time = std::chrono::high_resolution_clock::now();
