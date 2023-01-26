@@ -17,6 +17,7 @@
 #include "modals/settings.h"
 #include "shared.h"
 #include "event.h"
+#include "ns/airport.h"
 #include <thread>
 #include <restinio/all.hpp>
 
