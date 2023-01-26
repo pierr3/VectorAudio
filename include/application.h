@@ -36,7 +36,9 @@ namespace afv_unix::application {
             }
 
             afv_native::api::atcClient* mClient;
+            restinio::running_server_handle_t<restinio::default_traits_t> mSDKServer;
 
             void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
+            void _buildSDKServer();
         };
 }

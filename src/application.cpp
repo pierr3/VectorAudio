@@ -43,31 +43,28 @@ namespace afv_unix::application {
         // Start the API timer
         shared::currentlyTransmittingApiTimer = std::chrono::high_resolution_clock::now();
 
-        using server_t = restinio::http_server_t<>;
-
-		server_t server{
-			restinio::own_io_context(),
-			restinio::server_settings_t<>{}
-				.port( afv_unix::shared::apiServerPort )
-				.address("localhost")
-				.request_handler([&](auto req) {
-                    if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/" ) {
-                        return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
-                    } else {
-                        return req->create_response().set_body(afv_unix::shared::client_name).done(); 
-                    }
-                })
-		};
-
-        restinio::on_pool_runner_t< server_t > runner{
-			std::thread::hardware_concurrency(),
-			server
-		};
-		runner.start();
+        // Start the SDK server
+        _buildSDKServer();
     }
 
     App::~App() {
         delete mClient;
+    }
+
+    void App::_buildSDKServer() {
+        mSDKServer = restinio::run_async<>(
+		    restinio::own_io_context(),
+            restinio::server_settings_t<>{}
+			.port(afv_unix::shared::apiServerPort)
+			.address("0.0.0.0")
+			.request_handler([&](auto req) {
+                if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/transmitting" ) {
+                    // Nastiest of nasty gross anti-multithread concurrency occurs here, good enough I guess
+                    return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
+                } else {
+                    return req->create_response().set_body(afv_unix::shared::client_name).done(); 
+                }
+			}), 1u);
     }
 
     void App::_eventCallback(afv_native::ClientEventType evt, void* data, void* data2) {
@@ -150,6 +147,8 @@ namespace afv_unix::application {
             if (mClient->IsAPIConnected() && shared::FetchedStations.size() == 0 && !shared::bootUpVccs) {
                 // We force add the current user frequency
                 shared::bootUpVccs = true;
+
+                // We replaced double _ which may be used during frequency handovers, but are not defined in database
                 std::string cleanCallsign = afv_unix::util::ReplaceString(shared::datafile::callsign, "__", "_");
 
                 shared::StationElement el = shared::StationElement::build(cleanCallsign, shared::datafile::frequency);
@@ -408,6 +407,8 @@ namespace afv_unix::application {
                     if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end()) {
                         ReceivedCallsigns.push_back(receivedCld);
                     }
+
+                    // Here we filter not the last callsigns that transmitted, but only the ones that are currently transmitting
                     if (rxActive && receivedCld.size() > 0 && std::find(LiveReceivedCallsigns.begin(), LiveReceivedCallsigns.end(), receivedCld) == LiveReceivedCallsigns.end()) {
                         LiveReceivedCallsigns.push_back(receivedCld);
                     }
