@@ -61,6 +61,7 @@ section "install"
 	file "favicon.ico"
 	file "icon_win.png"
 	file "LICENSE.txt"
+	file "airports.json"
 	file /r *.wav
 	file /r *.dll
 	file /r *.ttf

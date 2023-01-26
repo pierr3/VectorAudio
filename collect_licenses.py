@@ -15,7 +15,10 @@ master_license += 'Vector Audio\n\n' + Path('LICENSE').read_text() + '\n\n'
 
 # Adding the licenses of submodules
 
-submodules_licenses = [['afv-native', os.path.join('extern', 'afv-native', 'COPYING.md')], ['ImGui', os.path.join('extern', 'imgui', 'LICENSE.txt')], ['Platform Folders', os.path.join('extern', 'PlatformFolders', 'LICENSE')]]
+submodules_licenses = [['afv-native', os.path.join('extern', 'afv-native', 'COPYING.md')], 
+    ['ImGui', os.path.join('extern', 'imgui', 'LICENSE.txt')], 
+    ['Platform Folders', os.path.join('extern', 'PlatformFolders', 'LICENSE')],
+    ['Airports Database', os.path.join('resources', 'LICENSE_AIRPORTS')]]
 
 for sublicense in submodules_licenses:
     print('Getting license for: ' + sublicense[0])

@@ -40,5 +40,7 @@ namespace afv_unix::application {
 
             void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
             void _buildSDKServer();
+
+            bool showWarningStationNotFound = false;
         };
 }

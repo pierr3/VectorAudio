@@ -27,7 +27,7 @@ jobs:
       - name: Install SFML dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev patchelf
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -63,6 +63,7 @@ jobs:
           cp resources/*.wav installer/
           cp resources/favicon.ico installer/
           cp resources/icon_win.png installer/
+          cp resources/airports.json installer/
           cp resources/LICENSE.txt installer/
           cp build/Release/vector_audio.exe installer/
           cp build/Release/*.dll installer/

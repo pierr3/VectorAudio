@@ -12,6 +12,7 @@ cp resources/*.wav VectorAudio_Ubuntu/
 cp resources/*.ttf VectorAudio_Ubuntu/
 cp build/extern/afv-native/libafv.so VectorAudio_Ubuntu/lib
 cp resources/LICENSE.txt VectorAudio_Ubuntu/
+cp resources/airports.json VectorAudio_Ubuntu/
 cp resources/icon_mac.png VectorAudio_Ubuntu
 
 chmod +x build/vector_audio

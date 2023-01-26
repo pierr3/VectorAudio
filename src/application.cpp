@@ -123,7 +123,7 @@ namespace afv_unix::application {
                     if(!_frequencyExists(el.freq))
                         shared::FetchedStations.push_back(el);
                 } else {
-                    // TODO: Prompt user the station was not found
+                    showWarningStationNotFound = true;
                     spdlog::warn("Station not found in AFV database through search");
                 }
             }
