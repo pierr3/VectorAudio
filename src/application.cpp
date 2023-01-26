@@ -4,9 +4,13 @@
 namespace afv_unix::application {
 
     App::App() {
-        mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
-
-        spdlog::info("Created afv_native client.");
+        try {
+            mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
+            spdlog::info("Created afv_native client.");
+        } catch (std::exception ex) {
+            spdlog::critical("Could not create AFV client interface: %s", ex.what());
+            return;
+        }
 
         // Load all from config
         try {
@@ -52,19 +56,24 @@ namespace afv_unix::application {
     }
 
     void App::_buildSDKServer() {
-        mSDKServer = restinio::run_async<>(
-		    restinio::own_io_context(),
-            restinio::server_settings_t<>{}
-			.port(afv_unix::shared::apiServerPort)
-			.address("0.0.0.0")
-			.request_handler([&](auto req) {
-                if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/transmitting" ) {
-                    // Nastiest of nasty gross anti-multithread concurrency occurs here, good enough I guess
-                    return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
-                } else {
-                    return req->create_response().set_body(afv_unix::shared::client_name).done(); 
-                }
-			}), 1u);
+        try {
+            mSDKServer = restinio::run_async<>(
+                restinio::own_io_context(),
+                restinio::server_settings_t<>{}
+                .port(afv_unix::shared::apiServerPort)
+                .address("0.0.0.0")
+                .request_handler([&](auto req) {
+                    if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/transmitting" ) {
+                        // Nastiest of nasty gross anti-multithread concurrency occurs here, good enough I guess
+                        return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
+                    } else {
+                        return req->create_response().set_body(afv_unix::shared::client_name).done(); 
+                    }
+                }), 1u);
+        } catch(std::exception ex) {
+            spdlog::error("Failed to created SDK http server, is the port in use?");
+            spdlog::error("%s", ex.what());
+        }
     }
 
     void App::_eventCallback(afv_native::ClientEventType evt, void* data, void* data2) {
