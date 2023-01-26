@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
           cmake --build build/
@@ -54,7 +54,7 @@ jobs:
           python-version: '3.10'
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
           cmake --build build/ --config Release
@@ -65,6 +65,7 @@ jobs:
           cp resources/*.wav installer/
           cp resources/favicon.ico installer/
           cp resources/icon_win.png installer/
+          cp resources/*.ttf installer/
           cp resources/airports.json installer/
           cp resources/LICENSE.txt installer/
           cp build/Release/vector_audio.exe installer/
@@ -99,7 +100,7 @@ jobs:
           mkdir -p build/extern/afv-native/
       - name: Configure cmake (intel)
         run: |
-          cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+          cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (intel)
         run: |
           cmake --build build_intel/
@@ -110,7 +111,7 @@ jobs:
           rm -rf build_intel/
       - name: Configure cmake (arm64)
         run: |
-          cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+          cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (arm64)
         run: |
           cmake --build build_arm64/
