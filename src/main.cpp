@@ -74,9 +74,9 @@ int main(int, char**)
 
     auto updaterInstance = new afv_unix::updater();
 
-    afv_unix::application::App* currentApp = new afv_unix::application::App();
-
     auto dataFileHandler = new afv_unix::data_file::Handler();
+
+    afv_unix::application::App* currentApp = new afv_unix::application::App();
 
     // Main loop
     sf::Clock deltaClock;

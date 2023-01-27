@@ -44,7 +44,7 @@ namespace afv_unix::data_file {
                 using namespace std::chrono_literals;
 
                 std::unique_lock<std::mutex> lk(m_);
-                while(!cv.wait_for(lk, 15s, [this] { return !_keep_running; })) {
+                do {
                     
                     auto res = cli.Get(data_feel_url.c_str());
                     if (res) {
@@ -111,7 +111,7 @@ namespace afv_unix::data_file {
                     {
                         spdlog::warn("Couldn't open http request for data file, skipping");
                     }
-                }
+                } while(!cv.wait_for(lk, 15s, [this] { return !_keep_running; }));
 
                 spdlog::debug("Data file thread terminated.");
             }

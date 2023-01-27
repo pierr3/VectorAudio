@@ -155,13 +155,13 @@ namespace afv_unix::application {
                     || err == afv_native::afv::APISessionError::RejectedCredentials) 
                 {
                     showErrorModal = true;
-                    lastErrorModalMessage = "Could not login to VATSIM:\n invalid credentials, check your password/cid.";
+                    lastErrorModalMessage = "Could not login to VATSIM.\nInvalid Credentials.\nCheck your password/cid!";
                 }
 
                 if (err == afv_native::afv::APISessionError::ConnectionError) 
                 {
                     showErrorModal = true;
-                    lastErrorModalMessage = "Could not login to VATSIM:\n connection error, check your internet.";
+                    lastErrorModalMessage = "Could not login to VATSIM.\nConnection Error.\nCheck your internet.";
                 }
             }
         }
@@ -391,11 +391,13 @@ namespace afv_unix::application {
         afv_unix::modals::settings::render(mClient);
 
         {
-            if (ImGui::BeginPopupModal("Error"))
+            ImGui::SetNextWindowSize(ImVec2(300, 150));
+            if (ImGui::BeginPopupModal("Error", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize))
             {
-                ImGui::TextUnformatted(lastErrorModalMessage.c_str());
+                afv_unix::util::TextCentered(lastErrorModalMessage);
+
                 ImGui::NewLine();
-                if (ImGui::Button("Ok")) 
+                if (ImGui::Button("Ok", ImVec2(-FLT_MIN, 0.0f))) 
                 {
                     ImGui::CloseCurrentPopup();
                 }
