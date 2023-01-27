@@ -44,6 +44,7 @@ namespace afv_unix::application {
             void _buildSDKServer();
             void _loadAirportsDatabaseAsync();
 
-            bool showWarningStationNotFound = false;
+            bool showErrorModal = false;
+            std::string lastErrorModalMessage = "";
         };
 }

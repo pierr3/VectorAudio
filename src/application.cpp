@@ -144,6 +144,27 @@ namespace afv_unix::application {
                     it->transceivers = mClient->GetTransceiverCountForStation(station);
             }
         }
+        
+        if (evt == afv_native::ClientEventType::APIServerError) {
+
+            // We got an error from the API server, we can display this to the user
+            if (data != nullptr) {
+                afv_native::afv::APISessionError err = *reinterpret_cast<afv_native::afv::APISessionError*>(data);
+
+                if (err == afv_native::afv::APISessionError::BadPassword 
+                    || err == afv_native::afv::APISessionError::RejectedCredentials) 
+                {
+                    showErrorModal = true;
+                    lastErrorModalMessage = "Could not login to VATSIM:\n invalid credentials, check your password/cid.";
+                }
+
+                if (err == afv_native::afv::APISessionError::ConnectionError) 
+                {
+                    showErrorModal = true;
+                    lastErrorModalMessage = "Could not login to VATSIM:\n connection error, check your internet.";
+                }
+            }
+        }
 
         if (evt == afv_native::ClientEventType::StationDataReceived) {
             if (data != nullptr && data2 != nullptr) {
@@ -160,7 +181,8 @@ namespace afv_unix::application {
                     if(!_frequencyExists(el.freq))
                         shared::FetchedStations.push_back(el);
                 } else {
-                    showWarningStationNotFound = true;
+                    showErrorModal = true;
+                    lastErrorModalMessage = "Could not find station in database.";
                     spdlog::warn("Station not found in AFV database through search");
                 }
             }
@@ -369,9 +391,9 @@ namespace afv_unix::application {
         afv_unix::modals::settings::render(mClient);
 
         {
-            if (ImGui::BeginPopupModal("Station Warning"))
+            if (ImGui::BeginPopupModal("Error"))
             {
-                ImGui::TextUnformatted("Could not find station in database");
+                ImGui::TextUnformatted(lastErrorModalMessage.c_str());
                 ImGui::NewLine();
                 if (ImGui::Button("Ok")) 
                 {
@@ -680,12 +702,10 @@ namespace afv_unix::application {
 
         ImGui::EndGroup();
 
-
-
-        if (showWarningStationNotFound) 
+        if (showErrorModal) 
         {
-            ImGui::OpenPopup("Station Warning");
-            showWarningStationNotFound = false;
+            ImGui::OpenPopup("Error");
+            showErrorModal = false;
         }
 
         // Clear out the old API data every 500ms
