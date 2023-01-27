@@ -7,17 +7,19 @@ namespace afv_unix {
         // Check version file
         auto res = cli.Get(mVersionUrl.c_str());
         if (!res) {
-            spdlog::error("Cannot access updater endpoint, please update manually");
+            spdlog::error("Cannot access updater endpoint, please update manually!");
             return;
         }
             
         if (res->status == 200) {
-            if (std::string(res->body) != std::string(VECTOR_VERSION)) {
+            semver::version currentVersion{std::string(VECTOR_VERSION)};
+            mNewVersion = semver::version{res->body};
+
+            if (currentVersion < mNewVersion) {
                 mNeedUpdate = true;
-                mNewVersion = res->body;
             }
         } else {
-            spdlog::error("Could not connect to update server, please update manually");
+            spdlog::error("Could not connect to update server, please update manually!");
         }
     }
 
@@ -33,10 +35,10 @@ namespace afv_unix {
         ImGui::Begin("Vector Audio Updater", NULL, ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar 
         | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
-        ImGui::Text("A new version of Vector Audio is available, please update it? (%s -> %s)", VECTOR_VERSION, mNewVersion.c_str());
+        ImGui::Text("A new version of Vector Audio is available, please update it! (%s -> %s)", 
+                    VECTOR_VERSION, mNewVersion.to_string().c_str());
 
         ImGui::NewLine();
-
         ImGui::Separator();
 
         if (ImGui::Button("Download from GitHub")) {

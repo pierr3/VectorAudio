@@ -9,6 +9,7 @@
 #include "spdlog/spdlog.h"
 #include "shared.h"
 #include "platform_folders.h"
+#include <neargye/semver.hpp>
 
 namespace afv_unix {
 
@@ -24,7 +25,7 @@ namespace afv_unix {
 
             std::string mBaseUrl = "https://raw.githubusercontent.com";
             std::string mVersionUrl = "/pierr3/VectorAudio/main/VERSION";
-            std::string mNewVersion = "";
+            semver::version mNewVersion;
 
             std::string mArtefactFileUrl = "https://github.com/pierr3/VectorAudio/releases/latest";
             httplib::Client cli;
