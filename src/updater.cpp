@@ -7,19 +7,26 @@ namespace afv_unix {
         // Check version file
         auto res = cli.Get(mVersionUrl.c_str());
         if (!res) {
-            spdlog::error("Cannot access updater endpoint, please update manually!");
+            spdlog::critical("Cannot access updater endpoint, please update manually!");
             return;
         }
             
         if (res->status == 200) {
-            semver::version currentVersion{std::string(VECTOR_VERSION)};
-            mNewVersion = semver::version{res->body};
+            semver::version currentVersion;
+
+            try {
+                currentVersion = semver::version{std::string(VECTOR_VERSION)};
+                mNewVersion = semver::version{res->body};
+            } catch (std::invalid_argument &ex) {
+                spdlog::critical("Cannot parse updater version, please update manually!");
+                return;
+            }
 
             if (currentVersion < mNewVersion) {
                 mNeedUpdate = true;
             }
         } else {
-            spdlog::error("Could not connect to update server, please update manually!");
+            spdlog::critical("Updater endpoint did not return ok, please update manually!");
         }
     }
 
