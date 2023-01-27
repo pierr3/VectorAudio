@@ -38,6 +38,7 @@ find_package(toml11 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
+find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 
 set(APPLE_EXTRA_LIBS "")
 
@@ -46,7 +47,8 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
                         ${CPP_HTTPLIB_INCLUDE_DIRS}
-                        ${OPENGL_INCLUDE_DIR})
+                        ${OPENGL_INCLUDE_DIR}
+                        ${NEARGYE_SEMVER_INCLUDE_DIRS})
 
 if (UNIX AND NOT APPLE)
     find_package(Threads REQUIRED)

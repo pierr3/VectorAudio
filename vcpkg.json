@@ -16,6 +16,7 @@
         "libevent",
         "fmt",
         "spdlog",
-        "restinio"
+        "restinio",
+        "neargye-semver"
     ]
   }
