@@ -10,6 +10,7 @@
 #include "shared.h"
 #include "platform_folders.h"
 #include <neargye/semver.hpp>
+#include "util.h"
 
 namespace afv_unix {
 
