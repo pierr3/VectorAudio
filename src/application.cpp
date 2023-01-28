@@ -1,11 +1,11 @@
 #include "application.h"
 
 
-namespace afv_unix::application {
+namespace vector_audio::application {
 
     App::App() {
         try {
-            mClient = new afv_native::api::atcClient(shared::client_name, afv_unix::configuration::get_resource_folder());
+            mClient = new afv_native::api::atcClient(shared::client_name, vector_audio::configuration::get_resource_folder());
             spdlog::debug("Created afv_native client.");
         } catch (std::exception ex) {
             spdlog::critical("Could not create AFV client interface: {}", ex.what());
@@ -14,29 +14,29 @@ namespace afv_unix::application {
 
         // Load all from config
         try {
-            afv_unix::shared::mOutputEffects = toml::find_or<bool>(afv_unix::configuration::config, "audio", "vhf_effects", true);
-            afv_unix::shared::mInputFilter = toml::find_or<bool>(afv_unix::configuration::config, "audio", "input_filters", true);
+            vector_audio::shared::mOutputEffects = toml::find_or<bool>(vector_audio::configuration::config, "audio", "vhf_effects", true);
+            vector_audio::shared::mInputFilter = toml::find_or<bool>(vector_audio::configuration::config, "audio", "input_filters", true);
     
-            afv_unix::shared::vatsim_cid = toml::find_or<int>(afv_unix::configuration::config, "user", "vatsim_id", 999999);
-            afv_unix::shared::vatsim_password = toml::find_or<std::string>(afv_unix::configuration::config, "user", "vatsim_password", std::string("password"));
+            vector_audio::shared::vatsim_cid = toml::find_or<int>(vector_audio::configuration::config, "user", "vatsim_id", 999999);
+            vector_audio::shared::vatsim_password = toml::find_or<std::string>(vector_audio::configuration::config, "user", "vatsim_password", std::string("password"));
 
-            afv_unix::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(afv_unix::configuration::config, "user", "ptt", -1));
+            vector_audio::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(vector_audio::configuration::config, "user", "ptt", -1));
 
             auto mAudioProviders = mClient->GetAudioApis();
-            afv_unix::shared::configAudioApi = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "api", std::string("Default API"));
+            vector_audio::shared::configAudioApi = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "api", std::string("Default API"));
             for(const auto& driver : mAudioProviders)
             {
-                if (driver.second == afv_unix::shared::configAudioApi)
-                    afv_unix::shared::mAudioApi = driver.first;
+                if (driver.second == vector_audio::shared::configAudioApi)
+                    vector_audio::shared::mAudioApi = driver.first;
             }
 
-            afv_unix::shared::configInputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "input_device", std::string(""));
-            afv_unix::shared::configOutputDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "output_device", std::string(""));
-            afv_unix::shared::configSpeakerDeviceName = toml::find_or<std::string>(afv_unix::configuration::config, "audio", "speaker_device", std::string(""));
+            vector_audio::shared::configInputDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "input_device", std::string(""));
+            vector_audio::shared::configOutputDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "output_device", std::string(""));
+            vector_audio::shared::configSpeakerDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "speaker_device", std::string(""));
 
-            afv_unix::shared::hardware = static_cast<afv_native::HardwareType>(toml::find_or<int>(afv_unix::configuration::config, "audio", "hardware_type", 0));
+            vector_audio::shared::hardware = static_cast<afv_native::HardwareType>(toml::find_or<int>(vector_audio::configuration::config, "audio", "hardware_type", 0));
 
-            afv_unix::shared::apiServerPort = toml::find_or<int>(afv_unix::configuration::config, "general", "api_port", 49080);
+            vector_audio::shared::apiServerPort = toml::find_or<int>(vector_audio::configuration::config, "general", "api_port", 49080);
         } catch (toml::exception &exc) {
             spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
@@ -60,7 +60,7 @@ namespace afv_unix::application {
     void App::_loadAirportsDatabaseAsync() {
         // if we cannot load this database, it's not that important, we will just log it.
 
-        if (!std::filesystem::exists(afv_unix::configuration::airports_db_file_path)) {
+        if (!std::filesystem::exists(vector_audio::configuration::airports_db_file_path)) {
             spdlog::warn("Could not find airport database json file");
             return;
         }
@@ -68,7 +68,7 @@ namespace afv_unix::application {
         try {
             // We do performance analysis here
             auto t1 = std::chrono::high_resolution_clock::now();
-            std::ifstream f(afv_unix::configuration::airports_db_file_path);
+            std::ifstream f(vector_audio::configuration::airports_db_file_path);
             nlohmann::json data = nlohmann::json::parse(f);
 
             // Loop through all the icaos
@@ -97,14 +97,14 @@ namespace afv_unix::application {
             mSDKServer = restinio::run_async<>(
                 restinio::own_io_context(),
                 restinio::server_settings_t<>{}
-                .port(afv_unix::shared::apiServerPort)
+                .port(vector_audio::shared::apiServerPort)
                 .address("0.0.0.0")
                 .request_handler([&](auto req) {
                     if( restinio::http_method_get() == req->header().method() && req->header().request_target() == "/transmitting" ) {
                         // Nastiest of nasty gross anti-multithread concurrency occurs here, good enough I guess
-                        return req->create_response().set_body(afv_unix::shared::currentlyTransmittingApiData).done();
+                        return req->create_response().set_body(vector_audio::shared::currentlyTransmittingApiData).done();
                     } else {
-                        return req->create_response().set_body(afv_unix::shared::client_name).done(); 
+                        return req->create_response().set_body(vector_audio::shared::client_name).done(); 
                     }
                 }), 2u);
         } catch(std::exception ex) {
@@ -194,8 +194,8 @@ namespace afv_unix::application {
 
         // AFV stuff
         if (mClient) {
-            afv_unix::shared::mPeak = mClient->GetInputPeak();
-            afv_unix::shared::mVu = mClient->GetInputVu();
+            vector_audio::shared::mPeak = mClient->GetInputPeak();
+            vector_audio::shared::mVu = mClient->GetInputVu();
 
             // Set the Ptt if required
             if (mClient->IsVoiceConnected() && shared::ptt != sf::Keyboard::Unknown) {
@@ -217,7 +217,7 @@ namespace afv_unix::application {
                 shared::bootUpVccs = true;
 
                 // We replaced double _ which may be used during frequency handovers, but are not defined in database
-                std::string cleanCallsign = afv_unix::util::ReplaceString(shared::datafile::callsign, "__", "_");
+                std::string cleanCallsign = vector_audio::util::ReplaceString(shared::datafile::callsign, "__", "_");
 
                 shared::StationElement el = shared::StationElement::build(cleanCallsign, shared::datafile::frequency);
                 if(!_frequencyExists(el.freq))
@@ -292,19 +292,19 @@ namespace afv_unix::application {
         // Connect button logic
 
         if (!mClient->IsVoiceConnected()) {
-            if (!afv_unix::shared::datafile::is_connected) {
+            if (!vector_audio::shared::datafile::is_connected) {
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
             }
-            if (ImGui::Button("Connect") && afv_unix::shared::datafile::is_connected) {
+            if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
                 mClient->StopAudio();
-                mClient->SetAudioApi(afv_unix::shared::mAudioApi);
-                mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
-                mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
-                mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
-                mClient->SetHardware(afv_unix::shared::hardware);
+                mClient->SetAudioApi(vector_audio::shared::mAudioApi);
+                mClient->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
+                mClient->SetAudioOutputDevice(vector_audio::shared::configOutputDeviceName);
+                mClient->SetAudioSpeakersOutputDevice(vector_audio::shared::configSpeakerDeviceName);
+                mClient->SetHardware(vector_audio::shared::hardware);
             
-                std::string clientIcao = afv_unix::shared::datafile::callsign.substr(0, afv_unix::shared::datafile::callsign.find('_'));
+                std::string clientIcao = vector_audio::shared::datafile::callsign.substr(0, vector_audio::shared::datafile::callsign.find('_'));
                 // We use the airport database for this
                 if (ns::Airport::All.find(clientIcao) != ns::Airport::All.end()) {
                     auto clientAirport = ns::Airport::All.at(clientIcao);
@@ -322,16 +322,16 @@ namespace afv_unix::application {
                     mClient->SetClientPosition(48.967860, 2.442000, 100, 100);
                 }
 
-                mClient->SetCredentials(std::to_string(afv_unix::shared::vatsim_cid), afv_unix::shared::vatsim_password);
-                mClient->SetCallsign(afv_unix::shared::datafile::callsign);
-                mClient->SetEnableInputFilters(afv_unix::shared::mInputFilter);
-                mClient->SetEnableOutputEffects(afv_unix::shared::mOutputEffects);
+                mClient->SetCredentials(std::to_string(vector_audio::shared::vatsim_cid), vector_audio::shared::vatsim_password);
+                mClient->SetCallsign(vector_audio::shared::datafile::callsign);
+                mClient->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+                mClient->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
 
                 if (!mClient->Connect()) {
                     spdlog::error("Failled to connect");
                 };
             }
-            if (!afv_unix::shared::datafile::is_connected) {
+            if (!vector_audio::shared::datafile::is_connected) {
                 ImGui::PopItemFlag();
                 ImGui::PopStyleVar();
             }
@@ -341,7 +341,7 @@ namespace afv_unix::application {
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(4 / 7.0f, 0.8f, 0.8f));
 
             // Auto disconnect if we need
-            if (ImGui::Button("Disconnect") || !afv_unix::shared::datafile::is_connected) {
+            if (ImGui::Button("Disconnect") || !vector_audio::shared::datafile::is_connected) {
                 if (mClient->IsAtisPlayingBack())
                     mClient->StopAtisPlayback();
                 mClient->Disconnect();
@@ -356,12 +356,12 @@ namespace afv_unix::application {
             ImGui::PopStyleColor(3);
 
             // If we're connected and the ATIS is not playing playing back, we add the frequency
-            if (!mClient->IsAtisPlayingBack() && afv_unix::shared::datafile::is_atis_connected) {
+            if (!mClient->IsAtisPlayingBack() && vector_audio::shared::datafile::is_atis_connected) {
                 mClient->StartAtisPlayback(shared::datafile::atis_callsign, shared::datafile::atis_frequency);
             }
 
             // Disconnect the ATIS if it disconnected
-            if (mClient->IsAtisPlayingBack() && !afv_unix::shared::datafile::is_atis_connected) {
+            if (mClient->IsAtisPlayingBack() && !vector_audio::shared::datafile::is_atis_connected) {
                 mClient->StopAtisPlayback();
             }
         }
@@ -376,9 +376,9 @@ namespace afv_unix::application {
         
         if (ImGui::Button("Settings") && !mClient->IsVoiceConnected()) {
             // Update all available data
-            afv_unix::shared::availableAudioAPI = mClient->GetAudioApis();
-            afv_unix::shared::availableInputDevices = mClient->GetAudioInputDevices(afv_unix::shared::mAudioApi);
-            afv_unix::shared::availableOutputDevices = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+            vector_audio::shared::availableAudioAPI = mClient->GetAudioApis();
+            vector_audio::shared::availableInputDevices = mClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+            vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
             ImGui::OpenPopup("Settings Panel");
         }
             
@@ -388,13 +388,13 @@ namespace afv_unix::application {
             ImGui::PopStyleVar();
         }
         
-        afv_unix::modals::settings::render(mClient);
+        vector_audio::modals::settings::render(mClient);
 
         {
             ImGui::SetNextWindowSize(ImVec2(300, 150));
             if (ImGui::BeginPopupModal("Error", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize))
             {
-                afv_unix::util::TextCentered(lastErrorModalMessage);
+                vector_audio::util::TextCentered(lastErrorModalMessage);
 
                 ImGui::NewLine();
                 if (ImGui::Button("Ok", ImVec2(-FLT_MIN, 0.0f))) 
@@ -461,7 +461,7 @@ namespace afv_unix::application {
                 // Frequency button
                 //
                 if (freqActive)
-                    afv_unix::style::button_green();
+                    vector_audio::style::button_green();
                 // Disable the hover colour for this item
                 ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor(14, 17, 22));
                 size_t callsignSize = el.callsign.length()/2;
@@ -491,7 +491,7 @@ namespace afv_unix::application {
                 }
 
                 if (freqActive)
-                    afv_unix::style::button_reset_colour();
+                    vector_audio::style::button_reset_colour();
 
                 //
                 // RX Button
@@ -499,7 +499,7 @@ namespace afv_unix::application {
                 if (rxState) 
                 {
                     // Set button colour
-                    rxActive ? afv_unix::style::button_yellow() : afv_unix::style::button_green();
+                    rxActive ? vector_audio::style::button_yellow() : vector_audio::style::button_green();
 
                     auto receivedCld = mClient->LastTransmitOnFreq(el.freq);
                     if (receivedCld.size() > 0 && std::find(ReceivedCallsigns.begin(), ReceivedCallsigns.end(), receivedCld) == ReceivedCallsigns.end()) {
@@ -532,7 +532,7 @@ namespace afv_unix::application {
                 }
 
                 if (rxState)
-                    afv_unix::style::button_reset_colour();
+                    vector_audio::style::button_reset_colour();
 
                 ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 3.f);
 
@@ -543,7 +543,7 @@ namespace afv_unix::application {
                 //
 
                 if (xcState)
-                    afv_unix::style::button_green();
+                    vector_audio::style::button_green();
 
                 if (ImGui::Button(std::string("XC##").append(el.callsign).c_str(), QuarterSize) && shared::datafile::facility > 0) 
                 {
@@ -560,7 +560,7 @@ namespace afv_unix::application {
                 } 
 
                 if (xcState)
-                    afv_unix::style::button_reset_colour();
+                    vector_audio::style::button_reset_colour();
 
                 ImGui::SameLine(0.f, 0.01f);
 
@@ -569,7 +569,7 @@ namespace afv_unix::application {
                 //
                 
                 if (isOnSpeaker)
-                    afv_unix::style::button_green();
+                    vector_audio::style::button_green();
 
                 std::string transceiverCount = std::to_string(el.transceivers);
                 if (transceiverCount.length() == 1)
@@ -585,7 +585,7 @@ namespace afv_unix::application {
                 }
                 
                 if (isOnSpeaker)
-                    afv_unix::style::button_reset_colour();
+                    vector_audio::style::button_reset_colour();
 
                 ImGui::SameLine(0.f, 0.01f);
 
@@ -594,7 +594,7 @@ namespace afv_unix::application {
                 //
 
                 if (txState)
-                    txActive ? afv_unix::style::button_yellow() : afv_unix::style::button_green();
+                    txActive ? vector_audio::style::button_yellow() : vector_audio::style::button_green();
 
                 if (ImGui::Button(std::string("TX##").append(el.callsign).c_str(), HalfSize) && shared::datafile::facility > 0) {
                     if (freqActive) {
@@ -609,7 +609,7 @@ namespace afv_unix::application {
                 }
 
                 if (txState)
-                    afv_unix::style::button_reset_colour();
+                    vector_audio::style::button_reset_colour();
 
 
                 ImGui::PopStyleColor();
@@ -658,7 +658,7 @@ namespace afv_unix::application {
         bool atisPlayingBack = mClient->IsAtisPlayingBack();
         std::string bttnAtisPlayback = atisPlayingBack ? "Broadcast active" : "Broadcast stopped";
         if (atisPlayingBack)
-            afv_unix::style::button_green();
+            vector_audio::style::button_green();
 
         ImGui::Button(bttnAtisPlayback.c_str(), ImVec2(-FLT_MIN, 0.0f));
 
@@ -666,11 +666,11 @@ namespace afv_unix::application {
         //mClient->StopAtisPlayback();
 
         if (atisPlayingBack)
-            afv_unix::style::button_reset_colour();
+            vector_audio::style::button_reset_colour();
         
         bool listeningInAtis = mClient->IsAtisListening();
         if (listeningInAtis)
-            afv_unix::style::button_yellow();
+            vector_audio::style::button_yellow();
 
         if (ImGui::Button("Listen in", ImVec2(-FLT_MIN, 0.0f))) {
             if (mClient->IsVoiceConnected() && shared::datafile::atis_callsign.size() > 0 && atisPlayingBack) {
@@ -679,7 +679,7 @@ namespace afv_unix::application {
         }
 
         if (listeningInAtis)
-            afv_unix::style::button_reset_colour();
+            vector_audio::style::button_reset_colour();
 
         if (!mClient->IsVoiceConnected() || shared::datafile::atis_callsign.size() == 0) {
             ImGui::PopItemFlag();
@@ -698,9 +698,9 @@ namespace afv_unix::application {
 
         ImGui::NewLine();
 
-        ImGui::TextUnformatted(afv_unix::shared::client_name.c_str());
+        ImGui::TextUnformatted(vector_audio::shared::client_name.c_str());
 
-        util::TextURL("Licenses", afv_unix::configuration::get_resource_folder() + "LICENSE.txt");
+        util::TextURL("Licenses", vector_audio::configuration::get_resource_folder() + "LICENSE.txt");
 
         ImGui::EndGroup();
 

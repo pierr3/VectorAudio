@@ -24,6 +24,6 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 
-namespace afv_unix::native {
+namespace vector_audio::native {
     std::string osx_resourcePath(void);
 }

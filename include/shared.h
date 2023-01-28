@@ -6,7 +6,7 @@
 #include <map>
 #include <chrono>
 
-namespace afv_unix::shared {
+namespace vector_audio::shared {
     struct StationElement {
         int freq;
         std::string callsign;

@@ -6,7 +6,7 @@
 #include <httplib.h>
 #include "shared.h"
 
-namespace afv_unix::data_file {
+namespace vector_audio::data_file {
     // TODO Get the overarching status file to get data file url
 
 
@@ -59,41 +59,41 @@ namespace afv_unix::data_file {
                                     bool atis_connected_flag = false;
 
                                     for(auto controller : j3["controllers"]) {
-                                        if (controller["cid"] == afv_unix::shared::vatsim_cid) {
+                                        if (controller["cid"] == vector_audio::shared::vatsim_cid) {
                                             
-                                            afv_unix::shared::datafile::callsign = controller["callsign"].get<std::string>();
-                                            afv_unix::shared::datafile::facility = controller["facility"].get<int>();
-                                            afv_unix::shared::datafile::frequency = std::atof(controller["frequency"].get<std::string>().c_str())*1000000;
-                                            afv_unix::shared::datafile::is_connected = true;
+                                            vector_audio::shared::datafile::callsign = controller["callsign"].get<std::string>();
+                                            vector_audio::shared::datafile::facility = controller["facility"].get<int>();
+                                            vector_audio::shared::datafile::frequency = std::atof(controller["frequency"].get<std::string>().c_str())*1000000;
+                                            vector_audio::shared::datafile::is_connected = true;
                                             connected_flag = true;
                                             break;
                                         }
                                     }
 
                                     for(auto atis : j3["atis"]) {
-                                        if (atis["cid"] == afv_unix::shared::vatsim_cid) {
+                                        if (atis["cid"] == vector_audio::shared::vatsim_cid) {
                                             
-                                            afv_unix::shared::datafile::atis_callsign = atis["callsign"].get<std::string>();
-                                            afv_unix::shared::datafile::atis_frequency = std::atof(atis["frequency"].get<std::string>().c_str())*1000000;
+                                            vector_audio::shared::datafile::atis_callsign = atis["callsign"].get<std::string>();
+                                            vector_audio::shared::datafile::atis_frequency = std::atof(atis["frequency"].get<std::string>().c_str())*1000000;
                                             if (atis["text_atis"].is_array()) {
-                                                afv_unix::shared::datafile::atis_text.clear();
+                                                vector_audio::shared::datafile::atis_text.clear();
                                                 for (auto atis_line : atis["text_atis"])
-                                                    afv_unix::shared::datafile::atis_text.push_back(atis_line.get<std::string>());
+                                                    vector_audio::shared::datafile::atis_text.push_back(atis_line.get<std::string>());
                                             }
                                             atis_connected_flag = true;
                                             break;
                                         }
                                     }
                                     
-                                    if (!connected_flag && afv_unix::shared::datafile::is_connected) {
-                                        afv_unix::shared::datafile::is_connected = false;
+                                    if (!connected_flag && vector_audio::shared::datafile::is_connected) {
+                                        vector_audio::shared::datafile::is_connected = false;
                                         spdlog::info("Detected client disconnecting from network");
                                     }
 
-                                    if (!atis_connected_flag && afv_unix::shared::datafile::is_atis_connected) {
-                                        afv_unix::shared::datafile::is_atis_connected = false;
-                                        afv_unix::shared::datafile::atis_callsign = "";
-                                        afv_unix::shared::datafile::atis_frequency = 0;
+                                    if (!atis_connected_flag && vector_audio::shared::datafile::is_atis_connected) {
+                                        vector_audio::shared::datafile::is_atis_connected = false;
+                                        vector_audio::shared::datafile::atis_callsign = "";
+                                        vector_audio::shared::datafile::atis_frequency = 0;
                                         spdlog::info("Detected atis disconnecting from network");
                                     }
                                         

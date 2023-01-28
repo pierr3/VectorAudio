@@ -1,7 +1,7 @@
 #pragma once
 #include "imgui.h"
 
-namespace afv_unix::style {
+namespace vector_audio::style {
     inline static void button_yellow() {
         ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));

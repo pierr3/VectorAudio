@@ -20,7 +20,7 @@
 // Main code
 int main(int, char**)
 {
-    afv_unix::configuration::build_logger();
+    vector_audio::configuration::build_logger();
     sf::RenderWindow window(sf::VideoMode(800, 450), "Vector Audio");
     window.setFramerateLimit(30);
 
@@ -32,7 +32,7 @@ int main(int, char**)
         std::string iconName = "icon_mac.png";
     #endif
     
-    if (!image.loadFromFile(afv_unix::configuration::get_resource_folder() + iconName))
+    if (!image.loadFromFile(vector_audio::configuration::get_resource_folder() + iconName))
     {
         spdlog::error("Could not load application icon");
     } else {
@@ -61,22 +61,22 @@ int main(int, char**)
     // - Read 'docs/FONTS.md' for more instructions and details.
     // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
     //io.Fonts->AddFontDefault();
-    io.Fonts->AddFontFromFileTTF((afv_unix::configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf").c_str(), 18.0f);
+    io.Fonts->AddFontFromFileTTF((vector_audio::configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf").c_str(), 18.0f);
     
     ImGui::SFML::UpdateFontTexture();
 
     // Our state
 
-    afv_unix::style::apply_style();
-    afv_unix::configuration::build_config();
+    vector_audio::style::apply_style();
+    vector_audio::configuration::build_config();
 
     spdlog::info("Starting Vector Audio...");
 
-    auto updaterInstance = new afv_unix::updater();
+    auto updaterInstance = new vector_audio::updater();
 
-    auto dataFileHandler = new afv_unix::data_file::Handler();
+    auto dataFileHandler = new vector_audio::data_file::Handler();
 
-    afv_unix::application::App* currentApp = new afv_unix::application::App();
+    vector_audio::application::App* currentApp = new vector_audio::application::App();
 
     // Main loop
     sf::Clock deltaClock;
@@ -97,12 +97,12 @@ int main(int, char**)
             else if(event.type == sf::Event::KeyPressed) {
 
                 // Capture the new Ptt key
-                if (afv_unix::shared::capture_ptt_flag) {
-                    afv_unix::shared::ptt = event.key.code;
+                if (vector_audio::shared::capture_ptt_flag) {
+                    vector_audio::shared::ptt = event.key.code;
 
-                    afv_unix::configuration::config["user"]["ptt"] = static_cast<int>(afv_unix::shared::ptt);
-                    afv_unix::configuration::write_config_async();
-                    afv_unix::shared::capture_ptt_flag = false;
+                    vector_audio::configuration::config["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::configuration::write_config_async();
+                    vector_audio::shared::capture_ptt_flag = false;
                 }
             }
         }

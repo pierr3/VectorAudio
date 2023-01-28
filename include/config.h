@@ -12,7 +12,7 @@
 #include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/sinks/basic_file_sink.h"
 
-namespace afv_unix {
+namespace vector_audio {
 
     class configuration {
         public:

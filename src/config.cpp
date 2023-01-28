@@ -13,7 +13,7 @@
     #include <unistd.h> 
 #endif
 
-namespace afv_unix {
+namespace vector_audio {
     toml::value configuration::config;
 
     void configuration::build_config() {
@@ -36,7 +36,7 @@ namespace afv_unix {
         airports_db_file_path = get_resource_folder() + airports_db_file_path;
 
         if (std::filesystem::exists(file_path)) {
-            afv_unix::configuration::config = toml::parse(file_path);
+            vector_audio::configuration::config = toml::parse(file_path);
         } else {
             spdlog::info("Did not find a config file, starting from scratch.");
         }
@@ -47,7 +47,7 @@ namespace afv_unix {
             return "../resources/";
         #else
             #ifdef SFML_SYSTEM_MACOS
-                return afv_unix::native::osx_resourcePath();
+                return vector_audio::native::osx_resourcePath();
             #endif
 
             #ifdef SFML_SYSTEM_LINUX
@@ -70,8 +70,8 @@ namespace afv_unix {
 
     void configuration::write_config_async() {
         std::thread([](){
-            std::ofstream ofs(afv_unix::configuration::file_path);
-            ofs << afv_unix::configuration::config; 
+            std::ofstream ofs(vector_audio::configuration::file_path);
+            ofs << vector_audio::configuration::config; 
             ofs.close();
         }).detach();
     }
@@ -79,7 +79,8 @@ namespace afv_unix {
     void configuration::build_logger() {
         spdlog::init_thread_pool(8192, 1);
 
-        auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>("VectorAudio", configuration::get_resource_folder() + "vector_audio.log", 1024*1024*10, 3);
+        auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>("VectorAudio", 
+                                          configuration::get_resource_folder() + "vector_audio.log", 1024*1024*10, 3);
         
         #ifdef NDEBUG
             spdlog::set_level(spdlog::level::info);

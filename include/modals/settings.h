@@ -7,7 +7,7 @@
 #include "shared.h"
 #include "util.h"
 
-namespace afv_unix::modals {
+namespace vector_audio::modals {
     class settings {
         public:
         static inline void render(afv_native::api::atcClient* mClient) {
@@ -19,9 +19,9 @@ namespace afv_unix::modals {
                 ImGui::BeginGroup();
                 ImGui::Text("VATSIM Details");
                 ImGui::PushItemWidth(200.0f);
-                ImGui::InputInt("VATSIM ID", &afv_unix::shared::vatsim_cid);
+                ImGui::InputInt("VATSIM ID", &vector_audio::shared::vatsim_cid);
 
-                ImGui::InputText("Password", &afv_unix::shared::vatsim_password, ImGuiInputTextFlags_Password);
+                ImGui::InputText("Password", &vector_audio::shared::vatsim_password, ImGuiInputTextFlags_Password);
                 ImGui::PopItemWidth();
                 ImGui::EndGroup();
                 
@@ -29,59 +29,59 @@ namespace afv_unix::modals {
 
                 ImGui::Text("Audio configuration");
                 
-                if (ImGui::BeginCombo("Sound API", afv_unix::shared::configAudioApi.c_str())) {
-                    for (const auto &item: afv_unix::shared::availableAudioAPI) {
-                        if (ImGui::Selectable(item.second.c_str(), afv_unix::shared::mAudioApi == item.first)) {
-                            afv_unix::shared::mAudioApi = item.first;
+                if (ImGui::BeginCombo("Sound API", vector_audio::shared::configAudioApi.c_str())) {
+                    for (const auto &item: vector_audio::shared::availableAudioAPI) {
+                        if (ImGui::Selectable(item.second.c_str(), vector_audio::shared::mAudioApi == item.first)) {
+                            vector_audio::shared::mAudioApi = item.first;
                             if (mClient) {
                                 // set the Audio API and update the available inputs and outputs
-                                mClient->SetAudioApi(afv_unix::shared::mAudioApi);
-                                afv_unix::shared::availableInputDevices = mClient->GetAudioInputDevices(afv_unix::shared::mAudioApi);
-                                afv_unix::shared::availableOutputDevices = mClient->GetAudioOutputDevices(afv_unix::shared::mAudioApi);
+                                mClient->SetAudioApi(vector_audio::shared::mAudioApi);
+                                vector_audio::shared::availableInputDevices = mClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+                                vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
                             }
-                            afv_unix::shared::configAudioApi = item.second;
-                            afv_unix::configuration::config["audio"]["api"] = item.second;
+                            vector_audio::shared::configAudioApi = item.second;
+                            vector_audio::configuration::config["audio"]["api"] = item.second;
                         }
                     }
                     ImGui::EndCombo();
                 }
 
-                if (ImGui::BeginCombo("Input Device", afv_unix::shared::configInputDeviceName.c_str())) {
+                if (ImGui::BeginCombo("Input Device", vector_audio::shared::configInputDeviceName.c_str())) {
 
-                    auto m_audioDrivers = afv_unix::shared::availableInputDevices;
+                    auto m_audioDrivers = vector_audio::shared::availableInputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
-                        if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configInputDeviceName == driver)) {
-                            afv_unix::shared::configInputDeviceName = driver;
-                            afv_unix::configuration::config["audio"]["input_device"] =  afv_unix::shared::configInputDeviceName;
+                        if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configInputDeviceName == driver)) {
+                            vector_audio::shared::configInputDeviceName = driver;
+                            vector_audio::configuration::config["audio"]["input_device"] =  vector_audio::shared::configInputDeviceName;
                         }
                     }
 
                     ImGui::EndCombo();
                 }
                 
-                if (ImGui::BeginCombo("Output Device", afv_unix::shared::configOutputDeviceName.c_str())) {
+                if (ImGui::BeginCombo("Output Device", vector_audio::shared::configOutputDeviceName.c_str())) {
 
-                    auto m_audioDrivers = afv_unix::shared::availableOutputDevices;
+                    auto m_audioDrivers = vector_audio::shared::availableOutputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
-                        if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configOutputDeviceName == driver)) {
-                            afv_unix::shared::configOutputDeviceName = driver;
-                            afv_unix::configuration::config["audio"]["output_device"] =  afv_unix::shared::configOutputDeviceName;
+                        if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configOutputDeviceName == driver)) {
+                            vector_audio::shared::configOutputDeviceName = driver;
+                            vector_audio::configuration::config["audio"]["output_device"] =  vector_audio::shared::configOutputDeviceName;
                         }
                     }
 
                     ImGui::EndCombo();
                 }
 
-                if (ImGui::BeginCombo("Speaker Device", afv_unix::shared::configSpeakerDeviceName.c_str())) {
+                if (ImGui::BeginCombo("Speaker Device", vector_audio::shared::configSpeakerDeviceName.c_str())) {
 
-                    auto m_audioDrivers = afv_unix::shared::availableOutputDevices;
+                    auto m_audioDrivers = vector_audio::shared::availableOutputDevices;
                     for(const auto& driver : m_audioDrivers)
                     {
-                        if (ImGui::Selectable(driver.c_str(), afv_unix::shared::configSpeakerDeviceName == driver)) {
-                            afv_unix::shared::configSpeakerDeviceName = driver;
-                            afv_unix::configuration::config["audio"]["speaker_device"] =  afv_unix::shared::configSpeakerDeviceName;
+                        if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configSpeakerDeviceName == driver)) {
+                            vector_audio::shared::configSpeakerDeviceName = driver;
+                            vector_audio::configuration::config["audio"]["speaker_device"] =  vector_audio::shared::configSpeakerDeviceName;
                         }
                     }
 
@@ -89,37 +89,37 @@ namespace afv_unix::modals {
                 }
                 
                 ImGui::NewLine();
-                if (ImGui::Checkbox("Input Filter", &afv_unix::shared::mInputFilter)) {
+                if (ImGui::Checkbox("Input Filter", &vector_audio::shared::mInputFilter)) {
                     if (mClient) {
-                        mClient->SetEnableInputFilters(afv_unix::shared::mInputFilter);
+                        mClient->SetEnableInputFilters(vector_audio::shared::mInputFilter);
                     } 
                 }
                 ImGui::SameLine();
-                if (ImGui::Checkbox("VHF Effects", &afv_unix::shared::mOutputEffects)) {
+                if (ImGui::Checkbox("VHF Effects", &vector_audio::shared::mOutputEffects)) {
                     if (mClient) {
-                        mClient->SetEnableOutputEffects(afv_unix::shared::mOutputEffects);
+                        mClient->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
                     }
                 }
 
-                if (ImGui::BeginCombo("Radio Hardware", afv_unix::util::getHardwareName(afv_unix::shared::hardware).c_str())) {
+                if (ImGui::BeginCombo("Radio Hardware", vector_audio::util::getHardwareName(vector_audio::shared::hardware).c_str())) {
 
 
-                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Schmid_ED_137B).c_str(), 
-                        afv_unix::shared::hardware == afv_native::HardwareType::Schmid_ED_137B)) 
+                    if (ImGui::Selectable(vector_audio::util::getHardwareName(afv_native::HardwareType::Schmid_ED_137B).c_str(), 
+                        vector_audio::shared::hardware == afv_native::HardwareType::Schmid_ED_137B)) 
                     {
-                        afv_unix::shared::hardware = afv_native::HardwareType::Schmid_ED_137B;
+                        vector_audio::shared::hardware = afv_native::HardwareType::Schmid_ED_137B;
                     }
 
-                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Garex_220).c_str(), 
-                        afv_unix::shared::hardware == afv_native::HardwareType::Garex_220)) 
+                    if (ImGui::Selectable(vector_audio::util::getHardwareName(afv_native::HardwareType::Garex_220).c_str(), 
+                        vector_audio::shared::hardware == afv_native::HardwareType::Garex_220)) 
                     {
-                        afv_unix::shared::hardware = afv_native::HardwareType::Garex_220;
+                        vector_audio::shared::hardware = afv_native::HardwareType::Garex_220;
                     }
 
-                    if (ImGui::Selectable(afv_unix::util::getHardwareName(afv_native::HardwareType::Rockwell_Collins_2100).c_str(), 
-                        afv_unix::shared::hardware == afv_native::HardwareType::Rockwell_Collins_2100)) 
+                    if (ImGui::Selectable(vector_audio::util::getHardwareName(afv_native::HardwareType::Rockwell_Collins_2100).c_str(), 
+                        vector_audio::shared::hardware == afv_native::HardwareType::Rockwell_Collins_2100)) 
                     {
-                        afv_unix::shared::hardware = afv_native::HardwareType::Rockwell_Collins_2100;
+                        vector_audio::shared::hardware = afv_native::HardwareType::Rockwell_Collins_2100;
                     }
 
                     ImGui::EndCombo();
@@ -138,26 +138,26 @@ namespace afv_unix::modals {
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
                     else {
-                        mClient->SetAudioApi(afv_unix::shared::mAudioApi);
-                        mClient->SetAudioInputDevice(afv_unix::shared::configInputDeviceName);
-                        mClient->SetAudioOutputDevice(afv_unix::shared::configOutputDeviceName);
-                        mClient->SetAudioSpeakersOutputDevice(afv_unix::shared::configSpeakerDeviceName);
+                        mClient->SetAudioApi(vector_audio::shared::mAudioApi);
+                        mClient->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
+                        mClient->SetAudioOutputDevice(vector_audio::shared::configOutputDeviceName);
+                        mClient->SetAudioSpeakersOutputDevice(vector_audio::shared::configSpeakerDeviceName);
                         mClient->StartAudio();
                     }
                 }
                 ImGui::PopStyleColor(3);
                 
                 //float width = (ImGui::GetContentRegionAvailWidth()*0.5f)-5.0f;
-                //ImGui::ProgressBar(1-(afv_unix::shared::mVu/-40.f), ImVec2(width, 0.0f));
+                //ImGui::ProgressBar(1-(vector_audio::shared::mVu/-40.f), ImVec2(width, 0.0f));
                 //ImGui::SameLine();
                 ImGui::PushStyleColor(ImGuiCol_PlotHistogram, (ImVec4)ImColor(0, 200, 100));
-                ImGui::ProgressBar(1-(afv_unix::shared::mPeak/-40.f), ImVec2(-1.f, 7.f), "");
+                ImGui::ProgressBar(1-(vector_audio::shared::mPeak/-40.f), ImVec2(-1.f, 7.f), "");
                 ImGui::PopStyleColor();
 
                 ImGui::NewLine();
 
                 std::string pttText = "Push to talk key: ";
-                shared::ptt == sf::Keyboard::Unknown ? pttText.append("Not set") : pttText.append(afv_unix::util::getKeyName(shared::ptt));
+                shared::ptt == sf::Keyboard::Unknown ? pttText.append("Not set") : pttText.append(vector_audio::util::getKeyName(shared::ptt));
 
                 ImGui::TextUnformatted(pttText.c_str());
                 ImGui::SameLine();
@@ -176,13 +176,13 @@ namespace afv_unix::modals {
                 ImGui::SameLine();
 
                 if (ImGui::Button("Save")) {
-                    afv_unix::configuration::config["user"]["vatsim_id"] =  afv_unix::shared::vatsim_cid;
-                    afv_unix::configuration::config["user"]["vatsim_password"] =  afv_unix::shared::vatsim_password;
-                    afv_unix::configuration::config["audio"]["input_filters"] =  afv_unix::shared::mInputFilter;
-                    afv_unix::configuration::config["audio"]["vhf_effects"] =  afv_unix::shared::mOutputEffects;
-                    afv_unix::configuration::config["audio"]["hardware_type"] =  static_cast<int>(afv_unix::shared::hardware);
+                    vector_audio::configuration::config["user"]["vatsim_id"] =  vector_audio::shared::vatsim_cid;
+                    vector_audio::configuration::config["user"]["vatsim_password"] =  vector_audio::shared::vatsim_password;
+                    vector_audio::configuration::config["audio"]["input_filters"] =  vector_audio::shared::mInputFilter;
+                    vector_audio::configuration::config["audio"]["vhf_effects"] =  vector_audio::shared::mOutputEffects;
+                    vector_audio::configuration::config["audio"]["hardware_type"] =  static_cast<int>(vector_audio::shared::hardware);
 
-                    afv_unix::configuration::write_config_async();
+                    vector_audio::configuration::write_config_async();
                     if (mClient->IsAudioRunning())
                         mClient->StopAudio();
                     ImGui::CloseCurrentPopup();

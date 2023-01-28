@@ -3,7 +3,7 @@
 #include <string>
 #include <afv-native/hardwareType.h>
 
-namespace afv_unix::util {
+namespace vector_audio::util {
         
 
         inline static std::string getKeyName( const sf::Keyboard::Key key ) {

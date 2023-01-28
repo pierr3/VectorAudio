@@ -23,7 +23,7 @@
 #include <restinio/all.hpp>
 
 
-namespace afv_unix::application {
+namespace vector_audio::application {
     class App {
         public:
             App();

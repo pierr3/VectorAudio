@@ -1,6 +1,6 @@
 #include "updater.h"
 
-namespace afv_unix {
+namespace vector_audio {
 
     // This class is blocking on purpose, we want to update if needed before anything
     updater::updater() : mNeedUpdate(false), cli(mBaseUrl.c_str()) {

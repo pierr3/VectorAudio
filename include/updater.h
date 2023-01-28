@@ -12,7 +12,7 @@
 #include <neargye/semver.hpp>
 #include "util.h"
 
-namespace afv_unix {
+namespace vector_audio {
 
     class updater {
         public:
