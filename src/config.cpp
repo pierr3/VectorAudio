@@ -17,8 +17,22 @@ namespace afv_unix {
     toml::value configuration::config;
 
     void configuration::build_config() {
-        // TODO: Adjust macOS config file path to ensure it remains after an update
-        file_path = get_resource_folder() + file_path;
+
+        #ifdef SFML_SYSTEM_MACOS
+            std::filesystem::path folderPath = std::filesystem::path(sago::getConfigHome()) / 
+                                               std::filesystem::path("VectorAudio");
+
+            // On macOS we cannot be sure the folder exists as we don't use the folder of the
+            // executable, hence we need to create it so we can write the config to it
+            if (!std::filesystem::exists(folderPath)) {
+                std::filesystem::create_directory(folderPath);
+            }
+
+            file_path =  folderPath / std::filesystem::path(file_path);
+        #else
+            file_path = get_resource_folder() + file_path;
+        #endif
+        
         airports_db_file_path = get_resource_folder() + airports_db_file_path;
 
         if (std::filesystem::exists(file_path)) {

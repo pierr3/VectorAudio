@@ -5,6 +5,7 @@
 #include <iostream>
 #include <SFML/Config.hpp>
 #include <filesystem>
+#include "platform_folders.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/async.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
