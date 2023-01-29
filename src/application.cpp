@@ -1,4 +1,6 @@
 #include "application.h"
+#include "imgui.h"
+#include "imgui_internal.h"
 
 namespace vector_audio::application {
 using util::TextURL;
@@ -692,12 +694,22 @@ void App::render_frame()
     ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign);
     ImGui::PopItemWidth();
 
+    if (!mClient_->IsVoiceConnected()) {
+        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5);
+    }
+
     if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
         if (mClient_->IsVoiceConnected()) {
             mClient_->GetStation(shared::station_auto_add_callsign);
             mClient_->FetchStationVccs(shared::station_auto_add_callsign);
             shared::station_auto_add_callsign = "";
         }
+    }
+
+    if (!mClient_->IsVoiceConnected()) {
+        ImGui::PopItemFlag();
+        ImGui::PopStyleVar();
     }
 
     ImGui::NewLine();
