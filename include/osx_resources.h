@@ -25,5 +25,5 @@
 #include <string>
 
 namespace vector_audio::native {
-    std::string osx_resourcePath(void);
+std::string osx_resourcePath(void);
 }
