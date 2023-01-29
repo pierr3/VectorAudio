@@ -20,6 +20,7 @@
 #include <shared_mutex>
 #include <string>
 #include <thread>
+#include <utility>
 
 namespace vector_audio::application {
 class App {
@@ -30,21 +31,20 @@ public:
     void render_frame();
 
 private:
-    inline bool _frequencyExists(int freq)
-    {
-        return std::find_if(shared::FetchedStations.begin(), shared::FetchedStations.end(),
-                   [&freq](const auto& obj) { return obj.freq == freq; })
-            != shared::FetchedStations.end();
-    }
+    static bool frequencyExists(int freq);
 
-    afv_native::api::atcClient* mClient;
-    restinio::running_server_handle_t<restinio::default_traits_t> mSDKServer;
+    void errorModal(std::string message);
 
-    void _eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
-    void _buildSDKServer();
-    void _loadAirportsDatabaseAsync();
+    afv_native::api::atcClient* mClient_;
+    restinio::running_server_handle_t<restinio::default_traits_t> mSDKServer_;
 
-    bool showErrorModal = false;
-    std::string lastErrorModalMessage = "";
+    void eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
+    void buildSDKServer();
+
+    // Used in another thread
+    static void loadAirportsDatabaseAsync();
+
+    bool showErrorModal_ = false;
+    std::string lastErrorModalMessage_;
 };
 }

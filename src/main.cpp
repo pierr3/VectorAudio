@@ -1,11 +1,12 @@
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <memory>
 #include <thread>
 
 #include "application.h"
@@ -30,10 +31,10 @@ int main(int, char**)
 #ifdef SFML_SYSTEM_WINDOWS
     std::string iconName = "icon_win.png";
 #else
-    std::string iconName = "icon_mac.png";
+    std::string icon_name = "icon_mac.png";
 #endif
 
-    if (!image.loadFromFile(vector_audio::configuration::get_resource_folder() + iconName)) {
+    if (!image.loadFromFile(vector_audio::configuration::get_resource_folder() + icon_name)) {
         spdlog::error("Could not load application icon");
     } else {
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
@@ -73,7 +74,7 @@ int main(int, char**)
     io.Fonts->AddFontFromFileTTF(
         (vector_audio::configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf")
             .c_str(),
-        18.0f);
+        18.0);
 
     ImGui::SFML::UpdateFontTexture();
 
@@ -84,14 +85,14 @@ int main(int, char**)
 
     spdlog::info("Starting Vector Audio...");
 
-    auto updaterInstance = new vector_audio::updater();
+    auto updater_instance = std::make_unique<vector_audio::updater>();
 
-    auto dataFileHandler = new vector_audio::data_file::Handler();
+    auto data_file_handler = std::make_unique<vector_audio::data_file::Handler>();
 
-    vector_audio::application::App* currentApp = new vector_audio::application::App();
+    auto current_app = std::make_unique<vector_audio::application::App>();
 
     // Main loop
-    sf::Clock deltaClock;
+    sf::Clock delta_clock;
     while (window.isOpen()) {
         // Poll and handle events (inputs, window resize, etc.)
         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
@@ -120,12 +121,12 @@ int main(int, char**)
             }
         }
 
-        ImGui::SFML::Update(window, deltaClock.restart());
+        ImGui::SFML::Update(window, delta_clock.restart());
 
-        if (!updaterInstance->need_update())
-            currentApp->render_frame();
+        if (!updater_instance->need_update())
+            current_app->render_frame();
         else
-            updaterInstance->draw();
+            updater_instance->draw();
 
         // ImGui::ShowDemoWindow(NULL);
 
@@ -135,11 +136,6 @@ int main(int, char**)
         window.display();
     }
 
-    // Close the datafile thread
-    delete dataFileHandler;
-
-    // Cleanup
-    delete currentApp;
     ImGui::SFML::Shutdown();
 
     return 0;
