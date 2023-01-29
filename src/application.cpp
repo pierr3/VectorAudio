@@ -1,11 +1,14 @@
 #include "application.h"
-
+#include <thread>
 
 namespace vector_audio::application {
+using util::TextURL;
 
-    App::App() {
+App::App() {
         try {
-            mClient = new afv_native::api::atcClient(shared::client_name, vector_audio::configuration::get_resource_folder());
+            mClient = new afv_native::api::atcClient(
+                shared::client_name,
+                vector_audio::configuration::get_resource_folder());
             spdlog::debug("Created afv_native client.");
         } catch (std::exception ex) {
             spdlog::critical("Could not create AFV client interface: {}", ex.what());
@@ -14,43 +17,65 @@ namespace vector_audio::application {
 
         // Load all from config
         try {
-            vector_audio::shared::mOutputEffects = toml::find_or<bool>(vector_audio::configuration::config, "audio", "vhf_effects", true);
-            vector_audio::shared::mInputFilter = toml::find_or<bool>(vector_audio::configuration::config, "audio", "input_filters", true);
-    
-            vector_audio::shared::vatsim_cid = toml::find_or<int>(vector_audio::configuration::config, "user", "vatsim_id", 999999);
-            vector_audio::shared::vatsim_password = toml::find_or<std::string>(vector_audio::configuration::config, "user", "vatsim_password", std::string("password"));
+            using cfg = vector_audio::configuration;
 
-            vector_audio::shared::ptt = static_cast<sf::Keyboard::Key>(toml::find_or<int>(vector_audio::configuration::config, "user", "ptt", -1));
+            vector_audio::shared::mOutputEffects = toml::find_or<bool>(
+                cfg::config, "audio", "vhf_effects", true);
+            vector_audio::shared::mInputFilter = toml::find_or<bool>(
+                cfg::config, "audio", "input_filters", true);
+
+            vector_audio::shared::vatsim_cid = toml::find_or<int>(
+                cfg::config, "user", "vatsim_id", 999999);
+            vector_audio::shared::vatsim_password =
+                toml::find_or<std::string>(cfg::config, "user",
+                                        "vatsim_password", std::string("password"));
+
+            vector_audio::shared::ptt =
+                static_cast<sf::Keyboard::Key>(toml::find_or<int>(
+                    cfg::config, "user", "ptt", -1));
 
             auto mAudioProviders = mClient->GetAudioApis();
-            vector_audio::shared::configAudioApi = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "api", std::string("Default API"));
-            for(const auto& driver : mAudioProviders)
-            {
-                if (driver.second == vector_audio::shared::configAudioApi)
-                    vector_audio::shared::mAudioApi = driver.first;
+            vector_audio::shared::configAudioApi =
+                toml::find_or<std::string>(cfg::config, "audio",
+                                        "api", std::string("Default API"));
+            for (const auto &driver : mAudioProviders) {
+            if (driver.second == vector_audio::shared::configAudioApi)
+                vector_audio::shared::mAudioApi = driver.first;
             }
 
-            vector_audio::shared::configInputDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "input_device", std::string(""));
-            vector_audio::shared::configOutputDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "output_device", std::string(""));
-            vector_audio::shared::configSpeakerDeviceName = toml::find_or<std::string>(vector_audio::configuration::config, "audio", "speaker_device", std::string(""));
+            vector_audio::shared::configInputDeviceName =
+                toml::find_or<std::string>(cfg::config, "audio",
+                                        "input_device", std::string(""));
+            vector_audio::shared::configOutputDeviceName =
+                toml::find_or<std::string>(cfg::config, "audio",
+                                        "output_device", std::string(""));
+            vector_audio::shared::configSpeakerDeviceName =
+                toml::find_or<std::string>(cfg::config, "audio",
+                                        "speaker_device", std::string(""));
 
-            vector_audio::shared::hardware = static_cast<afv_native::HardwareType>(toml::find_or<int>(vector_audio::configuration::config, "audio", "hardware_type", 0));
+            vector_audio::shared::hardware =
+                static_cast<afv_native::HardwareType>(toml::find_or<int>(
+                    cfg::config, "audio", "hardware_type", 0));
 
-            vector_audio::shared::apiServerPort = toml::find_or<int>(vector_audio::configuration::config, "general", "api_port", 49080);
+            vector_audio::shared::apiServerPort = toml::find_or<int>(
+                cfg::config, "general", "api_port", 49080);
         } catch (toml::exception &exc) {
             spdlog::error("Failed to parse available configuration: {}", exc.what());
         }
-        
+
         // Bind the callbacks from the client
-        mClient->RaiseClientEvent(std::bind(&App::_eventCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+        mClient->RaiseClientEvent(
+            std::bind(&App::_eventCallback, this, std::placeholders::_1,
+                        std::placeholders::_2, std::placeholders::_3));
 
         // Start the API timer
-        shared::currentlyTransmittingApiTimer = std::chrono::high_resolution_clock::now();
+        shared::currentlyTransmittingApiTimer =
+            std::chrono::high_resolution_clock::now();
 
         // Start the SDK server
         _buildSDKServer();
 
-        std::async(&App::_loadAirportsDatabaseAsync, this);
+        std::thread(&App::_loadAirportsDatabaseAsync, this).detach();
     }
 
     App::~App() {
@@ -700,7 +725,8 @@ namespace vector_audio::application {
 
         ImGui::TextUnformatted(vector_audio::shared::client_name.c_str());
 
-        util::TextURL("Licenses", vector_audio::configuration::get_resource_folder() + "LICENSE.txt");
+        TextURL("Licenses", vector_audio::configuration::get_resource_folder() +
+                                "LICENSE.txt");
 
         ImGui::EndGroup();
 
@@ -724,4 +750,4 @@ namespace vector_audio::application {
 
     }
 
-}
+    } // namespace vector_audio::application

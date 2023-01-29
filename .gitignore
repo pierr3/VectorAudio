@@ -55,3 +55,5 @@ build/imgui.ini
 build/Makefile
 
 config.toml
+
+.cache
