@@ -29,7 +29,7 @@ int main(int, char**)
     auto image = sf::Image {};
 
 #ifdef SFML_SYSTEM_WINDOWS
-    std::string iconName = "icon_win.png";
+    std::string icon_name = "icon_win.png";
 #else
     std::string icon_name = "icon_mac.png";
 #endif
