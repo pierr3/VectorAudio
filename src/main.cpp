@@ -128,7 +128,7 @@ int main(int, char**)
         else
             updater_instance->draw();
 
-        // ImGui::ShowDemoWindow(NULL);
+        //ImGui::ShowDemoWindow(NULL);
 
         // Rendering
         window.clear();

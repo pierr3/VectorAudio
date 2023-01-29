@@ -1,6 +1,7 @@
 #include "application.h"
 #include "imgui.h"
 #include "imgui_internal.h"
+#include "style.h"
 
 namespace vector_audio::application {
 using util::TextURL;
@@ -331,10 +332,8 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected()) {
-        if (!vector_audio::shared::datafile::is_connected) {
-            ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5F);
-        }
+        style::push_disabled_on(!vector_audio::shared::datafile::is_connected);
+
         if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
             mClient_->StopAudio();
             mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
@@ -372,15 +371,13 @@ void App::render_frame()
             mClient_->SetCallsign(vector_audio::shared::datafile::callsign);
             mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
             mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
+            mClient_->SetRadiosGain(shared::RadioGain/100.0F);
 
             if (!mClient_->Connect()) {
                 spdlog::error("Failled to connect");
             };
         }
-        if (!vector_audio::shared::datafile::is_connected) {
-            ImGui::PopItemFlag();
-            ImGui::PopStyleVar();
-        }
+        style::pop_disabled_on(!vector_audio::shared::datafile::is_connected);
     } else {
         ImGui::PushStyleColor(ImGuiCol_Button,
             ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -420,11 +417,7 @@ void App::render_frame()
     ImGui::SameLine();
 
     // Settings modal
-    if (mClient_->IsVoiceConnected()) {
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5F);
-    }
-
+    style::push_disabled_on(mClient_->IsVoiceConnected());
     if (ImGui::Button("Settings") && !mClient_->IsVoiceConnected()) {
         // Update all available data
         vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
@@ -432,11 +425,7 @@ void App::render_frame()
         vector_audio::shared::availableOutputDevices = mClient_->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
         ImGui::OpenPopup("Settings Panel");
     }
-
-    if (mClient_->IsVoiceConnected()) {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-    }
+    style::pop_disabled_on(mClient_->IsVoiceConnected());
 
     vector_audio::modals::settings::render(mClient_);
 
@@ -464,15 +453,6 @@ void App::render_frame()
     ImGui::Text("|");
     ImGui::SameLine();
     ImGui::TextColored(mClient_->IsVoiceConnected() ? green : red, "Voice");
-
-    /*ImGui::SameLine(); ImGui::Text(" | ");  ImGui::SameLine();
-
-    ImGui::PushItemWidth(200.f);
-    if (ImGui::SliderFloat("Radio Gain", &shared::RadioGain, 0.0f, 2.0f)) {
-        if (mClient->IsVoiceConnected())
-            mClient->SetRadiosGain(shared::RadioGain);
-    }
-    ImGui::PopItemWidth();*/
 
     ImGui::NewLine();
 
@@ -694,11 +674,7 @@ void App::render_frame()
     ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign);
     ImGui::PopItemWidth();
 
-    if (!mClient_->IsVoiceConnected()) {
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5);
-    }
-
+    style::push_disabled_on(!mClient_->IsVoiceConnected());
     if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
         if (mClient_->IsVoiceConnected()) {
             mClient_->GetStation(shared::station_auto_add_callsign);
@@ -706,23 +682,29 @@ void App::render_frame()
             shared::station_auto_add_callsign = "";
         }
     }
+    style::pop_disabled_on(!mClient_->IsVoiceConnected());
 
-    if (!mClient_->IsVoiceConnected()) {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
+    ImGui::NewLine();
+
+    // Gain control
+    
+    ImGui::PushItemWidth(-1.0);
+    ImGui::Text("Radio Gain");
+    style::push_disabled_on(!mClient_->IsVoiceConnected());
+    if (ImGui::SliderInt("##Radio Gain", &shared::RadioGain, 0, 200, "%.3i %%")) {
+        if (mClient_->IsVoiceConnected())
+            mClient_->SetRadiosGain(shared::RadioGain/100.0F);
     }
+    ImGui::PopItemWidth();
+    style::pop_disabled_on(!mClient_->IsVoiceConnected());
 
     ImGui::NewLine();
 
     ImGui::PushItemWidth(-1.0);
     ImGui::Text("ATIS Status");
-    ImGui::TextUnformatted(shared::datafile::atis_callsign.c_str());
     ImGui::PopItemWidth();
 
-    if (!mClient_->IsVoiceConnected() || shared::datafile::atis_callsign.empty()) {
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5);
-    }
+    style::push_disabled_on(!(mClient_->IsVoiceConnected() && shared::datafile::atis_callsign.empty()));
 
     bool atis_playing_back = mClient_->IsAtisPlayingBack();
     std::string bttn_atis_playback = atis_playing_back ? "Broadcast active" : "Broadcast stopped";
@@ -750,10 +732,7 @@ void App::render_frame()
     if (listening_in_atis)
         vector_audio::style::button_reset_colour();
 
-    if (!mClient_->IsVoiceConnected() || shared::datafile::atis_callsign.empty()) {
-        ImGui::PopItemFlag();
-        ImGui::PopStyleVar();
-    }
+    style::pop_disabled_on(!(mClient_->IsVoiceConnected() && shared::datafile::atis_callsign.empty()));
 
     ImGui::NewLine();
 

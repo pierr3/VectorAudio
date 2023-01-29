@@ -1,5 +1,6 @@
 #pragma once
 #include "imgui.h"
+#include "imgui_internal.h"
 
 namespace vector_audio::style {
 inline static void button_yellow()
@@ -19,6 +20,22 @@ inline static void button_green()
 inline static void button_reset_colour()
 {
     ImGui::PopStyleColor(3);
+};
+
+inline static void push_disabled_on(bool flag)
+{
+    if (!flag) return;
+
+    ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
+    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5);
+};
+
+inline static void pop_disabled_on(bool flag)
+{
+    if (!flag) return;
+
+    ImGui::PopItemFlag();
+    ImGui::PopStyleVar();
 };
 
 inline static void apply_style()

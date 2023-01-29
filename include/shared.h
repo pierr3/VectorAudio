@@ -62,7 +62,7 @@ inline afv_native::HardwareType hardware = afv_native::HardwareType::Schmid_ED_1
 
 inline const std::vector<std::string> AvailableHardware = { "Smid ED-137B", "Rockwell Collins 2100", "Garex 220" };
 
-inline float RadioGain = 1.0f;
+inline int RadioGain = 100;
 
 // Temp settings for config window
 inline std::map<unsigned int, std::string> availableAudioAPI;
