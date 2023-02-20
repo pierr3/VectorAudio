@@ -19,15 +19,15 @@ toml::value configuration::config;
 void configuration::build_config()
 {
 #ifdef SFML_SYSTEM_MACOS
-    std::filesystem::path folderPath = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
+    std::filesystem::path folder_path = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
 
     // On macOS we cannot be sure the folder exists as we don't use the folder of
     // the executable, hence we need to create it so we can write the config to it
-    if (!std::filesystem::exists(folderPath)) {
-        std::filesystem::create_directory(folderPath);
+    if (!std::filesystem::exists(folder_path)) {
+        std::filesystem::create_directory(folder_path);
     }
 
-    file_path = folderPath / std::filesystem::path(file_path);
+    file_path = folder_path / std::filesystem::path(file_path);
 #else
     file_path = get_resource_folder() + file_path;
 #endif

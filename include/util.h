@@ -1,7 +1,10 @@
 #pragma once
 #include <SFML/Window/Keyboard.hpp>
 #include <afv-native/hardwareType.h>
+#include <algorithm>
 #include <string>
+#include <utility>
+#include "imgui.h"
 
 namespace vector_audio::util {
 
@@ -291,11 +294,38 @@ inline void TextURL(std::string name_, std::string URL_)
 
     if (ImGui::IsItemHovered()) {
         if (ImGui::IsMouseClicked(0)) {
-            util::PlatformOpen(URL_);
+            util::PlatformOpen(std::move(URL_));
         }
         AddUnderLine(ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered]);
     } else {
         AddUnderLine(ImGui::GetStyle().Colors[ImGuiCol_Button]);
     }
 }
+
+inline int roundUpToMultiplier(int numToRound, int multiple)
+{
+    if (multiple == 0)
+        return numToRound;
+
+    int remainder = numToRound % multiple;
+    if (remainder == 0)
+        return numToRound;
+
+    return numToRound + multiple - remainder;
+}
+
+inline int cleanUpFrequency(int frequency) {
+    // Ensures that a frequency is always valid and within defined ranges and in 25Khz format
+    const int min_vhf = 118000000; // 118.000
+    const int max_vhf = 136975000; // 136.975
+
+    // Force 25Khz spacing
+    frequency = roundUpToMultiplier(std::abs(frequency), 25000);
+
+    // Clamp between allowed frequency band
+    frequency = std::clamp(frequency, min_vhf, max_vhf);
+
+    return frequency;
+}
+
 }

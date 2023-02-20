@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "style.h"
+#include "util.h"
 #include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
@@ -233,8 +234,7 @@ void App::eventCallback(afv_native::ClientEventType evt, void* data,
             if (found) {
                 auto station = *reinterpret_cast<std::pair<std::string, unsigned int>*>(data2);
 
-                if (station.second % 25000 != 0)
-                    station.second += 5000;
+                station.second = util::cleanUpFrequency(station.second);
 
                 shared::StationElement el = shared::StationElement::build(station.first, station.second);
 

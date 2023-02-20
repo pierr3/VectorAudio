@@ -5,6 +5,7 @@
 #include "shared.h"
 #include <httplib.h>
 #include <nlohmann/json.hpp>
+#include "util.h"
 
 namespace vector_audio::data_file {
 // TODO Get the overarching status file to get data file url
@@ -64,7 +65,11 @@ private:
 
                                     vector_audio::shared::datafile::callsign = controller["callsign"].get<std::string>();
                                     vector_audio::shared::datafile::facility = controller["facility"].get<int>();
-                                    vector_audio::shared::datafile::frequency = std::atof(controller["frequency"].get<std::string>().c_str()) * 1000000;
+                                    
+                                    // Get current user frequency
+                                    int temp_freq = static_cast<int>(std::atof(controller["frequency"].get<std::string>().c_str()) * 1000000);
+                                    vector_audio::shared::datafile::frequency = util::cleanUpFrequency(temp_freq);
+                                    
                                     vector_audio::shared::datafile::is_connected = true;
                                     connected_flag = true;
                                     break;
