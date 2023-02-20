@@ -15,9 +15,10 @@ cp resources/LICENSE.txt VectorAudio_Ubuntu/
 cp resources/airports.json VectorAudio_Ubuntu/
 cp resources/icon_mac.png VectorAudio_Ubuntu
 
-chmod +x build/vector_audio
-patchelf --set-rpath \$ORIGIN:\$ORIGIN/../lib build/vector_audio
-
 cp build/vector_audio VectorAudio_Ubuntu/
+cd VectorAudio_Ubuntu
+chmod +x vector_audio
+patchelf --set-rpath \$ORIGIN:\$ORIGIN/./lib vector_audio
 
+cd ..
 tar -zcvf VectorAudio_Ubuntu.tar.gz VectorAudio_Ubuntu/
