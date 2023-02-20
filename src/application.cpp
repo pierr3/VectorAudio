@@ -766,7 +766,7 @@ void App::render_frame()
     if (std::chrono::duration_cast<std::chrono::milliseconds>(
             current_time - shared::currentlyTransmittingApiTimer)
             .count()
-        >= 500) {
+        >= 300) {
         shared::currentlyTransmittingApiData = "";
 
         shared::currentlyTransmittingApiData.append(
