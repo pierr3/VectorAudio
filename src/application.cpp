@@ -139,7 +139,7 @@ void App::buildSDKServer()
                         .set_body(vector_audio::shared::client_name)
                         .done();
                 }),
-            2U);
+            16U);
     } catch (std::exception& ex) {
         spdlog::error("Failed to created SDK http server, is the port in use?");
         spdlog::error("%{}", ex.what());
