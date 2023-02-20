@@ -639,11 +639,11 @@ void App::render_frame()
             if (is_on_speaker)
                 vector_audio::style::button_green();
 
-            std::string transceiver_count = std::to_string(el.transceivers);
-            if (transceiver_count.length() == 1)
-                transceiver_count.append(" " + transceiver_count);
-
-            std::string speaker_string = el.transceivers == -1 ? "XX" : transceiver_count;
+            std::string transceiver_count = std::to_string(std::min(el.transceivers, 999));
+            if(transceiver_count.size() < 3)
+                transceiver_count.insert(0, 3 - transceiver_count.size(), ' ');
+            
+            std::string speaker_string = el.transceivers == -1 ? "   " : transceiver_count;
             speaker_string.append("\nSPK##");
             speaker_string.append(el.callsign);
             if (ImGui::Button(speaker_string.c_str(), quarter_size)) {
