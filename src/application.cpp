@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "style.h"
+#include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
 using util::TextURL;
@@ -188,11 +189,39 @@ void App::eventCallback(afv_native::ClientEventType evt, void* data,
             if (err == afv_native::afv::APISessionError::BadPassword || err == afv_native::afv::APISessionError::RejectedCredentials) {
                 errorModal("Could not login to VATSIM.\nInvalid "
                            "Credentials.\nCheck your password/cid!");
+                           
+                spdlog::error("Got invalid credential errors from AFV API: HTTP 403 or 401");
             }
 
             if (err == afv_native::afv::APISessionError::ConnectionError) {
                 errorModal("Could not login to VATSIM.\nConnection "
-                           "Error.\nCheck your internet.");
+                           "Error.\nCheck your internet connection.");
+
+                spdlog::error("Got connection error from AFV API: local socket or curl error");
+            }
+
+            if (err == afv_native::afv::APISessionError::BadRequestOrClientIncompatible) {
+                errorModal("Could not login to VATSIM.\n Bad Request or Client Incompatible.");
+
+                spdlog::error("Got connection error from AFV API: HTTP 400 - Bad Request or Client Incompatible");
+            }
+
+            if (err == afv_native::afv::APISessionError::InvalidAuthToken) {
+                errorModal("Could not login to VATSIM.\n Invalid Auth Token.");
+
+                spdlog::error("Got connection error from AFV API: Invalid Auth Token Local Parse Error.");
+            }
+
+            if (err == afv_native::afv::APISessionError::AuthTokenExpiryTimeInPast) {
+                errorModal("Could not login to VATSIM.\n Auth Token has expired.\n Check your system clock.");
+
+                spdlog::error("Got connection error from AFV API: Auth Token Expiry in the past");
+            }
+
+            if (err == afv_native::afv::APISessionError::OtherRequestError) {
+                errorModal("Could not login to VATSIM.\n Unknown Error.");
+
+                spdlog::error("Got connection error from AFV API: Unknown Error");
             }
         }
     }
