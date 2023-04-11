@@ -25,6 +25,8 @@ public:
 
     static std::string get_resource_folder();
 
+    static std::string get_linux_config_folder();
+
     static void build_logger();
 
     //

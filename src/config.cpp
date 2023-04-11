@@ -9,6 +9,7 @@
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
+#include <cstdlib>
 #include <limits.h>
 #include <unistd.h>
 #endif
@@ -18,7 +19,7 @@ toml::value configuration::config;
 
 void configuration::build_config()
 {
-#ifdef SFML_SYSTEM_MACOS
+#if defined(SFML_SYSTEM_MACOS)
     std::filesystem::path folder_path = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
 
     // On macOS we cannot be sure the folder exists as we don't use the folder of
@@ -28,6 +29,12 @@ void configuration::build_config()
     }
 
     file_path = folder_path / std::filesystem::path(file_path);
+#elif defined(SFML_SYSTEM_LINUX)
+    std::string config_path = get_linux_config_folder();
+    if (!std::filesystem::exists(config_path)) {
+        std::filesystem::create_directory(config_path);
+    }
+    file_path = config_path + file_path;
 #else
     file_path = get_resource_folder() + file_path;
 #endif
@@ -66,6 +73,18 @@ std::string configuration::get_resource_folder()
     return std::string(buffer).substr(0, pos + 1);
 #endif
 #endif
+}
+
+std::string configuration::get_linux_config_folder()
+{
+    char* xdg_config_home_chars = getenv("XDG_CONFIG_HOME");
+    std::string suffix = "/vector_audio/";
+    if (xdg_config_home_chars) {
+        std::string xdg_config_home(xdg_config_home_chars);
+        return xdg_config_home + suffix;
+    }
+    std::string home(getenv("HOME"));
+    return home + "/.config" + suffix;
 }
 
 void configuration::write_config_async()
