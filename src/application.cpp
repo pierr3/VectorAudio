@@ -1,6 +1,7 @@
 #include "application.h"
 #include "imgui.h"
 #include "imgui_internal.h"
+#include "shared.h"
 #include "style.h"
 #include "util.h"
 #include <spdlog/spdlog.h>
@@ -48,6 +49,8 @@ App::App()
             cfg::config, "audio", "output_device", std::string(""));
         vector_audio::shared::configSpeakerDeviceName = toml::find_or<std::string>(
             cfg::config, "audio", "speaker_device", std::string(""));
+        vector_audio::shared::headsetOutputChannel = toml::find_or<int>(
+            cfg::config, "audio", "headset_channel", 0);
 
         vector_audio::shared::hardware = static_cast<afv_native::HardwareType>(
             toml::find_or<int>(cfg::config, "audio", "hardware_type", 0));
@@ -365,7 +368,7 @@ void App::render_frame()
 
         if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
             mClient_->StopAudio();
-            mClient_->Disconnect();
+            mClient_->Disconnect(); // Force a disconnect of API
             mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
             mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
             mClient_->SetAudioOutputDevice(
@@ -373,6 +376,7 @@ void App::render_frame()
             mClient_->SetAudioSpeakersOutputDevice(
                 vector_audio::shared::configSpeakerDeviceName);
             mClient_->SetHardware(vector_audio::shared::hardware);
+            mClient_->SetHeadsetOutputChannel(vector_audio::shared::headsetOutputChannel);
 
             std::string client_icao = vector_audio::shared::datafile::callsign.substr(
                 0, vector_audio::shared::datafile::callsign.find('_'));
@@ -457,7 +461,7 @@ void App::render_frame()
     }
     style::pop_disabled_on(mClient_->IsVoiceConnected());
 
-    vector_audio::modals::settings::render(mClient_);
+    vector_audio::modals::Settings::render(mClient_);
 
     {
         ImGui::SetNextWindowSize(ImVec2(300, 150));

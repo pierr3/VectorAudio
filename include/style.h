@@ -5,16 +5,31 @@
 namespace vector_audio::style {
 inline static void button_yellow()
 {
-    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(1 / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(1 / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(1 / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(1 / 7.0F, 0.6f, 0.6f).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(1 / 7.0F, 0.7f, 0.7f).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(1 / 7.0F, 0.8f, 0.8f).Value);
 };
+
+inline static void button_blue()
+{
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(34, 107, 201).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.12f, 0.20f, 0.28f, 1.00f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.06f, 0.53f, 0.98f, 1.00f));
+};
+
 
 inline static void button_green()
 {
-    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor(30, 140, 45));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(30, 140, 45).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(2 / 7.0F, 0.7f, 0.7f).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(2 / 7.0F, 0.8f, 0.8f).Value);
+};
+
+inline static void button_purple()
+{
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(5 / 7.0F, 0.6F, 0.6F).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(5 / 7.0F, 0.7F, 0.7F).Value);
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(5 / 7.0F, 0.8F, 0.8F).Value);
 };
 
 inline static void button_reset_colour()
@@ -40,8 +55,8 @@ inline static void pop_disabled_on(bool flag)
 
 inline static void apply_style()
 {
-    ImGui::GetStyle().FrameRounding = 4.0f;
-    ImGui::GetStyle().GrabRounding = 4.0f;
+    ImGui::GetStyle().FrameRounding = 4.0F;
+    ImGui::GetStyle().GrabRounding = 4.0F;
 
     ImVec4* colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_Text] = ImVec4(0.95f, 0.96f, 0.98f, 1.00f);

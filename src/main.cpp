@@ -23,7 +23,7 @@
 int main(int, char**)
 {
     vector_audio::configuration::build_logger();
-    sf::RenderWindow window(sf::VideoMode(800, 450), "Vector Audio");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Vector Audio");
     window.setFramerateLimit(30);
 
     auto image = sf::Image {};
@@ -40,7 +40,9 @@ int main(int, char**)
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
     }
 
-    ImGui::SFML::Init(window, false);
+    if (!ImGui::SFML::Init(window, false)) {
+        spdlog::critical("Could not initialise ImGui SFML");
+    }
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -76,7 +78,9 @@ int main(int, char**)
             .c_str(),
         18.0);
 
-    ImGui::SFML::UpdateFontTexture();
+    if (ImGui::SFML::UpdateFontTexture()) {
+        spdlog::critical("Could not update font textures");
+    };
 
     // Our state
 

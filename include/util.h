@@ -252,6 +252,19 @@ inline void AddUnderLine(ImColor col_)
     ImGui::GetWindowDrawList()->AddLine(min, max, col_, 1.0f);
 }
 
+// From Imgui demo
+static void HelpMarker(const char* desc)
+{
+    ImGui::TextDisabled("(?)");
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort) && ImGui::BeginTooltip())
+    {
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+        ImGui::TextUnformatted(desc);
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
+}
+
 // https://stackoverflow.com/questions/64653747/how-to-center-align-text-horizontally
 inline void TextCentered(std::string text)
 {

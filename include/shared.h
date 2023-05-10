@@ -41,6 +41,7 @@ inline std::string configAudioApi;
 inline std::string configInputDeviceName;
 inline std::string configOutputDeviceName;
 inline std::string configSpeakerDeviceName;
+inline int headsetOutputChannel = 0;
 
 inline bool capture_ptt_flag = false;
 
