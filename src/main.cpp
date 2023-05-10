@@ -78,7 +78,7 @@ int main(int, char**)
             .c_str(),
         18.0);
 
-    if (ImGui::SFML::UpdateFontTexture()) {
+    if (!ImGui::SFML::UpdateFontTexture()) {
         spdlog::critical("Could not update font textures");
     };
 
