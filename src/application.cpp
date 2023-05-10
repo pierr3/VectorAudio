@@ -360,11 +360,12 @@ void App::render_frame()
 
     // Connect button logic
 
-    if (!mClient_->IsVoiceConnected()) {
+    if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
         style::push_disabled_on(!vector_audio::shared::datafile::is_connected);
 
         if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
             mClient_->StopAudio();
+            mClient_->Disconnect();
             mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
             mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
             mClient_->SetAudioOutputDevice(
@@ -403,7 +404,7 @@ void App::render_frame()
             mClient_->SetRadiosGain(shared::RadioGain/100.0F);
 
             if (!mClient_->Connect()) {
-                spdlog::error("Failled to connect");
+                spdlog::error("Failed to connect: afv_lib says API is connected.");
             };
         }
         style::pop_disabled_on(!vector_audio::shared::datafile::is_connected);

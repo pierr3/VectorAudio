@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-    "name": "afv-native",
+    "name": "vector-audio",
     "version": "0.4.1",
     "dependencies": [
         "openssl",
