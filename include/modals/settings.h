@@ -7,7 +7,6 @@
 #include "util.h"
 #include <string>
 #include "style.h"
-#include <format>
 
 namespace vector_audio::modals {
 class Settings {
