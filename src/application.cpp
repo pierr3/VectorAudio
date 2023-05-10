@@ -4,6 +4,7 @@
 #include "shared.h"
 #include "style.h"
 #include "util.h"
+#include <SFML/Window/Joystick.hpp>
 #include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
@@ -34,6 +35,11 @@ App::App()
 
         vector_audio::shared::ptt = static_cast<sf::Keyboard::Key>(
             toml::find_or<int>(cfg::config, "user", "ptt", -1));
+
+        vector_audio::shared::joyStickId = static_cast<int>(
+            toml::find_or<int>(cfg::config, "user", "joyStickId", -1));
+        vector_audio::shared::joyStickPtt = static_cast<int>(
+            toml::find_or<int>(cfg::config, "user", "joyStickPtt", -1));
 
         auto audio_providers = mClient_->GetAudioApis();
         vector_audio::shared::configAudioApi = toml::find_or<std::string>(
@@ -259,18 +265,32 @@ void App::render_frame()
         vector_audio::shared::mPeak = mClient_->GetInputPeak();
         vector_audio::shared::mVu = mClient_->GetInputVu();
 
-        // Set the Ptt if required
-        if (mClient_->IsVoiceConnected() && shared::ptt != sf::Keyboard::Unknown) {
+        // Set the Ptt if required, input based on event
+        if (mClient_->IsVoiceConnected() && (shared::ptt != sf::Keyboard::Unknown || shared::joyStickId != -1)) {
             if (shared::isPttOpen) {
-                if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
-                    mClient_->SetPtt(false);
-                    shared::isPttOpen = false;
+                if (shared::joyStickId != -1) {
+                    if (!sf::Joystick::isButtonPressed(shared::joyStickId, shared::joyStickPtt)) {
+                        shared::isPttOpen = false;
+                    }
+                } else {
+                    if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
+                        shared::isPttOpen = false;
+                    }
                 }
+
+                mClient_->SetPtt(shared::isPttOpen);
             } else {
-                if (sf::Keyboard::isKeyPressed(shared::ptt)) {
-                    mClient_->SetPtt(true);
-                    shared::isPttOpen = true;
+                if (shared::joyStickId != -1) {
+                    if (sf::Joystick::isButtonPressed(shared::joyStickId, shared::joyStickPtt)) {
+                        shared::isPttOpen = true;
+                    }
+                } else {
+                    if (sf::Keyboard::isKeyPressed(shared::ptt)) {
+                        shared::isPttOpen = true;
+                    }
                 }
+
+                mClient_->SetPtt(shared::isPttOpen);
             }
         }
 

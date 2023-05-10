@@ -118,10 +118,28 @@ int main(int, char**)
                 if (vector_audio::shared::capture_ptt_flag) {
                     vector_audio::shared::ptt = event.key.code;
 
+                    vector_audio::shared::joyStickId = -1; vector_audio::shared::joyStickPtt = -1;
+                    vector_audio::configuration::config["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::configuration::config["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
                     vector_audio::configuration::config["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
                     vector_audio::configuration::write_config_async();
                     vector_audio::shared::capture_ptt_flag = false;
                 }
+            } else if (event.type == sf::Event::JoystickButtonPressed) {
+                
+                if (vector_audio::shared::capture_ptt_flag) {
+                    vector_audio::shared::ptt = sf::Keyboard::Unknown;
+
+                    vector_audio::shared::joyStickId = event.joystickButton.joystickId; 
+                    vector_audio::shared::joyStickPtt = event.joystickButton.button;
+
+                    vector_audio::configuration::config["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::configuration::config["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
+                    vector_audio::configuration::config["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::configuration::write_config_async();
+                    vector_audio::shared::capture_ptt_flag = false;
+                }
+
             }
         }
 

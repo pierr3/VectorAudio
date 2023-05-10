@@ -7,6 +7,7 @@
 #include "util.h"
 #include <string>
 #include "style.h"
+#include <format>
 
 namespace vector_audio::modals {
 class Settings {
@@ -130,14 +131,17 @@ public:
 
                 ImGui::TextUnformatted("Push to talk key: ");
                 std::string ptt_key_name;
-                shared::ptt == sf::Keyboard::Unknown ? ptt_key_name = "Not set" : ptt_key_name = vector_audio::util::getKeyName(shared::ptt);
-                ImGui::SameLine();
+                if (shared::ptt == sf::Keyboard::Unknown && shared::joyStickId == -1) {
+                    ptt_key_name = "Not set";
+                } else if (shared::ptt != -1) {
+                    ptt_key_name = "Key: "+ vector_audio::util::getKeyName(shared::ptt);
+                } else if (shared::joyStickId != -1) {
+                    ptt_key_name = fmt::format("Joystick {} Button {}", shared::joyStickId, shared::joyStickPtt);
+                }
 
-                vector_audio::style::button_yellow();
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-                ImGui::Button(ptt_key_name.c_str());
+                ImGui::Button(ptt_key_name.c_str(), ImVec2(-1.0F, 0.0F));
                 ImGui::PopItemFlag();
-                vector_audio::style::button_reset_colour();
 
                 vector_audio::style::button_blue();
                 if (shared::capture_ptt_flag) {
