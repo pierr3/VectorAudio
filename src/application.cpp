@@ -494,7 +494,7 @@ void App::render_frame()
     ImGuiTableFlags flags = ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_NoBordersInBody | ImGuiTableFlags_ScrollY;
     if (ImGui::BeginTable(
             "stations_table", 3, flags,
-            ImVec2(ImGui::GetContentRegionAvailWidth() * 0.8F, 0.0F))) {
+            ImVec2(ImGui::GetContentRegionAvail().x * 0.8F, 0.0F))) {
         int counter = -1;
         for (auto& el : shared::FetchedStations) {
             if (counter == -1 || counter == 4) {
@@ -503,9 +503,9 @@ void App::render_frame()
             }
             ImGui::TableSetColumnIndex(counter - 1);
 
-            float half_height = ImGui::GetContentRegionAvailWidth() * 0.25F;
-            ImVec2 half_size = ImVec2(ImGui::GetContentRegionAvailWidth() * 0.50F, half_height);
-            ImVec2 quarter_size = ImVec2(ImGui::GetContentRegionAvailWidth() * 0.25F, half_height);
+            float half_height = ImGui::GetContentRegionAvail().x * 0.25F;
+            ImVec2 half_size = ImVec2(ImGui::GetContentRegionAvail().x * 0.50F, half_height);
+            ImVec2 quarter_size = ImVec2(ImGui::GetContentRegionAvail().x * 0.25F, half_height);
 
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.F);
             ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.F);
