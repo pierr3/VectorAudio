@@ -1,4 +1,6 @@
 #include "application.h"
+#include "Log.h"
+#include "atcClientWrapper.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "shared.h"
@@ -10,9 +12,18 @@
 namespace vector_audio::application {
 using util::TextURL;
 
+static void defaultLogger(const char *subsystem, const char *file, int line, const char *lineOut)
+{
+    spdlog::info("[afv_native] {} {}", subsystem, lineOut);
+}
+
+static afv_native::log_fn gLogger = defaultLogger;
+
 App::App()
 {
     try {
+        afv_native::api::atcClient::setLogger(gLogger);
+
         mClient_ = new afv_native::api::atcClient(
             shared::client_name,
             vector_audio::configuration::get_resource_folder());

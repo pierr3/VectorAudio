@@ -224,18 +224,20 @@ public:
                 ImGui::TextUnformatted("Headset Playback Channel");
                 ImGui::SameLine(); vector_audio::util::HelpMarker("Optional: You can choose whether to play the\nsound in your right, left, or both ears.");
 
-                ImGui::PushItemWidth(-1.0F);
-                if (ImGui::BeginCombo("##Channel Setup", vector_audio::shared::configOutputDeviceName.c_str())) {
+                std::string channelsDisplay[] = {"Left + Right", "Left", "Right"};
 
-                    if (ImGui::Selectable("Left + Right", vector_audio::shared::headsetOutputChannel == 0)) {
+                ImGui::PushItemWidth(-1.0F);
+                if (ImGui::BeginCombo("##Channel Setup", channelsDisplay[vector_audio::shared::headsetOutputChannel].c_str())) {
+
+                    if (ImGui::Selectable(channelsDisplay[0].c_str(), vector_audio::shared::headsetOutputChannel == 0)) {
                         vector_audio::shared::headsetOutputChannel = 0;
                     }
 
-                    if (ImGui::Selectable("Left", vector_audio::shared::headsetOutputChannel == 1)) {
+                    if (ImGui::Selectable(channelsDisplay[1].c_str(), vector_audio::shared::headsetOutputChannel == 1)) {
                         vector_audio::shared::headsetOutputChannel = 1;
                     }
 
-                    if (ImGui::Selectable("Right", vector_audio::shared::headsetOutputChannel == 2)) {
+                    if (ImGui::Selectable(channelsDisplay[2].c_str(), vector_audio::shared::headsetOutputChannel == 2)) {
                         vector_audio::shared::headsetOutputChannel = 2;
                     }
 
