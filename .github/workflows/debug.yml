@@ -1,4 +1,4 @@
-name: Release Vector Audio
+name: Debug Rel Vector Audio
 
 on:
   workflow_dispatch:
