@@ -1,0 +1,114 @@
+name: Release Vector Audio
+
+on:
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Debug
+  VECTOR_SECRET: Dev
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Install SFML dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake
+        run: |
+          cmake --build build/
+      - name: Bundle Linux
+        run: |
+          ./bundle_linux.sh
+          mv VectorAudio_Ubuntu.tar.gz VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Configure cmake
+        run: |
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake
+        run: |
+          cmake --build build/ --config Release
+      - name: Prepare windows installer
+        run: |
+          python collect_licenses.py
+          mkdir installer
+          cp resources/*.wav installer/
+          cp resources/favicon.ico installer/
+          cp resources/icon_win.png installer/
+          cp resources/*.ttf installer/
+          cp resources/airports.json installer/
+          cp resources/LICENSE.txt installer/
+          cp build/Release/vector_audio.exe installer/
+          cp build/Release/*.dll installer/
+          cp build/extern/afv-native/Release/*.dll installer/
+          cp bundle_windows.nsi installer/install.nsi
+      - name: Create installer
+        run: |
+          cd installer/
+          makensis install.nsi
+      - name: Rename installer
+        run: |
+          mv installer/VectorAudio-installer.exe VectorAudio-DEBUG-${{ github.ref_name }}-Installer.exe
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio-DEBUG-${{ github.ref_name }}-Installer.exe
+  build-osx:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install native dependencies
+        run: |
+          brew install pkg-config
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Create universal build folder
+        run: |
+          mkdir build/
+          mkdir -p build/extern/afv-native/
+      - name: Configure cmake (intel)
+        run: |
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+      - name: Build cmake (intel)
+        run: |
+          cmake --build build/
+      - name: Bundle OSX
+        run: |
+          ./bundle_osx.sh
+      - name: Create DMG
+        run: |
+          brew install create-dmg
+          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer.dmg" "build/VectorAudio.app"
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer.dmg
