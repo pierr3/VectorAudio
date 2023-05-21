@@ -404,7 +404,8 @@ void App::render_frame()
 
         if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
             mClient_->StopAudio();
-            //mClient_->Disconnect(); // Force a disconnect of API
+            mClient_->Disconnect(); // Force a disconnect of API
+            
             mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
             mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
             mClient_->SetAudioOutputDevice(
