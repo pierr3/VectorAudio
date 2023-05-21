@@ -247,6 +247,11 @@ void App::eventCallback(afv_native::ClientEventType evt, void* data,
         }
     }
 
+    if (evt == afv_native::ClientEventType::AudioError) {
+        errorModal("Error starting audio devices.\nPlease check "
+                           "your log file for details.\nCheck your audio config!");
+    }
+
     if (evt == afv_native::ClientEventType::StationDataReceived) {
         if (data != nullptr && data2 != nullptr) {
             // We just refresh the transceiver count in our display

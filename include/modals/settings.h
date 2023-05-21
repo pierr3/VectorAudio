@@ -165,6 +165,21 @@ public:
 
                 ImGui::PushItemWidth(-1.0F);
                 if (ImGui::BeginCombo("##Sound API", vector_audio::shared::configAudioApi.c_str())) {
+                    // Listing the default setting
+                    if (ImGui::Selectable("Default", vector_audio::shared::mAudioApi == -1)) {
+                        vector_audio::shared::mAudioApi = -1;
+                        if (mClient) {
+                            // set the Audio API and update the available inputs and outputs
+                            mClient->SetAudioApi(vector_audio::shared::mAudioApi);
+                            vector_audio::shared::availableInputDevices = mClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+                            vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
+                        }
+                        vector_audio::shared::configAudioApi = "Default";
+                        vector_audio::configuration::config["audio"]["api"] = -1;
+                    }
+
+
+                    // Listing all the devices
                     for (const auto& item : vector_audio::shared::availableAudioAPI) {
                         if (ImGui::Selectable(item.second.c_str(), vector_audio::shared::mAudioApi == item.first)) {
                             vector_audio::shared::mAudioApi = item.first;
