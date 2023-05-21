@@ -36,7 +36,7 @@ inline float mVu = 60.0f;
 inline int vatsim_cid;
 inline std::string vatsim_password;
 
-inline unsigned int mAudioApi = 0;
+inline unsigned int mAudioApi = -1;
 inline std::string configAudioApi;
 inline std::string configInputDeviceName;
 inline std::string configOutputDeviceName;
