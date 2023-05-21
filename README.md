@@ -1,8 +1,8 @@
 # Vector Audio
 
- A cross-platform Audio-For-VATSIM ATC Client for macOS, Windows and Linux support (audio only)
+A cross-platform Audio-For-VATSIM ATC Client for macOS, Windows and Linux support (audio only)
 
- ![screengrab of application](https://raw.githubusercontent.com/pierr3/VectorAudio/main/splash.png)
+![screengrab of application](https://raw.githubusercontent.com/pierr3/VectorAudio/main/splash.png)
 
 ## Releases
 
@@ -13,6 +13,16 @@ See [releases](https://github.com/pierr3/VectorAudio/releases) for latest builds
 ### My PTT does not work on macOS
 
 macOS has strict permissioning around background keyboard inputs. VectorAudio should prompt you on first launch to allow it to monitor keyboard input. Sometimes, upon updating the app, this setting will undo itself. In that case, follow the steps described [in this issue](https://github.com/pierr3/VectorAudio/issues/30#issuecomment-1407573758).
+
+### Where is the configuration file stored?
+
+On macOS: `~/VectorAudio`
+On Linux: `~/.config/vector_audio`
+On Windows: where VectorAudio.exe is installed
+
+### Does Vector Audio support joystick PTT?
+
+Yes.
 
 ### The station I am trying to add is not found
 
@@ -74,18 +84,12 @@ Download the latest release on the [release page](https://github.com/pierr3/Vect
 
 ### Dependencies
 
-`cmake` and `pkg-config` should take care of this.
+VectorAudio uses OpenGL as a rendering backend, and thus requires an OpenGL compatible device.
 
-* OpenGL,
-* SFML 2.5
-* afv-native (atc-client branch)
-* imgui
-* toml.hpp
-* nlohmann.json
+`cmake` is required to build the project. Dependencies will be downloaded through vcpkg at build time. See vcpkg.json for further details
 
-### imgui version
-
-v1.86
+On linux, the following packages are required: `build-essentials libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev`
+On macOS, Homebrew is required and the following homebrew package is required: `pkg-config`
 
 ## Build process
 
