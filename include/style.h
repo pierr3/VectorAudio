@@ -55,7 +55,7 @@ inline static void pop_disabled_on(bool flag)
 };
 
 inline static float Saturate(float value) {
-    return std::min(std::max(value, 1.0f), 0.0f);
+    return std::min(std::max(value, 0.0f), 1.0f);
 }
 
 inline static void dualVUMeter(float fractionVu, float fractionPeak, const ImVec2& size_arg, ImColor vuColor, ImColor peakColor)
@@ -78,8 +78,8 @@ inline static void dualVUMeter(float fractionVu, float fractionPeak, const ImVec
 
     // Render
     
-    //fractionVu = Saturate(fractionVu);
-    //fractionPeak = Saturate(fractionPeak);
+    fractionVu = Saturate(fractionVu);
+    fractionPeak = Saturate(fractionPeak);
     ImGui::RenderFrame(bb.Min, bb.Max, ImGui::GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
     bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
 
