@@ -296,12 +296,13 @@ public:
                 }
                 vector_audio::style::button_reset_colour();
 
-                //float width = (ImGui::GetContentRegionAvailWidth()*0.5f)-5.0f;
-                //ImGui::ProgressBar(1-(vector_audio::shared::mVu/-40.f), ImVec2(width, 0.0f));
-                //ImGui::SameLine();
-                ImGui::PushStyleColor(ImGuiCol_PlotHistogram, (ImVec4)ImColor(0, 200, 100));
-                ImGui::ProgressBar(1 - (vector_audio::shared::mPeak / -40.f), ImVec2(-1.f, 7.f), "");
-                ImGui::PopStyleColor();
+                vector_audio::style::dualVUMeter(
+                    1 - (vector_audio::shared::mVu / -40.f), 
+                    1 - (vector_audio::shared::mPeak / -40.f), 
+                    ImVec2(-1.f, 7.f),
+                    ImColor(0, 200, 100),
+                    ImColor(219, 201, 0)
+                );
 
                 ImGui::NewLine();
                 ImGui::NewLine();

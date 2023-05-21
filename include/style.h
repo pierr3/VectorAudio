@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui.h"
 #include "imgui_internal.h"
+#include <limits>
 
 namespace vector_audio::style {
 inline static void button_yellow()
@@ -52,6 +53,42 @@ inline static void pop_disabled_on(bool flag)
     ImGui::PopItemFlag();
     ImGui::PopStyleVar();
 };
+
+inline static float Saturate(float value) {
+    return std::min(std::max(value, 1.0f), 0.0f);
+}
+
+inline static void dualVUMeter(float fractionVu, float fractionPeak, const ImVec2& size_arg, ImColor vuColor, ImColor peakColor)
+{
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+        return;
+
+    ImGuiContext& g = *GImGui;
+    const ImGuiStyle& style = g.Style;
+
+    ImVec2 pos = window->DC.CursorPos;
+    ImVec2 size = ImGui::CalcItemSize(size_arg, ImGui::CalcItemWidth(), g.FontSize + style.FramePadding.y * 2.0f);
+    ImRect bb(pos, ImVec2(pos.x + size.x, pos.y + size.y));
+    ImGui::ItemSize(size, style.FramePadding.y);
+    if (!ImGui::ItemAdd(bb, 0))
+        return;
+
+    ImDrawList *dl = ImGui::GetWindowDrawList();
+
+    // Render
+    
+    //fractionVu = Saturate(fractionVu);
+    //fractionPeak = Saturate(fractionPeak);
+    ImGui::RenderFrame(bb.Min, bb.Max, ImGui::GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
+    bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
+
+    ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, fractionPeak), bb.Max.y);
+    ImGui::RenderRectFilledRangeH(window->DrawList, bb, peakColor, 0.0f, fractionPeak, style.FrameRounding);
+
+    fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, fractionVu), bb.Max.y);
+    ImGui::RenderRectFilledRangeH(window->DrawList, bb, vuColor, 0.0f, fractionVu, style.FrameRounding);
+}
 
 inline static void apply_style()
 {
