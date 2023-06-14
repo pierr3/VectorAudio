@@ -21,6 +21,8 @@
 #include <string>
 #include <thread>
 #include <utility>
+#include <httplib.h>
+#include <data_file_handler.h>
 
 namespace vector_audio::application {
 class App {

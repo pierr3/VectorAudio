@@ -835,6 +835,56 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+neargye-semver_arm64-osx
+
+MIT License
+
+Copyright (c) 2018 - 2021 Daniil Goncharov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+egl-registry_arm64-osx
+
+<?xml version="1.0" encoding="UTF-8"?>
+<para xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <refsect3 xml:id="copyright">
+        <!-- <title>Copyright</title> -->
+        <imageobject>
+            <imagedata fileref="KhronosLogo.jpg" format="jpg"/>
+        </imageobject>
+        <para>
+            Copyright &#169; 2003-2014 The Khronos Group Inc.
+            Permission is hereby granted, free of charge, to any person obtaining a
+            copy of this software and/or associated documentation files (the
+            "Materials"), to deal in the Materials without restriction, including
+            without limitation the rights to use, copy, modify, merge, publish,
+            distribute, sublicense, and/or sell copies of the Materials, and to
+            permit persons to whom the Materials are furnished to do so, subject to
+            the condition that this copyright notice and permission notice shall be included
+            in all copies or substantial portions of the Materials.
+        </para>
+    </refsect3>
+</para>
+
+
+
 bzip2_arm64-osx
 
 
@@ -879,6 +929,84 @@ Julian Seward, jseward@acm.org
 bzip2/libbzip2 version 1.0.8 of 13 July 2019
 
 --------------------------------------------------------------------------
+
+
+opengl-registry_arm64-osx
+
+# Copyright 2013-2020 The Khronos Group Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+# Generator scripts and options
+# GENOPTS can be e.g. '-noprotect'
+
+PYFILES = genheaders.py reg.py
+GENOPTS =
+GENHEADERS = ./genheaders.py $(GENOPTS)
+
+# Generate all headers for GL / GLES / WGL / GLX
+# Different headers depend on different XML registry files
+# The $(GENHEADERS) script has targets for the additional headers
+#   $(API)/GL/gl.h
+#   $(API)/GL/glx.h
+#   $(API)/GL/wgl.h
+# but these are experimental and not supported by Khronos. OpenGL
+# drivers and SDKs provided by OS vendors and IHVs include their own
+# platform-specific versions of these headers, where appropriate.
+
+API	   = ../api
+GLHEADERS  = $(API)/GL/glext.h \
+	     $(API)/GL/glcorearb.h \
+	     $(API)/GLES/gl.h \
+	     $(API)/GLES/glext.h \
+	     $(API)/GLES2/gl2.h \
+	     $(API)/GLES2/gl2ext.h \
+	     $(API)/GLES3/gl3.h \
+	     $(API)/GLSC2/glsc2.h \
+	     $(API)/GLSC2/glsc2ext.h
+
+GLXHEADERS = $(API)/GL/glxext.h
+WGLHEADERS = $(API)/GL/wglext.h \
+	     $(API)/GL/wgl.h
+ALLHEADERS = $(GLHEADERS) $(GLXHEADERS) $(WGLHEADERS)
+
+# Generated files to clean up
+TEXDIRT = readme.aux readme.idx readme.ilg readme.ind readme.log readme.toc readme.out
+PYDIRT	= diag.txt dumpReg.txt errwarn.txt reg.pyc
+
+default: $(ALLHEADERS)
+
+$(GLHEADERS): gl.xml $(PYFILES)
+	$(GENHEADERS) $@
+
+$(GLXHEADERS): glx.xml $(PYFILES)
+	$(GENHEADERS) $@ -registry glx.xml
+
+$(WGLHEADERS): wgl.xml $(PYFILES)
+	$(GENHEADERS) $@ -registry wgl.xml
+
+# Generate Relax NG XML schema from Compact schema
+
+registry.rng: registry.rnc
+	trang registry.rnc registry.rng
+
+# Verify all registry XML files against the schema
+
+validate:
+	jing -c registry.rnc gl.xml
+	jing -c registry.rnc glx.xml
+	jing -c registry.rnc wgl.xml
+
+# Documentation target
+
+readme.pdf: readme.tex
+	touch readme.ind
+	pdflatex readme.tex
+	pdflatex readme.tex
+	makeindex readme.idx
+	pdflatex readme.tex
+
+clean:
+	-rm -f $(PYDIRT) $(TEXDIRT)
 
 
 http-parser_arm64-osx
@@ -1551,8 +1679,8 @@ COPYRIGHT NOTICE, DISCLAIMER, and LICENSE
 PNG Reference Library License version 2
 ---------------------------------------
 
- * Copyright (c) 1995-2019 The PNG Reference Library Authors.
- * Copyright (c) 2018-2019 Cosmin Truta.
+ * Copyright (c) 1995-2022 The PNG Reference Library Authors.
+ * Copyright (c) 2018-2022 Cosmin Truta.
  * Copyright (c) 2000-2002, 2004, 2006-2018 Glenn Randers-Pehrson.
  * Copyright (c) 1996-1997 Andreas Dilger.
  * Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.

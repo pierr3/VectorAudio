@@ -4,7 +4,16 @@
 #include <chrono>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
+
+#define vatsim_status_host "https://status.vatsim.net"
+#define vatsim_status_url "/status.json"
+
+#define slurper_host "https://slurper.vatsim.net"
+#define slurper_url "/users/info/?cid="
+
+#define url_regex "^(https?:\\/\\/)?(?:[^@\n]+@)?(?:www\\.)?([^:\\/\n?]+)(\\/[.A-z0-9/-]+)$"
 
 namespace vector_audio::shared {
 struct StationElement {
@@ -17,7 +26,7 @@ struct StationElement {
     inline static StationElement build(std::string callsign, int freq)
     {
         StationElement s;
-        s.callsign = callsign;
+        s.callsign = std::move(callsign);
         s.freq = freq;
 
         std::string temp = std::to_string(freq / 1000);
@@ -27,7 +36,26 @@ struct StationElement {
     }
 };
 
-const std::string client_name = "VectorAudio/" + std::string(VECTOR_VERSION);
+static std::vector<std::string> split_string(const std::string& str,
+                                      const std::string& delimiter)
+{
+    std::vector<std::string> strings;
+
+    std::string::size_type pos = 0;
+    std::string::size_type prev = 0;
+    while ((pos = str.find(delimiter, prev)) != std::string::npos)
+    {
+        strings.push_back(str.substr(prev, pos - prev));
+        prev = pos + delimiter.size();
+    }
+
+    // To get the last substring (or only, if delimiter is not found)
+    strings.push_back(str.substr(prev));
+
+    return strings;
+}
+
+const std::string kClientName = "VectorAudio/" + std::string(VECTOR_VERSION);
 
 inline bool mInputFilter;
 inline bool mOutputEffects;
@@ -77,10 +105,19 @@ inline static std::chrono::high_resolution_clock::time_point currentlyTransmitti
 
 inline int apiServerPort = 49080;
 
+namespace slurper {
+    inline bool is_unavailable = false;
+
+    inline float position_lat;
+    inline float position_lon;
+}
+
 // Thread unsafe stuff
 namespace datafile {
     inline int facility = 0;
     inline bool is_connected = false;
+
+    inline bool is_unavailable = false;
 
     inline std::string callsign = "Not connected";
     inline int frequency;

@@ -7,12 +7,13 @@
 #include "style.h"
 #include "util.h"
 #include <SFML/Window/Joystick.hpp>
+#include <httplib.h>
 #include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
 using util::TextURL;
 
-static void defaultLogger(const char *subsystem, const char *file, int line, const char *lineOut)
+static void defaultLogger(const char* subsystem, const char* file, int line, const char* lineOut)
 {
     spdlog::info("[afv_native] {} {}", subsystem, lineOut);
 }
@@ -25,7 +26,7 @@ App::App()
         afv_native::api::atcClient::setLogger(gLogger);
 
         mClient_ = new afv_native::api::atcClient(
-            shared::client_name,
+            shared::kClientName,
             vector_audio::configuration::get_resource_folder());
         spdlog::debug("Created afv_native client.");
     } catch (std::exception& ex) {
@@ -158,7 +159,7 @@ void App::buildSDKServer()
                     }
 
                     return req->create_response()
-                        .set_body(vector_audio::shared::client_name)
+                        .set_body(vector_audio::shared::kClientName)
                         .done();
                 }),
             16U);
@@ -210,7 +211,7 @@ void App::eventCallback(afv_native::ClientEventType evt, void* data,
             if (err == afv_native::afv::APISessionError::BadPassword || err == afv_native::afv::APISessionError::RejectedCredentials) {
                 errorModal("Could not login to VATSIM.\nInvalid "
                            "Credentials.\nCheck your password/cid!");
-                           
+
                 spdlog::error("Got invalid credential errors from AFV API: HTTP 403 or 401");
             }
 
@@ -249,7 +250,7 @@ void App::eventCallback(afv_native::ClientEventType evt, void* data,
 
     if (evt == afv_native::ClientEventType::AudioError) {
         errorModal("Error starting audio devices.\nPlease check "
-                           "your log file for details.\nCheck your audio config!");
+                   "your log file for details.\nCheck your audio config!");
     }
 
     if (evt == afv_native::ClientEventType::StationDataReceived) {
@@ -400,55 +401,74 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        style::push_disabled_on(!vector_audio::shared::datafile::is_connected);
+        // style::push_disabled_on(!vector_audio::shared::datafile::is_connected);
 
-        if (ImGui::Button("Connect") && vector_audio::shared::datafile::is_connected) {
-            mClient_->StopAudio();
-            mClient_->Disconnect(); // Force a disconnect of API
-            
-            mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
-            mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
-            mClient_->SetAudioOutputDevice(
-                vector_audio::shared::configOutputDeviceName);
-            mClient_->SetAudioSpeakersOutputDevice(
-                vector_audio::shared::configSpeakerDeviceName);
-            mClient_->SetHardware(vector_audio::shared::hardware);
-            mClient_->SetHeadsetOutputChannel(vector_audio::shared::headsetOutputChannel);
+        if (ImGui::Button("Connect")) {
 
-            std::string client_icao = vector_audio::shared::datafile::callsign.substr(
-                0, vector_audio::shared::datafile::callsign.find('_'));
-            // We use the airport database for this
-            if (ns::Airport::All.find(client_icao) != ns::Airport::All.end()) {
-                auto client_airport = ns::Airport::All.at(client_icao);
+            if (!vector_audio::shared::datafile::is_connected && !vector_audio::shared::slurper::is_unavailable) {
+                // We manually call the slurper here in case that we do not have a connection yet
+                // Although this will block the whole program, it is not an issue in this case
+                // As the user does not need to interact with the software while we attempt
+                // A connection that fails once will not be retried and will default to datafile only
 
-                // We pad the elevation by 10 meters to simulate the client being in a
-                // tower
-                mClient_->SetClientPosition(client_airport.lat, client_airport.lon,
-                    client_airport.elevation + 33,
-                    client_airport.elevation + 33);
-
-                spdlog::info(
-                    "Found client position in database at lat:{}, lon:{}, elev:{}",
-                    client_airport.lat, client_airport.lon, client_airport.elevation);
-            } else {
-                spdlog::info("Client position is unknown, setting default.");
-
-                // Default position is over Paris somewhere
-                mClient_->SetClientPosition(48.967860, 2.442000, 100, 100);
+                auto* slurper_cli = new httplib::Client(slurper_host);
+                auto sluper_data = data_file::Handler::download_string(slurper_url + std::to_string(shared::vatsim_cid), slurper_cli);
+                data_file::Handler::parse_slurper(sluper_data);
             }
 
-            mClient_->SetCredentials(std::to_string(vector_audio::shared::vatsim_cid),
-                vector_audio::shared::vatsim_password);
-            mClient_->SetCallsign(vector_audio::shared::datafile::callsign);
-            mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
-            mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
-            mClient_->SetRadiosGain(shared::RadioGain/100.0F);
+            if (vector_audio::shared::datafile::is_connected) {
+                mClient_->StopAudio();
+                mClient_->Disconnect(); // Force a disconnect of API
 
-            if (!mClient_->Connect()) {
-                spdlog::error("Failed to connect: afv_lib says API is connected.");
-            };
+                mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
+                mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
+                mClient_->SetAudioOutputDevice(
+                    vector_audio::shared::configOutputDeviceName);
+                mClient_->SetAudioSpeakersOutputDevice(
+                    vector_audio::shared::configSpeakerDeviceName);
+                mClient_->SetHardware(vector_audio::shared::hardware);
+                mClient_->SetHeadsetOutputChannel(vector_audio::shared::headsetOutputChannel);
+
+                if (shared::slurper::is_unavailable) {
+                    std::string client_icao = vector_audio::shared::datafile::callsign.substr(
+                        0, vector_audio::shared::datafile::callsign.find('_'));
+                    // We use the airport database for this
+                    if (ns::Airport::All.find(client_icao) != ns::Airport::All.end()) {
+                        auto client_airport = ns::Airport::All.at(client_icao);
+
+                        // We pad the elevation by 10 meters to simulate the client being in a
+                        // tower
+                        mClient_->SetClientPosition(client_airport.lat, client_airport.lon,
+                            client_airport.elevation + 33,
+                            client_airport.elevation + 33);
+
+                        spdlog::info(
+                            "Found client position in database at lat:{}, lon:{}, elev:{}",
+                            client_airport.lat, client_airport.lon, client_airport.elevation);
+                    } else {
+                        spdlog::info("Client position is unknown, setting default.");
+
+                        // Default position is over Paris somewhere
+                        mClient_->SetClientPosition(48.967860, 2.442000, 100, 100);
+                    }
+                } else {
+                    mClient_->SetClientPosition(vector_audio::shared::slurper::position_lat, vector_audio::shared::slurper::position_lon,
+                        100, 100);
+                }
+
+                mClient_->SetCredentials(std::to_string(vector_audio::shared::vatsim_cid),
+                    vector_audio::shared::vatsim_password);
+                mClient_->SetCallsign(vector_audio::shared::datafile::callsign);
+                mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+                mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
+                mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+
+                if (!mClient_->Connect()) {
+                    spdlog::error("Failed to connect: afv_lib says API is connected.");
+                };
+            }
         }
-        style::pop_disabled_on(!vector_audio::shared::datafile::is_connected);
+        // style::pop_disabled_on(!vector_audio::shared::datafile::is_connected);
     } else {
         ImGui::PushStyleColor(ImGuiCol_Button,
             ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -682,9 +702,9 @@ void App::render_frame()
                 vector_audio::style::button_green();
 
             std::string transceiver_count = std::to_string(std::min(el.transceivers, 999));
-            if(transceiver_count.size() < 3)
+            if (transceiver_count.size() < 3)
                 transceiver_count.insert(0, 3 - transceiver_count.size(), ' ');
-            
+
             std::string speaker_string = el.transceivers == -1 ? "   " : transceiver_count;
             speaker_string.append("\nSPK##");
             speaker_string.append(el.callsign);
@@ -758,13 +778,13 @@ void App::render_frame()
     ImGui::NewLine();
 
     // Gain control
-    
+
     ImGui::PushItemWidth(-1.0);
     ImGui::Text("Radio Gain");
     style::push_disabled_on(!mClient_->IsVoiceConnected());
     if (ImGui::SliderInt("##Radio Gain", &shared::RadioGain, 0, 200, "%.3i %%")) {
         if (mClient_->IsVoiceConnected())
-            mClient_->SetRadiosGain(shared::RadioGain/100.0F);
+            mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
     }
     ImGui::PopItemWidth();
     style::pop_disabled_on(!mClient_->IsVoiceConnected());
@@ -820,7 +840,7 @@ void App::render_frame()
 
     ImGui::NewLine();
 
-    ImGui::TextUnformatted(vector_audio::shared::client_name.c_str());
+    ImGui::TextUnformatted(vector_audio::shared::kClientName.c_str());
 
     TextURL("Licenses",
         vector_audio::configuration::get_resource_folder() + "LICENSE.txt");
