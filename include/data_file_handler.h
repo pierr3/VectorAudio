@@ -112,7 +112,9 @@ private:
                         if (status_json["data"]["v3"].is_array()) {
                             std::regex regex(url_regex);
                             std::smatch m;
-                            std::regex_match(vatsim_status, m, regex);
+                            // TODO(pierre): Try and randomize the URL for redundancy
+                            auto data = std::string(status_json["data"]["v3"][0]);
+                            std::regex_match(data, m, regex);
                             if (m.size() == 4) {
                                 vatsim_datafile_host = m[1].str() + m[2].str();
                                 vatsim_datafile_url = m[3].str();
