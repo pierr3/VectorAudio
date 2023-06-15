@@ -42,6 +42,7 @@ find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 
 set(APPLE_EXTRA_LIBS "")
+set(APPLE_FRAMEWORKS "")
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
@@ -82,7 +83,24 @@ if (WIN32)
     set_target_properties(vector_audio PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
+if(APPLE)
+	find_library(CORE_AUDIO CoreAudio)
+	find_library(AUDIO_TOOLBOX AudioToolbox)
+	find_library(AUDIO_UNIT AudioUnit)
+	find_library(CORE_FOUNDATION CoreFoundation)
+	find_library(CORE_SERVICES CoreServices)
+
+	target_link_libraries(vector_audio
+		PRIVATE
+		${CORE_AUDIO}
+		${AUDIO_TOOLBOX}
+		${AUDIO_UNIT}
+		${CORE_FOUNDATION}
+		${CORE_SERVICES})
+endif()
+
 target_link_libraries(vector_audio
+    PRIVATE
     OpenSSL::SSL OpenSSL::Crypto 
     sfml-system sfml-window sfml-graphics
     toml11::toml11
@@ -90,7 +108,7 @@ target_link_libraries(vector_audio
     fmt::fmt-header-only
     restinio::restinio
     afv_native
-    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT} ${APPLE_FRAMEWORKS})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD
