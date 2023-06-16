@@ -1,3 +1,4 @@
+#include "shared.h"
 #include <data_file_handler.h>
 
 vector_audio::data_file::Handler::Handler()
@@ -38,7 +39,11 @@ std::string vector_audio::data_file::Handler::download_string(std::string url, h
 bool vector_audio::data_file::Handler::parse_slurper(const std::string& sluper_data)
 {
     if (sluper_data.empty()) {
+        if (shared::datafile::is_connected)
+            spdlog::info("Detected client disconnecting from network");
         vector_audio::shared::datafile::is_connected = false;
+        vector_audio::shared::datafile::callsign = "Not connected";
+
     } else {
         auto lines = shared::split_string(sluper_data, "\n");
         auto res = shared::split_string(lines[0], ",");
@@ -46,7 +51,13 @@ bool vector_audio::data_file::Handler::parse_slurper(const std::string& sluper_d
         vector_audio::shared::datafile::is_connected = true;
         vector_audio::shared::datafile::callsign = res[1];
 
-        vector_audio::shared::datafile::facility = res[2] == "atc" ? 1 : 0;
+        bool is_atc_callsign = false;
+        if (util::endsWith(res[1], "_CTR") || util::endsWith(res[1], "_APP") 
+        || util::endsWith(res[1], "_TWR") || util::endsWith(res[1], "_GND") ||
+        util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS"))
+            is_atc_callsign = true;
+
+        vector_audio::shared::datafile::facility = res[2] == "atc" && is_atc_callsign ? 1 : 0;
 
         // Get current user frequency
         int temp_freq = static_cast<int>(std::atof(res[3].c_str()) * 1000000);
@@ -175,6 +186,7 @@ inline void vector_audio::data_file::Handler::thread()
 
                 if (!connected_flag && vector_audio::shared::datafile::is_connected) {
                     vector_audio::shared::datafile::is_connected = false;
+                    vector_audio::shared::datafile::callsign = "Not connected";
                     spdlog::info("Detected client disconnecting from network");
                 }
 

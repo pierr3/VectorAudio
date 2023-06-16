@@ -13,7 +13,7 @@
 namespace vector_audio::application {
 using util::TextURL;
 
-static void defaultLogger(const char* subsystem, const char* file, int line, const char* lineOut)
+static void defaultLogger(const char* subsystem, const char*  /*file*/, int  /*line*/, const char* lineOut)
 {
     spdlog::info("[afv_native] {} {}", subsystem, lineOut);
 }
@@ -401,7 +401,7 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        // style::push_disabled_on(!vector_audio::shared::datafile::is_connected);
+        style::push_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable) );
 
         if (ImGui::Button("Connect")) {
 
@@ -472,7 +472,7 @@ void App::render_frame()
                 };
             }
         }
-        // style::pop_disabled_on(!vector_audio::shared::datafile::is_connected);
+        style::pop_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable) );
     } else {
         ImGui::PushStyleColor(ImGuiCol_Button,
             ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -482,7 +482,7 @@ void App::render_frame()
             ImColor::HSV(4 / 7.0F, 0.8F, 0.8F).Value);
 
         // Auto disconnect if we need
-        if (ImGui::Button("Disconnect") || !vector_audio::shared::datafile::is_connected) {
+        if (ImGui::Button("Disconnect") || !shared::datafile::is_connected) {
             if (mClient_->IsAtisPlayingBack())
                 mClient_->StopAtisPlayback();
             mClient_->Disconnect();
@@ -512,15 +512,15 @@ void App::render_frame()
     ImGui::SameLine();
 
     // Settings modal
-    style::push_disabled_on(mClient_->IsVoiceConnected());
-    if (ImGui::Button("Settings") && !mClient_->IsVoiceConnected()) {
+    style::push_disabled_on(mClient_->IsAPIConnected());
+    if (ImGui::Button("Settings") && !mClient_->IsAPIConnected()) {
         // Update all available data
         vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
         vector_audio::shared::availableInputDevices = mClient_->GetAudioInputDevices(vector_audio::shared::mAudioApi);
         vector_audio::shared::availableOutputDevices = mClient_->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
         ImGui::OpenPopup("Settings Panel");
     }
-    style::pop_disabled_on(mClient_->IsVoiceConnected());
+    style::pop_disabled_on(mClient_->IsAPIConnected());
 
     vector_audio::modals::Settings::render(mClient_);
 

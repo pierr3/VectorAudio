@@ -1,10 +1,10 @@
 #pragma once
+#include "imgui.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <afv-native/hardwareType.h>
 #include <algorithm>
 #include <string>
 #include <utility>
-#include "imgui.h"
 
 namespace vector_audio::util {
 
@@ -256,8 +256,7 @@ inline void AddUnderLine(ImColor col_)
 static void HelpMarker(const char* desc)
 {
     ImGui::TextDisabled("(?)");
-    if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort) && ImGui::BeginTooltip())
-    {
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort) && ImGui::BeginTooltip()) {
         ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
         ImGui::TextUnformatted(desc);
         ImGui::PopTextWrapPos();
@@ -327,7 +326,8 @@ inline int roundUpToMultiplier(int numToRound, int multiple)
     return numToRound + multiple - remainder;
 }
 
-inline int cleanUpFrequency(int frequency) {
+inline int cleanUpFrequency(int frequency)
+{
     // Ensures that a frequency is always valid and within defined ranges and in 25Khz format
     const int min_vhf = 118000000; // 118.000
     const int max_vhf = 136975000; // 136.975
@@ -339,6 +339,16 @@ inline int cleanUpFrequency(int frequency) {
     frequency = std::clamp(frequency, min_vhf, max_vhf);
 
     return frequency;
+}
+
+static bool endsWith(const std::string& str, const std::string& suffix)
+{
+    return str.size() >= suffix.size() && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix);
+}
+
+static bool startsWith(const std::string& str, const std::string& prefix)
+{
+    return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
 }
 
 }
