@@ -496,17 +496,6 @@ void App::render_frame()
         }
         ImGui::PopStyleColor(3);
 
-        // If we're connected and the ATIS is not playing playing back, we add the
-        // frequency
-        if (!mClient_->IsAtisPlayingBack() && vector_audio::shared::datafile::is_atis_connected) {
-            mClient_->StartAtisPlayback(shared::datafile::atis_callsign,
-                shared::datafile::atis_frequency);
-        }
-
-        // Disconnect the ATIS if it disconnected
-        if (mClient_->IsAtisPlayingBack() && !vector_audio::shared::datafile::is_atis_connected) {
-            mClient_->StopAtisPlayback();
-        }
     }
 
     ImGui::SameLine();
@@ -817,41 +806,6 @@ void App::render_frame()
 
     ImGui::NewLine();
 
-    ImGui::PushItemWidth(-1.0);
-    ImGui::Text("ATIS Status");
-    ImGui::PopItemWidth();
-
-    style::push_disabled_on(!(mClient_->IsVoiceConnected() && shared::datafile::atis_callsign.empty()));
-
-    bool atis_playing_back = mClient_->IsAtisPlayingBack();
-    std::string bttn_atis_playback = atis_playing_back ? "Broadcast active" : "Broadcast stopped";
-    if (atis_playing_back)
-        vector_audio::style::button_green();
-
-    ImGui::Button(bttn_atis_playback.c_str(), ImVec2(-FLT_MIN, 0.0));
-
-    // mClient->StartAtisPlayback(shared::datafile::atis_callsign,
-    // shared::datafile::atis_frequency); mClient->StopAtisPlayback();
-
-    if (atis_playing_back)
-        vector_audio::style::button_reset_colour();
-
-    bool listening_in_atis = mClient_->IsAtisListening();
-    if (listening_in_atis)
-        vector_audio::style::button_yellow();
-
-    if (ImGui::Button("Listen in", ImVec2(-FLT_MIN, 0.0))) {
-        if (mClient_->IsVoiceConnected() && !shared::datafile::atis_callsign.empty() && atis_playing_back) {
-            mClient_->SetAtisListening(!listening_in_atis);
-        }
-    }
-
-    if (listening_in_atis)
-        vector_audio::style::button_reset_colour();
-
-    style::pop_disabled_on(!(mClient_->IsVoiceConnected() && shared::datafile::atis_callsign.empty()));
-
-    ImGui::NewLine();
 
     std::string rx_list = "Last RX: ";
     rx_list.append(

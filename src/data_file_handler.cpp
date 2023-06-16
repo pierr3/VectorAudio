@@ -169,32 +169,10 @@ inline void vector_audio::data_file::Handler::thread()
                     }
                 }
 
-                for (auto atis : j3["atis"]) {
-                    if (atis["cid"] == vector_audio::shared::vatsim_cid) {
-
-                        vector_audio::shared::datafile::atis_callsign = atis["callsign"].get<std::string>();
-                        vector_audio::shared::datafile::atis_frequency = std::atof(atis["frequency"].get<std::string>().c_str()) * 1000000;
-                        if (atis["text_atis"].is_array()) {
-                            vector_audio::shared::datafile::atis_text.clear();
-                            for (const auto& atis_line : atis["text_atis"])
-                                vector_audio::shared::datafile::atis_text.push_back(atis_line.get<std::string>());
-                        }
-                        atis_connected_flag = true;
-                        break;
-                    }
-                }
-
                 if (!connected_flag && vector_audio::shared::datafile::is_connected) {
                     vector_audio::shared::datafile::is_connected = false;
                     vector_audio::shared::datafile::callsign = "Not connected";
                     spdlog::info("Detected client disconnecting from network");
-                }
-
-                if (!atis_connected_flag && vector_audio::shared::datafile::is_atis_connected) {
-                    vector_audio::shared::datafile::is_atis_connected = false;
-                    vector_audio::shared::datafile::atis_callsign = "";
-                    vector_audio::shared::datafile::atis_frequency = 0;
-                    spdlog::info("Detected atis disconnecting from network");
                 }
             }
         }

@@ -121,10 +121,5 @@ namespace datafile {
 
     inline std::string callsign = "Not connected";
     inline int frequency;
-
-    inline std::string atis_callsign = "Not connected";
-    inline int atis_frequency;
-    inline bool is_atis_connected = false;
-    inline std::vector<std::string> atis_text;
 }
 }
