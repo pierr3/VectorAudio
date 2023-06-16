@@ -32,6 +32,18 @@ Ask your FE to define the station in the AFV database. Per the AFV FE manual, al
 
 Yes! @KingfuChan has updated the RDF plugin for EuroScope to include support for VectorAudio. Find the plugin [in this repo](https://github.com/KingfuChan/RDF/).
 
+### What is this green "Slurper" text/yellow "Datafile" text/red "No VATSIM data"
+
+VectorAudio uses two different ways to detect a connection to vatsim: the slurper and the datafile. If VectorAudio does not allow you to connect or does not detect your network connection, click the slurper text to switch to the datafile as fallback. If you already see a yellow "datafile" label in the top right, that means the slurper is not available.
+
+If you see a red "No VATSIM data", this most likely means that VATSIM servers are temporarily down.
+
+### One of my PTT keys does not work (F16, F17, ...)
+
+VectorAudio is limited by the underlying SFML library which is used for keydown detection. So far, the library only support F keys up to F15, and some other keys might have limited support. This is likely to improve in the future.
+
+See also [#46](https://github.com/pierr3/VectorAudio/issues/46)
+
 ### Does VectorAudio support HF Simulation?
 
 No.
