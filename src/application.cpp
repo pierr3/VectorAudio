@@ -470,6 +470,8 @@ void App::render_frame()
                 if (!mClient_->Connect()) {
                     spdlog::error("Failed to connect: afv_lib says API is connected.");
                 };
+            } else {
+                errorModal("Not connected to VATSIM!");
             }
         }
         style::pop_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable) );
