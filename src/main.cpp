@@ -1,5 +1,3 @@
-#define CPPHTTPLIB_OPENSSL_SUPPORT
-
 #include <cstdio>
 
 #include <SFML/Graphics/RenderWindow.hpp>

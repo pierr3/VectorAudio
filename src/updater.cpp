@@ -6,10 +6,10 @@ namespace vector_audio {
 // anything
 updater::updater()
     : mNeedUpdate(false)
-    , cli(mBaseUrl.c_str())
+    , cli(mBaseUrl)
 {
     // Check version file
-    auto res = cli.Get(mVersionUrl.c_str());
+    auto res = cli.Get(mVersionUrl);
     if (!res) {
         spdlog::critical("Cannot access updater endpoint, please update manually!");
         return;

@@ -449,11 +449,15 @@ void App::render_frame()
                         spdlog::info("Client position is unknown, setting default.");
 
                         // Default position is over Paris somewhere
-                        mClient_->SetClientPosition(48.967860, 2.442000, 100, 100);
+                        mClient_->SetClientPosition(48.967860, 2.442000, 300, 300);
                     }
                 } else {
-                    mClient_->SetClientPosition(vector_audio::shared::slurper::position_lat, vector_audio::shared::slurper::position_lon,
-                        100, 100);
+                    spdlog::info(
+                        "Found client position from slurper at lat:{}, lon:{}",
+                        vector_audio::shared::slurper::position_lat, vector_audio::shared::slurper::position_lon);
+                    mClient_->SetClientPosition(vector_audio::shared::slurper::position_lat,
+                        vector_audio::shared::slurper::position_lon,
+                        300, 300);
                 }
 
                 mClient_->SetCredentials(std::to_string(vector_audio::shared::vatsim_cid),
@@ -538,12 +542,34 @@ void App::render_frame()
     ImGui::SameLine();
 
     const ImVec4 red(1.0, 0.0, 0.0, 1.0);
+    const ImVec4 yellow(1.0, 1.0, 0.0, 1.0);
     const ImVec4 green(0.0, 1.0, 0.0, 1.0);
     ImGui::TextColored(mClient_->IsAPIConnected() ? green : red, "API");
     ImGui::SameLine();
     ImGui::Text("|");
     ImGui::SameLine();
     ImGui::TextColored(mClient_->IsVoiceConnected() ? green : red, "Voice");
+    ImGui::SameLine();
+    ImGui::Text("|");
+    ImGui::SameLine();
+    // Status about datasource
+
+    if (!shared::slurper::is_unavailable) {
+        ImGui::TextColored(green, "Slurper");
+        if (ImGui::IsItemClicked()) {
+            shared::slurper::is_unavailable = true;
+        }
+    } else if (!shared::datafile::is_unavailable) {
+        ImGui::TextColored(yellow, "Datafile");
+    } else {
+        ImGui::TextColored(red, "No VATSIM Data");
+    }
+
+    ImGui::SameLine();
+
+    vector_audio::util::HelpMarker("The data source where VectorAudio\nchecks for your connection.\n"
+    "Click it to force usage of the datafile in\ncase the slurper does not detect your connection\n"
+    "Red text means vatsim servers could not be reached at all.");
 
     ImGui::NewLine();
 
@@ -840,7 +866,12 @@ void App::render_frame()
 
     ImGui::NewLine();
 
+
+
+    // Version
     ImGui::TextUnformatted(vector_audio::shared::kClientName.c_str());
+
+    // Licenses
 
     TextURL("Licenses",
         vector_audio::configuration::get_resource_folder() + "LICENSE.txt");

@@ -11,6 +11,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 add_definitions(-DVECTOR_VERSION="1.1.0")
+add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
 if(APPLE)
     execute_process(
@@ -31,7 +32,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
 
 find_package(OpenGL REQUIRED)
-find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
+find_package(httplib REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
@@ -42,13 +43,11 @@ find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 
 set(APPLE_EXTRA_LIBS "")
-set(APPLE_FRAMEWORKS "")
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
-                        ${CPP_HTTPLIB_INCLUDE_DIRS}
                         ${OPENGL_INCLUDE_DIR}
                         ${NEARGYE_SEMVER_INCLUDE_DIRS})
 
@@ -109,7 +108,8 @@ target_link_libraries(vector_audio
     fmt::fmt-header-only
     restinio::restinio
     afv_native
-    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT} ${APPLE_FRAMEWORKS})
+    httplib::httplib
+    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD
