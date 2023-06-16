@@ -69,6 +69,7 @@ add_executable(vector_audio src/main.cpp
                 src/application.cpp
                 src/config.cpp
                 src/updater.cpp
+                src/data_file_handler.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
