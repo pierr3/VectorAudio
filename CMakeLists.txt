@@ -64,11 +64,6 @@ if (WIN32)
 endif()
 
 add_executable(vector_audio src/main.cpp
-                src/application.cpp
-                src/config.cpp
-                src/updater.cpp
-                src/data_file_handler.cpp
-                src/modals/settings.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
@@ -76,6 +71,11 @@ add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
+                src/application.cpp
+                src/config.cpp
+                src/updater.cpp
+                src/data_file_handler.cpp
+                src/modals/settings.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS})
 
