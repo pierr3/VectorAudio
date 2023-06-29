@@ -39,7 +39,7 @@ inline void AddUnderLine(ImColor col_)
     ImVec2 min = ImGui::GetItemRectMin();
     ImVec2 max = ImGui::GetItemRectMax();
     min.y = max.y;
-    ImGui::GetWindowDrawList()->AddLine(min, max, col_, 1.0f);
+    ImGui::GetWindowDrawList()->AddLine(min, max, col_, 1.0F);
 }
 
 // From Imgui demo

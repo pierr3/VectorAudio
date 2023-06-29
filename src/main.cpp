@@ -114,7 +114,7 @@ int main(int, char**)
             } else if (event.type == sf::Event::KeyPressed) {
                 // Capture the new Ptt key
                 if (vector_audio::shared::capture_ptt_flag) {
-                    vector_audio::shared::ptt = event.key.code;
+                    vector_audio::shared::ptt = event.key.scancode;
 
                     vector_audio::shared::joyStickId = -1; vector_audio::shared::joyStickPtt = -1;
                     vector_audio::configuration::config["user"]["joyStickId"] = vector_audio::shared::joyStickId;
@@ -126,7 +126,7 @@ int main(int, char**)
             } else if (event.type == sf::Event::JoystickButtonPressed) {
                 
                 if (vector_audio::shared::capture_ptt_flag) {
-                    vector_audio::shared::ptt = sf::Keyboard::Unknown;
+                    vector_audio::shared::ptt = sf::Keyboard::Scan::Unknown;
 
                     vector_audio::shared::joyStickId = event.joystickButton.joystickId; 
                     vector_audio::shared::joyStickPtt = event.joystickButton.button;

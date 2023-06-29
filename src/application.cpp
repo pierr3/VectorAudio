@@ -13,17 +13,19 @@
 namespace vector_audio::application {
 using util::TextURL;
 
-static void defaultLogger(const char* subsystem, const char* /*file*/, int /*line*/, const char* lineOut)
-{
-    spdlog::info("[afv_native] {} {}", subsystem, lineOut);
-}
+namespace afv_logger {
+    void defaultLogger(const char* subsystem, const char* /*file*/, int /*line*/, const char* lineOut)
+    {
+        spdlog::info("[afv_native] {} {}", subsystem, lineOut);
+    }
 
-static afv_native::log_fn gLogger = defaultLogger;
+    afv_native::log_fn g_logger = defaultLogger;
+}
 
 App::App()
 {
     try {
-        afv_native::api::atcClient::setLogger(gLogger);
+        afv_native::api::atcClient::setLogger(afv_logger::g_logger);
 
         mClient_ = new afv_native::api::atcClient(
             shared::kClientName,
@@ -45,8 +47,8 @@ App::App()
         vector_audio::shared::vatsim_password = toml::find_or<std::string>(
             cfg::config, "user", "vatsim_password", std::string("password"));
 
-        vector_audio::shared::ptt = static_cast<sf::Keyboard::Key>(
-            toml::find_or<int>(cfg::config, "user", "ptt", -1));
+        vector_audio::shared::ptt = static_cast<sf::Keyboard::Scancode>(
+            toml::find_or<int>(cfg::config, "user", "ptt", static_cast<int>(sf::Keyboard::Scan::Unknown)));
 
         vector_audio::shared::joyStickId = static_cast<int>(
             toml::find_or<int>(cfg::config, "user", "joyStickId", -1));
@@ -283,7 +285,7 @@ void App::render_frame()
         vector_audio::shared::mVu = mClient_->GetInputVu();
 
         // Set the Ptt if required, input based on event
-        if (mClient_->IsVoiceConnected() && (shared::ptt != sf::Keyboard::Unknown || shared::joyStickId != -1)) {
+        if (mClient_->IsVoiceConnected() && (shared::ptt != sf::Keyboard::Scan::Unknown || shared::joyStickId != -1)) {
             if (shared::isPttOpen) {
                 if (shared::joyStickId != -1) {
                     if (!sf::Joystick::isButtonPressed(shared::joyStickId, shared::joyStickPtt)) {

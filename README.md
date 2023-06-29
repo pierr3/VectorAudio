@@ -38,12 +38,6 @@ VectorAudio uses two different ways to detect a connection to vatsim: the slurpe
 
 If you see a red "No VATSIM data", this most likely means that VATSIM servers are temporarily down.
 
-### One of my PTT keys does not work (F16, F17, ...)
-
-VectorAudio is limited by the underlying SFML library which is used for keydown detection. So far, the library only support F keys up to F15, and some other keys might have limited support. This is likely to improve in the future.
-
-See also [#46](https://github.com/pierr3/VectorAudio/issues/46)
-
 ### Does VectorAudio support HF Simulation?
 
 No.

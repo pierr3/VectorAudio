@@ -8,6 +8,9 @@
 #include <string>
 #include "style.h"
 #include <imgui_stdlib.h>
+#include <SFML/System/String.hpp>
+#include <SFML/Window/Keyboard.hpp>
+
 
 namespace vector_audio::modals {
 class Settings {

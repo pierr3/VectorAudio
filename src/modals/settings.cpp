@@ -118,10 +118,10 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
 
             ImGui::TextUnformatted("Push to talk key: ");
             std::string ptt_key_name;
-            if (shared::ptt == sf::Keyboard::Unknown && shared::joyStickId == -1) {
+            if (shared::ptt == sf::Keyboard::Scan::Unknown && shared::joyStickId == -1) {
                 ptt_key_name = "Not set";
             } else if (shared::ptt != -1) {
-                ptt_key_name = "Key: " + vector_audio::util::getKeyName(shared::ptt);
+                ptt_key_name = "Key: " + sf::Keyboard::getDescription(shared::ptt);
             } else if (shared::joyStickId != -1) {
                 ptt_key_name = fmt::format("Joystick {} Button {}", shared::joyStickId, shared::joyStickPtt);
             }
