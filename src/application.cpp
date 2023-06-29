@@ -465,11 +465,10 @@ void App::render_frame()
                 mClient_->SetCredentials(std::to_string(vector_audio::shared::vatsim_cid),
                     vector_audio::shared::vatsim_password);
                 mClient_->SetCallsign(vector_audio::shared::datafile::callsign);
-                mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
-                mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
                 mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
-
+                mClient_->StartAudio();
                 if (!mClient_->Connect()) {
+                    mClient_->StopAudio();
                     spdlog::error("Failed to connect: afv_lib says API is connected.");
                 };
             } else {
