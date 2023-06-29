@@ -32,6 +32,8 @@ private:
     std::condition_variable cv_;
     std::mutex m_;
 
+    static inline bool yx_ = false;
+
     void thread();
 };
 }

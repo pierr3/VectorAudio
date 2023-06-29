@@ -64,6 +64,11 @@ inline float mVu = 60.0f;
 inline int vatsim_cid;
 inline std::string vatsim_password;
 
+const int kMinVhf = 118000000; // 118.000
+const int kMaxVhf = 136975000; // 136.975
+const int kObsFrequency = 199998000; // 199.998
+const int kFrequencyStep = 25000; // 25Khz frequency step
+
 inline unsigned int mAudioApi = -1;
 inline std::string configAudioApi;
 inline std::string configInputDeviceName;

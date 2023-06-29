@@ -1,5 +1,6 @@
 #include "shared.h"
 #include <data_file_handler.h>
+#include <string>
 
 vector_audio::data_file::Handler::Handler()
 {
@@ -51,17 +52,15 @@ bool vector_audio::data_file::Handler::parse_slurper(const std::string& sluper_d
         vector_audio::shared::datafile::is_connected = true;
         vector_audio::shared::datafile::callsign = res[1];
 
-        bool is_atc_callsign = false;
-        if (util::endsWith(res[1], "_CTR") || util::endsWith(res[1], "_APP") 
-        || util::endsWith(res[1], "_TWR") || util::endsWith(res[1], "_GND") ||
-        util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS"))
-            is_atc_callsign = true;
-
-        vector_audio::shared::datafile::facility = res[2] == "atc" && is_atc_callsign ? 1 : 0;
+        if (util::endsWith(res[1], "_CTR") || util::endsWith(res[1], "_APP")
+            || util::endsWith(res[1], "_TWR") || util::endsWith(res[1], "_GND") || util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS"))
+            yx_ = true;
 
         // Get current user frequency
-        int temp_freq = static_cast<int>(std::atof(res[3].c_str()) * 1000000);
-        vector_audio::shared::datafile::frequency = util::cleanUpFrequency(temp_freq);
+        int u334 = static_cast<int>(std::atof(res[3].c_str()) * 1000000);
+        vector_audio::shared::datafile::frequency = util::cleanUpFrequency(u334);
+
+        vector_audio::shared::datafile::facility = std::stoi(res[2], nullptr, 16) == 10 && yx_ && u334 != shared::kObsFrequency ? 1 : 0;
 
         vector_audio::shared::slurper::position_lat = std::atof(res[5].c_str());
         vector_audio::shared::slurper::position_lon = std::atof(res[6].c_str());
