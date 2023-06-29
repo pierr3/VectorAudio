@@ -41,6 +41,10 @@ find_package(fmt CONFIG REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
+find_package(Threads REQUIRED)
+
+option(SFML_BUILD_AUDIO "Build audio" OFF)
+option(SFML_BUILD_NETWORK "Build network" OFF)
 
 set(APPLE_EXTRA_LIBS "")
 
@@ -50,11 +54,6 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
                         ${OPENGL_INCLUDE_DIR}
                         ${NEARGYE_SEMVER_INCLUDE_DIRS})
-
-if (UNIX AND NOT APPLE)
-    find_package(Threads REQUIRED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-endif()
 
 if (APPLE)
     set(APPLE_EXTRA_LIBS src/osx_resources.mm)
@@ -69,6 +68,7 @@ add_executable(vector_audio src/main.cpp
                 src/config.cpp
                 src/updater.cpp
                 src/data_file_handler.cpp
+                src/modals/settings.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
@@ -109,7 +109,8 @@ target_link_libraries(vector_audio
     restinio::restinio
     afv_native
     httplib::httplib
-    ${OPENGL_LIBRARY} ${AFV_LIB} ${CMAKE_THREAD_LIBS_INIT})
+    Threads::Threads
+    ${OPENGL_LIBRARY} ${AFV_LIB})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD

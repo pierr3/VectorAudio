@@ -29,7 +29,7 @@ std::string vector_audio::data_file::Handler::download_string(std::string url, h
     }
 
     if (res->status != 200) {
-        spdlog::error("Couldn't {}, HTTP error {}", url, res->status);
+        spdlog::error("Couldn't load {}, HTTP error {}", url, res->status);
         return "";
     }
 
@@ -99,7 +99,7 @@ inline void vector_audio::data_file::Handler::thread()
                         std::regex regex(url_regex);
                         std::smatch m;
                         // TODO(pierre): Try and randomize the URL for redundancy
-                        auto data = std::string(status_json["data"]["v3"][0]);
+                        auto data = status_json["data"]["v3"][0].get<std::string>();
                         std::regex_match(data, m, regex);
                         if (m.size() == 4) {
                             vatsim_datafile_host = m[1].str() + m[2].str();
