@@ -13,7 +13,7 @@
 namespace vector_audio::application {
 using util::TextURL;
 
-static void defaultLogger(const char* subsystem, const char*  /*file*/, int  /*line*/, const char* lineOut)
+static void defaultLogger(const char* subsystem, const char* /*file*/, int /*line*/, const char* lineOut)
 {
     spdlog::info("[afv_native] {} {}", subsystem, lineOut);
 }
@@ -326,6 +326,8 @@ void App::render_frame()
                 shared::FetchedStations.push_back(el);
 
             this->mClient_->AddFrequency(shared::datafile::frequency, clean_callsign);
+            mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+            mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
             this->mClient_->UseTransceiversFromStation(clean_callsign,
                 shared::datafile::frequency);
             this->mClient_->SetRx(shared::datafile::frequency, true);
@@ -401,7 +403,7 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        style::push_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable) );
+        style::push_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable));
 
         if (ImGui::Button("Connect")) {
 
@@ -474,7 +476,7 @@ void App::render_frame()
                 errorModal("Not connected to VATSIM!");
             }
         }
-        style::pop_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable) );
+        style::pop_disabled_on((!shared::datafile::is_connected && shared::slurper::is_unavailable) || (shared::slurper::is_unavailable && shared::datafile::is_unavailable));
     } else {
         ImGui::PushStyleColor(ImGuiCol_Button,
             ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -497,7 +499,6 @@ void App::render_frame()
             shared::bootUpVccs = false;
         }
         ImGui::PopStyleColor(3);
-
     }
 
     ImGui::SameLine();
@@ -559,8 +560,8 @@ void App::render_frame()
     ImGui::SameLine();
 
     vector_audio::util::HelpMarker("The data source where VectorAudio\nchecks for your connection.\n"
-    "Click it to force usage of the datafile in\ncase the slurper does not detect your connection\n"
-    "Red text means vatsim servers could not be reached at all.");
+                                   "Click it to force usage of the datafile in\ncase the slurper does not detect your connection\n"
+                                   "Red text means vatsim servers could not be reached at all.");
 
     ImGui::NewLine();
 
@@ -673,6 +674,8 @@ void App::render_frame()
                     }
                 } else {
                     mClient_->AddFrequency(el.freq, el.callsign);
+                    mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+                    mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
                     mClient_->UseTransceiversFromStation(el.callsign, el.freq);
                     mClient_->SetRx(el.freq, true);
                 }
@@ -699,6 +702,8 @@ void App::render_frame()
                     mClient_->SetXc(el.freq, !xc_state);
                 } else {
                     mClient_->AddFrequency(el.freq, el.callsign);
+                    mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+                    mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
                     mClient_->UseTransceiversFromStation(el.callsign, el.freq);
                     mClient_->SetTx(el.freq, true);
                     mClient_->SetRx(el.freq, true);
@@ -750,6 +755,8 @@ void App::render_frame()
                     mClient_->SetTx(el.freq, !tx_state);
                 } else {
                     mClient_->AddFrequency(el.freq, el.callsign);
+                    mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+                    mClient_->SetEnableOutputEffects(vector_audio::shared::mOutputEffects);
                     mClient_->UseTransceiversFromStation(el.callsign, el.freq);
                     mClient_->SetTx(el.freq, true);
                     mClient_->SetRx(el.freq, true);
@@ -808,7 +815,6 @@ void App::render_frame()
 
     ImGui::NewLine();
 
-
     std::string rx_list = "Last RX: ";
     rx_list.append(
         received_callsigns.empty()
@@ -821,8 +827,6 @@ void App::render_frame()
     ImGui::PopItemWidth();
 
     ImGui::NewLine();
-
-
 
     // Version
     ImGui::TextUnformatted(vector_audio::shared::kClientName.c_str());
