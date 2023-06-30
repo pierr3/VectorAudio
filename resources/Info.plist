@@ -8,5 +8,4 @@
 	CFBundlePackageType = APPL;
 	CFBundleExecutable = "vector_audio";
 	CFBundleIconFile = "VectorAudio.icns";
-	"NSHighResolutionCapable" = false;
 }
