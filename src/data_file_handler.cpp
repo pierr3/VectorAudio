@@ -1,5 +1,7 @@
 #include "shared.h"
 #include <data_file_handler.h>
+#include <exception>
+#include <spdlog/spdlog.h>
 #include <string>
 
 vector_audio::data_file::Handler::Handler()
@@ -40,8 +42,11 @@ std::string vector_audio::data_file::Handler::download_string(std::string url, h
 bool vector_audio::data_file::Handler::parse_slurper(const std::string& sluper_data)
 {
     if (sluper_data.empty()) {
-        if (shared::datafile::is_connected)
+
+        if (shared::datafile::is_connected) {
             spdlog::info("Detected client disconnecting from network");
+        }
+
         vector_audio::shared::datafile::is_connected = false;
         vector_audio::shared::datafile::callsign = "Not connected";
 
@@ -141,7 +146,11 @@ inline void vector_audio::data_file::Handler::thread()
 
         if (!shared::slurper::is_unavailable) {
             auto sluper_data = download_string(slurper_url + std::to_string(shared::vatsim_cid), slurper_cli);
-            parse_slurper(sluper_data);
+            try {
+                parse_slurper(sluper_data);
+            } catch (const std::exception& e) {
+                spdlog::error("Failed to parse slurper data: %s. Raw string: %s", e.what(), sluper_data);
+            }
         }
 
         // We check the datafile because the slurper is not available
