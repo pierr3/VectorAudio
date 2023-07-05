@@ -149,7 +149,7 @@ inline void vector_audio::data_file::Handler::thread()
             try {
                 parse_slurper(sluper_data);
             } catch (const std::exception& e) {
-                spdlog::error("Failed to parse slurper data: %s. Raw string: %s", e.what(), sluper_data);
+                spdlog::error("Failed to parse slurper data: " + std::string(e.what()) + ". Raw string:" + sluper_data);
             }
         }
 
