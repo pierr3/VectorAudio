@@ -152,11 +152,65 @@ void App::buildSDKServer()
                 .request_handler([&](auto req) {
                     if (restinio::http_method_get() == req->header().method()
                         && req->header().request_target() == "/transmitting") {
-                        // Nastiest of nasty gross anti-multithread concurrency occurs
-                        // here, good enough I guess
+
+                        const std::lock_guard<std::mutex> lock(vector_audio::shared::transmitting_mutex);
                         return req->create_response()
                             .set_body(
                                 vector_audio::shared::currentlyTransmittingApiData)
+                            .done();
+                    }
+                    if (restinio::http_method_get() == req->header().method()
+                        && req->header().request_target() == "/rx") {
+                        std::vector<shared::StationElement> bar;
+
+                        // copy only positive numbers:
+                        std::copy_if(shared::FetchedStations.begin(), shared::FetchedStations.end(),
+                            std::back_inserter(bar), [this](const shared::StationElement& s) {
+                                if (!mClient_->IsVoiceConnected())
+                                    return false;
+                                return mClient_->GetRxState(s.freq);
+                            });
+
+                        std::string out;
+                        if (!bar.empty()) {
+                            for (auto& f : bar) {
+                                out += f.callsign + ":" + f.human_freq + ",";
+                            }
+                        }
+
+                        if (out.back() == ',') {
+                            out.pop_back();
+                        }
+
+                        return req->create_response()
+                            .set_body(out)
+                            .done();
+                    }
+                    if (restinio::http_method_get() == req->header().method()
+                        && req->header().request_target() == "/tx") {
+                        std::vector<shared::StationElement> bar;
+
+                        // copy only positive numbers:
+                        std::copy_if(shared::FetchedStations.begin(), shared::FetchedStations.end(),
+                            std::back_inserter(bar), [this](const shared::StationElement& s) {
+                                if (!mClient_->IsVoiceConnected())
+                                    return false;
+                                return mClient_->GetTxState(s.freq);
+                            });
+
+                        std::string out;
+                        if (!bar.empty()) {
+                            for (auto& f : bar) {
+                                out += f.callsign + ":" + f.human_freq + ",";
+                            }
+                        }
+
+                        if (out.back() == ',') {
+                            out.pop_back();
+                        }
+
+                        return req->create_response()
+                            .set_body(out)
                             .done();
                     }
 
@@ -850,6 +904,7 @@ void App::render_frame()
             current_time - shared::currentlyTransmittingApiTimer)
             .count()
         >= 300) {
+        const std::lock_guard<std::mutex> lock(vector_audio::shared::transmitting_mutex);
         shared::currentlyTransmittingApiData = "";
 
         shared::currentlyTransmittingApiData.append(

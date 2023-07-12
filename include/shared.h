@@ -3,6 +3,7 @@
 #include <afv-native/hardwareType.h>
 #include <chrono>
 #include <map>
+#include <mutex>
 #include <string>
 #include <utility>
 #include <vector>
@@ -105,6 +106,7 @@ inline std::map<unsigned int, std::string> availableAudioAPI;
 inline std::vector<std::string> availableInputDevices;
 inline std::vector<std::string> availableOutputDevices;
 
+inline static std::mutex transmitting_mutex;
 inline static std::string currentlyTransmittingApiData;
 inline static std::chrono::high_resolution_clock::time_point currentlyTransmittingApiTimer;
 
