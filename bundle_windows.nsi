@@ -8,11 +8,12 @@
 # show up in a few places.
 # All the other settings can be tweaked by editing the !defines at the top of this script
 !define APPNAME "Vector Audio"
-!define DESCRIPTION "An AudioForVatsim client"
+!define DESCRIPTION "Audio client for VATSIM"
+!define MAIN_EXECUTABLE_NAME "vector_audio.exe"
 # These three must be integers
-!define VERSIONMAJOR 0
-!define VERSIONMINOR 5
-!define VERSIONBUILD 0
+!define VERSIONMAJOR 1
+!define VERSIONMINOR 2
+!define VERSIONBUILD 2
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
 !define HELPURL "https://github.com/pierr3/VectorAudio" # "Support Information" link
@@ -90,7 +91,10 @@ section "install"
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "NoModify" 1
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "NoRepair" 1
 	# Request to run as admin
-	WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\layers" "$\"$INSTDIR\vector_audio.exe$\"" "RUNASADMIN"
+	SetRegView 64
+	WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$\"$INSTDIR\${MAIN_EXECUTABLE_NAME}.exe$\"" "RUNASADMIN"
+	SetRegView 32
+	WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$\"$INSTDIR\${MAIN_EXECUTABLE_NAME}.exe$\"" "RUNASADMIN"
 sectionEnd
  
 # Uninstaller
@@ -113,7 +117,12 @@ section "uninstall"
 	# Remove files
 	delete $INSTDIR\vector_audio.exe
 	delete $INSTDIR\favicon.ico
- 
+
+	SetRegView 32
+	DeleteRegValue HKLM "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$\"$INSTDIR\${MAIN_EXECUTABLE_NAME}.exe$\""
+	SetRegView 64
+	DeleteRegValue HKLM "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$\"$INSTDIR\${MAIN_EXECUTABLE_NAME}.exe$\""
+
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
  
