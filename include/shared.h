@@ -64,6 +64,7 @@ inline float mPeak = 60.0f;
 inline float mVu = 60.0f;
 inline int vatsim_cid;
 inline std::string vatsim_password;
+inline bool keepWindowOnTop = false;
 
 const int kMinVhf = 118000000; // 118.000
 const int kMaxVhf = 136975000; // 136.975

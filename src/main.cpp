@@ -16,6 +16,7 @@
 #include "spdlog/spdlog.h"
 #include "style.h"
 #include "updater.h"
+#include "window_manager.h"
 
 // Main code
 int main(int, char**)
@@ -93,6 +94,9 @@ int main(int, char**)
 
     auto current_app = std::make_unique<vector_audio::application::App>();
 
+    bool alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+    vector_audio::setAlwaysOnTop(window, alwaysOnTop);
+
     // Main loop
     sf::Clock delta_clock;
     while (window.isOpen()) {
@@ -137,7 +141,11 @@ int main(int, char**)
                     vector_audio::configuration::write_config_async();
                     vector_audio::shared::capture_ptt_flag = false;
                 }
+            }
 
+            if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
+                vector_audio::setAlwaysOnTop(window, vector_audio::shared::keepWindowOnTop);
+                alwaysOnTop = vector_audio::shared::keepWindowOnTop;
             }
         }
 

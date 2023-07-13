@@ -47,6 +47,8 @@ App::App()
         vector_audio::shared::vatsim_password = toml::find_or<std::string>(
             cfg::config, "user", "vatsim_password", std::string("password"));
 
+        vector_audio::shared::keepWindowOnTop = toml::find_or<bool>(cfg::config, "user", "keepWindowOnTop", false);
+
         vector_audio::shared::ptt = static_cast<sf::Keyboard::Scancode>(
             toml::find_or<int>(cfg::config, "user", "ptt", static_cast<int>(sf::Keyboard::Scan::Unknown)));
 
