@@ -16,10 +16,16 @@
 #include "spdlog/spdlog.h"
 #include "style.h"
 #include "updater.h"
+#include "single_instance.h"
 
 // Main code
 int main(int, char**)
 {
+    vector_audio::SingleInstance instance;
+    if(instance.HasRunningInstance()) {
+        return 0;
+    }
+
     vector_audio::configuration::build_logger();
     sf::RenderWindow window(sf::VideoMode(800, 600), "Vector Audio");
     window.setFramerateLimit(30);
