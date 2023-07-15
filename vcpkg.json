@@ -2,9 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
     "name": "vector-audio",
     "version": "1.1.0",
-    "builtin-baseline": "fba81a6a545a66ef3de3a2d36c355f687f72a6b4",
     "dependencies": [
-        "openssl",
         "nlohmann-json",
         "toml11",
         "cpp-httplib",
