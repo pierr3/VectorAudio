@@ -1,4 +1,4 @@
-# Vector Audio
+# VectorAudio
 
 A cross-platform Audio-For-VATSIM ATC Client for macOS, Windows and Linux support (audio only)
 
@@ -20,7 +20,7 @@ On macOS: `~/VectorAudio`
 On Linux: `~/.config/vector_audio`
 On Windows: where VectorAudio.exe is installed
 
-### Does Vector Audio support joystick PTT?
+### Does VectorAudio support joystick PTT?
 
 Yes.
 

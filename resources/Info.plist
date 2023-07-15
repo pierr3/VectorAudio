@@ -3,9 +3,9 @@
 <plist version="1.0">
 	<dict>
 		<key>CFBundleName</key>
-		<string>Vector Audio</string>
+		<string>VectorAudio</string>
 		<key>CFBundleDisplayName</key>
-		<string>Vector Audio</string>
+		<string>VectorAudio</string>
 		<key>CFBundleGetInfoString</key>
 		<string>Audio client for VATSIM</string>
 		<key>CFBundleExecutable</key>

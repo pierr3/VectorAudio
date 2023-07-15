@@ -28,7 +28,7 @@ int main(int, char**)
     }
 
     vector_audio::configuration::build_logger();
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Vector Audio");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "VectorAudio");
     window.setFramerateLimit(30);
 
     auto image = sf::Image {};
@@ -92,7 +92,7 @@ int main(int, char**)
     vector_audio::style::apply_style();
     vector_audio::configuration::build_config();
 
-    spdlog::info("Starting Vector Audio...");
+    spdlog::info("Starting VectorAudio...");
 
     auto updater_instance = std::make_unique<vector_audio::updater>();
 

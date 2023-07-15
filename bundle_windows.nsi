@@ -7,7 +7,7 @@
 # If you change the names "app.exe", "logo.ico", or "license.rtf" you should do a search and replace - they
 # show up in a few places.
 # All the other settings can be tweaked by editing the !defines at the top of this script
-!define APPNAME "Vector Audio"
+!define APPNAME "VectorAudio"
 !define DESCRIPTION "Audio client for VATSIM"
 !define MAIN_EXECUTABLE_NAME "vector_audio"
 # These three must be integers

@@ -11,7 +11,7 @@ output_file = os.path.join('resources', 'LICENSE.txt')
 
 # Adding the base licenses
 
-master_license += 'Vector Audio\n\n' + Path('LICENSE').read_text() + '\n\n'
+master_license += 'VectorAudio\n\n' + Path('LICENSE').read_text() + '\n\n'
 
 # Adding the licenses of submodules
 

@@ -46,11 +46,11 @@ bool updater::need_update()
 
 void updater::draw()
 {
-    ImGui::Begin("Vector Audio Updater", NULL,
+    ImGui::Begin("VectorAudio Updater", NULL,
         ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
     ImGui::Text(
-        "A new version of Vector Audio is available, please update it! (%s -> "
+        "A new version of VectorAudio is available, please update it! (%s -> "
         "%s)",
         VECTOR_VERSION, mNewVersion.to_string().c_str());
 
