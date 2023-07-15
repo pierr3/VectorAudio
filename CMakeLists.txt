@@ -30,7 +30,11 @@ if(APPLE)
     add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
 endif()
 
+option(SFML_BUILD_AUDIO "Build audio" OFF)
+option(SFML_BUILD_NETWORK "Build network" OFF)
+
 find_package(OpenGL REQUIRED)
+find_package(OpenSSL REQUIRED)
 find_package(httplib REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(toml11 CONFIG REQUIRED)
@@ -40,9 +44,6 @@ find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 find_package(Threads REQUIRED)
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
-
-option(SFML_BUILD_AUDIO "Build audio" OFF)
-option(SFML_BUILD_NETWORK "Build network" OFF)
 
 set(APPLE_EXTRA_LIBS "")
 
