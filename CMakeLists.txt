@@ -13,6 +13,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 add_definitions(-DVECTOR_VERSION="1.2.3")
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
+add_subdirectory(extern/afv-native)
 
 if(APPLE)
     execute_process(
@@ -29,14 +30,9 @@ if(APPLE)
     add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
 endif()
 
-
-
-add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
-
 find_package(OpenGL REQUIRED)
 find_package(httplib REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
-
 find_package(toml11 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
@@ -45,15 +41,12 @@ find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 find_package(Threads REQUIRED)
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 
-find_package(afv_native REQUIRED)
-
 option(SFML_BUILD_AUDIO "Build audio" OFF)
 option(SFML_BUILD_NETWORK "Build network" OFF)
 
 set(APPLE_EXTRA_LIBS "")
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
-                        ${CMAKE_SOURCE_DIR}/extern/afv-native/include
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
                         ${OPENGL_INCLUDE_DIR}
@@ -111,9 +104,8 @@ target_link_libraries(vector_audio
     sfml-system sfml-window sfml-graphics
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
-    fmt::fmt-header-only
     restinio::restinio
-    afv_native::afv_native
+    afv_native
     httplib::httplib
     Threads::Threads
     ${OPENGL_LIBRARY})

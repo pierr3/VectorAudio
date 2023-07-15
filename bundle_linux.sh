@@ -10,7 +10,7 @@ mkdir VectorAudio_Ubuntu
 mkdir VectorAudio_Ubuntu/lib
 cp resources/*.wav VectorAudio_Ubuntu/
 cp resources/*.ttf VectorAudio_Ubuntu/
-cp build/lib/libafv_native.so VectorAudio_Ubuntu/lib
+cp build/extern/afv-native/libafv_native.so VectorAudio_Ubuntu/lib
 cp resources/LICENSE.txt VectorAudio_Ubuntu/
 cp resources/airports.json VectorAudio_Ubuntu/
 cp resources/icon_mac.png VectorAudio_Ubuntu

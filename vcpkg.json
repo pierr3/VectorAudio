@@ -7,7 +7,6 @@
         "toml11",
         "cpp-httplib",
         "curl",
-        "fmt",
         "spdlog",
         "restinio",
         "opus",
