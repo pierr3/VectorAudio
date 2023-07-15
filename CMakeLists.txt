@@ -77,6 +77,7 @@ add_executable(vector_audio src/main.cpp
                 src/window_manager.cpp
                 src/data_file_handler.cpp
                 src/modals/settings.cpp
+                src/single_instance.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS})
 
