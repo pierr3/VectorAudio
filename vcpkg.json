@@ -17,6 +17,7 @@
         "cpp-jwt",
         "msgpack",
         "libevent",
-        "neargye-semver"
+        "neargye-semver",
+        "sfml"
     ]
   }
