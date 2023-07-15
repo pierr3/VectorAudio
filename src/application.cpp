@@ -1,6 +1,6 @@
 #include "application.h"
-#include "Log.h"
-#include "atcClientWrapper.h"
+#include "afv-native/Log.h"
+#include "afv-native/atcClientWrapper.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "shared.h"

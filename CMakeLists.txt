@@ -13,6 +13,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 add_definitions(-DVECTOR_VERSION="1.2.3")
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
+
 if(APPLE)
     execute_process(
         COMMAND arch
@@ -28,20 +29,23 @@ if(APPLE)
     add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
 endif()
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/extern/afv-native)
 
 find_package(OpenGL REQUIRED)
 find_package(httplib REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
-find_package(OpenSSL REQUIRED)
-find_package(SFML COMPONENTS system window graphics network CONFIG REQUIRED)
+
 find_package(toml11 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 find_package(Threads REQUIRED)
+find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
+
+find_package(afv_native REQUIRED)
 
 option(SFML_BUILD_AUDIO "Build audio" OFF)
 option(SFML_BUILD_NETWORK "Build network" OFF)
@@ -49,7 +53,7 @@ option(SFML_BUILD_NETWORK "Build network" OFF)
 set(APPLE_EXTRA_LIBS "")
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
-                        ${CMAKE_SOURCE_DIR}/extern/afv-native/include/afv-native
+                        ${CMAKE_SOURCE_DIR}/extern/afv-native/include
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
                         ${OPENGL_INCLUDE_DIR}
@@ -59,9 +63,6 @@ if (APPLE)
     set(APPLE_EXTRA_LIBS src/osx_resources.mm src/window_manager.mm)
 endif()
 
-if (WIN32)
-    find_library(AFV_LIB speexdsp.lib)
-endif()
 
 add_executable(vector_audio src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
@@ -82,10 +83,12 @@ add_executable(vector_audio src/main.cpp
                 ${APPLE_EXTRA_LIBS})
 
 if (WIN32)
-    set_target_properties(vector_audio PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+    target_link_options(vector_audio PRIVATE "/MANIFESTUAC:level='requireAdministrator'" PRIVATE "/MANIFESTUAC:uiAccess='false'")
 endif()
 
 if(APPLE)
+    find_library(COCOA_LIBRARY Cocoa)
+    find_library(CORE_SERVICES CoreServices)
 	find_library(CORE_AUDIO CoreAudio)
 	find_library(AUDIO_TOOLBOX AudioToolbox)
 	find_library(AUDIO_UNIT AudioUnit)
@@ -94,6 +97,7 @@ if(APPLE)
 
 	target_link_libraries(vector_audio
 		PRIVATE
+        ${COCOA_LIBRARY}
 		${CORE_AUDIO}
 		${AUDIO_TOOLBOX}
 		${AUDIO_UNIT}
@@ -109,10 +113,10 @@ target_link_libraries(vector_audio
     nlohmann_json nlohmann_json::nlohmann_json
     fmt::fmt-header-only
     restinio::restinio
-    afv_native
+    afv_native::afv_native
     httplib::httplib
     Threads::Threads
-    ${OPENGL_LIBRARY} ${AFV_LIB})
+    ${OPENGL_LIBRARY})
 
 if (WIN32)
     add_custom_command(TARGET vector_audio POST_BUILD

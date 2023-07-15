@@ -5,17 +5,16 @@
     "dependencies": [
         "nlohmann-json",
         "toml11",
-        "sfml",
         "cpp-httplib",
+        "curl",
+        "fmt",
+        "spdlog",
+        "restinio",
         "opus",
         "speexdsp",
         "cpp-jwt",
         "msgpack",
-        "curl",
         "libevent",
-        "fmt",
-        "spdlog",
-        "restinio",
         "neargye-semver"
     ]
   }
