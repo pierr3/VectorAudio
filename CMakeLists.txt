@@ -56,7 +56,7 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${NEARGYE_SEMVER_INCLUDE_DIRS})
 
 if (APPLE)
-    set(APPLE_EXTRA_LIBS src/osx_resources.mm)
+    set(APPLE_EXTRA_LIBS src/osx_resources.mm src/window_manager.mm)
 endif()
 
 if (WIN32)
@@ -74,6 +74,7 @@ add_executable(vector_audio src/main.cpp
                 src/application.cpp
                 src/config.cpp
                 src/updater.cpp
+                src/window_manager.cpp
                 src/data_file_handler.cpp
                 src/modals/settings.cpp
                 src/single_instance.cpp

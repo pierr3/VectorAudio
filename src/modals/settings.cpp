@@ -142,6 +142,12 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
             }
             vector_audio::style::button_reset_colour();
 
+            ImGui::NewLine();
+
+            ImGui::Checkbox("Keep Window On Top", &vector_audio::shared::keepWindowOnTop);
+            ImGui::SameLine();
+            vector_audio::util::HelpMarker("Enable this option to make the VectorAudio\nwindow stay on top of other windows.");
+
             ImGui::TableNextColumn();
 
             ImGui::Text("Audio configuration");
@@ -309,6 +315,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
             if (ImGui::Button("Save", ImVec2(ImGui::GetContentRegionAvail().x, 0.0F))) {
                 vector_audio::configuration::config["user"]["vatsim_id"] = vector_audio::shared::vatsim_cid;
                 vector_audio::configuration::config["user"]["vatsim_password"] = vector_audio::shared::vatsim_password;
+                vector_audio::configuration::config["user"]["keepWindowOnTop"] = vector_audio::shared::keepWindowOnTop;
                 vector_audio::configuration::config["audio"]["input_filters"] = vector_audio::shared::mInputFilter;
                 vector_audio::configuration::config["audio"]["vhf_effects"] = vector_audio::shared::mOutputEffects;
                 vector_audio::configuration::config["audio"]["hardware_type"] = static_cast<int>(vector_audio::shared::hardware);
