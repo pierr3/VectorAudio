@@ -6,15 +6,13 @@
     "configurations": [
         {
             "name": "(lldb) Launch",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/build/vector_audio",
             "args": [],
-            "stopAtEntry": false,
+            "preRunCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],
+            "initCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],
             "cwd": "${workspaceFolder}/resources",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
         }
     ]
 }

@@ -145,3 +145,35 @@ static bool startsWith(const std::string& str, const std::string& prefix)
 }
 
 }
+
+inline static int findAudioAPIorDefault()
+{
+    if (vector_audio::shared::availableAudioAPI.find(vector_audio::shared::mAudioApi) != vector_audio::shared::availableAudioAPI.end())
+        return vector_audio::shared::mAudioApi;
+    
+    return 0;
+}
+
+inline static std::string findHeadsetInputDeviceOrDefault()
+{
+    if (std::find(vector_audio::shared::availableInputDevices.begin(), vector_audio::shared::availableInputDevices.end(), vector_audio::shared::configInputDeviceName) != vector_audio::shared::availableInputDevices.end())
+        return vector_audio::shared::configInputDeviceName;
+    
+    return vector_audio::shared::availableInputDevices.front();
+}
+
+inline static std::string findHeadsetOutputDeviceOrDefault()
+{
+    if (std::find(vector_audio::shared::availableOutputDevices.begin(), vector_audio::shared::availableOutputDevices.end(), vector_audio::shared::configOutputDeviceName) != vector_audio::shared::availableOutputDevices.end())
+        return vector_audio::shared::configOutputDeviceName;
+    
+    return vector_audio::shared::availableOutputDevices.front();
+}
+
+inline static std::string findSpeakerOutputDeviceOrDefault()
+{
+    if (std::find(vector_audio::shared::availableOutputDevices.begin(), vector_audio::shared::availableOutputDevices.end(), vector_audio::shared::configSpeakerDeviceName) != vector_audio::shared::availableOutputDevices.end())
+        return vector_audio::shared::configSpeakerDeviceName;
+    
+    return vector_audio::shared::availableOutputDevices.front();
+}

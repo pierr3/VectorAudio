@@ -30,6 +30,11 @@ App::App()
         mClient_ = new afv_native::api::atcClient(
             shared::kClientName,
             vector_audio::configuration::get_resource_folder());
+
+        // Fetch all available devices on start
+        vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
+        vector_audio::shared::availableInputDevices = mClient_->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+        vector_audio::shared::availableOutputDevices = mClient_->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
         spdlog::debug("Created afv_native client.");
     } catch (std::exception& ex) {
         spdlog::critical("Could not create AFV client interface: {}", ex.what());
@@ -480,12 +485,10 @@ void App::render_frame()
                 mClient_->StopAudio();
                 mClient_->Disconnect(); // Force a disconnect of API
 
-                mClient_->SetAudioApi(vector_audio::shared::mAudioApi);
-                mClient_->SetAudioInputDevice(vector_audio::shared::configInputDeviceName);
-                mClient_->SetAudioOutputDevice(
-                    vector_audio::shared::configOutputDeviceName);
-                mClient_->SetAudioSpeakersOutputDevice(
-                    vector_audio::shared::configSpeakerDeviceName);
+                mClient_->SetAudioApi(findAudioAPIorDefault());
+                mClient_->SetAudioInputDevice(findHeadsetInputDeviceOrDefault());
+                mClient_->SetAudioOutputDevice(findHeadsetOutputDeviceOrDefault());
+                mClient_->SetAudioSpeakersOutputDevice(findSpeakerOutputDeviceOrDefault());
                 mClient_->SetHardware(vector_audio::shared::hardware);
                 mClient_->SetHeadsetOutputChannel(vector_audio::shared::headsetOutputChannel);
 
