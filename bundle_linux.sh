@@ -6,7 +6,7 @@
 
 python collect_licenses.py
 
-cp -r VectorAudio.AppDir build/
+cp -r resources/VectorAudio.AppDir build/
 cp resources/*.wav build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/*.ttf build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/LICENSE.txt build/VectorAudio.AppDir/usr/share/vectoraudio/

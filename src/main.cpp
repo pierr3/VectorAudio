@@ -100,8 +100,8 @@ int main(int, char**)
 
     auto current_app = std::make_unique<vector_audio::application::App>();
 
-    bool alwaysOnTop = vector_audio::shared::keepWindowOnTop;
-    vector_audio::setAlwaysOnTop(window, alwaysOnTop);
+    bool always_on_top = vector_audio::shared::keepWindowOnTop;
+    vector_audio::setAlwaysOnTop(window, always_on_top);
 
     // Main loop
     sf::Clock delta_clock;
@@ -149,9 +149,9 @@ int main(int, char**)
                 }
             }
 
-            if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
+            if (vector_audio::shared::keepWindowOnTop != always_on_top) {
                 vector_audio::setAlwaysOnTop(window, vector_audio::shared::keepWindowOnTop);
-                alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+                always_on_top = vector_audio::shared::keepWindowOnTop;
             }
         }
 
