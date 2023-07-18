@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=VectorAudio
 Exec=vector_audio
-Icon=vectoraudio
+Icon=vectoraudio.png
 Type=Application
-Categories=Game
-Version=VAVER
+Categories=Game;

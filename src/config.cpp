@@ -58,12 +58,12 @@ std::string configuration::get_resource_folder()
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
-    /*char result[PATH_MAX];
+    char result[PATH_MAX];
     ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
     auto buffer = std::string(result, (count > 0) ? count : 0);
     std::string::size_type pos = std::string(buffer).find_last_of("\\/");
-    return std::string(buffer).substr(0, pos + 1);*/
-    return "../share/vectoraudio/";
+    auto currentPath = std::string(buffer).substr(0, pos + 1);
+    return currentPath + "../share/vectoraudio/";
 #endif
 
 #ifdef SFML_SYSTEM_WINDOWS
@@ -100,10 +100,18 @@ void configuration::write_config_async()
 void configuration::build_logger()
 {
     spdlog::init_thread_pool(8192, 1);
+    auto log_folder = configuration::get_resource_folder();
+
+    #ifdef SFML_SYSTEM_LINUX
+    log_folder = get_linux_config_folder();
+    if (!std::filesystem::exists(log_folder)) {
+        std::filesystem::create_directory(log_folder);
+    }
+    #endif
 
     auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>(
         "VectorAudio",
-        configuration::get_resource_folder() + "vector_audio.log",
+        log_folder + "vector_audio.log",
         1024 * 1024 * 10, 3);
 
 #ifdef NDEBUG

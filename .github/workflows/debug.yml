@@ -43,7 +43,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/VectorAudio-x64.AppImage
+          files: VectorAudio-x64.AppImage
           tag_name: ${{ steps.previoustag.outputs.tag }}
   build-windows:
     runs-on: windows-latest
