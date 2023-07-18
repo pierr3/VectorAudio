@@ -28,6 +28,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt install libfuse2
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
