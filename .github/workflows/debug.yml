@@ -27,7 +27,7 @@ jobs:
       - name: Install SFML dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -37,11 +37,10 @@ jobs:
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh
-          mv VectorAudio_Ubuntu.tar.gz VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
+          files: build/VectorAudio-x64.AppImage
           tag_name: ${{ steps.previoustag.outputs.tag }}
   build-windows:
     runs-on: windows-latest
@@ -83,11 +82,11 @@ jobs:
           makensis install.nsi
       - name: Rename installer
         run: |
-          mv installer/VectorAudio-installer.exe VectorAudio-DEBUG-${{ github.ref_name }}-Installer.exe
+          mv installer/VectorAudio-installer.exe VectorAudio-DEBUG-${{ github.ref_name }}-Installer-x64.exe
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-DEBUG-${{ github.ref_name }}-Installer.exe
+          files: VectorAudio-DEBUG-${{ github.ref_name }}-Installer-x64.exe
           tag_name: ${{ steps.previoustag.outputs.tag }}
   build-osx:
     runs-on: macos-latest
@@ -124,9 +123,9 @@ jobs:
       - name: Create DMG
         run: |
           brew install create-dmg
-          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer.dmg" "build/VectorAudio.app"
+          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer-universal.dmg" "build/VectorAudio.app"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer.dmg
+          files: VectorAudio-DEBUG-${{ env.RELEASE_VERSION }}-Installer-universal.dmg
           tag_name: ${{ steps.previoustag.outputs.tag }}

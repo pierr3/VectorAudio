@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=VectorAudio
+Exec=vector_audio
+Icon=vectoraudio
+Type=Application
+Categories=Game
+Version={{VERSION}}

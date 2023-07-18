@@ -58,11 +58,12 @@ std::string configuration::get_resource_folder()
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
-    char result[PATH_MAX];
+    /*char result[PATH_MAX];
     ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
     auto buffer = std::string(result, (count > 0) ? count : 0);
     std::string::size_type pos = std::string(buffer).find_last_of("\\/");
-    return std::string(buffer).substr(0, pos + 1);
+    return std::string(buffer).substr(0, pos + 1);*/
+    return "../share/vectoraudio/"
 #endif
 
 #ifdef SFML_SYSTEM_WINDOWS
