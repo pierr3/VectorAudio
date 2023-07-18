@@ -2,10 +2,10 @@ name: Release Vector Audio
 
 on:
   push:
-    tags:        
+    tags:
       - v*
 
-concurrency: 
+concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
@@ -22,13 +22,16 @@ jobs:
           submodules: recursive
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Install SFML dependencies
         run: |
           sudo apt-get update
           sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt install libfuse2
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -38,10 +41,16 @@ jobs:
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh libafv_native.so
+      - name: Rename installer
+        run: |
+          mv build/VectorAudio-x86_64.AppImage VectorAudio-${{ github.ref_name }}-x86_64.AppImage
+          mv build/VectorAudio-x86_64.AppImage.zsync VectorAudio-${{ github.ref_name }}-x86_64.AppImage.zsync
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
+          files: |
+            VectorAudio-${{ github.ref_name }}-x86_64.AppImage
+            VectorAudio-${{ github.ref_name }}-x86_64.AppImage.zsync
   build-windows:
     runs-on: windows-latest
     steps:
@@ -50,7 +59,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
@@ -90,7 +99,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Install native dependencies
         run: |
           brew install pkg-config

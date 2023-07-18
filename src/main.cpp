@@ -27,7 +27,7 @@ int main(int, char**)
         return 0;
     }
 
-    vector_audio::configuration::build_logger();
+    vector_audio::Configuration::build_logger();
     sf::RenderWindow window(sf::VideoMode(800, 600), "VectorAudio");
     window.setFramerateLimit(30);
 
@@ -39,7 +39,7 @@ int main(int, char**)
     std::string icon_name = "icon_mac.png";
 #endif
 
-    if (!image.loadFromFile(vector_audio::configuration::get_resource_folder() + icon_name)) {
+    if (!image.loadFromFile(vector_audio::Configuration::get_resource_folder() + icon_name)) {
         spdlog::error("Could not load application icon");
     } else {
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
@@ -79,7 +79,7 @@ int main(int, char**)
     // literal you need to write a double backslash \\ !
     // io.Fonts->AddFontDefault();
     io.Fonts->AddFontFromFileTTF(
-        (vector_audio::configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf")
+        (vector_audio::Configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf")
             .c_str(),
         18.0);
 
@@ -90,7 +90,7 @@ int main(int, char**)
     // Our state
 
     vector_audio::style::apply_style();
-    vector_audio::configuration::build_config();
+    vector_audio::Configuration::build_config();
 
     spdlog::info("Starting VectorAudio...");
 
@@ -127,10 +127,10 @@ int main(int, char**)
                     vector_audio::shared::ptt = event.key.scancode;
 
                     vector_audio::shared::joyStickId = -1; vector_audio::shared::joyStickPtt = -1;
-                    vector_audio::configuration::config["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::configuration::config["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::configuration::config["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
-                    vector_audio::configuration::write_config_async();
+                    vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::config_["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::config_["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::write_config_async();
                     vector_audio::shared::capture_ptt_flag = false;
                 }
             } else if (event.type == sf::Event::JoystickButtonPressed) {
@@ -141,10 +141,10 @@ int main(int, char**)
                     vector_audio::shared::joyStickId = event.joystickButton.joystickId; 
                     vector_audio::shared::joyStickPtt = event.joystickButton.button;
 
-                    vector_audio::configuration::config["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::configuration::config["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::configuration::config["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
-                    vector_audio::configuration::write_config_async();
+                    vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::config_["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::config_["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::write_config_async();
                     vector_audio::shared::capture_ptt_flag = false;
                 }
             }

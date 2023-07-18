@@ -29,7 +29,7 @@ App::App()
 
         mClient_ = new afv_native::api::atcClient(
             shared::kClientName,
-            vector_audio::configuration::get_resource_folder());
+            vector_audio::Configuration::get_resource_folder());
 
         // Fetch all available devices on start
         vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
@@ -43,46 +43,46 @@ App::App()
 
     // Load all from config
     try {
-        using cfg = vector_audio::configuration;
+        using cfg = vector_audio::Configuration;
 
-        vector_audio::shared::mOutputEffects = toml::find_or<bool>(cfg::config, "audio", "vhf_effects", true);
-        vector_audio::shared::mInputFilter = toml::find_or<bool>(cfg::config, "audio", "input_filters", true);
+        vector_audio::shared::mOutputEffects = toml::find_or<bool>(cfg::config_, "audio", "vhf_effects", true);
+        vector_audio::shared::mInputFilter = toml::find_or<bool>(cfg::config_, "audio", "input_filters", true);
 
-        vector_audio::shared::vatsim_cid = toml::find_or<int>(cfg::config, "user", "vatsim_id", 999999);
+        vector_audio::shared::vatsim_cid = toml::find_or<int>(cfg::config_, "user", "vatsim_id", 999999);
         vector_audio::shared::vatsim_password = toml::find_or<std::string>(
-            cfg::config, "user", "vatsim_password", std::string("password"));
+            cfg::config_, "user", "vatsim_password", std::string("password"));
 
-        vector_audio::shared::keepWindowOnTop = toml::find_or<bool>(cfg::config, "user", "keepWindowOnTop", false);
+        vector_audio::shared::keepWindowOnTop = toml::find_or<bool>(cfg::config_, "user", "keepWindowOnTop", false);
 
         vector_audio::shared::ptt = static_cast<sf::Keyboard::Scancode>(
-            toml::find_or<int>(cfg::config, "user", "ptt", static_cast<int>(sf::Keyboard::Scan::Unknown)));
+            toml::find_or<int>(cfg::config_, "user", "ptt", static_cast<int>(sf::Keyboard::Scan::Unknown)));
 
         vector_audio::shared::joyStickId = static_cast<int>(
-            toml::find_or<int>(cfg::config, "user", "joyStickId", -1));
+            toml::find_or<int>(cfg::config_, "user", "joyStickId", -1));
         vector_audio::shared::joyStickPtt = static_cast<int>(
-            toml::find_or<int>(cfg::config, "user", "joyStickPtt", -1));
+            toml::find_or<int>(cfg::config_, "user", "joyStickPtt", -1));
 
         auto audio_providers = mClient_->GetAudioApis();
         vector_audio::shared::configAudioApi = toml::find_or<std::string>(
-            cfg::config, "audio", "api", std::string("Default API"));
+            cfg::config_, "audio", "api", std::string("Default API"));
         for (const auto& driver : audio_providers) {
             if (driver.second == vector_audio::shared::configAudioApi)
                 vector_audio::shared::mAudioApi = driver.first;
         }
 
         vector_audio::shared::configInputDeviceName = toml::find_or<std::string>(
-            cfg::config, "audio", "input_device", std::string(""));
+            cfg::config_, "audio", "input_device", std::string(""));
         vector_audio::shared::configOutputDeviceName = toml::find_or<std::string>(
-            cfg::config, "audio", "output_device", std::string(""));
+            cfg::config_, "audio", "output_device", std::string(""));
         vector_audio::shared::configSpeakerDeviceName = toml::find_or<std::string>(
-            cfg::config, "audio", "speaker_device", std::string(""));
+            cfg::config_, "audio", "speaker_device", std::string(""));
         vector_audio::shared::headsetOutputChannel = toml::find_or<int>(
-            cfg::config, "audio", "headset_channel", 0);
+            cfg::config_, "audio", "headset_channel", 0);
 
         vector_audio::shared::hardware = static_cast<afv_native::HardwareType>(
-            toml::find_or<int>(cfg::config, "audio", "hardware_type", 0));
+            toml::find_or<int>(cfg::config_, "audio", "hardware_type", 0));
 
-        vector_audio::shared::apiServerPort = toml::find_or<int>(cfg::config, "general", "api_port", 49080);
+        vector_audio::shared::apiServerPort = toml::find_or<int>(cfg::config_, "general", "api_port", 49080);
     } catch (toml::exception& exc) {
         spdlog::error("Failed to parse available configuration: {}", exc.what());
     }
@@ -114,7 +114,7 @@ void App::loadAirportsDatabaseAsync()
     // it.
 
     if (!std::filesystem::exists(
-            vector_audio::configuration::airports_db_file_path)) {
+            vector_audio::Configuration::airports_db_file_path_)) {
         spdlog::warn("Could not find airport database json file");
         return;
     }
@@ -122,7 +122,7 @@ void App::loadAirportsDatabaseAsync()
     try {
         // We do performance analysis here
         auto t1 = std::chrono::high_resolution_clock::now();
-        std::ifstream f(vector_audio::configuration::airports_db_file_path);
+        std::ifstream f(vector_audio::Configuration::airports_db_file_path_);
         nlohmann::json data = nlohmann::json::parse(f);
 
         // Loop through all the icaos
@@ -577,7 +577,7 @@ void App::render_frame()
     vector_audio::modals::Settings::render(mClient_);
 
     {
-        ImGui::SetNextWindowSize(ImVec2(300, 150));
+        ImGui::SetNextWindowSize(ImVec2(300, -1));
         if (ImGui::BeginPopupModal(
                 "Error", nullptr,
                 ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize)) {
@@ -894,7 +894,7 @@ void App::render_frame()
     // Licenses
 
     TextURL("Licenses",
-        vector_audio::configuration::get_resource_folder() + "LICENSE.txt");
+        vector_audio::Configuration::get_resource_folder() + "LICENSE.txt");
 
     ImGui::EndGroup();
 

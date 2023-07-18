@@ -14,9 +14,9 @@ See [releases](https://github.com/pierr3/VectorAudio/releases) for latest builds
 
 macOS has strict permissioning around background keyboard inputs. VectorAudio should prompt you on first launch to allow it to monitor keyboard input. Sometimes, upon updating the app, this setting will undo itself. In that case, follow the steps described [in this issue](https://github.com/pierr3/VectorAudio/issues/30#issuecomment-1407573758).
 
-### Where is the configuration file stored?
+### Where is the configuration file/log file stored?
 
-On macOS: `~/VectorAudio`
+On macOS: `~/Library/Application\ Support/VectorAudio`
 On Linux: `~/.config/vector_audio`
 On Windows: where VectorAudio.exe is installed
 
@@ -50,21 +50,10 @@ Read this document entirely first. If you can't find the answer to your problem,
 
 ### Linux
 
-Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the executable.
+VectorAudio is packaged as an AppImage and should run without any specific actions.
 
-```sh
-# Unzip the package
-unzip VectorAudio-$VERSION-Ubuntu.zip
-
-# cd into the newly created directory
-cd VectorAudio-$VERSION-Ubuntu
-
-# Make the file executable
-chmod +x vector_audio
-
-# Run it
-./vector_audio
-```
+Download the latest release on the [release page](https://github.com/pierr3/VectorAudio/releases) and run the AppImage file.
+If it does not open, you might want to make sure it has permission to run as an executable by running `chmod +x` on the AppImage File.
 
 ### macOS
 
@@ -94,8 +83,8 @@ VectorAudio uses OpenGL as a rendering backend, and thus requires an OpenGL comp
 
 `cmake` is required to build the project. Dependencies will be downloaded through vcpkg at build time. See vcpkg.json for further details
 
-On linux, the following packages are required: `build-essentials libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev`
-On macOS, Homebrew is required and the following homebrew package is required: `pkg-config`
+On linux, the following packages are required: `build-essentials libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev`, you may also need further packages to enable the different audio backends, such as Alsa, JACK or PulseAudio.
+On macOS, XCode Command Line tools, CMake and Homebrew are required and the following homebrew package is required: `pkg-config`
 
 ## Build process
 
@@ -104,14 +93,6 @@ git submodule update --init --recursive
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 mkdir -p build/ && cd build/
 cmake .. && make
-```
-
-## Building on macOS
-
-Be sure to have the packages `pkg-config` and `cmake` installed.
-
-```sh
-brew install cmake pkg-config
 ```
 
 ## Contributing

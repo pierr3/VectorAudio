@@ -15,40 +15,22 @@
 #endif
 
 namespace vector_audio {
-toml::value configuration::config;
+toml::value Configuration::config_;
 
-void configuration::build_config()
+void Configuration::build_config()
 {
-#if defined(SFML_SYSTEM_MACOS)
-    std::filesystem::path folder_path = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
+    const auto config_file_path = Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_);
 
-    // On macOS we cannot be sure the folder exists as we don't use the folder of
-    // the executable, hence we need to create it so we can write the config to it
-    if (!std::filesystem::exists(folder_path)) {
-        std::filesystem::create_directory(folder_path);
-    }
+    airports_db_file_path_ = get_resource_folder() / std::filesystem::path(airports_db_file_path_);
 
-    file_path = folder_path / std::filesystem::path(file_path);
-#elif defined(SFML_SYSTEM_LINUX)
-    std::string config_path = get_linux_config_folder();
-    if (!std::filesystem::exists(config_path)) {
-        std::filesystem::create_directory(config_path);
-    }
-    file_path = config_path + file_path;
-#else
-    file_path = get_resource_folder() + file_path;
-#endif
-
-    airports_db_file_path = get_resource_folder() + airports_db_file_path;
-
-    if (std::filesystem::exists(file_path)) {
-        vector_audio::configuration::config = toml::parse(file_path);
+    if (std::filesystem::exists(config_file_path)) {
+        vector_audio::Configuration::config_ = toml::parse(config_file_path);
     } else {
         spdlog::info("Did not find a config file, starting from scratch.");
     }
 }
 
-std::string configuration::get_resource_folder()
+std::string Configuration::get_resource_folder()
 {
 #ifndef NDEBUG
     return "../resources/";
@@ -76,7 +58,7 @@ std::string configuration::get_resource_folder()
 #endif
 }
 
-std::string configuration::get_linux_config_folder()
+std::string Configuration::get_linux_config_folder()
 {
     char* xdg_config_home_chars = getenv("XDG_CONFIG_HOME");
     std::string suffix = "/vector_audio/";
@@ -88,30 +70,24 @@ std::string configuration::get_linux_config_folder()
     return home + "/.config" + suffix;
 }
 
-void configuration::write_config_async()
+void Configuration::write_config_async()
 {
     std::thread([]() {
-        std::ofstream ofs(vector_audio::configuration::file_path);
-        ofs << vector_audio::configuration::config;
+        const std::lock_guard<std::mutex> lock(vector_audio::Configuration::config_writer_lock_);
+        std::ofstream ofs(Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_));
+        ofs << vector_audio::Configuration::config_;
         ofs.close();
     }).detach();
 }
 
-void configuration::build_logger()
+void Configuration::build_logger()
 {
     spdlog::init_thread_pool(8192, 1);
-    auto log_folder = configuration::get_resource_folder();
-
-    #ifdef SFML_SYSTEM_LINUX
-    log_folder = get_linux_config_folder();
-    if (!std::filesystem::exists(log_folder)) {
-        std::filesystem::create_directory(log_folder);
-    }
-    #endif
+    auto log_folder = Configuration::get_config_folder_path();
 
     auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>(
         "VectorAudio",
-        log_folder + "vector_audio.log",
+        log_folder / "vector_audio.log",
         1024 * 1024 * 10, 3);
 
 #ifdef NDEBUG
@@ -123,4 +99,23 @@ void configuration::build_logger()
     spdlog::flush_on(spdlog::level::info);
     spdlog::set_default_logger(async_rotating_file_logger);
 }
+
+std::filesystem::path Configuration::get_config_folder_path()
+{
+    std::filesystem::path folder_path;
+
+#if defined(SFML_SYSTEM_MACOS)
+    folder_path = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
+#elif defined(SFML_SYSTEM_LINUX)
+    folder_path = get_linux_config_folder();
+#else
+    file_path = get_resource_folder();
+#endif
+
+    if (!std::filesystem::exists(folder_path)) {
+        std::filesystem::create_directory(folder_path);
+    }
+
+    return folder_path;
+};
 } // namespace vector_audio

@@ -170,7 +170,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                         vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
                     }
                     vector_audio::shared::configAudioApi = "Default";
-                    vector_audio::configuration::config["audio"]["api"] = -1;
+                    vector_audio::Configuration::config_["audio"]["api"] = -1;
                 }
 
                 // Listing all the devices
@@ -184,7 +184,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                             vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
                         }
                         vector_audio::shared::configAudioApi = item.second;
-                        vector_audio::configuration::config["audio"]["api"] = item.second;
+                        vector_audio::Configuration::config_["audio"]["api"] = item.second;
                     }
                 }
                 ImGui::EndCombo();
@@ -202,7 +202,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                 for (const auto& driver : m_audio_drivers) {
                     if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configInputDeviceName == driver)) {
                         vector_audio::shared::configInputDeviceName = driver;
-                        vector_audio::configuration::config["audio"]["input_device"] = vector_audio::shared::configInputDeviceName;
+                        vector_audio::Configuration::config_["audio"]["input_device"] = vector_audio::shared::configInputDeviceName;
                     }
                 }
 
@@ -221,7 +221,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                 for (const auto& driver : m_audio_drivers) {
                     if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configOutputDeviceName == driver)) {
                         vector_audio::shared::configOutputDeviceName = driver;
-                        vector_audio::configuration::config["audio"]["output_device"] = vector_audio::shared::configOutputDeviceName;
+                        vector_audio::Configuration::config_["audio"]["output_device"] = vector_audio::shared::configOutputDeviceName;
                     }
                 }
 
@@ -265,7 +265,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                 for (const auto& driver : m_audio_drivers) {
                     if (ImGui::Selectable(driver.c_str(), vector_audio::shared::configSpeakerDeviceName == driver)) {
                         vector_audio::shared::configSpeakerDeviceName = driver;
-                        vector_audio::configuration::config["audio"]["speaker_device"] = vector_audio::shared::configSpeakerDeviceName;
+                        vector_audio::Configuration::config_["audio"]["speaker_device"] = vector_audio::shared::configSpeakerDeviceName;
                     }
                 }
 
@@ -313,15 +313,15 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
 
             vector_audio::style::button_green();
             if (ImGui::Button("Save", ImVec2(ImGui::GetContentRegionAvail().x, 0.0F))) {
-                vector_audio::configuration::config["user"]["vatsim_id"] = vector_audio::shared::vatsim_cid;
-                vector_audio::configuration::config["user"]["vatsim_password"] = vector_audio::shared::vatsim_password;
-                vector_audio::configuration::config["user"]["keepWindowOnTop"] = vector_audio::shared::keepWindowOnTop;
-                vector_audio::configuration::config["audio"]["input_filters"] = vector_audio::shared::mInputFilter;
-                vector_audio::configuration::config["audio"]["vhf_effects"] = vector_audio::shared::mOutputEffects;
-                vector_audio::configuration::config["audio"]["hardware_type"] = static_cast<int>(vector_audio::shared::hardware);
-                vector_audio::configuration::config["audio"]["headset_channel"] = vector_audio::shared::headsetOutputChannel;
+                vector_audio::Configuration::config_["user"]["vatsim_id"] = vector_audio::shared::vatsim_cid;
+                vector_audio::Configuration::config_["user"]["vatsim_password"] = vector_audio::shared::vatsim_password;
+                vector_audio::Configuration::config_["user"]["keepWindowOnTop"] = vector_audio::shared::keepWindowOnTop;
+                vector_audio::Configuration::config_["audio"]["input_filters"] = vector_audio::shared::mInputFilter;
+                vector_audio::Configuration::config_["audio"]["vhf_effects"] = vector_audio::shared::mOutputEffects;
+                vector_audio::Configuration::config_["audio"]["hardware_type"] = static_cast<int>(vector_audio::shared::hardware);
+                vector_audio::Configuration::config_["audio"]["headset_channel"] = vector_audio::shared::headsetOutputChannel;
 
-                vector_audio::configuration::write_config_async();
+                vector_audio::Configuration::write_config_async();
                 if (mClient->IsAudioRunning())
                     mClient->StopAudio();
                 ImGui::CloseCurrentPopup();

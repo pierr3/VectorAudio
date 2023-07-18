@@ -29,6 +29,7 @@ chmod +x ./build/VectorAudio.AppDir/AppRun
 wget -O appimagetool-x86_64.AppImage https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 chmod +x appimagetool-x86_64.AppImage
 
-./appimagetool-x86_64.AppImage ./build/VectorAudio.AppDir
+./appimagetool-x86_64.AppImage ./build/VectorAudio.AppDir -u 'gh-releases-zsync|pierr3|VectorAudio|latest|VectorAudio-*x86_64.AppImage.zsync'
 
-mv ./build/VectorAudio.AppImage ./build/VectorAudio-x64.AppImage
+mv ./build/VectorAudio.AppImage ./build/VectorAudio-x86_64.AppImage
+mv ./build/VectorAudio.AppImage.zsync ./build/VectorAudio-x86_64.AppImage.zsync
