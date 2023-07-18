@@ -37,8 +37,7 @@ jobs:
           cmake --build build/
       - name: Bundle Linux
         run: |
-          ./bundle_linux.sh
-          mv VectorAudio_Ubuntu.tar.gz VectorAudio-${{ env.RELEASE_VERSION }}-Ubuntu.tar.gz
+          ./bundle_linux.sh libafv_native.so
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

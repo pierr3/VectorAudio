@@ -39,7 +39,7 @@ jobs:
           cmake --build build/
       - name: Bundle Linux
         run: |
-          ./bundle_linux.sh
+          ./bundle_linux.sh libafv_natived.so
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

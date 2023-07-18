@@ -8,7 +8,7 @@ libname=$1
 
 python3 collect_licenses.py
 
-cp -R ./resources/VectorAudio.AppDir/ ./build/VectorAudio.AppDir/
+cp -R ./resources/VectorAudio.AppDir/ ./build/
 cp ./resources/*.wav ./build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp ./resources/*.ttf ./build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp ./resources/LICENSE.txt ./build/VectorAudio.AppDir/usr/share/vectoraudio/
