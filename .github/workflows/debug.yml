@@ -27,7 +27,7 @@ jobs:
       - name: Install SFML dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config desktop-file-utils
           sudo add-apt-repository universe
           sudo apt-get update
           sudo apt install libfuse2
@@ -69,6 +69,7 @@ jobs:
       - name: Temporarily fix OpenSSL download
         run: |
           mkdir vcpkg/downloads
+          choco install wget --no-progress
           wget https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip -P vcpkg/downloads
       - name: Configure cmake
         run: |
