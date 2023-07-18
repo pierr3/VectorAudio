@@ -4,31 +4,30 @@
 # Creating the linux bundle
 #
 
-python collect_licenses.py
+python3 collect_licenses.py
 
-mkdir build/VectorAudio.AppDir
-cp -r resources/VectorAudio.AppDir/* build/VectorAudio.AppDir
+mkdir build/VectorAudio.AppDir/
+cp -R resources/VectorAudio.AppDir/* build/VectorAudio.AppDir/
 cp resources/*.wav build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/*.ttf build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/LICENSE.txt build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/airports.json build/VectorAudio.AppDir/usr/share/vectoraudio/
 cp resources/icon_mac.png build/VectorAudio.AppDir/vectoraudio.png
 cp resources/icon_mac.png build/VectorAudio.AppDir/usr/share/vectoraudio/
-mv build/VectorAudio.AppDir/AppRun_x86_64 build/VectorAudio.AppDir/AppRun
 
-cp build/extern/afv-native/libafv_native.so build/VectorAudio.AppDir/usr/lib
-chmod +x build/VectorAudio.AppDir/usr/lib/libafv_native.so
+cp build/extern/afv-native/afv_native.so build/VectorAudio.AppDir/usr/lib
+chmod +x build/VectorAudio.AppDir/usr/lib/afv_native.so
 
 cp build/vector_audio build/VectorAudio.AppDir/usr/bin
 chmod +x build/VectorAudio.AppDir/usr/bin/vector_audio
 chmod 755 build/VectorAudio.AppDir/usr/bin/vector_audio
 
 version=`cat VERSION`
-sed -i 's/{{VERSION}}/$version/' build/VectorAudio.AppDir/vectoraudio.desktop
+sed -i "s/VAVER/$version/" build/VectorAudio.AppDir/vectoraudio.desktop
 
 wget -O appimage-builder-x86_64.AppImage https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage
 chmod +x appimage-builder-x86_64.AppImage
 
-./appimage-builder-x86_64.AppImage build/VectorAudio.AppDir
+./appimage-builder-x86_64.AppImage --appdir build/VectorAudio.AppDir
 
 mv build/VectorAudio.AppImage build/VectorAudio-x64.AppImage
