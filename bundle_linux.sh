@@ -31,5 +31,5 @@ chmod +x appimagetool-x86_64.AppImage
 
 ./appimagetool-x86_64.AppImage ./build/VectorAudio.AppDir -u 'gh-releases-zsync|pierr3|VectorAudio|latest|VectorAudio-*x86_64.AppImage.zsync'
 
-mv ./build/VectorAudio.AppImage ./build/VectorAudio-x86_64.AppImage
-mv ./build/VectorAudio.AppImage.zsync ./build/VectorAudio-x86_64.AppImage.zsync
+mv ./build/VectorAudio-x86_64.AppImage ./build/VectorAudio-x86_64.AppImage
+mv ./build/VectorAudio-x86_64.AppImage.zsync ./build/VectorAudio-x86_64.AppImage.zsync
