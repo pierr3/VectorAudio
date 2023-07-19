@@ -1,4 +1,5 @@
 #include "config.h"
+#include <filesystem>
 
 #ifdef SFML_SYSTEM_MACOS
 #include "osx_resources.h"
@@ -83,11 +84,11 @@ void Configuration::write_config_async()
 void Configuration::build_logger()
 {
     spdlog::init_thread_pool(8192, 1);
-    auto log_folder = Configuration::get_config_folder_path();
+    auto log_folder = Configuration::get_config_folder_path() / std::filesystem::path("vector_audio.log");
 
     auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>(
         "VectorAudio",
-        (log_folder / "vector_audio.log").c_str(),
+        log_folder.string(),
         1024 * 1024 * 10, 3);
 
 #ifdef NDEBUG
