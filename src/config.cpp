@@ -21,7 +21,7 @@ void Configuration::build_config()
 {
     const auto config_file_path = Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_);
 
-    airports_db_file_path_ = get_resource_folder() / std::filesystem::path(airports_db_file_path_);
+    airports_db_file_path_ = (get_resource_folder() / std::filesystem::path(airports_db_file_path_)).c_str();
 
     if (std::filesystem::exists(config_file_path)) {
         vector_audio::Configuration::config_ = toml::parse(config_file_path);
@@ -30,7 +30,7 @@ void Configuration::build_config()
     }
 }
 
-std::string Configuration::get_resource_folder()
+std::filesystem::path Configuration::get_resource_folder()
 {
 #ifndef NDEBUG
     return "../resources/";
@@ -87,7 +87,7 @@ void Configuration::build_logger()
 
     auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>(
         "VectorAudio",
-        log_folder / "vector_audio.log",
+        (log_folder / "vector_audio.log").c_str(),
         1024 * 1024 * 10, 3);
 
 #ifdef NDEBUG

@@ -24,7 +24,7 @@ public:
 
     static void build_config();
 
-    static std::string get_resource_folder();
+    static std::filesystem::path get_resource_folder();
 
     static std::string get_linux_config_folder();
     static std::filesystem::path get_config_folder_path();
