@@ -894,7 +894,7 @@ void App::render_frame()
     // Licenses
 
     TextURL("Licenses",
-        vector_audio::Configuration::get_resource_folder() + "LICENSE.txt");
+        vector_audio::Configuration::get_resource_folder() / "LICENSE.txt");
 
     ImGui::EndGroup();
 

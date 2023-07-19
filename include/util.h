@@ -81,11 +81,20 @@ inline int PlatformOpen(std::string cmd)
 {
 #ifdef SFML_SYSTEM_WINDOWS
     cmd = "explorer " + cmd;
-#else
-    cmd = "open " + cmd;
+    return std::system(cmd.c_str());
 #endif
 
+#ifdef SFML_SYSTEM_MACOS
+    cmd = "open " + cmd;
     return std::system(cmd.c_str());
+#endif
+
+#ifdef SFML_SYSTEM_LINUX
+    int err = std::system("gedit " + cmd); // This assume gnome environment, we will also cover KDE if this fails
+    if (err != 0) {
+        std::system("kate " + cmd);
+    }
+#endif
 }
 
 inline void TextURL(const std::string& name_, std::string URL_)

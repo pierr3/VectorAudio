@@ -39,7 +39,7 @@ int main(int, char**)
     std::string icon_name = "icon_mac.png";
 #endif
 
-    if (!image.loadFromFile(vector_audio::Configuration::get_resource_folder() + icon_name)) {
+    if (!image.loadFromFile(vector_audio::Configuration::get_resource_folder() / icon_name)) {
         spdlog::error("Could not load application icon");
     } else {
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
@@ -79,7 +79,7 @@ int main(int, char**)
     // literal you need to write a double backslash \\ !
     // io.Fonts->AddFontDefault();
     io.Fonts->AddFontFromFileTTF(
-        (vector_audio::Configuration::get_resource_folder() + "JetBrainsMono-Regular.ttf")
+        (vector_audio::Configuration::get_resource_folder() / "JetBrainsMono-Regular.ttf")
             .c_str(),
         18.0);
 
