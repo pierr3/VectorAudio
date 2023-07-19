@@ -4,6 +4,7 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <filesystem>
 #include <memory>
 #include <thread>
 
@@ -13,17 +14,17 @@
 #include "imgui-SFML.h"
 #include "imgui.h"
 #include "shared.h"
+#include "single_instance.h"
 #include "spdlog/spdlog.h"
 #include "style.h"
 #include "updater.h"
-#include "single_instance.h"
 #include "window_manager.h"
 
 // Main code
 int main(int, char**)
 {
     vector_audio::SingleInstance instance;
-    if(instance.HasRunningInstance()) {
+    if (instance.HasRunningInstance()) {
         return 0;
     }
 
@@ -78,9 +79,8 @@ int main(int, char**)
     // - Remember that in C/C++ if you want to include a backslash \ in a string
     // literal you need to write a double backslash \\ !
     // io.Fonts->AddFontDefault();
-    io.Fonts->AddFontFromFileTTF(
-        (vector_audio::Configuration::get_resource_folder() / "JetBrainsMono-Regular.ttf").c_str(),
-        18.0);
+    auto p = vector_audio::Configuration::get_resource_folder() / std::filesystem::path("JetBrainsMono-Regular.ttf");
+    io.Fonts->AddFontFromFileTTF(p.c_str(), 18.0);
 
     if (!ImGui::SFML::UpdateFontTexture()) {
         spdlog::critical("Could not update font textures");
@@ -125,7 +125,8 @@ int main(int, char**)
                 if (vector_audio::shared::capture_ptt_flag) {
                     vector_audio::shared::ptt = event.key.scancode;
 
-                    vector_audio::shared::joyStickId = -1; vector_audio::shared::joyStickPtt = -1;
+                    vector_audio::shared::joyStickId = -1;
+                    vector_audio::shared::joyStickPtt = -1;
                     vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
                     vector_audio::Configuration::config_["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
                     vector_audio::Configuration::config_["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
@@ -133,11 +134,11 @@ int main(int, char**)
                     vector_audio::shared::capture_ptt_flag = false;
                 }
             } else if (event.type == sf::Event::JoystickButtonPressed) {
-                
+
                 if (vector_audio::shared::capture_ptt_flag) {
                     vector_audio::shared::ptt = sf::Keyboard::Scan::Unknown;
 
-                    vector_audio::shared::joyStickId = event.joystickButton.joystickId; 
+                    vector_audio::shared::joyStickId = event.joystickButton.joystickId;
                     vector_audio::shared::joyStickPtt = event.joystickButton.button;
 
                     vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
@@ -161,7 +162,7 @@ int main(int, char**)
         else
             updater_instance->draw();
 
-        //ImGui::ShowDemoWindow(NULL);
+        // ImGui::ShowDemoWindow(NULL);
 
         // Rendering
         window.clear();
