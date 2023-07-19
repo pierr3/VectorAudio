@@ -21,7 +21,7 @@ void Configuration::build_config()
 {
     const auto config_file_path = Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_);
 
-    airports_db_file_path_ = (get_resource_folder() / std::filesystem::path(airports_db_file_path_)).c_str();
+    airports_db_file_path_ = (get_resource_folder() / std::filesystem::path(airports_db_file_path_)).string();
 
     if (std::filesystem::exists(config_file_path)) {
         vector_audio::Configuration::config_ = toml::parse(config_file_path);

@@ -90,10 +90,11 @@ inline int PlatformOpen(std::string cmd)
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
-    int err = std::system("gedit " + cmd); // This assume gnome environment, we will also cover KDE if this fails
+    int err = std::system(std::string("gedit " + cmd).c_str()); // This assume gnome environment, we will also cover KDE if this fails
     if (err != 0) {
-        std::system("kate " + cmd);
+        return std::system(std::string("kate " + cmd).c_str());
     }
+    return err;
 #endif
 }
 

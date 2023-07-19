@@ -29,7 +29,7 @@ App::App()
 
         mClient_ = new afv_native::api::atcClient(
             shared::kClientName,
-            vector_audio::Configuration::get_resource_folder());
+            vector_audio::Configuration::get_resource_folder().string());
 
         // Fetch all available devices on start
         vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
@@ -893,8 +893,7 @@ void App::render_frame()
 
     // Licenses
 
-    TextURL("Licenses",
-        vector_audio::Configuration::get_resource_folder() / "LICENSE.txt");
+    TextURL("Licenses", (vector_audio::Configuration::get_resource_folder() / "LICENSE.txt").string());
 
     ImGui::EndGroup();
 
