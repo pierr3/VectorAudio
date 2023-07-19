@@ -6,6 +6,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <filesystem>
 #include <memory>
+#include <string>
 #include <thread>
 
 #include "application.h"
@@ -79,8 +80,8 @@ int main(int, char**)
     // - Remember that in C/C++ if you want to include a backslash \ in a string
     // literal you need to write a double backslash \\ !
     // io.Fonts->AddFontDefault();
-    auto p = vector_audio::Configuration::get_resource_folder() / std::filesystem::path("JetBrainsMono-Regular.ttf");
-    io.Fonts->AddFontFromFileTTF(p.c_str(), 18.0);
+    std::filesystem::path p = vector_audio::Configuration::get_resource_folder() / std::filesystem::path("JetBrainsMono-Regular.ttf");
+    io.Fonts->AddFontFromFileTTF(p.string().c_str(), 18.0);
 
     if (!ImGui::SFML::UpdateFontTexture()) {
         spdlog::critical("Could not update font textures");
