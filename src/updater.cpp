@@ -16,17 +16,17 @@ updater::updater()
     }
 
     if (res->status == 200) {
-        semver::version currentVersion;
+        semver::version current_version;
 
         try {
-            currentVersion = semver::version { std::string(VECTOR_VERSION) };
+            current_version = semver::version { std::string(VECTOR_VERSION) };
             mNewVersion = semver::version { res->body };
         } catch (std::invalid_argument& ex) {
             spdlog::critical("Cannot parse updater version, please update manually!");
             return;
         }
 
-        if (currentVersion < mNewVersion) {
+        if (current_version < mNewVersion) {
             mNeedUpdate = true;
         }
     } else {
