@@ -109,7 +109,7 @@ std::filesystem::path Configuration::get_config_folder_path()
 #elif defined(SFML_SYSTEM_LINUX)
     folder_path = get_linux_config_folder();
 #else
-    file_path = get_resource_folder();
+    folder_path = get_resource_folder();
 #endif
 
     if (!std::filesystem::exists(folder_path)) {

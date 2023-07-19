@@ -43,8 +43,8 @@ jobs:
 
       - name: Rename installer
         run: |
-          mv build/VectorAudio-x86_64.AppImage VectorAudio-DEBUG-x86_64.AppImage
-          mv build/VectorAudio-x86_64.AppImage.zsync VectorAudio-DEBUG-x86_64.AppImage.zsync
+          mv VectorAudio-x86_64.AppImage VectorAudio-DEBUG-x86_64.AppImage
+          mv VectorAudio-x86_64.AppImage.zsync VectorAudio-DEBUG-x86_64.AppImage.zsync
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
