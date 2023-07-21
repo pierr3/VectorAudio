@@ -30,6 +30,10 @@ if(APPLE)
     add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
 endif()
 
+if (WIN32)
+    add_definitions(-DCMAKE_CONFIGURATION_TYPES=Release)
+endif()
+
 option(SFML_BUILD_AUDIO "Build audio" OFF)
 option(SFML_BUILD_NETWORK "Build network" OFF)
 
