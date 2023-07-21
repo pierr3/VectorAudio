@@ -117,7 +117,7 @@ jobs:
           cmake --build build_intel/
       - name: Cleanup intel build
         run: |
-          cp build_intel/extern/afv-native/libafv.dylib build/libafv.dylib.intel
+          cp build_intel/extern/afv-native/libafv_native.dylib build/libafv_native.dylib.intel
           cp build_intel/vector_audio build/vector_audio.intel
           rm -rf build_intel/
       - name: Configure cmake (arm64)
@@ -128,12 +128,12 @@ jobs:
           cmake --build build_arm64/
       - name: Cleanup arm64 build
         run: |
-          cp build_arm64/extern/afv-native/libafv.dylib build/libafv.dylib.arm
+          cp build_arm64/extern/afv-native/libafv_native.dylib build/libafv_native.dylib.arm
           cp build_arm64/vector_audio build/vector_audio.arm
           rm -rf build_arm64/
       - name: Create Universal Binary
         run: |
-          lipo -create build/libafv.dylib.arm build/libafv.dylib.intel -output build/extern/afv-native/libafv.dylib
+          lipo -create build/libafv_native.dylib.arm build/libafv_native.dylib.intel -output build/extern/afv-native/libafv_native.dylib
           lipo -create build/vector_audio.arm build/vector_audio.intel -output build/vector_audio
       - name: Bundle OSX
         run: |
