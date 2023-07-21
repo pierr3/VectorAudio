@@ -141,8 +141,8 @@ jobs:
       - name: Create DMG
         run: |
           brew install create-dmg
-          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg" "build/VectorAudio.app"
+          create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg" "build/VectorAudio.app"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: VectorAudio-${{ env.RELEASE_VERSION }}-Installer.dmg
+          files: VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg
