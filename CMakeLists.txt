@@ -10,7 +10,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_definitions(-DVECTOR_VERSION="1.2.3")
+add_definitions(-DVECTOR_VERSION="1.3.0")
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
 add_subdirectory(extern/afv-native)

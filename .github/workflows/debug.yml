@@ -66,11 +66,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Temporarily fix OpenSSL download
-        run: |
-          mkdir vcpkg/downloads
-          choco install wget --no-progress
-          wget https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip -P vcpkg/downloads
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
