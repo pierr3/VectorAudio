@@ -10,7 +10,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_definitions(-DVECTOR_VERSION="1.3.1")
+add_definitions(-DVECTOR_VERSION="1.3.1a")
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
 add_subdirectory(extern/afv-native)
@@ -81,7 +81,7 @@ add_executable(vector_audio src/main.cpp
                 ${APPLE_EXTRA_LIBS})
 
 if (WIN32)
-    target_link_options(vector_audio PRIVATE "/MANIFESTUAC:level='requireAdministrator'" PRIVATE "/MANIFESTUAC:uiAccess='false'")
+    set_target_properties(vector_audio PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS")
 endif()
 
 if(APPLE)
