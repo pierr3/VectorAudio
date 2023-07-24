@@ -81,7 +81,7 @@ add_executable(vector_audio src/main.cpp
                 ${APPLE_EXTRA_LIBS})
 
 if (WIN32)
-    set_target_properties(vector_audio PROPERTIES WIN32_EXECUTABLE TRUE)
+    target_link_options(vector_audio PRIVATE "/SUBSYSTEM:WINDOWS")
     target_link_options(vector_audio PRIVATE "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\"")
 endif()
 
