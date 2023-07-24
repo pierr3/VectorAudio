@@ -22,7 +22,14 @@
 #include "window_manager.h"
 
 // Main code
+
+#ifdef SFML_SYSTEM_WINDOWS
+#include <windows.h>
+
+int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+#else
 int main(int, char**)
+#endif
 {
     vector_audio::SingleInstance instance;
     if (instance.HasRunningInstance()) {
