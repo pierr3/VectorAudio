@@ -14,6 +14,10 @@ See [releases](https://github.com/pierr3/VectorAudio/releases) for latest builds
 
 macOS has strict permissioning around background keyboard inputs. VectorAudio should prompt you on first launch to allow it to monitor keyboard input. Sometimes, upon updating the app, this setting will undo itself. In that case, follow the steps described [in this issue](https://github.com/pierr3/VectorAudio/issues/30#issuecomment-1407573758).
 
+### There is a console window appearing when I launch VectorAudio
+
+Version 1.3.1 accidentally triggered this issue. A hotfix has been released for windows, version 1.3.1a which is available to download under the 1.3.1 release, install it and the issue will be resolved.
+
 ### Where is the configuration file/log file stored?
 
 On macOS: `~/Library/Application\ Support/VectorAudio`
