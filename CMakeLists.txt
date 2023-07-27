@@ -61,8 +61,13 @@ if (APPLE)
     set(APPLE_EXTRA_LIBS src/osx_resources.mm src/window_manager.mm)
 endif()
 
+if(WIN32)
+    set(GUI_TYPE WIN32)
+elseif(APPLE)
+    set(GUI_TYPE MACOSX_BUNDLE)
+endif()
 
-add_executable(vector_audio src/main.cpp
+add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
@@ -81,8 +86,9 @@ add_executable(vector_audio src/main.cpp
                 ${APPLE_EXTRA_LIBS})
 
 if (WIN32)
-    target_link_options(vector_audio PRIVATE "/SUBSYSTEM:WINDOWS")
-    target_link_options(vector_audio PRIVATE "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\"")
+    set_target_properties(vector_audio PROPERTIES
+        WIN32_EXECUTABLE YES
+        LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
 if(APPLE)
