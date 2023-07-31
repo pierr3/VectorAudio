@@ -10,8 +10,28 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_definitions(-DVECTOR_VERSION="1.3.1a")
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
+
+# Read the VERSION file
+file(READ "VERSION" VERSION_CONTENT)
+string(REGEX MATCHALL "[0-9]+" VERSION_NUMBERS "${VERSION_CONTENT}")
+list(LENGTH VERSION_NUMBERS NUM_VERSIONS)
+if (NUM_VERSIONS LESS 3)
+    message(FATAL_ERROR "Invalid VERSION file. It should contain major, minor, and patch version numbers.")
+endif()
+
+# Extract major, minor, and patch version numbers from the list
+list(GET VERSION_NUMBERS 0 version_major)
+list(GET VERSION_NUMBERS 1 version_minor)
+list(GET VERSION_NUMBERS 2 version_patch)
+
+# Set version variables
+set(VERSION_MAJOR ${version_major})
+set(VERSION_MINOR ${version_minor})
+set(VERSION_PATCH ${version_patch})
+
+add_definitions(-DVECTOR_VERSION="${VERSION_CONTENT}")
+configure_file(vector_audio.rc.in ${CMAKE_SOURCE_DIR}/vector_audio.rc @ONLY)
 
 add_subdirectory(extern/afv-native)
 
@@ -61,8 +81,13 @@ if (APPLE)
     set(APPLE_EXTRA_LIBS src/osx_resources.mm src/window_manager.mm)
 endif()
 
+if(WIN32)
+    set(GUI_TYPE WIN32)
+elseif(APPLE)
+    set(GUI_TYPE MACOSX_BUNDLE)
+endif()
 
-add_executable(vector_audio src/main.cpp
+add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
@@ -78,11 +103,13 @@ add_executable(vector_audio src/main.cpp
                 src/modals/settings.cpp
                 src/single_instance.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
-                ${APPLE_EXTRA_LIBS})
+                ${APPLE_EXTRA_LIBS}
+                vector_audio.rc)
 
 if (WIN32)
-    target_link_options(vector_audio PRIVATE "/SUBSYSTEM:WINDOWS")
-    target_link_options(vector_audio PRIVATE "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\"")
+    set_target_properties(vector_audio PROPERTIES
+        WIN32_EXECUTABLE YES
+        LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
 if(APPLE)
