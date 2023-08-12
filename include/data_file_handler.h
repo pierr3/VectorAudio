@@ -7,6 +7,8 @@
 #include <string>
 #include <thread>
 
+#include <random>
+
 #include "shared.h"
 #include "util.h"
 #include <httplib.h>

@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <random>
 
 #include "application.h"
 #include "config.h"
@@ -24,6 +25,9 @@
 // Main code
 int main(int, char**)
 {
+
+    std::srand(time(nullptr));
+
     vector_audio::SingleInstance instance;
     if (instance.HasRunningInstance()) {
         return 0;
