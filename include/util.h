@@ -9,7 +9,8 @@
 
 namespace vector_audio::util {
 
-inline static std::string getHardwareName(const afv_native::HardwareType hardware)
+inline static std::string getHardwareName(
+    const afv_native::HardwareType hardware)
 {
     switch (hardware) {
     case afv_native::HardwareType::Garex_220:
@@ -23,8 +24,8 @@ inline static std::string getHardwareName(const afv_native::HardwareType hardwar
     return "Unknown Hardware";
 }
 
-inline static std::string ReplaceString(std::string subject, const std::string& search,
-    const std::string& replace)
+inline static std::string ReplaceString(
+    std::string subject, const std::string& search, const std::string& replace)
 {
     size_t pos = 0;
     while ((pos = subject.find(search, pos)) != std::string::npos) {
@@ -46,7 +47,8 @@ inline void AddUnderLine(ImColor col_)
 static void HelpMarker(const char* desc)
 {
     ImGui::TextDisabled("(?)");
-    if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort) && ImGui::BeginTooltip()) {
+    if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort)
+        && ImGui::BeginTooltip()) {
         ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0F);
         ImGui::TextUnformatted(desc);
         ImGui::PopTextWrapPos();
@@ -90,7 +92,9 @@ inline int PlatformOpen(std::string cmd)
 #endif
 
 #ifdef SFML_SYSTEM_LINUX
-    int err = std::system(std::string("gedit " + cmd).c_str()); // This assume gnome environment, we will also cover KDE if this fails
+    int err = std::system(std::string("gedit " + cmd)
+                              .c_str()); // This assume gnome environment, we
+                                         // will also cover KDE if this fails
     if (err != 0) {
         return std::system(std::string("kate " + cmd).c_str());
     }
@@ -98,9 +102,43 @@ inline int PlatformOpen(std::string cmd)
 #endif
 }
 
+// From https://github.com/swift-project/pilotclient/blob/main/src/blackmisc/aviation/comsystem.cpp
+// Under GPL v3 License
+
+inline bool isValid8_33kHzChannel(int fKHz)
+{
+    const int last_digits = static_cast<int>(fKHz) % 100;
+    return fKHz % 5 == 0 && last_digits != 20 && last_digits != 45
+        && last_digits != 70 && last_digits != 95;
+}
+
+inline int round8_33kHzChannel(int fKHz)
+{
+    if (!isValid8_33kHzChannel(fKHz)) {
+        const int diff = static_cast<int>(fKHz) % 5;
+        int lower = fKHz - diff;
+        if (!isValid8_33kHzChannel(lower)) {
+            lower -= 5;
+        }
+
+        int upper = fKHz + (5 - diff);
+        if (!isValid8_33kHzChannel(upper)) {
+            upper += 5;
+        }
+
+        const int lower_diff = abs(fKHz - lower);
+        const int upper_diff = abs(fKHz - upper);
+
+        fKHz = lower_diff < upper_diff ? lower : upper;
+        fKHz = std::clamp(fKHz, 118000, 136990);
+    }
+    return fKHz;
+}
+
 inline void TextURL(const std::string& name_, std::string URL_)
 {
-    ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered]);
+    ImGui::PushStyleColor(
+        ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered]);
     ImGui::TextUnformatted(name_.c_str());
     ImGui::PopStyleColor();
 
@@ -128,7 +166,8 @@ inline int roundUpToMultiplier(int numToRound, int multiple)
 
 inline int cleanUpFrequency(int frequency)
 {
-    // Ensures that a frequency is always valid and within defined ranges and in 25Khz format
+    // Ensures that a frequency is always valid and within defined ranges and in
+    // 25Khz format
 
     // We don't clean up an unset frequency
     if (std::abs(frequency) == shared::kObsFrequency) {
@@ -136,7 +175,8 @@ inline int cleanUpFrequency(int frequency)
     }
 
     // Force 25Khz spacing
-    frequency = roundUpToMultiplier(std::abs(frequency), shared::kFrequencyStep);
+    frequency
+        = roundUpToMultiplier(std::abs(frequency), shared::kFrequencyStep);
 
     // Clamp between allowed frequency band
     frequency = std::clamp(frequency, shared::kMinVhf, shared::kMaxVhf);
@@ -146,44 +186,57 @@ inline int cleanUpFrequency(int frequency)
 
 static bool endsWith(const std::string& str, const std::string& suffix)
 {
-    return str.size() >= suffix.size() && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix);
+    return str.size() >= suffix.size()
+        && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix);
 }
 
 static bool startsWith(const std::string& str, const std::string& prefix)
 {
-    return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
+    return str.size() >= prefix.size()
+        && 0 == str.compare(0, prefix.size(), prefix);
 }
 
 }
 
 inline static int findAudioAPIorDefault()
 {
-    if (vector_audio::shared::availableAudioAPI.find(vector_audio::shared::mAudioApi) != vector_audio::shared::availableAudioAPI.end())
+    if (vector_audio::shared::availableAudioAPI.find(
+            vector_audio::shared::mAudioApi)
+        != vector_audio::shared::availableAudioAPI.end())
         return vector_audio::shared::mAudioApi;
-    
+
     return 0;
 }
 
 inline static std::string findHeadsetInputDeviceOrDefault()
 {
-    if (std::find(vector_audio::shared::availableInputDevices.begin(), vector_audio::shared::availableInputDevices.end(), vector_audio::shared::configInputDeviceName) != vector_audio::shared::availableInputDevices.end())
+    if (std::find(vector_audio::shared::availableInputDevices.begin(),
+            vector_audio::shared::availableInputDevices.end(),
+            vector_audio::shared::configInputDeviceName)
+        != vector_audio::shared::availableInputDevices.end())
         return vector_audio::shared::configInputDeviceName;
-    
+
     return vector_audio::shared::availableInputDevices.front();
 }
 
 inline static std::string findHeadsetOutputDeviceOrDefault()
 {
-    if (std::find(vector_audio::shared::availableOutputDevices.begin(), vector_audio::shared::availableOutputDevices.end(), vector_audio::shared::configOutputDeviceName) != vector_audio::shared::availableOutputDevices.end())
+    if (std::find(vector_audio::shared::availableOutputDevices.begin(),
+            vector_audio::shared::availableOutputDevices.end(),
+            vector_audio::shared::configOutputDeviceName)
+        != vector_audio::shared::availableOutputDevices.end())
         return vector_audio::shared::configOutputDeviceName;
-    
+
     return vector_audio::shared::availableOutputDevices.front();
 }
 
 inline static std::string findSpeakerOutputDeviceOrDefault()
 {
-    if (std::find(vector_audio::shared::availableOutputDevices.begin(), vector_audio::shared::availableOutputDevices.end(), vector_audio::shared::configSpeakerDeviceName) != vector_audio::shared::availableOutputDevices.end())
+    if (std::find(vector_audio::shared::availableOutputDevices.begin(),
+            vector_audio::shared::availableOutputDevices.end(),
+            vector_audio::shared::configSpeakerDeviceName)
+        != vector_audio::shared::availableOutputDevices.end())
         return vector_audio::shared::configSpeakerDeviceName;
-    
+
     return vector_audio::shared::availableOutputDevices.front();
 }
