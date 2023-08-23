@@ -66,7 +66,7 @@ bool vector_audio::data_file::Handler::parse_slurper(
                 continue;
             }
 
-            auto res = shared::split_string(lines[0], ",");
+            auto res = shared::split_string(line, ",");
 
             if (util::endsWith(res[1], "_ATIS")) {
                 continue; // Ignore ATIS connections
