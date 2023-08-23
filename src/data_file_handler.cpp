@@ -45,12 +45,7 @@ bool vector_audio::data_file::Handler::parse_slurper(
 {
     if (sluper_data.empty()) {
 
-        if (shared::datafile::is_connected) {
-            spdlog::info("Detected client disconnecting from network");
-        }
-
-        vector_audio::shared::datafile::is_connected = false;
-        vector_audio::shared::datafile::callsign = "Not connected";
+        handle_disconnect();
 
     } else {
         auto lines = shared::split_string(sluper_data, "\n");
@@ -95,7 +90,7 @@ bool vector_audio::data_file::Handler::parse_slurper(
         }
 
         if (!found_not_atis_connection) {
-            vector_audio::shared::datafile::is_connected = false;
+            handle_disconnect();
             return false;
         }
 
@@ -245,13 +240,29 @@ inline void vector_audio::data_file::Handler::thread()
 
                 if (!connected_flag
                     && vector_audio::shared::datafile::is_connected) {
-                    vector_audio::shared::datafile::is_connected = false;
-                    vector_audio::shared::datafile::callsign = "Not connected";
-                    spdlog::info("Detected client disconnecting from network");
+                    handle_disconnect();
                 }
             }
         }
     } while (!cv_.wait_for(lk, 15s, [this] { return !keep_running_; }));
 
     spdlog::debug("Data file thread terminated.");
+}
+
+void vector_audio::data_file::Handler::handle_disconnect()
+{
+    if (!vector_audio::shared::datafile::is_connected) {
+        return;
+    }
+
+    if (had_one_disconnect_) {
+        spdlog::info("Client disconnected from vatsim");
+        vector_audio::shared::datafile::is_connected = false;
+        vector_audio::shared::datafile::callsign = "Not connected";
+        had_one_disconnect_ = false;
+    } else {
+        spdlog::info("Detected client disconnecting from network, grace "
+                     "period started");
+        had_one_disconnect_ = true;
+    }
 }

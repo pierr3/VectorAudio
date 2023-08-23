@@ -27,12 +27,16 @@ public:
 
     static bool parse_slurper(const std::string& sluper_data);
 
+    static void handle_disconnect();
+
 private:
     std::regex regex_ = std::regex();
     std::thread dataFileThread_;
     bool keep_running_ = true;
     std::condition_variable cv_;
     std::mutex m_;
+
+    static inline bool had_one_disconnect_ = false;
 
     static inline bool yx_ = false;
 
