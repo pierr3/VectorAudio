@@ -38,9 +38,11 @@ Yes! @KingfuChan has updated the RDF plugin for EuroScope to include support for
 
 ### What is this green "Slurper" text/yellow "Datafile" text/red "No VATSIM data"
 
-VectorAudio uses two different ways to detect a connection to vatsim: the slurper and the datafile. If VectorAudio does not allow you to connect or does not detect your network connection, click the slurper text to switch to the datafile as fallback. If you already see a yellow "datafile" label in the top right, that means the slurper is not available.
+VectorAudio uses two different ways to detect a connection to vatsim: the slurper and the datafile. If you see a yellow "datafile" label in the top right, that means the slurper is not available.
 
 If you see a red "No VATSIM data", this most likely means that VATSIM servers are temporarily down.
+
+The status of available endpoints is refreshed every 15 minutes.
 
 ### Does VectorAudio support HF Simulation?
 

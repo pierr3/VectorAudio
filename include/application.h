@@ -48,5 +48,7 @@ private:
 
     bool showErrorModal_ = false;
     std::string lastErrorModalMessage_;
+
+    std::unique_ptr<vector_audio::vatsim::DataHandler> dataHandler_;
 };
 }

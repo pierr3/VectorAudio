@@ -14,7 +14,8 @@
 #define slurper_host "https://slurper.vatsim.net"
 #define slurper_url "/users/info/?cid="
 
-#define url_regex "^(https?:\\/\\/)?(?:[^@\n]+@)?(?:www\\.)?([^:\\/\n?]+)(\\/[.A-z0-9/-]+)$"
+#define url_regex                                                              \
+    "^(https?:\\/\\/)?(?:[^@\n]+@)?(?:www\\.)?([^:\\/\n?]+)(\\/[.A-z0-9/-]+)$"
 
 namespace vector_audio::shared {
 struct StationElement {
@@ -37,15 +38,14 @@ struct StationElement {
     }
 };
 
-static std::vector<std::string> split_string(const std::string& str,
-                                      const std::string& delimiter)
+static std::vector<std::string> split_string(
+    const std::string& str, const std::string& delimiter)
 {
     std::vector<std::string> strings;
 
     std::string::size_type pos = 0;
     std::string::size_type prev = 0;
-    while ((pos = str.find(delimiter, prev)) != std::string::npos)
-    {
+    while ((pos = str.find(delimiter, prev)) != std::string::npos) {
         strings.push_back(str.substr(prev, pos - prev));
         prev = pos + delimiter.size();
     }
@@ -96,9 +96,11 @@ inline float station_add_frequency = 118.0;
 inline std::vector<int> StationsPendingRemoval;
 inline std::vector<int> StationsPendingRxChange;
 
-inline afv_native::HardwareType hardware = afv_native::HardwareType::Schmid_ED_137B;
+inline afv_native::HardwareType hardware
+    = afv_native::HardwareType::Schmid_ED_137B;
 
-inline const std::vector<std::string> AvailableHardware = { "Smid ED-137B", "Rockwell Collins 2100", "Garex 220" };
+inline const std::vector<std::string> AvailableHardware
+    = { "Smid ED-137B", "Rockwell Collins 2100", "Garex 220" };
 
 inline int RadioGain = 100;
 
@@ -109,23 +111,19 @@ inline std::vector<std::string> availableOutputDevices;
 
 inline static std::mutex transmitting_mutex;
 inline static std::string currentlyTransmittingApiData;
-inline static std::chrono::high_resolution_clock::time_point currentlyTransmittingApiTimer;
+inline static std::chrono::high_resolution_clock::time_point
+    currentlyTransmittingApiTimer;
 
 inline int apiServerPort = 49080;
 
-namespace slurper {
-    inline bool is_unavailable = false;
-
-    inline float position_lat;
-    inline float position_lon;
-}
-
 // Thread unsafe stuff
-namespace datafile {
+namespace session {
+    inline std::mutex m;
     inline int facility = 0;
     inline bool is_connected = false;
 
-    inline bool is_unavailable = false;
+    inline double latitude;
+    inline double longitude;
 
     inline std::string callsign = "Not connected";
     inline int frequency;

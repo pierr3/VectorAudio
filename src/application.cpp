@@ -1,6 +1,7 @@
 #include "application.h"
 #include "afv-native/Log.h"
 #include "afv-native/atcClientWrapper.h"
+#include "data_file_handler.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "shared.h"
@@ -8,6 +9,7 @@
 #include "util.h"
 #include <SFML/Window/Joystick.hpp>
 #include <httplib.h>
+#include <memory>
 #include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
@@ -24,6 +26,7 @@ namespace afv_logger {
 }
 
 App::App()
+    : dataHandler_(std::make_unique<vatsim::DataHandler>())
 {
     try {
         afv_native::api::atcClient::setLogger(afv_logger::g_logger);
@@ -425,24 +428,24 @@ void App::render_frame()
             // We replaced double _ which may be used during frequency
             // handovers, but are not defined in database
             std::string clean_callsign = vector_audio::util::ReplaceString(
-                shared::datafile::callsign, "__", "_");
+                shared::session::callsign, "__", "_");
 
             shared::StationElement el = shared::StationElement::build(
-                clean_callsign, shared::datafile::frequency);
+                clean_callsign, shared::session::frequency);
             if (!frequencyExists(el.freq))
                 shared::FetchedStations.push_back(el);
 
             this->mClient_->AddFrequency(
-                shared::datafile::frequency, clean_callsign);
+                shared::session::frequency, clean_callsign);
             mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
             mClient_->SetEnableOutputEffects(
                 vector_audio::shared::mOutputEffects);
             this->mClient_->UseTransceiversFromStation(
-                clean_callsign, shared::datafile::frequency);
-            this->mClient_->SetRx(shared::datafile::frequency, true);
-            if (shared::datafile::facility > 0) {
-                this->mClient_->SetTx(shared::datafile::frequency, true);
-                this->mClient_->SetXc(shared::datafile::frequency, true);
+                clean_callsign, shared::session::frequency);
+            this->mClient_->SetRx(shared::session::frequency, true);
+            if (shared::session::facility > 0) {
+                this->mClient_->SetTx(shared::session::frequency, true);
+                this->mClient_->SetXc(shared::session::frequency, true);
             }
             this->mClient_->FetchStationVccs(clean_callsign);
         }
@@ -504,7 +507,7 @@ void App::render_frame()
     // Callsign Field
     ImGui::PushItemWidth(100.0F);
     ImGui::TextUnformatted(
-        std::string("Callsign: ").append(shared::datafile::callsign).c_str());
+        std::string("Callsign: ").append(shared::session::callsign).c_str());
     ImGui::PopItemWidth();
     ImGui::SameLine();
     ImGui::Text("|");
@@ -514,15 +517,15 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        style::push_disabled_on(
-            (!shared::datafile::is_connected && shared::slurper::is_unavailable)
-            || (shared::slurper::is_unavailable
-                && shared::datafile::is_unavailable));
+        style::push_disabled_on((!shared::session::is_connected
+                                    && dataHandler_->isSlurperAvailable())
+            || (!dataHandler_->isSlurperAvailable()
+                && !dataHandler_->isDatafileAvailable()));
 
         if (ImGui::Button("Connect")) {
 
-            if (!vector_audio::shared::datafile::is_connected
-                && !vector_audio::shared::slurper::is_unavailable) {
+            if (!vector_audio::shared::session::is_connected
+                && dataHandler_->isSlurperAvailable()) {
                 // We manually call the slurper here in case that we do not have
                 // a connection yet Although this will block the whole program,
                 // it is not an issue in this case As the user does not need to
@@ -530,14 +533,10 @@ void App::render_frame()
                 // fails once will not be retried and will default to datafile
                 // only
 
-                auto* slurper_cli = new httplib::Client(slurper_host);
-                auto sluper_data = data_file::Handler::download_string(
-                    slurper_url + std::to_string(shared::vatsim_cid),
-                    slurper_cli);
-                data_file::Handler::parse_slurper(sluper_data);
+                dataHandler_->getConnectionStatusWithSlurper();
             }
 
-            if (vector_audio::shared::datafile::is_connected) {
+            if (vector_audio::shared::session::is_connected) {
                 mClient_->StopAudio();
                 mClient_->Disconnect(); // Force a disconnect of API
 
@@ -552,10 +551,10 @@ void App::render_frame()
                 mClient_->SetHeadsetOutputChannel(
                     vector_audio::shared::headsetOutputChannel);
 
-                if (shared::slurper::is_unavailable) {
+                if (!dataHandler_->isSlurperAvailable()) {
                     std::string client_icao
-                        = vector_audio::shared::datafile::callsign.substr(0,
-                            vector_audio::shared::datafile::callsign.find('_'));
+                        = vector_audio::shared::session::callsign.substr(0,
+                            vector_audio::shared::session::callsign.find('_'));
                     // We use the airport database for this
                     if (ns::Airport::All.find(client_icao)
                         != ns::Airport::All.end()) {
@@ -582,17 +581,17 @@ void App::render_frame()
                 } else {
                     spdlog::info(
                         "Found client position from slurper at lat:{}, lon:{}",
-                        vector_audio::shared::slurper::position_lat,
-                        vector_audio::shared::slurper::position_lon);
+                        vector_audio::shared::session::latitude,
+                        vector_audio::shared::session::longitude);
                     mClient_->SetClientPosition(
-                        vector_audio::shared::slurper::position_lat,
-                        vector_audio::shared::slurper::position_lon, 300, 300);
+                        vector_audio::shared::session::latitude,
+                        vector_audio::shared::session::longitude, 300, 300);
                 }
 
                 mClient_->SetCredentials(
                     std::to_string(vector_audio::shared::vatsim_cid),
                     vector_audio::shared::vatsim_password);
-                mClient_->SetCallsign(vector_audio::shared::datafile::callsign);
+                mClient_->SetCallsign(vector_audio::shared::session::callsign);
                 mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
                 mClient_->StartAudio();
                 if (!mClient_->Connect()) {
@@ -605,9 +604,9 @@ void App::render_frame()
             }
         }
         style::pop_disabled_on(
-            (!shared::datafile::is_connected && shared::slurper::is_unavailable)
-            || (shared::slurper::is_unavailable
-                && shared::datafile::is_unavailable));
+            (!shared::session::is_connected && dataHandler_->isSlurperAvailable())
+            || (!dataHandler_->isSlurperAvailable()
+                && !dataHandler_->isDatafileAvailable()));
     } else {
         ImGui::PushStyleColor(
             ImGuiCol_Button, ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -617,7 +616,7 @@ void App::render_frame()
             ImGuiCol_ButtonActive, ImColor::HSV(4 / 7.0F, 0.8F, 0.8F).Value);
 
         // Auto disconnect if we need
-        if (ImGui::Button("Disconnect") || !shared::datafile::is_connected) {
+        if (ImGui::Button("Disconnect") || !shared::session::is_connected) {
             if (mClient_->IsAtisPlayingBack())
                 mClient_->StopAtisPlayback();
             mClient_->Disconnect();
@@ -679,12 +678,12 @@ void App::render_frame()
     ImGui::SameLine();
     // Status about datasource
 
-    if (!shared::slurper::is_unavailable) {
+    if (dataHandler_->isSlurperAvailable()) {
         ImGui::TextColored(green, "Slurper");
-        if (ImGui::IsItemClicked()) {
+        /*if (ImGui::IsItemClicked()) {
             shared::slurper::is_unavailable = true;
-        }
-    } else if (!shared::datafile::is_unavailable) {
+        }*/
+    } else if (!dataHandler_->isDatafileAvailable()) {
         ImGui::TextColored(yellow, "Datafile");
     } else {
         ImGui::TextColored(red, "No VATSIM Data");
@@ -845,7 +844,7 @@ void App::render_frame()
 
             if (ImGui::Button(std::string("XC##").append(el.callsign).c_str(),
                     quarter_size)
-                && shared::datafile::facility > 0) {
+                && shared::session::facility > 0) {
                 if (freq_active) {
                     mClient_->SetXc(el.freq, !xc_state);
                 } else {
@@ -902,7 +901,7 @@ void App::render_frame()
 
             if (ImGui::Button(
                     std::string("TX##").append(el.callsign).c_str(), half_size)
-                && shared::datafile::facility > 0) {
+                && shared::session::facility > 0) {
                 if (freq_active) {
                     mClient_->SetTx(el.freq, !tx_state);
                 } else {

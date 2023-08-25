@@ -100,8 +100,6 @@ int main(int, char**)
 
     auto updater_instance = std::make_unique<vector_audio::updater>();
 
-    auto data_file_handler = std::make_unique<vector_audio::data_file::Handler>();
-
     auto current_app = std::make_unique<vector_audio::application::App>();
 
     bool always_on_top = vector_audio::shared::keepWindowOnTop;
