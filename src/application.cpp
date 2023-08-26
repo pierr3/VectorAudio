@@ -603,8 +603,8 @@ void App::render_frame()
                 errorModal("Not connected to VATSIM!");
             }
         }
-        style::pop_disabled_on(
-            (!shared::session::is_connected && dataHandler_->isSlurperAvailable())
+        style::pop_disabled_on((!shared::session::is_connected
+                                   && dataHandler_->isSlurperAvailable())
             || (!dataHandler_->isSlurperAvailable()
                 && !dataHandler_->isDatafileAvailable()));
     } else {
@@ -945,8 +945,15 @@ void App::render_frame()
     style::push_disabled_on(!mClient_->IsVoiceConnected());
     if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
         if (mClient_->IsVoiceConnected()) {
-            mClient_->GetStation(shared::station_auto_add_callsign);
-            mClient_->FetchStationVccs(shared::station_auto_add_callsign);
+            if (!util::startsWith(shared::station_auto_add_callsign, "!")) {
+                mClient_->GetStation(shared::station_auto_add_callsign);
+                mClient_->FetchStationVccs(shared::station_auto_add_callsign);
+            } else {
+                mClient_->AddFrequency(122800000, shared::station_auto_add_callsign);
+                mClient_->UseTransceiversFromStation(shared::station_auto_add_callsign, 122800000);
+                mClient_->SetRx(122800000, true);
+            }
+
             shared::station_auto_add_callsign = "";
         }
     }

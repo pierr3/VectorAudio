@@ -102,11 +102,13 @@ inline int PlatformOpen(std::string cmd)
 #endif
 }
 
-// From https://github.com/swift-project/pilotclient/blob/main/src/blackmisc/aviation/comsystem.cpp
+// From
+// https://github.com/swift-project/pilotclient/blob/main/src/blackmisc/aviation/comsystem.cpp
 // Under GPL v3 License
 
 inline bool isValid8_33kHzChannel(int fKHz)
 {
+    fKHz = fKHz / 100;
     const int last_digits = static_cast<int>(fKHz) % 100;
     return fKHz % 5 == 0 && last_digits != 20 && last_digits != 45
         && last_digits != 70 && last_digits != 95;
@@ -114,6 +116,7 @@ inline bool isValid8_33kHzChannel(int fKHz)
 
 inline int round8_33kHzChannel(int fKHz)
 {
+    fKHz = fKHz / 100;
     if (!isValid8_33kHzChannel(fKHz)) {
         const int diff = static_cast<int>(fKHz) % 5;
         int lower = fKHz - diff;
@@ -132,7 +135,7 @@ inline int round8_33kHzChannel(int fKHz)
         fKHz = lower_diff < upper_diff ? lower : upper;
         fKHz = std::clamp(fKHz, 118000, 136990);
     }
-    return fKHz;
+    return fKHz*100;
 }
 
 inline void TextURL(const std::string& name_, std::string URL_)
@@ -174,14 +177,11 @@ inline int cleanUpFrequency(int frequency)
         return frequency;
     }
 
-    // Force 25Khz spacing
-    frequency
-        = roundUpToMultiplier(std::abs(frequency), shared::kFrequencyStep);
+    if (!util::isValid8_33kHzChannel(frequency)) {
+        return util::round8_33kHzChannel(frequency);
+    }
 
-    // Clamp between allowed frequency band
-    frequency = std::clamp(frequency, shared::kMinVhf, shared::kMaxVhf);
-
-    return frequency;
+    return std::clamp(frequency, 118000000, 136990000);;
 }
 
 static bool endsWith(const std::string& str, const std::string& suffix)
