@@ -517,10 +517,12 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        style::push_disabled_on((!shared::session::is_connected
-                                    && dataHandler_->isSlurperAvailable())
+        bool ready_to_connect
+            = (!shared::session::is_connected
+                  && dataHandler_->isSlurperAvailable())
             || (!dataHandler_->isSlurperAvailable()
-                && !dataHandler_->isDatafileAvailable()));
+                && dataHandler_->isDatafileAvailable() && shared::session::is_connected);
+        style::push_disabled_on(!ready_to_connect);
 
         if (ImGui::Button("Connect")) {
 
@@ -571,7 +573,7 @@ void App::render_frame()
                             client_airport.lat, client_airport.lon,
                             client_airport.elevation);
                     } else {
-                        spdlog::info(
+                        spdlog::warn(
                             "Client position is unknown, setting default.");
 
                         // Default position is over Paris somewhere
@@ -603,10 +605,7 @@ void App::render_frame()
                 errorModal("Not connected to VATSIM!");
             }
         }
-        style::pop_disabled_on((!shared::session::is_connected
-                                   && dataHandler_->isSlurperAvailable())
-            || (!dataHandler_->isSlurperAvailable()
-                && !dataHandler_->isDatafileAvailable()));
+        style::pop_disabled_on(!ready_to_connect);
     } else {
         ImGui::PushStyleColor(
             ImGuiCol_Button, ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -683,7 +682,7 @@ void App::render_frame()
         /*if (ImGui::IsItemClicked()) {
             shared::slurper::is_unavailable = true;
         }*/
-    } else if (!dataHandler_->isDatafileAvailable()) {
+    } else if (dataHandler_->isDatafileAvailable()) {
         ImGui::TextColored(yellow, "Datafile");
     } else {
         ImGui::TextColored(red, "No VATSIM Data");
@@ -949,8 +948,10 @@ void App::render_frame()
                 mClient_->GetStation(shared::station_auto_add_callsign);
                 mClient_->FetchStationVccs(shared::station_auto_add_callsign);
             } else {
-                mClient_->AddFrequency(122800000, shared::station_auto_add_callsign);
-                mClient_->UseTransceiversFromStation(shared::station_auto_add_callsign, 122800000);
+                mClient_->AddFrequency(
+                    122800000, shared::station_auto_add_callsign);
+                mClient_->UseTransceiversFromStation(
+                    shared::station_auto_add_callsign, 122800000);
                 mClient_->SetRx(122800000, true);
             }
 

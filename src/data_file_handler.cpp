@@ -248,6 +248,8 @@ void vector_audio::vatsim::DataHandler::handleConnect()
 }
 void vector_audio::vatsim::DataHandler::worker()
 {
+    this->getAvailableEndpoints();
+
     std::unique_lock<std::mutex> lk(m_);
     do {
         if (!this->isSlurperAvailable() || !this->isDatafileAvailable()) {
