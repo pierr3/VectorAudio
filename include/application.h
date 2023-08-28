@@ -54,6 +54,8 @@ private:
     std::unique_ptr<vector_audio::vatsim::DataHandler> dataHandler_;
 
     sf::SoundBuffer disconnectWarningSoundbuffer_;
+    sf::Sound soundPlayer_;
     bool disconnectWarningSoundAvailable_ = true;
+    bool manuallyDisconnected_ = false;
 };
 }

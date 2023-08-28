@@ -146,9 +146,6 @@ bool vector_audio::vatsim::DataHandler::checkIfSlurperAvailable()
 };
 void vector_audio::vatsim::DataHandler::getAvailableEndpoints()
 {
-    this->dataFileAvailable_ = false;
-    this->slurperAvailable_ = false;
-
     auto status_available = this->getLatestDatafileURL();
     if (status_available) {
         this->dataFileAvailable_ = this->checkIfdatafileAvailable();
@@ -189,7 +186,7 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
 {
     try {
         if (!nlohmann::json::accept(data)) {
-            spdlog::error("Failed to parse slurper: not valid JSON");
+            spdlog::error("Failed to parse datafile: not valid JSON");
             return false;
         }
 
@@ -221,7 +218,7 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
             }
         }
     } catch (std::exception& e) {
-        spdlog::error("Failed to parse slurper: %s", e.what());
+        spdlog::error("Failed to parse datafile: %s", e.what());
     }
 
     return false;
@@ -248,7 +245,10 @@ void vector_audio::vatsim::DataHandler::handleConnect()
 }
 void vector_audio::vatsim::DataHandler::worker()
 {
-    this->getAvailableEndpoints();
+    {
+        const std::lock_guard<std::mutex> l(shared::session::m);
+        this->getAvailableEndpoints();
+    }
 
     std::unique_lock<std::mutex> lk(m_);
     do {
@@ -261,7 +261,7 @@ void vector_audio::vatsim::DataHandler::worker()
         if (this->isSlurperAvailable()) {
             res = this->getConnectionStatusWithSlurper();
         } else if (this->isDatafileAvailable()) {
-            res = this->checkIfdatafileAvailable();
+            res = this->getConnectionStatusWithDatafile();
         }
 
         if (!res) {
@@ -301,4 +301,91 @@ bool vector_audio::vatsim::DataHandler::getConnectionStatusWithDatafile()
         cli, this->datafile_url_);
 
     return this->parseDatafile(res);
+}
+bool vector_audio::vatsim::DataHandler::getPilotPositionWithSlurper(
+    const std::string& callsign, double& latitude, double& longitude)
+{
+    if (!this->isSlurperAvailable()) {
+        return false;
+    }
+
+    auto cli = httplib::Client(slurper_host);
+    std::string res;
+    std::string url_with_params = std::string(slurper_url) + callsign;
+    res = vector_audio::vatsim::DataHandler::downloadString(
+        cli, url_with_params);
+
+    if (res.empty()) {
+        return false;
+    }
+
+    try {
+        auto lines = shared::split_string(res, "\n");
+        for (const auto& line : lines) {
+            auto splits = shared::split_string(line, ",");
+
+            if (splits[2] == "pilot") {
+                latitude = std::stod(splits[5]);
+                longitude = std::stod(splits[6]);
+
+                return true;
+            }
+        }
+    } catch (const std::exception& e) {
+        spdlog::error("Error parsing pilot slurper position: %s", e.what());
+    }
+
+    return false;
+}
+bool vector_audio::vatsim::DataHandler::getPilotPositionWithDatafile(
+    const std::string& callsign, double& latitude, double& longitude)
+{
+    if (!this->isDatafileAvailable()) {
+        return false;
+    }
+
+    auto cli = httplib::Client(this->datafile_host_);
+    std::string res = vector_audio::vatsim::DataHandler::downloadString(
+        cli, this->datafile_url_);
+
+    if (res.empty()) {
+        return false;
+    }
+
+    try {
+        if (!nlohmann::json::accept(res)) {
+            spdlog::error("Failed to parse pilot datafile: not valid JSON");
+            return false;
+        }
+
+        auto v3_datafile = nlohmann::json::parse(res);
+
+        for (auto pilot : v3_datafile["pilots"]) {
+            if (pilot["callsign"] == callsign) {
+
+                latitude = pilot["latitude"].get<double>();
+                longitude = pilot["longitude"].get<double>();
+
+                return true;
+            }
+        }
+    } catch (const std::exception& e) {
+        spdlog::error("Failed to parse pilot datafile: %s", e.what());
+    }
+
+    return false;
+}
+bool vector_audio::vatsim::DataHandler::getPilotPositionWithAnything(
+    const std::string& callsign, double& latitude, double& longitude)
+{
+    if (this->slurperAvailable_) {
+        return this->getPilotPositionWithSlurper(callsign, latitude, longitude);
+    }
+
+    if (this->dataFileAvailable_) {
+        return this->getPilotPositionWithDatafile(
+            callsign, latitude, longitude);
+    }
+
+    return false;
 }

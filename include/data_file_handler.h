@@ -44,6 +44,9 @@ public:
 
     bool getConnectionStatusWithDatafile();
 
+    bool getPilotPositionWithAnything(
+        const std::string& callsign, double& latitude, double& longitude);
+
 private:
     std::regex regex_;
     std::unique_ptr<std::thread> workerThread_;
@@ -64,6 +67,12 @@ private:
     bool parseSlurper(const std::string& sluper_data);
 
     bool getLatestDatafileURL();
+
+    bool getPilotPositionWithSlurper(
+        const std::string& callsign, double& latitude, double& longitude);
+
+    bool getPilotPositionWithDatafile(
+        const std::string& callsign, double& latitude, double& longitude);
 
     bool checkIfdatafileAvailable();
 

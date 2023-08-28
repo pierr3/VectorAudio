@@ -10,6 +10,7 @@
 #include "style.h"
 #include "util.h"
 #include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Joystick.hpp>
 #include <httplib.h>
 #include <memory>
@@ -128,12 +129,15 @@ App::App()
         .detach();
 
     // Load the warning sound for disconnection
-    if (!disconnectWarningSoundbuffer_.loadFromFile(
-            Configuration::get_resource_folder() / "disconnect.wav")) {
+    auto sound_path = Configuration::get_resource_folder()
+        / std::filesystem::path("disconnect.wav");
+    if (!disconnectWarningSoundbuffer_.loadFromFile(sound_path.string())) {
         spdlog::error(
             "Could not load warning sound file, disconnection will be silent");
         disconnectWarningSoundAvailable_ = false;
     }
+
+    soundPlayer_.setBuffer(disconnectWarningSoundbuffer_);
 }
 
 App::~App() { delete mClient_; }
@@ -370,9 +374,23 @@ void App::eventCallback(
             return;
         }
 
-        sf::Sound sound;
-        sound.setBuffer(disconnectWarningSoundbuffer_);
-        sound.play();
+        if (!manuallyDisconnected_) {
+            soundPlayer_.play();
+        }
+
+        manuallyDisconnected_ = false;
+    }
+
+    if (evt == afv_native::ClientEventType::VoiceServerError) {
+        int err_code = *reinterpret_cast<int*>(data);
+        errorModal("Voice server returned error " + std::to_string(err_code)
+            + ", please check the log file.");
+    }
+
+    if (evt == afv_native::ClientEventType::VoiceServerChannelError) {
+        int err_code = *reinterpret_cast<int*>(data);
+        errorModal("Voice server returned channel error "
+            + std::to_string(err_code) + ", please check the log file.");
     }
 
     if (evt == afv_native::ClientEventType::StationDataReceived) {
@@ -540,9 +558,7 @@ void App::render_frame()
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
         bool ready_to_connect = (!shared::session::is_connected
                                     && dataHandler_->isSlurperAvailable())
-            || (!dataHandler_->isSlurperAvailable()
-                && dataHandler_->isDatafileAvailable()
-                && shared::session::is_connected);
+            || shared::session::is_connected;
         style::push_disabled_on(!ready_to_connect);
 
         if (ImGui::Button("Connect")) {
@@ -556,7 +572,8 @@ void App::render_frame()
                 // fails once will not be retried and will default to datafile
                 // only
 
-                dataHandler_->getConnectionStatusWithSlurper();
+                vector_audio::shared::session::is_connected
+                    = dataHandler_->getConnectionStatusWithSlurper();
             }
 
             if (vector_audio::shared::session::is_connected) {
@@ -636,14 +653,20 @@ void App::render_frame()
             ImGuiCol_ButtonActive, ImColor::HSV(4 / 7.0F, 0.8F, 0.8F).Value);
 
         // Auto disconnect if we need
-        if (ImGui::Button("Disconnect") || !shared::session::is_connected) {
+        auto pressed_disconnect = ImGui::Button("Disconnect");
+        if (pressed_disconnect || !shared::session::is_connected) {
+
+            if (pressed_disconnect) {
+                manuallyDisconnected_ = true;
+            }
+
             if (mClient_->IsAtisPlayingBack())
                 mClient_->StopAtisPlayback();
-            mClient_->Disconnect();
 
             // Cleanup everything
             for (const auto& f : shared::FetchedStations)
                 mClient_->RemoveFrequency(f.freq);
+            mClient_->Disconnect();
 
             shared::FetchedStations.clear();
             shared::bootUpVccs = false;
@@ -712,10 +735,10 @@ void App::render_frame()
     ImGui::SameLine();
 
     vector_audio::util::HelpMarker(
-        "The data source where VectorAudio\nchecks for your connection.\n"
-        "Click it to force usage of the datafile in\ncase the slurper does not "
-        "detect your connection\n"
-        "Red text means vatsim servers could not be reached at all.");
+        "The data source where VectorAudio\nchecks for your VATSIM "
+        "connection.\n"
+        "No VATSIM Data means that VATSIM servers could not be reached at "
+        "all.");
 
     ImGui::NewLine();
 
@@ -969,11 +992,37 @@ void App::render_frame()
                 mClient_->GetStation(shared::station_auto_add_callsign);
                 mClient_->FetchStationVccs(shared::station_auto_add_callsign);
             } else {
-                mClient_->AddFrequency(
-                    122800000, shared::station_auto_add_callsign);
-                mClient_->UseTransceiversFromStation(
-                    shared::station_auto_add_callsign, 122800000);
-                mClient_->SetRx(122800000, true);
+                double latitude;
+                double longitude;
+                shared::station_auto_add_callsign
+                    = shared::station_auto_add_callsign.substr(1);
+
+                if (!frequencyExists(shared::kUnicomFrequency)) {
+                    if (dataHandler_->getPilotPositionWithAnything(
+                            shared::station_auto_add_callsign, latitude,
+                            longitude)) {
+
+                        shared::StationElement el
+                            = shared::StationElement::build(
+                                shared::station_auto_add_callsign,
+                                shared::kUnicomFrequency);
+
+                        shared::FetchedStations.push_back(el);
+                        mClient_->AddFrequency(shared::kUnicomFrequency,
+                            shared::station_auto_add_callsign);
+                        mClient_->SetClientPosition(
+                            latitude, longitude, 1000, 1000);
+                        mClient_->SetRx(shared::kUnicomFrequency, true);
+
+                    } else {
+                        errorModal("Could not find pilot connected under that "
+                                   "callsign.");
+                    }
+
+                } else {
+                    errorModal("Another UNICOM frequency is active, please "
+                               "delete it first.");
+                }
             }
 
             shared::station_auto_add_callsign = "";
