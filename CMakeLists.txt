@@ -67,7 +67,7 @@ find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 find_package(Threads REQUIRED)
-find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
+find_package(SFML COMPONENTS system window graphics audio CONFIG REQUIRED)
 
 set(APPLE_EXTRA_LIBS "")
 
