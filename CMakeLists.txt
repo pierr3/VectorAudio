@@ -134,7 +134,7 @@ endif()
 target_link_libraries(vector_audio
     PRIVATE
     OpenSSL::SSL OpenSSL::Crypto 
-    sfml-system sfml-window sfml-graphics
+    sfml-system sfml-window sfml-graphics sfml-audio
     toml11::toml11
     nlohmann_json nlohmann_json::nlohmann_json
     restinio::restinio

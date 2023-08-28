@@ -9,9 +9,12 @@
 #include "ns/airport.h"
 #include "shared.h"
 #include "style.h"
+#include <SFML/Audio.hpp>
 #include <algorithm>
+#include <data_file_handler.h>
 #include <fstream>
 #include <functional>
+#include <httplib.h>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -21,8 +24,6 @@
 #include <string>
 #include <thread>
 #include <utility>
-#include <httplib.h>
-#include <data_file_handler.h>
 
 namespace vector_audio::application {
 class App {
@@ -40,7 +41,8 @@ private:
     afv_native::api::atcClient* mClient_;
     restinio::running_server_handle_t<restinio::default_traits_t> mSDKServer_;
 
-    void eventCallback(afv_native::ClientEventType evt, void* data, void* data2);
+    void eventCallback(
+        afv_native::ClientEventType evt, void* data, void* data2);
     void buildSDKServer();
 
     // Used in another thread
@@ -50,5 +52,8 @@ private:
     std::string lastErrorModalMessage_;
 
     std::unique_ptr<vector_audio::vatsim::DataHandler> dataHandler_;
+
+    sf::SoundBuffer disconnectWarningSoundbuffer_;
+    bool disconnectWarningSoundAvailable_ = true;
 };
 }

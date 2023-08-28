@@ -1,12 +1,15 @@
 #include "application.h"
 #include "afv-native/Log.h"
 #include "afv-native/atcClientWrapper.h"
+#include "afv-native/event.h"
+#include "config.h"
 #include "data_file_handler.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "shared.h"
 #include "style.h"
 #include "util.h"
+#include <SFML/Audio/Sound.hpp>
 #include <SFML/Window/Joystick.hpp>
 #include <httplib.h>
 #include <memory>
@@ -123,6 +126,14 @@ App::App()
     // Load the airport database async
     std::thread(&vector_audio::application::App::loadAirportsDatabaseAsync)
         .detach();
+
+    // Load the warning sound for disconnection
+    if (!disconnectWarningSoundbuffer_.loadFromFile(
+            Configuration::get_resource_folder() / "disconnect.wav")) {
+        spdlog::error(
+            "Could not load warning sound file, disconnection will be silent");
+        disconnectWarningSoundAvailable_ = false;
+    }
 }
 
 App::~App() { delete mClient_; }
@@ -354,6 +365,16 @@ void App::eventCallback(
                    "your log file for details.\nCheck your audio config!");
     }
 
+    if (evt == afv_native::ClientEventType::VoiceServerDisconnected) {
+        if (!disconnectWarningSoundAvailable_) {
+            return;
+        }
+
+        sf::Sound sound;
+        sound.setBuffer(disconnectWarningSoundbuffer_);
+        sound.play();
+    }
+
     if (evt == afv_native::ClientEventType::StationDataReceived) {
         if (data != nullptr && data2 != nullptr) {
             // We just refresh the transceiver count in our display
@@ -517,11 +538,11 @@ void App::render_frame()
     // Connect button logic
 
     if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        bool ready_to_connect
-            = (!shared::session::is_connected
-                  && dataHandler_->isSlurperAvailable())
+        bool ready_to_connect = (!shared::session::is_connected
+                                    && dataHandler_->isSlurperAvailable())
             || (!dataHandler_->isSlurperAvailable()
-                && dataHandler_->isDatafileAvailable() && shared::session::is_connected);
+                && dataHandler_->isDatafileAvailable()
+                && shared::session::is_connected);
         style::push_disabled_on(!ready_to_connect);
 
         if (ImGui::Button("Connect")) {
