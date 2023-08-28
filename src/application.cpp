@@ -1008,10 +1008,10 @@ void App::render_frame()
                                 shared::kUnicomFrequency);
 
                         shared::FetchedStations.push_back(el);
-                        mClient_->AddFrequency(shared::kUnicomFrequency,
-                            shared::station_auto_add_callsign);
                         mClient_->SetClientPosition(
                             latitude, longitude, 1000, 1000);
+                        mClient_->AddFrequency(shared::kUnicomFrequency,
+                            shared::station_auto_add_callsign);
                         mClient_->SetRx(shared::kUnicomFrequency, true);
 
                     } else {
