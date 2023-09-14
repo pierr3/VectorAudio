@@ -487,6 +487,7 @@ void App::render_frame()
                 this->mClient_->SetXc(shared::session::frequency, true);
             }
             this->mClient_->FetchStationVccs(clean_callsign);
+            mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
         }
     }
 
@@ -868,6 +869,7 @@ void App::render_frame()
                         vector_audio::shared::mOutputEffects);
                     mClient_->UseTransceiversFromStation(el.callsign, el.freq);
                     mClient_->SetRx(el.freq, true);
+                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
                 }
             }
 
@@ -900,6 +902,7 @@ void App::render_frame()
                     mClient_->SetTx(el.freq, true);
                     mClient_->SetRx(el.freq, true);
                     mClient_->SetXc(el.freq, true);
+                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
                 }
             }
 
@@ -956,6 +959,7 @@ void App::render_frame()
                     mClient_->UseTransceiversFromStation(el.callsign, el.freq);
                     mClient_->SetTx(el.freq, true);
                     mClient_->SetRx(el.freq, true);
+                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
                 }
             }
 
@@ -1013,6 +1017,7 @@ void App::render_frame()
                         mClient_->AddFrequency(shared::kUnicomFrequency,
                             shared::station_auto_add_callsign);
                         mClient_->SetRx(shared::kUnicomFrequency, true);
+                        mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
 
                     } else {
                         errorModal("Could not find pilot connected under that "
