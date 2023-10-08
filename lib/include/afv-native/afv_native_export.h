@@ -26,7 +26,7 @@
 
 #  ifndef AFV_NATIVE_NO_EXPORT
         #ifdef SFML_SYSTEM_WINDOWS
-                #define AFV_NATIVE_API __declspec(dllexport)
+                #define AFV_NATIVE_NO_EXPORT __declspec(dllexport)
         #else
                #define AFV_NATIVE_NO_EXPORT __attribute__((visibility("hidden")))
         #endif
@@ -34,7 +34,7 @@
 
 #ifndef AFV_NATIVE_DEPRECATED
         #ifdef SFML_SYSTEM_WINDOWS
-                #define AFV_NATIVE_API __declspec(deprecated)
+                #define AFV_NATIVE_DEPRECATED __declspec(deprecated)
         #else
                 #define AFV_NATIVE_DEPRECATED __attribute__ ((__deprecated__))
         #endif

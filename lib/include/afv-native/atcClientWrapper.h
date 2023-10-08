@@ -14,7 +14,7 @@ namespace afv_native::api {
         public:
             AFV_NATIVE_API static void setLogger(afv_native::log_fn gLogger);
 
-            AFV_NATIVE_API atcClient(std::string clientName, std::string resourcePath = "");
+            AFV_NATIVE_API explicit atcClient(std::string clientName, std::string resourcePath = "");
             AFV_NATIVE_API ~atcClient();
 
             AFV_NATIVE_API bool IsInitialized();
