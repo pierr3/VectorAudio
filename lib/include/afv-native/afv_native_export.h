@@ -6,26 +6,27 @@
 #  define AFV_NATIVE_API
 #  define AFV_NATIVE_NO_EXPORT
 #else
-#  ifndef AFV_NATIVE_API
-#    ifdef afv_native_EXPORTS
-        /* We are building this library */
-#      #ifdef SFML_SYSTEM_WINDOWS
-                #define AFV_NATIVE_API __declspec(dllexport)
+        #ifndef AFV_NATIVE_API
+                #ifdef afv_native_EXPORTS
+                /* We are building this library */
+                #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+                        #define AFV_NATIVE_API __declspec(dllexport)
+                #else
+                        #define AFV_NATIVE_API __attribute__((visibility("default")))
+                #endif    
         #else
-                #define AFV_NATIVE_API __attribute__((visibility("default")))
-        #endif    
-#    else
-        /* We are using this library */
-        #ifdef SFML_SYSTEM_WINDOWS
-                #define AFV_NATIVE_API __declspec(dllimport)
-        #else
-                #define AFV_NATIVE_API __attribute__((visibility("default")))
-        #endif    
+                /* We are using this library */
+                #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+                        #define AFV_NATIVE_API __declspec(dllimport)
+                #else
+                        #define AFV_NATIVE_API __attribute__((visibility("default")))
+                #endif
+        #endif
 #    endif
 #  endif
 
 #  ifndef AFV_NATIVE_NO_EXPORT
-        #ifdef SFML_SYSTEM_WINDOWS
+        #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
                 #define AFV_NATIVE_NO_EXPORT __declspec(dllexport)
         #else
                #define AFV_NATIVE_NO_EXPORT __attribute__((visibility("hidden")))
@@ -33,7 +34,7 @@
 #endif
 
 #ifndef AFV_NATIVE_DEPRECATED
-        #ifdef SFML_SYSTEM_WINDOWS
+        #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
                 #define AFV_NATIVE_DEPRECATED __declspec(deprecated)
         #else
                 #define AFV_NATIVE_DEPRECATED __attribute__ ((__deprecated__))
