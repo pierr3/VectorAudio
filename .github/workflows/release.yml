@@ -37,7 +37,7 @@ jobs:
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
-          cmake --build build/
+          cmake --build build/ --config Release
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh libafv_native.so
@@ -114,7 +114,7 @@ jobs:
           cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (intel)
         run: |
-          cmake --build build_intel/
+          cmake --build build_intel/ --config Release
       - name: Cleanup intel build
         run: |
           cp build_intel/extern/afv-native/libafv_native.dylib build/libafv_native.dylib.intel
@@ -125,7 +125,7 @@ jobs:
           cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake (arm64)
         run: |
-          cmake --build build_arm64/
+          cmake --build build_arm64/ --config Release
       - name: Cleanup arm64 build
         run: |
           cp build_arm64/extern/afv-native/libafv_native.dylib build/libafv_native.dylib.arm

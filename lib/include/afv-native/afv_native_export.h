@@ -9,20 +9,35 @@
 #  ifndef AFV_NATIVE_API
 #    ifdef afv_native_EXPORTS
         /* We are building this library */
-#      define AFV_NATIVE_API __attribute__((visibility("default")))
+#      #ifdef SFML_SYSTEM_WINDOWS
+                #define AFV_NATIVE_API __declspec(dllexport)
+        #else
+                #define AFV_NATIVE_API __attribute__((visibility("default")))
+        #endif    
 #    else
         /* We are using this library */
-#      define AFV_NATIVE_API __attribute__((visibility("default")))
+        #ifdef SFML_SYSTEM_WINDOWS
+                #define AFV_NATIVE_API __declspec(dllimport)
+        #else
+                #define AFV_NATIVE_API __attribute__((visibility("default")))
+        #endif    
 #    endif
 #  endif
 
 #  ifndef AFV_NATIVE_NO_EXPORT
-#    define AFV_NATIVE_NO_EXPORT __attribute__((visibility("hidden")))
-#  endif
+        #ifdef SFML_SYSTEM_WINDOWS
+                #define AFV_NATIVE_API __declspec(dllexport)
+        #else
+               #define AFV_NATIVE_NO_EXPORT __attribute__((visibility("hidden")))
+        #endif
 #endif
 
 #ifndef AFV_NATIVE_DEPRECATED
-#  define AFV_NATIVE_DEPRECATED __attribute__ ((__deprecated__))
+        #ifdef SFML_SYSTEM_WINDOWS
+                #define AFV_NATIVE_API __declspec(deprecated)
+        #else
+                #define AFV_NATIVE_DEPRECATED __attribute__ ((__deprecated__))
+        #endif
 #endif
 
 #ifndef AFV_NATIVE_DEPRECATED_EXPORT
