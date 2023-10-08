@@ -78,7 +78,7 @@ jobs:
           cp resources/LICENSE.txt installer/
           cp build/Release/vector_audio.exe installer/
           cp build/Release/*.dll installer/
-          cp build/extern/afv-native/Release/*.dll installer/
+          cp lib/windows/*.dll installer/
           cp bundle_windows.nsi installer/install.nsi
       - name: Create installer
         run: |

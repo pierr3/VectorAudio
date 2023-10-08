@@ -21,7 +21,7 @@ using util::TextURL;
 
 namespace afv_logger {
     void defaultLogger(const char* subsystem, const char* /*file*/,
-        int /*line*/, const char* lineOut)
+        int /*line*/, const char* lineOut, void*  /*ref*/)
     {
         spdlog::info("[afv_native] {} {}", subsystem, lineOut);
     }

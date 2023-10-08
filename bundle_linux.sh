@@ -17,8 +17,8 @@ cp ./resources/icon_mac.png ./build/VectorAudio.AppDir/vectoraudio.png
 cp ./resources/icon_mac.png ./build/VectorAudio.AppDir/.DirIcon
 cp ./resources/icon_mac.png ./build/VectorAudio.AppDir/usr/share/vectoraudio/
 
-cp ./build/extern/afv-native/$libname ./build/VectorAudio.AppDir/usr/lib/
-chmod +x ./build/VectorAudio.AppDir/usr/lib/libafv_native.so
+cp ./lib/linux/$libname ./build/VectorAudio.AppDir/usr/lib/
+chmod +x ./build/VectorAudio.AppDir/usr/lib/$libname
 
 cp ./build/vector_audio ./build/VectorAudio.AppDir/usr/bin
 chmod +x ./build/VectorAudio.AppDir/usr/bin/vector_audio

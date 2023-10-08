@@ -33,7 +33,7 @@ set(VERSION_PATCH ${version_patch})
 add_definitions(-DVECTOR_VERSION="${VERSION_CONTENT}")
 configure_file(vector_audio.rc.in ${CMAKE_SOURCE_DIR}/vector_audio.rc @ONLY)
 
-add_subdirectory(extern/afv-native EXCLUDE_FROM_ALL)
+include_directories(extern/afv-native/include/ lib/include)
 
 if(APPLE)
     execute_process(
@@ -48,10 +48,6 @@ if(APPLE)
 
     # Suppress warnings of the deprecation of glut functions on macOS.
     add_definitions(-Wno-deprecated-declarations -Wno-many-braces-around-scalar-init)
-endif()
-
-if (WIN32)
-    add_definitions(-DCMAKE_CONFIGURATION_TYPES=Release)
 endif()
 
 option(SFML_BUILD_AUDIO "Build audio" OFF)
@@ -106,10 +102,18 @@ add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 ${APPLE_EXTRA_LIBS}
                 vector_audio.rc)
 
+
 if (WIN32)
     set_target_properties(vector_audio PROPERTIES
         WIN32_EXECUTABLE YES
         LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\" /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+
+    #afv
+    find_library(LIB_AFV afv_native PATHS ${CMAKE_SOURCE_DIR}/lib/windows/ NO_DEFAULT_PATH)
+    if(NOT LIB_AFV)
+        message(FATAL_ERROR "libafv library not found")
+    endif()
+    message(STATUS "libafv: ${LIB_AFV}")
 endif()
 
 if(APPLE)
@@ -129,6 +133,22 @@ if(APPLE)
 		${AUDIO_UNIT}
 		${CORE_FOUNDATION}
 		${CORE_SERVICES})
+    
+    #afv
+    find_library(LIB_AFV afv_native PATHS ${CMAKE_SOURCE_DIR}/lib/macos/ NO_DEFAULT_PATH)
+    if(NOT LIB_AFV)
+        message(FATAL_ERROR "libafv library not found")
+    endif()
+    message(STATUS "libafv: ${LIB_AFV}")
+endif()
+
+if (UNIX AND NOT APPLE)
+    #afv
+    find_library(LIB_AFV afv_native PATHS ${CMAKE_SOURCE_DIR}/lib/linux/ NO_DEFAULT_PATH)
+    if(NOT LIB_AFV)
+        message(FATAL_ERROR "libafv library not found")
+    endif()
+    message(STATUS "libafv: ${LIB_AFV}")
 endif()
 
 target_link_libraries(vector_audio
@@ -136,9 +156,9 @@ target_link_libraries(vector_audio
     OpenSSL::SSL OpenSSL::Crypto 
     sfml-system sfml-window sfml-graphics sfml-audio
     toml11::toml11
+    ${LIB_AFV}
     nlohmann_json nlohmann_json::nlohmann_json
     restinio::restinio
-    afv_native
     httplib::httplib
     Threads::Threads
     ${OPENGL_LIBRARY})
