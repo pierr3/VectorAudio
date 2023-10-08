@@ -169,8 +169,8 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                         vector_audio::shared::availableInputDevices = mClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
                         vector_audio::shared::availableOutputDevices = mClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
                     }
-                    vector_audio::shared::configAudioApi = "Default";
-                    vector_audio::Configuration::config_["audio"]["api"] = -1;
+                    vector_audio::shared::configAudioApi = "Default API";
+                    vector_audio::Configuration::config_["audio"]["api"] = "Default API";
                 }
 
                 // Listing all the devices

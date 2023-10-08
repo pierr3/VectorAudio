@@ -205,7 +205,7 @@ inline static int findAudioAPIorDefault()
         != vector_audio::shared::availableAudioAPI.end())
         return vector_audio::shared::mAudioApi;
 
-    return 0;
+    return -1;
 }
 
 inline static std::string findHeadsetInputDeviceOrDefault()

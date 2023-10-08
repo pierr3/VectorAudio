@@ -578,9 +578,13 @@ void App::render_frame()
             }
 
             if (vector_audio::shared::session::is_connected) {
-                mClient_->StopAudio();
-                mClient_->Disconnect(); // Force a disconnect of API
-
+                if (mClient_->IsAudioRunning()) {
+                    mClient_->StopAudio();
+                }
+                if (mClient_->IsAPIConnected()) {
+                    mClient_->Disconnect(); // Force a disconnect of API
+                }
+                
                 mClient_->SetAudioApi(findAudioAPIorDefault());
                 mClient_->SetAudioInputDevice(
                     findHeadsetInputDeviceOrDefault());
