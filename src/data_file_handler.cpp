@@ -55,7 +55,9 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
         if (util::endsWith(res[1], "_CTR") || util::endsWith(res[1], "_APP")
             || util::endsWith(res[1], "_TWR") || util::endsWith(res[1], "_GND")
             || util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS")
-            || util::endsWith(res[1], "_SUP"))
+            || util::endsWith(res[1], "_SUP") || util::endsWith(res[1], "_RDO")
+            || util::endsWith(res[1], "_RMP") || util::endsWith(res[1], "_TMU")
+            || util::endsWith(res[1], "_FMP"))
             yx_ = true;
 
         callsign = res[1];
