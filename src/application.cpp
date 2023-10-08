@@ -546,8 +546,13 @@ void App::render_frame()
 
     // Callsign Field
     ImGui::PushItemWidth(100.0F);
+    std::string padded_callsign = shared::session::callsign;
+    std::string not_connected = "Not connected";
+    if (padded_callsign.length() < not_connected.length()) {
+        padded_callsign.insert(padded_callsign.end(), not_connected.size() - padded_callsign.size(), ' ');
+    }
     ImGui::TextUnformatted(
-        std::string("Callsign: ").append(shared::session::callsign).c_str());
+        std::string("Callsign: ").append(padded_callsign).c_str());
     ImGui::PopItemWidth();
     ImGui::SameLine();
     ImGui::Text("|");
@@ -584,7 +589,7 @@ void App::render_frame()
                 if (mClient_->IsAPIConnected()) {
                     mClient_->Disconnect(); // Force a disconnect of API
                 }
-                
+
                 mClient_->SetAudioApi(findAudioAPIorDefault());
                 mClient_->SetAudioInputDevice(
                     findHeadsetInputDeviceOrDefault());
