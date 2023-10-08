@@ -33,7 +33,7 @@ set(VERSION_PATCH ${version_patch})
 add_definitions(-DVECTOR_VERSION="${VERSION_CONTENT}")
 configure_file(vector_audio.rc.in ${CMAKE_SOURCE_DIR}/vector_audio.rc @ONLY)
 
-include_directories(extern/afv-native/include/ lib/include)
+include_directories(lib/include)
 
 if(APPLE)
     execute_process(

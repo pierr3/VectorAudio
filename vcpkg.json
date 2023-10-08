@@ -10,11 +10,6 @@
         "curl",
         "spdlog",
         "restinio",
-        "opus",
-        "speexdsp",
-        "cpp-jwt",
-        "msgpack",
-        "libevent",
         "neargye-semver",
         "sfml"
     ]

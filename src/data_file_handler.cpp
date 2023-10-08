@@ -1,4 +1,5 @@
 #include <data_file_handler.h>
+#include <spdlog/spdlog.h>
 
 vector_audio::vatsim::DataHandler::DataHandler()
     : workerThread_(std::make_unique<std::thread>(&DataHandler::worker, this))
@@ -65,6 +66,10 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
         lon = res[6];
 
         break;
+    }
+
+    if (callsign == "DCLIENT3") {
+        return false;
     }
 
     if (!found_not_atis_connection) {
@@ -275,6 +280,10 @@ void vector_audio::vatsim::DataHandler::worker()
 bool vector_audio::vatsim::DataHandler::getConnectionStatusWithSlurper()
 {
     if (!this->isSlurperAvailable()) {
+        return false;
+    }
+
+    if (shared::vatsim_cid == 0) {
         return false;
     }
 
