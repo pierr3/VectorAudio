@@ -549,7 +549,8 @@ void App::render_frame()
     std::string padded_callsign = shared::session::callsign;
     std::string not_connected = "Not connected";
     if (padded_callsign.length() < not_connected.length()) {
-        padded_callsign.insert(padded_callsign.end(), not_connected.size() - padded_callsign.size(), ' ');
+        padded_callsign.insert(padded_callsign.end(),
+            not_connected.size() - padded_callsign.size(), ' ');
     }
     ImGui::TextUnformatted(
         std::string("Callsign: ").append(padded_callsign).c_str());
@@ -995,11 +996,13 @@ void App::render_frame()
 
     ImGui::PushItemWidth(-1.0);
     ImGui::Text("Add station");
-    ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign);
-    ImGui::PopItemWidth();
 
     style::push_disabled_on(!mClient_->IsVoiceConnected());
-    if (ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
+    if (ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign,
+            ImGuiInputTextFlags_EnterReturnsTrue
+                | ImGuiInputTextFlags_AutoSelectAll
+                | ImGuiInputTextFlags_CharsUppercase)
+        || ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
         if (mClient_->IsVoiceConnected()) {
             if (!util::startsWith(shared::station_auto_add_callsign, "!")) {
                 mClient_->GetStation(shared::station_auto_add_callsign);
@@ -1042,6 +1045,7 @@ void App::render_frame()
             shared::station_auto_add_callsign = "";
         }
     }
+    ImGui::PopItemWidth();
     style::pop_disabled_on(!mClient_->IsVoiceConnected());
 
     ImGui::NewLine();
