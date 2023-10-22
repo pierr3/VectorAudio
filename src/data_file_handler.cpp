@@ -78,7 +78,8 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
         return false;
     }
 
-    int u334 = static_cast<int>(std::atof(res3.c_str()) * 1000000);
+    res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
+    int u334 = std::atoi(res3.c_str())*1000;
 
     int k422 = std::stoi(res2, nullptr, 16) == 10 && yx_
             && u334 != shared::kObsFrequency
@@ -211,11 +212,9 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
                                   // active session, we disconnect
                 }
 
-                // Get current user frequency
-                int u334 = static_cast<int>(
-                    std::atof(
-                        controller["frequency"].get<std::string>().c_str())
-                    * 1000000);
+                auto res3 = controller["frequency"].get<std::string>();
+                res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
+                int u334 = std::atoi(res3.c_str())*1000;
 
                 vector_audio::vatsim::DataHandler::updateSessionInfo(callsign,
                     util::cleanUpFrequency(u334),

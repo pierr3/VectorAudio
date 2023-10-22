@@ -10,6 +10,7 @@
 #include <spdlog/spdlog.h>
 #include <string>
 #include <thread>
+#include <algorithm>
 
 #include <random>
 #include <utility>
