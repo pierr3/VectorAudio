@@ -22,19 +22,21 @@ cp resources/*.ttf build/VectorAudio.app/Contents/Resources
 cp resources/LICENSE.txt build/VectorAudio.app/Contents/Resources
 cp resources/airports.json build/VectorAudio.app/Contents/Resources
 cp resources/VectorAudio.icns build/VectorAudio.app/Contents/Resources
-cp lib/macos/libafv_native.dylib build/VectorAudio.app/Contents/Frameworks
 cp resources/icon_mac.png build/VectorAudio.app/Contents/Resources
-
-chmod +x build/vector_audio.app/Contents/MacOS/vector_audio
-chmod +x build/VectorAudio.app/Contents/Frameworks/libafv_native.dylib
-cp build/vector_audio.app/Contents/MacOS/vector_audio build/VectorAudio.app/Contents/MacOS
-
-cp resources/Info.plist build/VectorAudio.app/Contents/
-
-install_name_tool -add_rpath "@executable_path/../Frameworks" build/VectorAudio.app/Contents/MacOS/vector_audio
 
 rm resources/VectorAudio.icns
 
+cp build/vector_audio.app/Contents/MacOS/vector_audio build/VectorAudio.app/Contents/MacOS
+chmod +x build/vector_audio.app/Contents/MacOS/vector_audio
+cp resources/Info.plist build/VectorAudio.app/Contents/
+
+chmod +x lib/macos/libafv_native.dylib
+lipo -create lib/macos/libafv_native.dylib -output resources/libafv_native.framework/libafv_native
+install_name_tool -change @rpath/libafv_native.dylib @loader_path/../Frameworks/libafv_native.framework/libafv_native build/VectorAudio.app/Contents/MacOS/vector_audio
+cp -R resources/libafv_native.framework/ build/VectorAudio.app/Contents/Frameworks/libafv_native.framework
+
 xattr -cr build/VectorAudio.app
-codesign --force --timestamp -s - build/VectorAudio.app/Contents/Frameworks/libafv_native.dylib
-codesign --force --deep --timestamp -s - build/VectorAudio.app
+if [ $# -eq 1 ]
+  then
+    codesign --force --deep --timestamp -s "Developer ID Application" build/VectorAudio.app
+fi

@@ -51,6 +51,8 @@ build/Makefile
 
 config.toml
 
+resources/libafv_native.framework/libafv_native
+
 .cache
 
 *.rc
