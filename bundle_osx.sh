@@ -36,4 +36,5 @@ install_name_tool -add_rpath "@executable_path/../Frameworks" build/VectorAudio.
 rm resources/VectorAudio.icns
 
 xattr -cr build/VectorAudio.app
-codesign --force --deep -s - build/VectorAudio.app
+codesign --force --timestamp -s - build/VectorAudio.app/Contents/Frameworks/libafv_native.dylib
+codesign --force --deep --timestamp -s - build/VectorAudio.app

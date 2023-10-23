@@ -19,7 +19,8 @@ submodules_licenses = [['afv-native', os.path.join('lib', 'include', 'afv-native
     ['ImGui', os.path.join('extern', 'imgui', 'LICENSE.txt')], 
     ['Platform Folders', os.path.join('extern', 'PlatformFolders', 'LICENSE')],
     ['Airports Database', os.path.join('resources', 'LICENSE_AIRPORTS')],
-    ['swift pilot client', os.path.join('resources', 'LICENSE_SWIFT')]]
+    ['swift pilot client', os.path.join('resources', 'LICENSE_SWIFT')],
+    ['audio alert tune', os.path.join('resources', 'LICENSE_AUDIO_ALERT')]]
 
 for sublicense in submodules_licenses:
     print('Getting license for: ' + sublicense[0])

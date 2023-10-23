@@ -1,7 +1,7 @@
 #pragma once
 #include "afv-native/atcClientWrapper.h"
-#include "config.h"
 #include "afv-native/event.h"
+#include "config.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_stdlib.h"
@@ -45,6 +45,17 @@ private:
         afv_native::ClientEventType evt, void* data, void* data2);
     void buildSDKServer();
 
+    void disconnectAndCleanup();
+
+    void playErrorSound()
+    {
+        if (!disconnect_warning_sound_available) {
+            return;
+        }
+        // Load the warning sound for disconnection
+        sound_player_.play();
+    };
+
     // Used in another thread
     static void loadAirportsDatabaseAsync();
 
@@ -53,9 +64,8 @@ private:
 
     std::unique_ptr<vector_audio::vatsim::DataHandler> dataHandler_;
 
-    sf::SoundBuffer disconnectWarningSoundbuffer_;
-    sf::Sound soundPlayer_;
-    bool disconnectWarningSoundAvailable_ = true;
     bool manuallyDisconnected_ = false;
+    sf::SoundBuffer disconnect_warning_soundbuffer_;
+    sf::Sound sound_player_;
 };
 }

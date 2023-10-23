@@ -5,10 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "default",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/vector_audio.app/Contents/MacOS/vector_audio",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/resources",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
             "name": "(lldb) Launch",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/vector_audio",
+            "program": "${workspaceFolder}/resources/vector_audio",
             "args": [],
             "preRunCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],
             "initCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],

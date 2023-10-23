@@ -55,7 +55,8 @@ namespace afv_native {
         VccsReceived,
         StationDataReceived,
         InputDeviceError,
-        AudioDisabled
+        AudioDisabled,
+        AudioDeviceStoppedError, // data is a pointer to a std::string of the relevant device name
     };
 
     namespace afv {

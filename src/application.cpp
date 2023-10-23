@@ -5,7 +5,6 @@
 #include "config.h"
 #include "data_file_handler.h"
 #include "imgui.h"
-#include "imgui_internal.h"
 #include "shared.h"
 #include "style.h"
 #include "util.h"
@@ -128,16 +127,16 @@ App::App()
     std::thread(&vector_audio::application::App::loadAirportsDatabaseAsync)
         .detach();
 
-    // Load the warning sound for disconnection
     auto sound_path = Configuration::get_resource_folder()
         / std::filesystem::path("disconnect.wav");
-    if (!disconnectWarningSoundbuffer_.loadFromFile(sound_path.string())) {
+
+    if (!disconnect_warning_soundbuffer_.loadFromFile(sound_path)) {
+        disconnect_warning_sound_available = false;
         spdlog::error(
             "Could not load warning sound file, disconnection will be silent");
-        disconnectWarningSoundAvailable_ = false;
     }
 
-    soundPlayer_.setBuffer(disconnectWarningSoundbuffer_);
+    sound_player_.setBuffer(disconnect_warning_soundbuffer_);
 }
 
 App::~App() { delete mClient_; }
@@ -326,6 +325,8 @@ void App::eventCallback(
 
                 spdlog::error("Got connection error from AFV API: local socket "
                               "or curl error");
+                disconnectAndCleanup();
+                playErrorSound();
             }
 
             if (err
@@ -336,6 +337,8 @@ void App::eventCallback(
 
                 spdlog::error("Got connection error from AFV API: HTTP 400 - "
                               "Bad Request or Client Incompatible");
+                disconnectAndCleanup();
+                playErrorSound();
             }
 
             if (err == afv_native::afv::APISessionError::InvalidAuthToken) {
@@ -343,6 +346,8 @@ void App::eventCallback(
 
                 spdlog::error("Got connection error from AFV API: Invalid Auth "
                               "Token Local Parse Error.");
+                disconnectAndCleanup();
+                playErrorSound();
             }
 
             if (err
@@ -353,6 +358,8 @@ void App::eventCallback(
 
                 spdlog::error("Got connection error from AFV API: Auth Token "
                               "Expiry in the past");
+                disconnectAndCleanup();
+                playErrorSound();
             }
 
             if (err == afv_native::afv::APISessionError::OtherRequestError) {
@@ -360,6 +367,9 @@ void App::eventCallback(
 
                 spdlog::error(
                     "Got connection error from AFV API: Unknown Error");
+
+                disconnectAndCleanup();
+                playErrorSound();
             }
         }
     }
@@ -367,30 +377,41 @@ void App::eventCallback(
     if (evt == afv_native::ClientEventType::AudioError) {
         errorModal("Error starting audio devices.\nPlease check "
                    "your log file for details.\nCheck your audio config!");
+        disconnectAndCleanup();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerDisconnected) {
-        if (!disconnectWarningSoundAvailable_) {
-            return;
-        }
 
         if (!manuallyDisconnected_) {
-            soundPlayer_.play();
+            playErrorSound();
         }
 
         manuallyDisconnected_ = false;
+        // disconnectAndCleanup();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerError) {
         int err_code = *reinterpret_cast<int*>(data);
         errorModal("Voice server returned error " + std::to_string(err_code)
             + ", please check the log file.");
+        disconnectAndCleanup();
+        playErrorSound();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerChannelError) {
         int err_code = *reinterpret_cast<int*>(data);
         errorModal("Voice server returned channel error "
             + std::to_string(err_code) + ", please check the log file.");
+        disconnectAndCleanup();
+        playErrorSound();
+    }
+
+    if (evt == afv_native::ClientEventType::AudioDeviceStoppedError) {
+        errorModal("The audio device " + *reinterpret_cast<std::string*>(data)
+            + " has stopped working "
+              ", check if they are still physically connected.");
+        disconnectAndCleanup();
+        playErrorSound();
     }
 
     if (evt == afv_native::ClientEventType::StationDataReceived) {
@@ -490,48 +511,6 @@ void App::render_frame()
             mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
         }
     }
-
-    // Forcing removal of unused stations if possible, otherwise we try at the
-    // next loop
-    shared::StationsPendingRemoval.erase(
-        std::remove_if(shared::StationsPendingRemoval.begin(),
-            shared::StationsPendingRemoval.end(),
-            [this](int const& station) {
-                // First we check if we are not receiving or transmitting
-                // on the frequency
-                if (!this->mClient_->GetRxActive(station)
-                    && !this->mClient_->GetTxActive(station)) {
-                    // The frequency is free, we can remove it
-
-                    shared::FetchedStations.erase(
-                        std::remove_if(shared::FetchedStations.begin(),
-                            shared::FetchedStations.end(),
-                            [station](shared::StationElement const& p) {
-                                return station == p.freq;
-                            }),
-                        shared::FetchedStations.end());
-                    mClient_->RemoveFrequency(station);
-
-                    return true;
-                } // The frequency is not free, we try again later
-                return false;
-            }),
-        shared::StationsPendingRemoval.end());
-
-    // Changing RX status that is locked
-    shared::StationsPendingRxChange.erase(
-        std::remove_if(shared::StationsPendingRxChange.begin(),
-            shared::StationsPendingRxChange.end(),
-            [this](int const& station) {
-                if (!this->mClient_->GetRxActive(station)) {
-                    // Frequency is free, we can change the state
-                    this->mClient_->SetRx(
-                        station, !this->mClient_->GetRxState(station));
-                    return true;
-                } // Frequency is not free, we try again later
-                return false;
-            }),
-        shared::StationsPendingRxChange.end());
 
     // The live Received callsign data
     std::vector<std::string> received_callsigns;
@@ -644,9 +623,7 @@ void App::render_frame()
                     vector_audio::shared::vatsim_password);
                 mClient_->SetCallsign(vector_audio::shared::session::callsign);
                 mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
-                mClient_->StartAudio();
                 if (!mClient_->Connect()) {
-                    mClient_->StopAudio();
                     spdlog::error(
                         "Failed to connect: afv_lib says API is connected.");
                 };
@@ -671,16 +648,7 @@ void App::render_frame()
                 manuallyDisconnected_ = true;
             }
 
-            if (mClient_->IsAtisPlayingBack())
-                mClient_->StopAtisPlayback();
-
-            // Cleanup everything
-            for (const auto& f : shared::FetchedStations)
-                mClient_->RemoveFrequency(f.freq);
-            mClient_->Disconnect();
-
-            shared::FetchedStations.clear();
-            shared::bootUpVccs = false;
+            disconnectAndCleanup();
         }
         ImGui::PopStyleColor(3);
     }
@@ -782,13 +750,15 @@ void App::render_frame()
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor(14, 17, 22).Value);
 
             // Polling all data
-            bool freq_active = mClient_->IsFrequencyActive(el.freq);
+
             bool rx_state = mClient_->GetRxState(el.freq);
             bool rx_active = mClient_->GetRxActive(el.freq);
             bool tx_state = mClient_->GetTxState(el.freq);
             bool tx_active = mClient_->GetTxActive(el.freq);
             bool xc_state = mClient_->GetXcState(el.freq);
             bool is_on_speaker = !mClient_->GetOnHeadset(el.freq);
+            bool freq_active = mClient_->IsFrequencyActive(el.freq)
+                && (rx_state || tx_state || xc_state);
 
             //
             // Frequency button
@@ -823,7 +793,14 @@ void App::render_frame()
                 }
                 if (ImGui::Selectable(
                         std::string("Delete##").append(el.callsign).c_str())) {
-                    shared::StationsPendingRemoval.push_back(el.freq);
+                    mClient_->RemoveFrequency(el.freq);
+                    shared::FetchedStations.erase(
+                        std::remove_if(shared::FetchedStations.begin(),
+                            shared::FetchedStations.end(),
+                            [el](shared::StationElement const& p) {
+                                return el.freq == p.freq;
+                            }),
+                        shared::FetchedStations.end());
                 }
                 ImGui::EndPopup();
             }
@@ -860,17 +837,7 @@ void App::render_frame()
             if (ImGui::Button(std::string("RX##").append(el.callsign).c_str(),
                     half_size)) {
                 if (freq_active) {
-                    // We check if we are receiving something, if that is the
-                    // case we must wait till the end of transmition to change
-                    // the state
-                    if (rx_active) {
-                        if (std::find(shared::StationsPendingRxChange.begin(),
-                                shared::StationsPendingRxChange.end(), el.freq)
-                            == shared::StationsPendingRxChange.end())
-                            shared::StationsPendingRxChange.push_back(el.freq);
-                    } else {
-                        mClient_->SetRx(el.freq, !rx_state);
-                    }
+                    mClient_->SetRx(el.freq, !rx_state);
                 } else {
                     mClient_->AddFrequency(el.freq, el.callsign);
                     mClient_->SetEnableInputFilters(
@@ -1129,4 +1096,20 @@ bool App::frequencyExists(int freq)
                [&freq](const auto& obj) { return obj.freq == freq; })
         != shared::FetchedStations.end();
 }
+void App::disconnectAndCleanup()
+{
+    if (!mClient_) {
+        return;
+    }
+
+    mClient_->Disconnect();
+    mClient_->StopAudio();
+
+    for (const auto& f : shared::FetchedStations)
+        mClient_->RemoveFrequency(f.freq);
+
+    shared::FetchedStations.clear();
+    shared::bootUpVccs = false;
+}
+
 } // namespace vector_audio::application

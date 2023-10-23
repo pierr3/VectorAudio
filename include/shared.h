@@ -93,9 +93,6 @@ inline std::string station_add_callsign = "";
 inline std::string station_auto_add_callsign = "";
 inline float station_add_frequency = 118.0;
 
-inline std::vector<int> StationsPendingRemoval;
-inline std::vector<int> StationsPendingRxChange;
-
 inline afv_native::HardwareType hardware
     = afv_native::HardwareType::Schmid_ED_137B;
 

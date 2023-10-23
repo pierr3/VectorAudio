@@ -1,6 +1,8 @@
 #pragma once
 #include "imgui.h"
 #include "shared.h"
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <afv-native/hardwareType.h>
 #include <algorithm>
@@ -135,7 +137,7 @@ inline int round8_33kHzChannel(int fKHz)
         fKHz = lower_diff < upper_diff ? lower : upper;
         fKHz = std::clamp(fKHz, 118000, 136990);
     }
-    return fKHz*100;
+    return fKHz * 100;
 }
 
 inline void TextURL(const std::string& name_, std::string URL_)
@@ -181,7 +183,8 @@ inline int cleanUpFrequency(int frequency)
         return util::round8_33kHzChannel(frequency);
     }
 
-    return std::clamp(frequency, 118000000, 136990000);;
+    return std::clamp(frequency, 118000000, 136990000);
+    ;
 }
 
 static bool endsWith(const std::string& str, const std::string& suffix)
@@ -218,6 +221,8 @@ inline static std::string findHeadsetInputDeviceOrDefault()
 
     return vector_audio::shared::availableInputDevices.front();
 }
+
+inline static bool disconnect_warning_sound_available = true;
 
 inline static std::string findHeadsetOutputDeviceOrDefault()
 {

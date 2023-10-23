@@ -20,9 +20,12 @@ toml::value Configuration::config_;
 
 void Configuration::build_config()
 {
-    const auto config_file_path = Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_);
+    const auto config_file_path = Configuration::get_config_folder_path()
+        / std::filesystem::path(config_file_name_);
 
-    airports_db_file_path_ = (get_resource_folder() / std::filesystem::path(airports_db_file_path_)).string();
+    airports_db_file_path_ = (get_resource_folder()
+        / std::filesystem::path(airports_db_file_path_))
+                                 .string();
 
     if (std::filesystem::exists(config_file_path)) {
         vector_audio::Configuration::config_ = toml::parse(config_file_path);
@@ -34,7 +37,13 @@ void Configuration::build_config()
 std::filesystem::path Configuration::get_resource_folder()
 {
 #ifndef NDEBUG
+
+#ifdef SFML_SYSTEM_MACOS
+    return "./";
+#else
     return "../resources/";
+#endif
+
 #else
 #ifdef SFML_SYSTEM_MACOS
     return vector_audio::native::osx_resourcePath();
@@ -74,8 +83,10 @@ std::string Configuration::get_linux_config_folder()
 void Configuration::write_config_async()
 {
     std::thread([]() {
-        const std::lock_guard<std::mutex> lock(vector_audio::Configuration::config_writer_lock_);
-        std::ofstream ofs(Configuration::get_config_folder_path() / std::filesystem::path(config_file_name_));
+        const std::lock_guard<std::mutex> lock(
+            vector_audio::Configuration::config_writer_lock_);
+        std::ofstream ofs(Configuration::get_config_folder_path()
+            / std::filesystem::path(config_file_name_));
         ofs << vector_audio::Configuration::config_;
         ofs.close();
     }).detach();
@@ -84,12 +95,12 @@ void Configuration::write_config_async()
 void Configuration::build_logger()
 {
     spdlog::init_thread_pool(8192, 1);
-    auto log_folder = Configuration::get_config_folder_path() / std::filesystem::path("vector_audio.log");
+    auto log_folder = Configuration::get_config_folder_path()
+        / std::filesystem::path("vector_audio.log");
 
-    auto async_rotating_file_logger = spdlog::rotating_logger_mt<spdlog::async_factory>(
-        "VectorAudio",
-        log_folder.string(),
-        1024 * 1024 * 10, 3);
+    auto async_rotating_file_logger
+        = spdlog::rotating_logger_mt<spdlog::async_factory>(
+            "VectorAudio", log_folder.string(), 1024 * 1024 * 10, 3);
 
 #ifdef NDEBUG
     spdlog::set_level(spdlog::level::info);
@@ -106,7 +117,8 @@ std::filesystem::path Configuration::get_config_folder_path()
     std::filesystem::path folder_path;
 
 #if defined(SFML_SYSTEM_MACOS)
-    folder_path = std::filesystem::path(sago::getConfigHome()) / std::filesystem::path("VectorAudio");
+    folder_path = std::filesystem::path(sago::getConfigHome())
+        / std::filesystem::path("VectorAudio");
 #elif defined(SFML_SYSTEM_LINUX)
     folder_path = get_linux_config_folder();
 #else
