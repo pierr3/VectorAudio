@@ -130,7 +130,7 @@ App::App()
     auto sound_path = Configuration::get_resource_folder()
         / std::filesystem::path("disconnect.wav");
 
-    if (!disconnect_warning_soundbuffer_.loadFromFile(sound_path)) {
+    if (!disconnect_warning_soundbuffer_.loadFromFile(sound_path.string())) {
         disconnect_warning_sound_available = false;
         spdlog::error(
             "Could not load warning sound file, disconnection will be silent");
