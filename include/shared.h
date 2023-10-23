@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <afv-native/hardwareType.h>
 #include <chrono>

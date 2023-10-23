@@ -15,6 +15,6 @@
 namespace vector_audio::modals {
 class Settings {
 public:
-    static void render(afv_native::api::atcClient* mClient);
+    static void render(afv_native::api::atcClient* mClient, const std::function<void()>& playAlertSound);
 };
 }

@@ -668,7 +668,7 @@ void App::render_frame()
     }
     style::pop_disabled_on(mClient_->IsAPIConnected());
 
-    vector_audio::modals::Settings::render(mClient_);
+    vector_audio::modals::Settings::render(mClient_, [this]() -> void { playErrorSound(); });
 
     {
         ImGui::SetNextWindowSize(ImVec2(300, -1));

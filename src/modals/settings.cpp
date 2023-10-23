@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "util.h"
 
-void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
+void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient, const std::function<void()>& playAlertSound)
 {
     // Settings modal definition
     if (ImGui::BeginPopupModal("Settings Panel")) {
@@ -399,21 +399,10 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient)
                 1 - (vector_audio::shared::mPeak / -40.F), ImVec2(-1.F, 7.F),
                 ImColor(0, 200, 100), ImColor(219, 201, 0));
 
+            ImGui::NewLine();
+
             if (ImGui::Button("Test alert sound")) {
-                sf::SoundBuffer disconnect_warning_soundbuffer;
-                sf::Sound sound_player;
-
-                auto sound_path = Configuration::get_resource_folder()
-                    / std::filesystem::path("disconnect.wav");
-
-                if (!disconnect_warning_soundbuffer.loadFromFile(sound_path)) {
-                    disconnect_warning_sound_available = false;
-                    spdlog::error("Could not load warning sound file, "
-                                  "disconnection will be silent");
-                } else {
-                    sound_player.setBuffer(disconnect_warning_soundbuffer);
-                    sound_player.play();
-                }
+               playAlertSound();
             }
             ImGui::SameLine();
             vector_audio::util::HelpMarker(
