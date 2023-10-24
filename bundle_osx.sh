@@ -26,8 +26,14 @@ cp resources/icon_mac.png build/VectorAudio.app/Contents/Resources
 
 rm resources/VectorAudio.icns
 
-cp build/vector_audio.app/Contents/MacOS/vector_audio build/VectorAudio.app/Contents/MacOS
-chmod +x build/vector_audio.app/Contents/MacOS/vector_audio
+if [ $# -eq 1 ]; then
+  chmod +x build/vector_audio.app/Contents/MacOS/vector_audio
+  cp build/vector_audio.app/Contents/MacOS/vector_audio build/VectorAudio.app/Contents/MacOS
+else
+  chmod +x build/vector_audio
+  cp build/vector_audio build/VectorAudio.app/Contents/MacOS
+fi
+
 cp resources/Info.plist build/VectorAudio.app/Contents/
 
 chmod +x lib/macos/libafv_native.dylib
@@ -36,7 +42,6 @@ install_name_tool -change @rpath/libafv_native.dylib @loader_path/../Frameworks/
 cp -R resources/libafv_native.framework/ build/VectorAudio.app/Contents/Frameworks/libafv_native.framework
 
 xattr -cr build/VectorAudio.app
-if [ $# -eq 1 ]
-  then
-    codesign --force --deep --timestamp -s "Developer ID Application" build/VectorAudio.app
+if [ $# -eq 1 ]; then
+  codesign --force --deep --timestamp -s "Developer ID Application" build/VectorAudio.app
 fi
