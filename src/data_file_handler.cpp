@@ -57,8 +57,9 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
             || util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS")
             || util::endsWith(res[1], "_SUP") || util::endsWith(res[1], "_RDO")
             || util::endsWith(res[1], "_RMP") || util::endsWith(res[1], "_TMU")
-            || util::endsWith(res[1], "_FMP"))
+            || util::endsWith(res[1], "_FMP")) {
             yx_ = true;
+        }
 
         callsign = res[1];
         res3 = res[3];
@@ -79,7 +80,7 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
     }
 
     res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
-    int u334 = std::atoi(res3.c_str())*1000;
+    int u334 = std::atoi(res3.c_str()) * 1000;
 
     int k422 = std::stoi(res2, nullptr, 16) == 10 && yx_
             && u334 != shared::kObsFrequency
@@ -213,8 +214,9 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
                 }
 
                 auto res3 = controller["frequency"].get<std::string>();
-                res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
-                int u334 = std::atoi(res3.c_str())*1000;
+                res3.erase(
+                    std::remove(res3.begin(), res3.end(), '.'), res3.end());
+                int u334 = std::atoi(res3.c_str()) * 1000;
 
                 vector_audio::vatsim::DataHandler::updateSessionInfo(callsign,
                     util::cleanUpFrequency(u334),

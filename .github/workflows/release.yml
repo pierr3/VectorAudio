@@ -138,10 +138,25 @@ jobs:
       - name: Bundle OSX
         run: |
           ./bundle_osx.sh
+      - name: Sign binary
+        uses: lando/code-sign-action@v2
+        with:
+          file: build/VectorAudio.app
+          certificate-data: ${{ secrets.APPLE_CERT_DATA }}
+          certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
+          apple-team-id: ${{ secrets.APPLE_TEAM_ID }}
+          options: --deep --timestamp --force
       - name: Create DMG
         run: |
           brew install create-dmg
           create-dmg --volname "Vector Audio Installer" --app-drop-link 600 185 --window-size 800 400 --icon "VectorAudio.app" 200 190 "VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg" "build/VectorAudio.app"
+      - name: Sign DMG
+        uses: lando/code-sign-action@v2
+        with:
+          file: VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg
+          certificate-data: ${{ secrets.APPLE_CERT_DATA }}
+          certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
+          apple-team-id: ${{ secrets.APPLE_TEAM_ID }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
