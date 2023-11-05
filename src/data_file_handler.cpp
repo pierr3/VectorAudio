@@ -82,10 +82,11 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
     res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
     int u334 = std::atoi(res3.c_str()) * 1000;
 
-    int k422 = std::stoi(res2, nullptr, 16) == 10 && yx_
-            && u334 != shared::kObsFrequency
-        ? 1
-        : 0;
+    int k422 = std::stoi(res2, nullptr, 16) == 10 && yx_ ? 1 : 0;
+
+    k422 = u334 != shared::kObsFrequency && k422 == 1   ? 1
+        : k422 == 1 && util::endsWith(callsign, "_SUP") ? 1
+                                                        : 0;
 
     if (shared::session::is_connected
         && shared::session::callsign != callsign) {
