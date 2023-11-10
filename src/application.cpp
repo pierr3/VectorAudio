@@ -408,8 +408,8 @@ void App::eventCallback(
 
     if (evt == afv_native::ClientEventType::AudioDeviceStoppedError) {
         errorModal("The audio device " + *reinterpret_cast<std::string*>(data)
-            + " has stopped working "
-              ", check if they are still physically connected.");
+            + " has stopped working"
+              ", check if it is still physically connected.");
         disconnectAndCleanup();
         playErrorSound();
     }
