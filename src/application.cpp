@@ -11,6 +11,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Joystick.hpp>
+#include <cstddef>
 #include <httplib.h>
 #include <memory>
 #include <spdlog/spdlog.h>
@@ -668,7 +669,8 @@ void App::render_frame()
     }
     style::pop_disabled_on(mClient_->IsAPIConnected());
 
-    vector_audio::modals::Settings::render(mClient_, [this]() -> void { playErrorSound(); });
+    vector_audio::modals::Settings::render(
+        mClient_, [this]() -> void { playErrorSound(); });
 
     {
         ImGui::SetNextWindowSize(ImVec2(300, -1));
@@ -971,10 +973,12 @@ void App::render_frame()
                 | ImGuiInputTextFlags_CharsUppercase)
         || ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
         if (mClient_->IsVoiceConnected()) {
-            if (!util::startsWith(shared::station_auto_add_callsign, "!")) {
+            if (!util::startsWith(shared::station_auto_add_callsign, "!")
+                && !util::startsWith(shared::station_auto_add_callsign, "#")) {
                 mClient_->GetStation(shared::station_auto_add_callsign);
                 mClient_->FetchStationVccs(shared::station_auto_add_callsign);
-            } else {
+            } else if (util::startsWith(
+                           shared::station_auto_add_callsign, "!")) {
                 double latitude;
                 double longitude;
                 shared::station_auto_add_callsign
@@ -1002,9 +1006,36 @@ void App::render_frame()
                         errorModal("Could not find pilot connected under that "
                                    "callsign.");
                     }
-
                 } else {
                     errorModal("Another UNICOM frequency is active, please "
+                               "delete it first.");
+                }
+            } else {
+                double latitude;
+                double longitude;
+                shared::station_auto_add_callsign
+                    = shared::station_auto_add_callsign.substr(1);
+
+                double frequency = 0;
+                try {
+                    frequency
+                        = std::stoi(shared::station_auto_add_callsign) * 1000;
+                } catch (...) {
+                    errorModal("Failed to parse frequency, format is #123456");
+                }
+
+                if (!frequencyExists(frequency) && frequency != 0) {
+                    shared::StationElement el = shared::StationElement::build(
+                        shared::station_auto_add_callsign, frequency);
+
+                    shared::FetchedStations.push_back(el);
+                    mClient_->SetClientPosition(
+                        latitude, longitude, 1000, 1000);
+                    mClient_->AddFrequency(frequency, "MANUAL");
+                    mClient_->SetRx(frequency, true);
+                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                } else {
+                    errorModal("The same frequency is already active, please "
                                "delete it first.");
                 }
             }
