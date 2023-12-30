@@ -52,7 +52,7 @@ inline static void push_disabled_on(bool flag)
         return;
 
     ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5);
+    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5F);
 };
 
 inline static void pop_disabled_on(bool flag)

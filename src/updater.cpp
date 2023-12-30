@@ -24,6 +24,7 @@ Updater::Updater()
         } catch (std::invalid_argument& ex) {
             spdlog::critical(
                 "Cannot parse updater version, please update manually!");
+            spdlog::critical(ex.what());
             return;
         }
 

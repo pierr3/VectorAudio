@@ -26,7 +26,7 @@
 int main(int, char**)
 {
 
-    std::srand(time(nullptr));
+    std::srand(static_cast<unsigned int>(time(nullptr)));
 
     vector_audio::SingleInstance instance;
     if (instance.HasRunningInstance()) {

@@ -25,9 +25,9 @@ void Configuration::build_config()
     const auto configFilePath = Configuration::get_config_folder_path()
         / std::filesystem::path(mConfigFileName);
 
-    mAirportsDBFilePath = (get_resource_folder()
-        / std::filesystem::path(mAirportsDBFilePath))
-                                 .string();
+    mAirportsDBFilePath
+        = (get_resource_folder() / std::filesystem::path(mAirportsDBFilePath))
+              .string();
 
     if (std::filesystem::exists(configFilePath)) {
         vector_audio::Configuration::mConfig = toml::parse(configFilePath);
@@ -72,6 +72,7 @@ std::filesystem::path Configuration::get_resource_folder()
 
 std::string Configuration::get_linux_config_folder()
 {
+#ifdef SFML_SYSTEM_LINUX
     char* xdgConfigHomeChars = getenv("XDG_CONFIG_HOME");
     std::string suffix = "/vector_audio/";
     if (xdgConfigHomeChars) {
@@ -80,6 +81,9 @@ std::string Configuration::get_linux_config_folder()
     }
     std::string home(getenv("HOME"));
     return home + "/.config" + suffix;
+#else
+    return "";
+#endif
 }
 
 void Configuration::write_config_async()
@@ -122,9 +126,9 @@ std::filesystem::path Configuration::get_config_folder_path()
     folderPath = std::filesystem::path(sago::getConfigHome())
         / std::filesystem::path("VectorAudio");
 #elif defined(SFML_SYSTEM_LINUX)
-    folder_path = get_linux_config_folder();
+    folderPath = get_linux_config_folder();
 #else
-    folder_path = get_resource_folder();
+    folderPath = get_resource_folder();
 #endif
 
     if (!std::filesystem::exists(folderPath)) {

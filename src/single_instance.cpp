@@ -27,7 +27,7 @@ namespace vector_audio {
 
   SingleInstance::SingleInstance() : pInstance(new instance) {
 #if defined(_WIN32)
-    pInstance->mutex = CreateMutexA(NULL, FALSE, INSTANCE_KEY.c_str());
+    pInstance->mutex = CreateMutexA(NULL, FALSE, kInstanceKey.c_str());
     pInstance->exists = GetLastError() == ERROR_ALREADY_EXISTS;
 #elif defined(__APPLE__) || defined(__linux__)
     pInstance->blockingFile = open(("/tmp/" + kInstanceKey).c_str(), O_CREAT | O_RDWR, 0666);

@@ -423,8 +423,8 @@ void App::render_frame()
 {
     // AFV stuff
     if (pClient) {
-        vector_audio::shared::mPeak = pClient->GetInputPeak();
-        vector_audio::shared::mVu = pClient->GetInputVu();
+        vector_audio::shared::mPeak = static_cast<float>(pClient->GetInputPeak());
+        vector_audio::shared::mVu = static_cast<float>(pClient->GetInputVu());
 
         // Set the Ptt if required, input based on event
         if (pClient->IsVoiceConnected()
@@ -556,8 +556,9 @@ void App::render_frame()
                 pClient->SetAudioSpeakersOutputDevice(
                     findSpeakerOutputDeviceOrDefault());
                 pClient->SetHardware(vector_audio::shared::hardware);
-                pClient->SetPlaybackChannelAll(util::OutputChannelToAfvPlaybackChannel(
-                    vector_audio::shared::headsetOutputChannel));
+                pClient->SetPlaybackChannelAll(
+                    util::OutputChannelToAfvPlaybackChannel(
+                        vector_audio::shared::headsetOutputChannel));
 
                 if (!pDataHandler->isSlurperAvailable()) {
                     std::string clientIcao
@@ -757,7 +758,7 @@ void App::render_frame()
             std::string btnText = el.getCallsign() + "\n" + paddedFreq;
             if (ImGui::Button(btnText.c_str(), halfSize))
                 ImGui::OpenPopup(el.getCallsign().c_str());
-            ImGui::SameLine(0, 0.01);
+            ImGui::SameLine(0.F, 0.01F);
             ImGui::PopStyleColor();
 
             //
@@ -875,7 +876,7 @@ void App::render_frame()
             if (xcState)
                 vector_audio::style::button_reset_colour();
 
-            ImGui::SameLine(0, 0.01);
+            ImGui::SameLine(0.F, 0.01F);
 
             //
             // Speaker device
@@ -901,7 +902,7 @@ void App::render_frame()
             if (isOnSpeaker)
                 vector_audio::style::button_reset_colour();
 
-            ImGui::SameLine(0, 0.01);
+            ImGui::SameLine(0.F, 0.01F);
 
             //
             // TX
@@ -1004,7 +1005,7 @@ void App::render_frame()
                 shared::stationAutoAddCallsign
                     = shared::stationAutoAddCallsign.substr(1);
 
-                double frequency = 0;
+                int frequency = 0;
                 try {
                     frequency
                         = std::stoi(shared::stationAutoAddCallsign) * 1000;
