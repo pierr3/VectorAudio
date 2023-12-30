@@ -487,7 +487,7 @@ void App::render_frame()
                 this->pClient->SetXc(shared::session::frequency, true);
             }
             this->pClient->FetchStationVccs(cleanCallsign);
-            this->pClient->SetRadiosGain(shared::radioGain / 100.0F);
+            this->pClient->SetRadioGainAll(shared::radioGain / 100.0F);
         }
     }
 
@@ -556,8 +556,8 @@ void App::render_frame()
                 pClient->SetAudioSpeakersOutputDevice(
                     findSpeakerOutputDeviceOrDefault());
                 pClient->SetHardware(vector_audio::shared::hardware);
-                pClient->SetHeadsetOutputChannel(
-                    vector_audio::shared::headsetOutputChannel);
+                pClient->SetPlaybackChannelAll(util::OutputChannelToAfvPlaybackChannel(
+                    vector_audio::shared::headsetOutputChannel));
 
                 if (!pDataHandler->isSlurperAvailable()) {
                     std::string clientIcao
@@ -600,7 +600,7 @@ void App::render_frame()
                     std::to_string(vector_audio::shared::vatsimCid),
                     vector_audio::shared::vatsimPassword);
                 pClient->SetCallsign(vector_audio::shared::session::callsign);
-                pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 if (!pClient->Connect()) {
                     spdlog::error(
                         "Failed to connect: afv_lib says API is connected.");
@@ -832,7 +832,7 @@ void App::render_frame()
                     pClient->UseTransceiversFromStation(
                         el.getCallsign(), el.getFrequencyHz());
                     pClient->SetRx(el.getFrequencyHz(), true);
-                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                    pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
             }
 
@@ -868,7 +868,7 @@ void App::render_frame()
                     pClient->SetTx(el.getFrequencyHz(), true);
                     pClient->SetRx(el.getFrequencyHz(), true);
                     pClient->SetXc(el.getFrequencyHz(), true);
-                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                    pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
             }
 
@@ -928,7 +928,7 @@ void App::render_frame()
                         el.getCallsign(), el.getFrequencyHz());
                     pClient->SetTx(el.getFrequencyHz(), true);
                     pClient->SetRx(el.getFrequencyHz(), true);
-                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                    pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
             }
 
@@ -988,7 +988,7 @@ void App::render_frame()
                         pClient->AddFrequency(shared::kUnicomFrequency,
                             shared::stationAutoAddCallsign);
                         pClient->SetRx(shared::kUnicomFrequency, true);
-                        pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                        pClient->SetRadioGainAll(shared::radioGain / 100.0F);
 
                     } else {
                         errorModal("Could not find pilot connected under that "
@@ -1020,7 +1020,7 @@ void App::render_frame()
                     pClient->SetClientPosition(latitude, longitude, 1000, 1000);
                     pClient->AddFrequency(frequency, "MANUAL");
                     pClient->SetRx(frequency, true);
-                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                    pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 } else {
                     errorModal("The same frequency is already active, please "
                                "delete it first.");
@@ -1043,7 +1043,7 @@ void App::render_frame()
     if (ImGui::SliderInt(
             "##Radio Gain", &shared::radioGain, 0, 200, "%.3i %%")) {
         if (pClient->IsVoiceConnected())
-            pClient->SetRadiosGain(shared::radioGain / 100.0F);
+            pClient->SetRadioGainAll(shared::radioGain / 100.0F);
     }
     ImGui::PopItemWidth();
     style::pop_disabled_on(!pClient->IsVoiceConnected());

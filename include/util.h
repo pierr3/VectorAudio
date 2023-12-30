@@ -27,6 +27,15 @@ inline static std::string getHardwareName(
     return "Unknown Hardware";
 }
 
+inline static afv_native::PlaybackChannel OutputChannelToAfvPlaybackChannel(int outputChannel) {
+    if (outputChannel == 1)
+        return afv_native::PlaybackChannel::Left;
+    if (outputChannel == 2)
+        return afv_native::PlaybackChannel::Right;
+    
+    return afv_native::PlaybackChannel::Both;
+}
+
 inline static std::string ReplaceString(
     std::string subject, const std::string& search, const std::string& replace)
 {

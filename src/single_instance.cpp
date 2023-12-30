@@ -1,7 +1,6 @@
 #include "single_instance.h"
 #include <cstdio>
 #include <string>
-#include <sys/fcntl.h>
 
 #if defined(_WIN32)
 #include <Windows.h>
