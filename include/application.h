@@ -6,11 +6,14 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_stdlib.h"
-#include "modals/settings.h"
 #include "ns/airport.h"
 #include "radioSimulation.h"
 #include "shared.h"
 #include "style.h"
+#include "ui/modals/settings.h"
+#include "ui/widgets/addstation.widget.h"
+#include "ui/widgets/gain.widget.h"
+#include "ui/widgets/lastrx.widget.h"
 #include "util.h"
 
 #include <algorithm>
@@ -56,6 +59,8 @@ private:
     void disconnectAndCleanup();
 
     void playErrorSound();
+
+    void addNewStation();
 
     // Used in another thread
     static void loadAirportsDatabaseAsync();

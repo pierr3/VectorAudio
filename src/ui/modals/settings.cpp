@@ -1,6 +1,6 @@
-#include "modals/settings.h"
+#include "ui/modals/settings.h"
 
-void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient, const std::function<void()>& playAlertSound)
+void vector_audio::ui::modals::Settings::render(afv_native::api::atcClient* mClient, const std::function<void()>& playAlertSound)
 {
     // Settings modal definition
     if (ImGui::BeginPopupModal("Settings Panel")) {

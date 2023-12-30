@@ -13,7 +13,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <string>
 
-namespace vector_audio::modals {
+namespace vector_audio::ui::modals {
 class Settings {
 public:
     static void render(afv_native::api::atcClient* mClient,
