@@ -1,4 +1,7 @@
 #include "single_instance.h"
+#include <cstdio>
+#include <string>
+#include <sys/fcntl.h>
 
 #if defined(_WIN32)
 #include <Windows.h>
@@ -9,7 +12,7 @@
 
 namespace vector_audio {
 
-  const std::string INSTANCE_KEY = "org.vatsim.vectoraudio";
+  const std::string kInstanceKey = "org.vatsim.vectoraudio";
 
   struct SingleInstance::instance {
     // Indicates whether another instance is running.
@@ -23,36 +26,36 @@ namespace vector_audio {
 #endif
   };
 
-  SingleInstance::SingleInstance() : instance_(new instance) {
+  SingleInstance::SingleInstance() : pInstance(new instance) {
 #if defined(_WIN32)
-    instance_->mutex = CreateMutexA(NULL, FALSE, INSTANCE_KEY.c_str());
-    instance_->exists = GetLastError() == ERROR_ALREADY_EXISTS;
+    pInstance->mutex = CreateMutexA(NULL, FALSE, INSTANCE_KEY.c_str());
+    pInstance->exists = GetLastError() == ERROR_ALREADY_EXISTS;
 #elif defined(__APPLE__) || defined(__linux__)
-    instance_->blockingFile = open(("/tmp/" + INSTANCE_KEY).c_str(), O_CREAT | O_RDWR, 0666);
+    pInstance->blockingFile = open(("/tmp/" + kInstanceKey).c_str(), O_CREAT | O_RDWR, 0666);
     struct flock lock {};
     lock.l_type = F_WRLCK;
     lock.l_whence = SEEK_CUR;
     lock.l_start = 0;
     lock.l_len = 0;
-    instance_->exists = fcntl(instance_->blockingFile, F_SETLK, &lock) < 0;
+    pInstance->exists = fcntl(pInstance->blockingFile, F_SETLK, &lock) < 0;
 #endif
   }
 
   SingleInstance::~SingleInstance() {
 #if defined(_WIN32)
-    if(instance_->mutex) {
-      CloseHandle(instance_->mutex);
+    if(pInstance->mutex) {
+      CloseHandle(pInstance->mutex);
     }
-    instance_->mutex = nullptr;
-    instance_->exists = false;
+    pInstance->mutex = nullptr;
+    pInstance->exists = false;
 #elif defined(__linux__) || defined(__APPLE__)
-    close(instance_->blockingFile);
-    instance_->blockingFile = -1;
-    instance_->exists = false;
+    close(pInstance->blockingFile);
+    pInstance->blockingFile = -1;
+    pInstance->exists = false;
 #endif
   }
 
   bool SingleInstance::HasRunningInstance() const {
-    return instance_->exists;
+    return pInstance->exists;
   }
 }

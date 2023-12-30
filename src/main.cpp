@@ -40,12 +40,12 @@ int main(int, char**)
     auto image = sf::Image {};
 
 #ifdef SFML_SYSTEM_WINDOWS
-    std::string icon_name = "icon_win.png";
+    std::string iconName = "icon_win.png";
 #else
-    std::string icon_name = "icon_mac.png";
+    std::string iconName = "icon_mac.png";
 #endif
 
-    if (!image.loadFromFile((vector_audio::Configuration::get_resource_folder() / icon_name).string())) {
+    if (!image.loadFromFile((vector_audio::Configuration::get_resource_folder() / iconName).string())) {
         spdlog::error("Could not load application icon");
     } else {
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
@@ -66,24 +66,7 @@ int main(int, char**)
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
-    // ImGui::StyleColorsClassic();
 
-    // Load Fonts
-    // - If no fonts are loaded, dear imgui will use the default font. You can
-    // also load multiple fonts and use ImGui::PushFont()/PopFont() to select
-    // them.
-    // - AddFontFromFileTTF() will return the ImFont* so you can store it if you
-    // need to select the font among multiple.
-    // - If the file cannot be loaded, the function will return NULL. Please
-    // handle those errors in your application (e.g. use an assertion, or display
-    // an error and quit).
-    // - The fonts will be rasterized at a given size (w/ oversampling) and stored
-    // into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which
-    // ImGui_ImplXXXX_NewFrame below will call.
-    // - Read 'docs/FONTS.md' for more instructions and details.
-    // - Remember that in C/C++ if you want to include a backslash \ in a string
-    // literal you need to write a double backslash \\ !
-    // io.Fonts->AddFontDefault();
     std::filesystem::path p = vector_audio::Configuration::get_resource_folder() / std::filesystem::path("JetBrainsMono-Regular.ttf");
     io.Fonts->AddFontFromFileTTF(p.string().c_str(), 18.0);
 
@@ -98,15 +81,15 @@ int main(int, char**)
 
     spdlog::info("Starting VectorAudio...");
 
-    auto updater_instance = std::make_unique<vector_audio::updater>();
+    auto updaterInstance = std::make_unique<vector_audio::Updater>();
 
-    auto current_app = std::make_unique<vector_audio::application::App>();
+    auto currentApp = std::make_unique<vector_audio::application::App>();
 
-    bool always_on_top = vector_audio::shared::keepWindowOnTop;
-    vector_audio::setAlwaysOnTop(window, always_on_top);
+    bool alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+    vector_audio::setAlwaysOnTop(window, alwaysOnTop);
 
     // Main loop
-    sf::Clock delta_clock;
+    sf::Clock deltaClock;
     while (window.isOpen()) {
         // Poll and handle events (inputs, window resize, etc.)
         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
@@ -125,45 +108,45 @@ int main(int, char**)
                 window.close();
             } else if (event.type == sf::Event::KeyPressed) {
                 // Capture the new Ptt key
-                if (vector_audio::shared::capture_ptt_flag) {
+                if (vector_audio::shared::capturePttFlag) {
                     vector_audio::shared::ptt = event.key.scancode;
 
                     vector_audio::shared::joyStickId = -1;
                     vector_audio::shared::joyStickPtt = -1;
-                    vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::config_["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::config_["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::mConfig["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::mConfig["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
                     vector_audio::Configuration::write_config_async();
-                    vector_audio::shared::capture_ptt_flag = false;
+                    vector_audio::shared::capturePttFlag = false;
                 }
             } else if (event.type == sf::Event::JoystickButtonPressed) {
 
-                if (vector_audio::shared::capture_ptt_flag) {
+                if (vector_audio::shared::capturePttFlag) {
                     vector_audio::shared::ptt = sf::Keyboard::Scan::Unknown;
 
                     vector_audio::shared::joyStickId = event.joystickButton.joystickId;
                     vector_audio::shared::joyStickPtt = event.joystickButton.button;
 
-                    vector_audio::Configuration::config_["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::config_["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::config_["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::mConfig["user"]["joyStickId"] = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::mConfig["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
                     vector_audio::Configuration::write_config_async();
-                    vector_audio::shared::capture_ptt_flag = false;
+                    vector_audio::shared::capturePttFlag = false;
                 }
             }
 
-            if (vector_audio::shared::keepWindowOnTop != always_on_top) {
+            if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
                 vector_audio::setAlwaysOnTop(window, vector_audio::shared::keepWindowOnTop);
-                always_on_top = vector_audio::shared::keepWindowOnTop;
+                alwaysOnTop = vector_audio::shared::keepWindowOnTop;
             }
         }
 
-        ImGui::SFML::Update(window, delta_clock.restart());
+        ImGui::SFML::Update(window, deltaClock.restart());
 
-        if (!updater_instance->need_update())
-            current_app->render_frame();
+        if (!updaterInstance->need_update())
+            currentApp->render_frame();
         else
-            updater_instance->draw();
+            updaterInstance->draw();
 
         // ImGui::ShowDemoWindow(NULL);
 

@@ -2,16 +2,19 @@
 #include "afv-native/atcClientWrapper.h"
 #include "afv-native/event.h"
 #include "config.h"
+#include "data_file_handler.h"
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_stdlib.h"
 #include "modals/settings.h"
 #include "ns/airport.h"
+#include "radioSimulation.h"
 #include "shared.h"
 #include "style.h"
-#include <SFML/Audio.hpp>
+#include "util.h"
+
 #include <algorithm>
-#include <data_file_handler.h>
+#include <cstddef>
 #include <fstream>
 #include <functional>
 #include <httplib.h>
@@ -20,7 +23,12 @@
 #include <memory>
 #include <numeric>
 #include <restinio/all.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Window/Joystick.hpp>
 #include <shared_mutex>
+#include <spdlog/spdlog.h>
 #include <string>
 #include <thread>
 #include <utility>
@@ -38,8 +46,8 @@ private:
 
     void errorModal(std::string message);
 
-    afv_native::api::atcClient* mClient_;
-    restinio::running_server_handle_t<restinio::default_traits_t> mSDKServer_;
+    afv_native::api::atcClient* pClient;
+    restinio::running_server_handle_t<restinio::default_traits_t> pSDKServer;
 
     void eventCallback(
         afv_native::ClientEventType evt, void* data, void* data2);
@@ -47,25 +55,18 @@ private:
 
     void disconnectAndCleanup();
 
-    void playErrorSound()
-    {
-        if (!disconnect_warning_sound_available) {
-            return;
-        }
-        // Load the warning sound for disconnection
-        sound_player_.play();
-    };
+    void playErrorSound();
 
     // Used in another thread
     static void loadAirportsDatabaseAsync();
 
-    bool showErrorModal_ = false;
-    std::string lastErrorModalMessage_;
+    bool pShowErrorModal = false;
+    std::string pLastErrorModalMessage;
 
-    std::unique_ptr<vector_audio::vatsim::DataHandler> dataHandler_;
+    std::unique_ptr<vector_audio::vatsim::DataHandler> pDataHandler;
 
-    bool manuallyDisconnected_ = false;
-    sf::SoundBuffer disconnect_warning_soundbuffer_;
-    sf::Sound sound_player_;
+    bool pManuallyDisconnected = false;
+    sf::SoundBuffer pDisconnectWarningSoundbuffer;
+    sf::Sound pSoundPlayer;
 };
 }

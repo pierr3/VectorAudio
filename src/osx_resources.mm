@@ -30,7 +30,7 @@
 #import <Foundation/Foundation.h>
 
 ////////////////////////////////////////////////////////////
-std::string vector_audio::native::osx_resourcePath(void)
+std::string vector_audio::native::OSXGetResourcePath()
 {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 

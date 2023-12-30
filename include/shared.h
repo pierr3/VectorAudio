@@ -1,12 +1,13 @@
 #pragma once
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Window/Keyboard.hpp>
+#include "ns/station.h"
+
 #include <afv-native/hardwareType.h>
 #include <chrono>
 #include <map>
 #include <mutex>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <string>
-#include <utility>
 #include <vector>
 
 #define vatsim_status_host "https://status.vatsim.net"
@@ -19,52 +20,15 @@
     "^(https?:\\/\\/)?(?:[^@\n]+@)?(?:www\\.)?([^:\\/\n?]+)(\\/[.A-z0-9/-]+)$"
 
 namespace vector_audio::shared {
-struct StationElement {
-    int freq;
-    std::string callsign;
-    std::string human_freq;
-
-    int transceivers = -1;
-
-    inline static StationElement build(std::string callsign, int freq)
-    {
-        StationElement s;
-        s.callsign = std::move(callsign);
-        s.freq = freq;
-
-        std::string temp = std::to_string(freq / 1000);
-        s.human_freq = temp.substr(0, 3) + "." + temp.substr(3, 7);
-
-        return s;
-    }
-};
-
-static std::vector<std::string> split_string(
-    const std::string& str, const std::string& delimiter)
-{
-    std::vector<std::string> strings;
-
-    std::string::size_type pos = 0;
-    std::string::size_type prev = 0;
-    while ((pos = str.find(delimiter, prev)) != std::string::npos) {
-        strings.push_back(str.substr(prev, pos - prev));
-        prev = pos + delimiter.size();
-    }
-
-    // To get the last substring (or only, if delimiter is not found)
-    strings.push_back(str.substr(prev));
-
-    return strings;
-}
 
 const std::string kClientName = "VectorAudio/" + std::string(VECTOR_VERSION);
 
 inline bool mInputFilter;
 inline bool mOutputEffects;
-inline float mPeak = 60.0f;
-inline float mVu = 60.0f;
-inline int vatsim_cid;
-inline std::string vatsim_password;
+inline float mPeak = 60.0F;
+inline float mVu = 60.0F;
+inline int vatsimCid;
+inline std::string vatsimPassword;
 inline bool keepWindowOnTop = false;
 
 const int kMinVhf = 118000000; // 118.000
@@ -79,35 +43,35 @@ inline std::string configOutputDeviceName;
 inline std::string configSpeakerDeviceName;
 inline int headsetOutputChannel = 0;
 
-inline bool capture_ptt_flag = false;
+inline bool capturePttFlag = false;
 
 inline sf::Keyboard::Scancode ptt = sf::Keyboard::Scan::Unknown;
 inline int joyStickId = -1;
 inline int joyStickPtt = -1;
 inline bool isPttOpen = false;
 
-inline std::vector<StationElement> FetchedStations;
+inline std::vector<ns::Station> fetchedStations;
 inline bool bootUpVccs = false;
 
 // Temp inputs
-inline std::string station_add_callsign = "";
-inline std::string station_auto_add_callsign = "";
-inline float station_add_frequency = 118.0;
+inline std::string stationAddCallsign;
+inline std::string stationAutoAddCallsign;
+inline float stationAddFrequency = 118.0;
 
 inline afv_native::HardwareType hardware
     = afv_native::HardwareType::Schmid_ED_137B;
 
-inline const std::vector<std::string> AvailableHardware
+inline const std::vector<std::string> kAvailableHardware
     = { "Smid ED-137B", "Rockwell Collins 2100", "Garex 220" };
 
-inline int RadioGain = 100;
+inline int radioGain = 100;
 
 // Temp settings for config window
 inline std::map<unsigned int, std::string> availableAudioAPI;
 inline std::vector<std::string> availableInputDevices;
 inline std::vector<std::string> availableOutputDevices;
 
-inline static std::mutex transmitting_mutex;
+inline static std::mutex transmittingMutex;
 inline static std::string currentlyTransmittingApiData;
 inline static std::chrono::high_resolution_clock::time_point
     currentlyTransmittingApiTimer;
@@ -118,7 +82,7 @@ inline int apiServerPort = 49080;
 namespace session {
     inline std::mutex m;
     inline int facility = 0;
-    inline bool is_connected = false;
+    inline bool isConnected = false;
 
     inline double latitude;
     inline double longitude;

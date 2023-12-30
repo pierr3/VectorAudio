@@ -1,23 +1,25 @@
 #pragma once
+#include "shared.h"
+#include "util.h"
+
+#include <absl/strings/match.h>
+#include <absl/strings/str_split.h>
+#include <algorithm>
 #include <atomic>
 #include <chrono>
 #include <exception>
+#include <httplib.h>
 #include <memory>
 #include <mutex>
 #include <nlohmann/json.hpp>
 #include <nlohmann/json_fwd.hpp>
+#include <random>
 #include <regex>
 #include <spdlog/spdlog.h>
 #include <string>
 #include <thread>
-#include <algorithm>
-
-#include <random>
 #include <utility>
-
-#include "shared.h"
-#include "util.h"
-#include <httplib.h>
+#include <vector>
 
 namespace vector_audio::vatsim {
 using namespace std::chrono_literals;
@@ -28,18 +30,18 @@ public:
     virtual ~DataHandler()
     {
         {
-            std::unique_lock<std::mutex> lk(m_);
-            keep_running_ = false;
+            std::unique_lock<std::mutex> lk(pDfMutex);
+            pKeepRunning = false;
         }
-        cv_.notify_one();
+        pCv.notify_one();
 
-        if (workerThread_->joinable())
-            workerThread_->join();
+        if (pWorkerThread->joinable())
+            pWorkerThread->join();
     };
 
-    bool isSlurperAvailable() const { return this->slurperAvailable_; }
+    bool isSlurperAvailable() const { return this->pSlurperAvailable; }
 
-    bool isDatafileAvailable() const { return this->dataFileAvailable_; }
+    bool isDatafileAvailable() const { return this->pDataFileAvailable; }
 
     bool getConnectionStatusWithSlurper();
 
@@ -49,19 +51,19 @@ public:
         const std::string& callsign, double& latitude, double& longitude);
 
 private:
-    std::regex regex_;
-    std::unique_ptr<std::thread> workerThread_;
-    std::atomic<bool> keep_running_ = true;
-    std::condition_variable cv_;
-    std::mutex m_;
+    std::regex pRegexp;
+    std::unique_ptr<std::thread> pWorkerThread;
+    std::atomic<bool> pKeepRunning = true;
+    std::condition_variable pCv;
+    std::mutex pDfMutex;
 
-    std::string datafile_host_;
-    std::string datafile_url_;
+    std::string pDatafileHost;
+    std::string pDatafileUrl;
 
-    bool slurperAvailable_ = false;
-    bool dataFileAvailable_ = false;
-    bool had_one_disconnect_ = false;
-    bool yx_ = false;
+    bool pSlurperAvailable = false;
+    bool pDataFileAvailable = false;
+    bool pHadOneDisconnect = false;
+    bool pYx = false;
 
     static std::string downloadString(httplib::Client& cli, std::string url);
 
@@ -70,7 +72,7 @@ private:
     bool getLatestDatafileURL();
 
     bool getPilotPositionWithSlurper(
-        const std::string& callsign, double& latitude, double& longitude);
+        const std::string& callsign, double& latitude, double& longitude) const;
 
     bool getPilotPositionWithDatafile(
         const std::string& callsign, double& latitude, double& longitude);

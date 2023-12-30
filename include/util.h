@@ -1,5 +1,6 @@
 #pragma once
 #include "imgui.h"
+#include "radioSimulation.h"
 #include "shared.h"
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -61,22 +62,22 @@ static void HelpMarker(const char* desc)
 // https://stackoverflow.com/questions/64653747/how-to-center-align-text-horizontally
 inline void TextCentered(const std::string& text)
 {
-    float win_width = ImGui::GetWindowSize().x;
-    float text_width = ImGui::CalcTextSize(text.c_str()).x;
+    float winWidth = ImGui::GetWindowSize().x;
+    float textWidth = ImGui::CalcTextSize(text.c_str()).x;
 
     // calculate the indentation that centers the text on one line, relative
     // to window left, regardless of the `ImGuiStyleVar_WindowPadding` value
-    float text_indentation = (win_width - text_width) * 0.5F;
+    float textIndentation = (winWidth - textWidth) * 0.5F;
 
     // if text is too long to be drawn on one line, `text_indentation` can
     // become too small or even negative, so we check a minimum indentation
-    float min_indentation = 20.0F;
-    if (text_indentation <= min_indentation) {
-        text_indentation = min_indentation;
+    float minIndentation = 20.0F;
+    if (textIndentation <= minIndentation) {
+        textIndentation = minIndentation;
     }
 
-    ImGui::SameLine(text_indentation);
-    ImGui::PushTextWrapPos(win_width - text_indentation);
+    ImGui::SameLine(textIndentation);
+    ImGui::PushTextWrapPos(winWidth - textIndentation);
     ImGui::TextWrapped("%s", text.c_str());
     ImGui::PopTextWrapPos();
 }
@@ -102,42 +103,6 @@ inline int PlatformOpen(std::string cmd)
     }
     return err;
 #endif
-}
-
-// From
-// https://github.com/swift-project/pilotclient/blob/main/src/blackmisc/aviation/comsystem.cpp
-// Under GPL v3 License
-
-inline bool isValid8_33kHzChannel(int fKHz)
-{
-    fKHz = fKHz / 100;
-    const int last_digits = static_cast<int>(fKHz) % 100;
-    return fKHz % 5 == 0 && last_digits != 20 && last_digits != 45
-        && last_digits != 70 && last_digits != 95;
-}
-
-inline int round8_33kHzChannel(int fKHz)
-{
-    fKHz = fKHz / 100;
-    if (!isValid8_33kHzChannel(fKHz)) {
-        const int diff = static_cast<int>(fKHz) % 5;
-        int lower = fKHz - diff;
-        if (!isValid8_33kHzChannel(lower)) {
-            lower -= 5;
-        }
-
-        int upper = fKHz + (5 - diff);
-        if (!isValid8_33kHzChannel(upper)) {
-            upper += 5;
-        }
-
-        const int lower_diff = abs(fKHz - lower);
-        const int upper_diff = abs(fKHz - upper);
-
-        fKHz = lower_diff < upper_diff ? lower : upper;
-        fKHz = std::clamp(fKHz, 118000, 136990);
-    }
-    return fKHz * 100;
 }
 
 inline void TextURL(const std::string& name_, std::string URL_)
@@ -171,32 +136,12 @@ inline int roundUpToMultiplier(int numToRound, int multiple)
 
 inline int cleanUpFrequency(int frequency)
 {
-    // Ensures that a frequency is always valid and within defined ranges and in
-    // 25Khz format
-
     // We don't clean up an unset frequency
     if (std::abs(frequency) == shared::kObsFrequency) {
         return frequency;
     }
 
-    if (!util::isValid8_33kHzChannel(frequency)) {
-        return util::round8_33kHzChannel(frequency);
-    }
-
-    return std::clamp(frequency, 118000000, 136990000);
-    ;
-}
-
-static bool endsWith(const std::string& str, const std::string& suffix)
-{
-    return str.size() >= suffix.size()
-        && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix);
-}
-
-static bool startsWith(const std::string& str, const std::string& prefix)
-{
-    return str.size() >= prefix.size()
-        && 0 == str.compare(0, prefix.size(), prefix);
+    return RadioSimulation::round8_33kHzChannel(frequency);
 }
 
 }
@@ -222,7 +167,7 @@ inline static std::string findHeadsetInputDeviceOrDefault()
     return vector_audio::shared::availableInputDevices.front();
 }
 
-inline static bool disconnect_warning_sound_available = true;
+inline static bool disconnectWarningSoundAvailable = true;
 
 inline static std::string findHeadsetOutputDeviceOrDefault()
 {

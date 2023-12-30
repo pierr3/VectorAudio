@@ -1,8 +1,8 @@
+
 #include <data_file_handler.h>
-#include <spdlog/spdlog.h>
 
 vector_audio::vatsim::DataHandler::DataHandler()
-    : workerThread_(std::make_unique<std::thread>(&DataHandler::worker, this))
+    : pWorkerThread(std::make_unique<std::thread>(&DataHandler::worker, this))
 {
     spdlog::debug("Created data file thread");
 }
@@ -31,34 +31,35 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
         return false;
     }
 
-    auto lines = shared::split_string(sluper_data, "\n");
+    auto lines = absl::StrSplit(sluper_data, '\n');
     std::string callsign;
     std::string res3;
     std::string res2;
     std::string lat;
     std::string lon;
-    bool found_not_atis_connection = false;
+    bool foundNotAtisConnection = false;
 
     for (const auto& line : lines) {
         if (line.empty()) {
             continue;
         }
 
-        auto res = shared::split_string(line, ",");
+        std::vector<std::string> res = absl::StrSplit(line, ',');
 
-        if (util::endsWith(res[1], "_ATIS")) {
+        if (absl::EndsWith(res[1], "_ATIS")) {
             continue; // Ignore ATIS connections
         }
 
-        found_not_atis_connection = true;
+        foundNotAtisConnection = true;
 
-        if (util::endsWith(res[1], "_CTR") || util::endsWith(res[1], "_APP")
-            || util::endsWith(res[1], "_TWR") || util::endsWith(res[1], "_GND")
-            || util::endsWith(res[1], "_DEL") || util::endsWith(res[1], "_FSS")
-            || util::endsWith(res[1], "_SUP") || util::endsWith(res[1], "_RDO")
-            || util::endsWith(res[1], "_RMP") || util::endsWith(res[1], "_TMU")
-            || util::endsWith(res[1], "_FMP")) {
-            yx_ = true;
+        auto allowedYx = { "_CTR", "_APP", "_TWR", "_GND", "_DEL", "_FSS",
+            "_SUP", "_RDO", "_RMP", "_TMU", "_FMP" };
+
+        for (const auto& yxTest : allowedYx) {
+            if (absl::EndsWith(res[1], yxTest)) {
+                pYx = true;
+                break;
+            }
         }
 
         callsign = res[1];
@@ -75,21 +76,20 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
         return false;
     }
 
-    if (!found_not_atis_connection) {
+    if (!foundNotAtisConnection) {
         return false;
     }
 
     res3.erase(std::remove(res3.begin(), res3.end(), '.'), res3.end());
     int u334 = std::atoi(res3.c_str()) * 1000;
 
-    int k422 = std::stoi(res2, nullptr, 16) == 10 && yx_ ? 1 : 0;
+    int k422 = std::stoi(res2, nullptr, 16) == 10 && pYx ? 1 : 0;
 
     k422 = u334 != shared::kObsFrequency && k422 == 1   ? 1
-        : k422 == 1 && util::endsWith(callsign, "_SUP") ? 1
+        : k422 == 1 && absl::EndsWith(callsign, "_SUP") ? 1
                                                         : 0;
 
-    if (shared::session::is_connected
-        && shared::session::callsign != callsign) {
+    if (shared::session::isConnected && shared::session::callsign != callsign) {
         spdlog::warn(
             "Detected an active session but with a different callsign");
         return false; // If the callsign changes during an active session, we
@@ -102,6 +102,7 @@ bool vector_audio::vatsim::DataHandler::parseSlurper(
 
     return true;
 }
+
 bool vector_audio::vatsim::DataHandler::getLatestDatafileURL()
 {
     auto cli = httplib::Client(vatsim_status_host);
@@ -112,24 +113,23 @@ bool vector_audio::vatsim::DataHandler::getLatestDatafileURL()
             return false;
         }
 
-        auto status_json = nlohmann::json::parse(res);
+        auto statusJson = nlohmann::json::parse(res);
 
-        auto number_of_status_files
-            = status_json["data"]["v3"].get<std::vector<std::string>>().size();
+        auto numberOfStatusFiles
+            = statusJson["data"]["v3"].get<std::vector<std::string>>().size();
 
-        auto selected_file_index = number_of_status_files == 1
-            ? 0
-            : std::rand() % number_of_status_files;
+        auto selectedFileIndex
+            = numberOfStatusFiles == 1 ? 0 : std::rand() % numberOfStatusFiles;
 
         auto data
-            = status_json["data"]["v3"][selected_file_index].get<std::string>();
+            = statusJson["data"]["v3"][selectedFileIndex].get<std::string>();
 
         std::regex regex(url_regex);
         std::smatch m;
         std::regex_match(data, m, regex);
         if (m.size() == 4) {
-            datafile_host_ = m[1].str() + m[2].str();
-            datafile_url_ = m[3].str();
+            pDatafileHost = m[1].str() + m[2].str();
+            pDatafileUrl = m[3].str();
             return true;
         }
     } catch (std::exception& e) {
@@ -138,14 +138,16 @@ bool vector_audio::vatsim::DataHandler::getLatestDatafileURL()
 
     return false;
 }
+
 bool vector_audio::vatsim::DataHandler::checkIfdatafileAvailable()
 {
-    auto cli = httplib::Client(this->datafile_host_);
+    auto cli = httplib::Client(this->pDatafileHost);
     auto res = vector_audio::vatsim::DataHandler::downloadString(
-        cli, this->datafile_url_);
+        cli, this->pDatafileUrl);
 
     return !res.empty();
-};
+}
+
 bool vector_audio::vatsim::DataHandler::checkIfSlurperAvailable()
 {
     auto cli = httplib::Client(slurper_host);
@@ -153,20 +155,22 @@ bool vector_audio::vatsim::DataHandler::checkIfSlurperAvailable()
         = vector_audio::vatsim::DataHandler::downloadString(cli, slurper_url);
 
     return res == "Must Provide CID";
-};
+}
+
 void vector_audio::vatsim::DataHandler::getAvailableEndpoints()
 {
-    auto status_available = this->getLatestDatafileURL();
-    if (status_available) {
-        this->dataFileAvailable_ = this->checkIfdatafileAvailable();
+    auto statusAvailable = this->getLatestDatafileURL();
+    if (statusAvailable) {
+        this->pDataFileAvailable = this->checkIfdatafileAvailable();
     }
 
-    this->slurperAvailable_
+    this->pSlurperAvailable
         = vector_audio::vatsim::DataHandler::checkIfSlurperAvailable();
 }
+
 void vector_audio::vatsim::DataHandler::resetSessionData()
 {
-    shared::session::is_connected = false;
+    shared::session::isConnected = false;
     shared::session::callsign.clear();
     shared::session::facility = 0;
     shared::session::frequency = 0;
@@ -174,24 +178,26 @@ void vector_audio::vatsim::DataHandler::resetSessionData()
     shared::session::latitude = 0.0;
     shared::session::longitude = 0.0;
 }
+
 void vector_audio::vatsim::DataHandler::handleDisconnect()
 {
     const std::lock_guard<std::mutex> l(shared::session::m);
-    if (!shared::session::is_connected) {
+    if (!shared::session::isConnected) {
         return;
     }
 
-    if (this->had_one_disconnect_) {
+    if (this->pHadOneDisconnect) {
         spdlog::info("VATSIM client disconnection confirmed");
-        this->had_one_disconnect_ = false;
+        this->pHadOneDisconnect = false;
         vector_audio::vatsim::DataHandler::resetSessionData();
         return;
     }
     spdlog::info("Detected VATSIM client disconnect, waiting for second "
                  "confirmation.");
 
-    this->had_one_disconnect_ = true;
-};
+    this->pHadOneDisconnect = true;
+}
+
 bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
 {
     try {
@@ -200,13 +206,13 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
             return false;
         }
 
-        auto v3_datafile = nlohmann::json::parse(data);
+        auto v3Datafile = nlohmann::json::parse(data);
 
-        for (auto controller : v3_datafile["controllers"]) {
-            if (controller["cid"] == vector_audio::shared::vatsim_cid) {
+        for (auto controller : v3Datafile["controllers"]) {
+            if (controller["cid"] == vector_audio::shared::vatsimCid) {
 
                 auto callsign = controller["callsign"].get<std::string>();
-                if (shared::session::is_connected
+                if (shared::session::isConnected
                     && shared::session::callsign != callsign) {
                     spdlog::warn("Detected an active session but with a "
                                  "different callsign, disconnecting");
@@ -232,6 +238,7 @@ bool vector_audio::vatsim::DataHandler::parseDatafile(const std::string& data)
 
     return false;
 }
+
 void vector_audio::vatsim::DataHandler::updateSessionInfo(std::string callsign,
     int frequency, int facility, double latitude, double longitude)
 {
@@ -242,16 +249,18 @@ void vector_audio::vatsim::DataHandler::updateSessionInfo(std::string callsign,
     shared::session::longitude = longitude;
     shared::session::frequency = frequency;
 }
+
 void vector_audio::vatsim::DataHandler::handleConnect()
 {
     const std::lock_guard<std::mutex> l(shared::session::m);
-    if (shared::session::is_connected) {
+    if (shared::session::isConnected) {
         return;
     }
 
     spdlog::info("Detected VATSIM client connection");
-    shared::session::is_connected = true;
+    shared::session::isConnected = true;
 }
+
 void vector_audio::vatsim::DataHandler::worker()
 {
     {
@@ -259,7 +268,7 @@ void vector_audio::vatsim::DataHandler::worker()
         this->getAvailableEndpoints();
     }
 
-    std::unique_lock<std::mutex> lk(m_);
+    std::unique_lock<std::mutex> lk(pDfMutex);
     do {
         if (!this->isSlurperAvailable() || !this->isDatafileAvailable()) {
             this->getAvailableEndpoints();
@@ -279,15 +288,16 @@ void vector_audio::vatsim::DataHandler::worker()
             handleConnect();
         }
 
-    } while (!cv_.wait_for(lk, 15s, [this] { return !keep_running_; }));
+    } while (!pCv.wait_for(lk, 15s, [this] { return !pKeepRunning; }));
 }
+
 bool vector_audio::vatsim::DataHandler::getConnectionStatusWithSlurper()
 {
     if (!this->isSlurperAvailable()) {
         return false;
     }
 
-    if (shared::vatsim_cid == 0) {
+    if (shared::vatsimCid == 0) {
         return false;
     }
 
@@ -295,28 +305,30 @@ bool vector_audio::vatsim::DataHandler::getConnectionStatusWithSlurper()
     std::string res;
     {
         const std::lock_guard<std::mutex> l(shared::session::m);
-        std::string url_with_params
-            = std::string(slurper_url) + std::to_string(shared::vatsim_cid);
+        std::string urlWithParams
+            = std::string(slurper_url) + std::to_string(shared::vatsimCid);
         res = vector_audio::vatsim::DataHandler::downloadString(
-            cli, url_with_params);
+            cli, urlWithParams);
     }
 
     return this->parseSlurper(res);
 }
+
 bool vector_audio::vatsim::DataHandler::getConnectionStatusWithDatafile()
 {
     if (!this->isDatafileAvailable()) {
         return false;
     }
 
-    auto cli = httplib::Client(this->datafile_host_);
+    auto cli = httplib::Client(this->pDatafileHost);
     std::string res = vector_audio::vatsim::DataHandler::downloadString(
-        cli, this->datafile_url_);
+        cli, this->pDatafileUrl);
 
     return this->parseDatafile(res);
 }
+
 bool vector_audio::vatsim::DataHandler::getPilotPositionWithSlurper(
-    const std::string& callsign, double& latitude, double& longitude)
+    const std::string& callsign, double& latitude, double& longitude) const
 {
     if (!this->isSlurperAvailable()) {
         return false;
@@ -324,18 +336,17 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithSlurper(
 
     auto cli = httplib::Client(slurper_host);
     std::string res;
-    std::string url_with_params = std::string(slurper_url) + callsign;
-    res = vector_audio::vatsim::DataHandler::downloadString(
-        cli, url_with_params);
+    std::string urlWithParams = std::string(slurper_url) + callsign;
+    res = vector_audio::vatsim::DataHandler::downloadString(cli, urlWithParams);
 
     if (res.empty()) {
         return false;
     }
 
     try {
-        auto lines = shared::split_string(res, "\n");
+        auto lines = absl::StrSplit(res, '\n');
         for (const auto& line : lines) {
-            auto splits = shared::split_string(line, ",");
+            std::vector<std::string> splits = absl::StrSplit(line, ',');
 
             if (splits[2] == "pilot") {
                 latitude = std::stod(splits[5]);
@@ -350,6 +361,7 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithSlurper(
 
     return false;
 }
+
 bool vector_audio::vatsim::DataHandler::getPilotPositionWithDatafile(
     const std::string& callsign, double& latitude, double& longitude)
 {
@@ -357,9 +369,9 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithDatafile(
         return false;
     }
 
-    auto cli = httplib::Client(this->datafile_host_);
+    auto cli = httplib::Client(this->pDatafileHost);
     std::string res = vector_audio::vatsim::DataHandler::downloadString(
-        cli, this->datafile_url_);
+        cli, this->pDatafileUrl);
 
     if (res.empty()) {
         return false;
@@ -371,9 +383,9 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithDatafile(
             return false;
         }
 
-        auto v3_datafile = nlohmann::json::parse(res);
+        auto v3Datafile = nlohmann::json::parse(res);
 
-        for (auto pilot : v3_datafile["pilots"]) {
+        for (auto pilot : v3Datafile["pilots"]) {
             if (pilot["callsign"] == callsign) {
 
                 latitude = pilot["latitude"].get<double>();
@@ -388,14 +400,15 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithDatafile(
 
     return false;
 }
+
 bool vector_audio::vatsim::DataHandler::getPilotPositionWithAnything(
     const std::string& callsign, double& latitude, double& longitude)
 {
-    if (this->slurperAvailable_) {
+    if (this->pSlurperAvailable) {
         return this->getPilotPositionWithSlurper(callsign, latitude, longitude);
     }
 
-    if (this->dataFileAvailable_) {
+    if (this->pDataFileAvailable) {
         return this->getPilotPositionWithDatafile(
             callsign, latitude, longitude);
     }

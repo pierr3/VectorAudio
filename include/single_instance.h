@@ -8,9 +8,9 @@ namespace vector_audio {
     public:
       explicit SingleInstance();
       ~SingleInstance();
-      bool HasRunningInstance() const;
+      [[nodiscard]] bool HasRunningInstance() const;
     private:
       struct instance;
-      std::unique_ptr<instance> instance_;
+      std::unique_ptr<instance> pInstance;
   };
 }

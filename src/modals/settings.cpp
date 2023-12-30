@@ -1,7 +1,4 @@
 #include "modals/settings.h"
-#include "data_file_handler.h"
-#include "imgui.h"
-#include "util.h"
 
 void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient, const std::function<void()>& playAlertSound)
 {
@@ -17,8 +14,8 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             ImGui::Text("VATSIM Details");
             ImGui::NewLine();
 
-            ImGui::InputInt("CID", &vector_audio::shared::vatsim_cid, 0);
-            ImGui::InputText("Password", &vector_audio::shared::vatsim_password,
+            ImGui::InputInt("CID", &vector_audio::shared::vatsimCid, 0);
+            ImGui::InputText("Password", &vector_audio::shared::vatsimPassword,
                 ImGuiInputTextFlags_Password);
 
             ImGui::EndGroup();
@@ -31,30 +28,30 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             vector_audio::util::HelpMarker(
                 "/!\\ ADVANCED SETTING /!\\ \nThis affects processing done to the audio, including\nsimmulating VHF on \
                                                                     incoming audio. In general, you\nshould at least always leave input processing on.");
-            std::string filter_current_value;
+            std::string filterCurrentValue;
             if (vector_audio::shared::mInputFilter
                 && !vector_audio::shared::mOutputEffects) {
-                filter_current_value = "Input only";
+                filterCurrentValue = "Input only";
             }
 
             if (!vector_audio::shared::mInputFilter
                 && vector_audio::shared::mOutputEffects) {
-                filter_current_value = "Output only";
+                filterCurrentValue = "Output only";
             }
 
             if (!vector_audio::shared::mInputFilter
                 && !vector_audio::shared::mOutputEffects) {
-                filter_current_value = "Off";
+                filterCurrentValue = "Off";
             }
 
             if (vector_audio::shared::mInputFilter
                 && vector_audio::shared::mOutputEffects) {
-                filter_current_value = "On";
+                filterCurrentValue = "On";
             }
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo(
-                    "##Audio filters", filter_current_value.c_str())) {
+                    "##Audio filters", filterCurrentValue.c_str())) {
 
                 if (ImGui::Selectable("On",
                         vector_audio::shared::mInputFilter
@@ -162,30 +159,30 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             ImGui::NewLine();
 
             ImGui::TextUnformatted("Push to talk key: ");
-            std::string ptt_key_name;
+            std::string pttKeyName;
             if (shared::ptt == sf::Keyboard::Scan::Unknown
                 && shared::joyStickId == -1) {
-                ptt_key_name = "Not set";
+                pttKeyName = "Not set";
             } else if (shared::ptt != -1) {
-                ptt_key_name
+                pttKeyName
                     = "Key: " + sf::Keyboard::getDescription(shared::ptt);
             } else if (shared::joyStickId != -1) {
-                ptt_key_name = fmt::format("Joystick {} Button {}",
+                pttKeyName = fmt::format("Joystick {} Button {}",
                     shared::joyStickId, shared::joyStickPtt);
             }
 
             ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-            ImGui::Button(ptt_key_name.c_str(), ImVec2(-1.0F, 0.0F));
+            ImGui::Button(pttKeyName.c_str(), ImVec2(-1.0F, 0.0F));
             ImGui::PopItemFlag();
 
             vector_audio::style::button_blue();
-            if (shared::capture_ptt_flag) {
+            if (shared::capturePttFlag) {
                 if (ImGui::Button("Capturing key...", ImVec2(-1.0F, 0.0F))) {
-                    shared::capture_ptt_flag = false;
+                    shared::capturePttFlag = false;
                 }
             } else {
                 if (ImGui::Button("Select New Key", ImVec2(-1.0F, 0.0F))) {
-                    shared::capture_ptt_flag = true;
+                    shared::capturePttFlag = true;
                 }
             }
             vector_audio::style::button_reset_colour();
@@ -229,7 +226,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
                                 vector_audio::shared::mAudioApi);
                     }
                     vector_audio::shared::configAudioApi = "Default API";
-                    vector_audio::Configuration::config_["audio"]["api"]
+                    vector_audio::Configuration::mConfig["audio"]["api"]
                         = "Default API";
                 }
 
@@ -252,7 +249,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
                                     vector_audio::shared::mAudioApi);
                         }
                         vector_audio::shared::configAudioApi = item.second;
-                        vector_audio::Configuration::config_["audio"]["api"]
+                        vector_audio::Configuration::mConfig["audio"]["api"]
                             = item.second;
                     }
                 }
@@ -268,14 +265,14 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             if (ImGui::BeginCombo("##Input Device",
                     vector_audio::shared::configInputDeviceName.c_str())) {
 
-                auto m_audio_drivers
+                auto mAudioDrivers
                     = vector_audio::shared::availableInputDevices;
-                for (const auto& driver : m_audio_drivers) {
+                for (const auto& driver : mAudioDrivers) {
                     if (ImGui::Selectable(driver.c_str(),
                             vector_audio::shared::configInputDeviceName
                                 == driver)) {
                         vector_audio::shared::configInputDeviceName = driver;
-                        vector_audio::Configuration::config_["audio"]
+                        vector_audio::Configuration::mConfig["audio"]
                                                             ["input_device"]
                             = vector_audio::shared::configInputDeviceName;
                     }
@@ -294,14 +291,14 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             if (ImGui::BeginCombo("##Headset Device",
                     vector_audio::shared::configOutputDeviceName.c_str())) {
 
-                auto m_audio_drivers
+                auto mAudioDrivers
                     = vector_audio::shared::availableOutputDevices;
-                for (const auto& driver : m_audio_drivers) {
+                for (const auto& driver : mAudioDrivers) {
                     if (ImGui::Selectable(driver.c_str(),
                             vector_audio::shared::configOutputDeviceName
                                 == driver)) {
                         vector_audio::shared::configOutputDeviceName = driver;
-                        vector_audio::Configuration::config_["audio"]
+                        vector_audio::Configuration::mConfig["audio"]
                                                             ["output_device"]
                             = vector_audio::shared::configOutputDeviceName;
                     }
@@ -317,25 +314,25 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
                 "Optional: You can choose whether to play the\nsound in your "
                 "right, left, or both ears.");
 
-            std::string channels_display[]
+            std::string channelsDisplay[]
                 = { "Left + Right", "Left", "Right" };
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo("##Channel Setup",
-                    channels_display[vector_audio::shared::headsetOutputChannel]
+                    channelsDisplay[vector_audio::shared::headsetOutputChannel]
                         .c_str())) {
 
-                if (ImGui::Selectable(channels_display[0].c_str(),
+                if (ImGui::Selectable(channelsDisplay[0].c_str(),
                         vector_audio::shared::headsetOutputChannel == 0)) {
                     vector_audio::shared::headsetOutputChannel = 0;
                 }
 
-                if (ImGui::Selectable(channels_display[1].c_str(),
+                if (ImGui::Selectable(channelsDisplay[1].c_str(),
                         vector_audio::shared::headsetOutputChannel == 1)) {
                     vector_audio::shared::headsetOutputChannel = 1;
                 }
 
-                if (ImGui::Selectable(channels_display[2].c_str(),
+                if (ImGui::Selectable(channelsDisplay[2].c_str(),
                         vector_audio::shared::headsetOutputChannel == 2)) {
                     vector_audio::shared::headsetOutputChannel = 2;
                 }
@@ -354,14 +351,14 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             if (ImGui::BeginCombo("##Speaker Device",
                     vector_audio::shared::configSpeakerDeviceName.c_str())) {
 
-                auto m_audio_drivers
+                auto mAudioDrivers
                     = vector_audio::shared::availableOutputDevices;
-                for (const auto& driver : m_audio_drivers) {
+                for (const auto& driver : mAudioDrivers) {
                     if (ImGui::Selectable(driver.c_str(),
                             vector_audio::shared::configSpeakerDeviceName
                                 == driver)) {
                         vector_audio::shared::configSpeakerDeviceName = driver;
-                        vector_audio::Configuration::config_["audio"]
+                        vector_audio::Configuration::mConfig["audio"]
                                                             ["speaker_device"]
                             = vector_audio::shared::configSpeakerDeviceName;
                     }
@@ -374,10 +371,10 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             ImGui::NewLine();
 
             vector_audio::style::button_purple();
-            const char* audio_test_button_text = mClient->IsAudioRunning()
+            const char* audioTestButtonText = mClient->IsAudioRunning()
                 ? "Stop Mic Test"
                 : "Start Mic Test";
-            if (ImGui::Button(audio_test_button_text, ImVec2(-1.0F, 0.0F))) {
+            if (ImGui::Button(audioTestButtonText, ImVec2(-1.0F, 0.0F))) {
 
                 if (mClient->IsAudioRunning())
                     mClient->StopAudio();
@@ -419,7 +416,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
                     mClient->StopAudio();
                 ImGui::CloseCurrentPopup();
 
-                shared::capture_ptt_flag = false;
+                shared::capturePttFlag = false;
             }
 
             ImGui::SameLine();
@@ -427,19 +424,19 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
             vector_audio::style::button_green();
             if (ImGui::Button(
                     "Save", ImVec2(ImGui::GetContentRegionAvail().x, 0.0F))) {
-                vector_audio::Configuration::config_["user"]["vatsim_id"]
-                    = vector_audio::shared::vatsim_cid;
-                vector_audio::Configuration::config_["user"]["vatsim_password"]
-                    = vector_audio::shared::vatsim_password;
-                vector_audio::Configuration::config_["user"]["keepWindowOnTop"]
+                vector_audio::Configuration::mConfig["user"]["vatsim_id"]
+                    = vector_audio::shared::vatsimCid;
+                vector_audio::Configuration::mConfig["user"]["vatsim_password"]
+                    = vector_audio::shared::vatsimPassword;
+                vector_audio::Configuration::mConfig["user"]["keepWindowOnTop"]
                     = vector_audio::shared::keepWindowOnTop;
-                vector_audio::Configuration::config_["audio"]["input_filters"]
+                vector_audio::Configuration::mConfig["audio"]["input_filters"]
                     = vector_audio::shared::mInputFilter;
-                vector_audio::Configuration::config_["audio"]["vhf_effects"]
+                vector_audio::Configuration::mConfig["audio"]["vhf_effects"]
                     = vector_audio::shared::mOutputEffects;
-                vector_audio::Configuration::config_["audio"]["hardware_type"]
+                vector_audio::Configuration::mConfig["audio"]["hardware_type"]
                     = static_cast<int>(vector_audio::shared::hardware);
-                vector_audio::Configuration::config_["audio"]["headset_channel"]
+                vector_audio::Configuration::mConfig["audio"]["headset_channel"]
                     = vector_audio::shared::headsetOutputChannel;
 
                 vector_audio::Configuration::write_config_async();
@@ -447,7 +444,7 @@ void vector_audio::modals::Settings::render(afv_native::api::atcClient* mClient,
                     mClient->StopAudio();
                 ImGui::CloseCurrentPopup();
 
-                shared::capture_ptt_flag = false;
+                shared::capturePttFlag = false;
             }
             vector_audio::style::button_reset_colour();
 

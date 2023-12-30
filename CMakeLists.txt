@@ -12,6 +12,11 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 add_definitions(-DCPPHTTPLIB_OPENSSL_SUPPORT=1)
 
+# Clang preferences
+
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
+
+
 # Read the VERSION file
 file(READ "VERSION" VERSION_CONTENT)
 string(REGEX MATCHALL "[0-9]+" VERSION_NUMBERS "${VERSION_CONTENT}")
@@ -63,6 +68,7 @@ find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 find_package(Threads REQUIRED)
+find_package(absl CONFIG REQUIRED)
 find_package(SFML COMPONENTS system window graphics audio CONFIG REQUIRED)
 
 set(APPLE_EXTRA_LIBS "")
@@ -161,6 +167,7 @@ target_link_libraries(vector_audio
     restinio::restinio
     httplib::httplib
     Threads::Threads
+    absl::strings
     ${OPENGL_LIBRARY})
 
 if (WIN32)

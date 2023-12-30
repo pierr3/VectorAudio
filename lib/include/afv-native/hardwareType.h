@@ -7,6 +7,13 @@ namespace afv_native {
         Rockwell_Collins_2100,
         Garex_220
     };
-}
 
-#endif //AFV_NATIVE_HARDWARE_H
+    enum class PlaybackChannel {
+        Both,
+        Left,
+        Right,
+        Default
+    };
+} // namespace afv_native
+
+#endif // AFV_NATIVE_HARDWARE_H

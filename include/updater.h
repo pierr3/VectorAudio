@@ -5,6 +5,7 @@
 #include "shared.h"
 #include "spdlog/spdlog.h"
 #include "util.h"
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -14,22 +15,23 @@
 
 namespace vector_audio {
 
-class updater {
+class Updater {
 public:
-    updater();
+    Updater();
 
-    bool need_update();
+    [[nodiscard]] bool need_update() const;
     void draw();
 
 private:
-    bool mNeedUpdate;
+    bool pNeedUpdate = false;
 
-    std::string mBaseUrl = "https://raw.githubusercontent.com";
-    std::string mVersionUrl = "/pierr3/VectorAudio/main/VERSION";
-    semver::version mNewVersion;
+    std::string pBaseUrl = "https://raw.githubusercontent.com";
+    std::string pVersionUrl = "/pierr3/VectorAudio/main/VERSION";
+    semver::version pNewVersion;
 
-    std::string mArtefactFileUrl = "https://github.com/pierr3/VectorAudio/releases/latest";
-    httplib::Client cli;
+    std::string pArtefactFileUrl
+        = "https://github.com/pierr3/VectorAudio/releases/latest";
+    httplib::Client pCli;
 };
 
 }

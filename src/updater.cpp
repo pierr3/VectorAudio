@@ -4,30 +4,31 @@ namespace vector_audio {
 
 // This class is blocking on purpose, we want to update if needed before
 // anything
-updater::updater()
-    : mNeedUpdate(false)
-    , cli(mBaseUrl)
+Updater::Updater()
+    : pCli(pBaseUrl)
 {
     // Check version file
-    auto res = cli.Get(mVersionUrl);
+    auto res = pCli.Get(pVersionUrl);
     if (!res) {
-        spdlog::critical("Cannot access updater endpoint, please update manually!");
+        spdlog::critical(
+            "Cannot access updater endpoint, please update manually!");
         return;
     }
 
     if (res->status == 200) {
-        semver::version current_version;
+        semver::version currentVersion;
 
         try {
-            current_version = semver::version { std::string(VECTOR_VERSION) };
-            mNewVersion = semver::version { res->body };
+            currentVersion = semver::version { std::string(VECTOR_VERSION) };
+            pNewVersion = semver::version { res->body };
         } catch (std::invalid_argument& ex) {
-            spdlog::critical("Cannot parse updater version, please update manually!");
+            spdlog::critical(
+                "Cannot parse updater version, please update manually!");
             return;
         }
 
-        if (current_version < mNewVersion) {
-            mNeedUpdate = true;
+        if (currentVersion < pNewVersion) {
+            pNeedUpdate = true;
         }
     } else {
         spdlog::critical(
@@ -35,30 +36,32 @@ updater::updater()
     }
 }
 
-bool updater::need_update()
+bool Updater::need_update() const
 {
 #ifdef NDEBUG
-    return mNeedUpdate;
+    return pNeedUpdate;
 #else
     return false;
 #endif
 }
 
-void updater::draw()
+void Updater::draw()
 {
     ImGui::Begin("VectorAudio Updater", NULL,
-        ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
+        ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove
+            | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
+            | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
     ImGui::Text(
         "A new version of VectorAudio is available, please update it! (%s -> "
         "%s)",
-        VECTOR_VERSION, mNewVersion.to_string().c_str());
+        VECTOR_VERSION, pNewVersion.to_string().c_str());
 
     ImGui::NewLine();
     ImGui::Separator();
 
     if (ImGui::Button("Download from GitHub")) {
-        util::PlatformOpen(mArtefactFileUrl);
+        util::PlatformOpen(pArtefactFileUrl);
     }
 
     ImGui::End();

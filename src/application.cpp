@@ -1,49 +1,27 @@
 #include "application.h"
-#include "afv-native/Log.h"
-#include "afv-native/atcClientWrapper.h"
-#include "afv-native/event.h"
-#include "config.h"
-#include "data_file_handler.h"
-#include "imgui.h"
-#include "shared.h"
-#include "style.h"
-#include "util.h"
-#include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Window/Joystick.hpp>
-#include <cstddef>
-#include <httplib.h>
-#include <memory>
-#include <spdlog/spdlog.h>
 
 namespace vector_audio::application {
 using util::TextURL;
 
-namespace afv_logger {
-    void defaultLogger(const char* subsystem, const char* /*file*/,
-        int /*line*/, const char* lineOut)
-    {
-        spdlog::info("[afv_native] {} {}", subsystem, lineOut);
-    }
-
-    afv_native::log_fn g_logger = defaultLogger;
-}
-
 App::App()
-    : dataHandler_(std::make_unique<vatsim::DataHandler>())
+    : pDataHandler(std::make_unique<vatsim::DataHandler>())
 {
     try {
-        afv_native::api::atcClient::setLogger(afv_logger::g_logger);
+        afv_native::api::setLogger(
+            [this](auto&& subsystem, auto&& file, auto&& line, auto&& lineOut) {
+                spdlog::info("[afv_native] [{}@{}] {} {}", file, line,
+                    subsystem, lineOut);
+            });
 
-        mClient_ = new afv_native::api::atcClient(shared::kClientName,
+        pClient = new afv_native::api::atcClient(shared::kClientName,
             vector_audio::Configuration::get_resource_folder().string());
 
         // Fetch all available devices on start
-        vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
+        vector_audio::shared::availableAudioAPI = pClient->GetAudioApis();
         vector_audio::shared::availableInputDevices
-            = mClient_->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+            = pClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
         vector_audio::shared::availableOutputDevices
-            = mClient_->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
+            = pClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
         spdlog::debug("Created afv_native client.");
     } catch (std::exception& ex) {
         spdlog::critical(
@@ -56,52 +34,52 @@ App::App()
         using cfg = vector_audio::Configuration;
 
         vector_audio::shared::mOutputEffects
-            = toml::find_or<bool>(cfg::config_, "audio", "vhf_effects", true);
+            = toml::find_or<bool>(cfg::mConfig, "audio", "vhf_effects", true);
         vector_audio::shared::mInputFilter
-            = toml::find_or<bool>(cfg::config_, "audio", "input_filters", true);
+            = toml::find_or<bool>(cfg::mConfig, "audio", "input_filters", true);
 
-        vector_audio::shared::vatsim_cid
-            = toml::find_or<int>(cfg::config_, "user", "vatsim_id", 999999);
-        vector_audio::shared::vatsim_password = toml::find_or<std::string>(
-            cfg::config_, "user", "vatsim_password", std::string("password"));
+        vector_audio::shared::vatsimCid
+            = toml::find_or<int>(cfg::mConfig, "user", "vatsim_id", 999999);
+        vector_audio::shared::vatsimPassword = toml::find_or<std::string>(
+            cfg::mConfig, "user", "vatsimPassword", std::string("password"));
 
         vector_audio::shared::keepWindowOnTop = toml::find_or<bool>(
-            cfg::config_, "user", "keepWindowOnTop", false);
+            cfg::mConfig, "user", "keepWindowOnTop", false);
 
         vector_audio::shared::ptt = static_cast<sf::Keyboard::Scancode>(
-            toml::find_or<int>(cfg::config_, "user", "ptt",
+            toml::find_or<int>(cfg::mConfig, "user", "ptt",
                 static_cast<int>(sf::Keyboard::Scan::Unknown)));
 
         vector_audio::shared::joyStickId = static_cast<int>(
-            toml::find_or<int>(cfg::config_, "user", "joyStickId", -1));
+            toml::find_or<int>(cfg::mConfig, "user", "joyStickId", -1));
         vector_audio::shared::joyStickPtt = static_cast<int>(
-            toml::find_or<int>(cfg::config_, "user", "joyStickPtt", -1));
+            toml::find_or<int>(cfg::mConfig, "user", "joyStickPtt", -1));
 
-        auto audio_providers = mClient_->GetAudioApis();
+        auto audioProviders = pClient->GetAudioApis();
         vector_audio::shared::configAudioApi = toml::find_or<std::string>(
-            cfg::config_, "audio", "api", std::string("Default API"));
-        for (const auto& driver : audio_providers) {
+            cfg::mConfig, "audio", "api", std::string("Default API"));
+        for (const auto& driver : audioProviders) {
             if (driver.second == vector_audio::shared::configAudioApi)
                 vector_audio::shared::mAudioApi = driver.first;
         }
 
         vector_audio::shared::configInputDeviceName
             = toml::find_or<std::string>(
-                cfg::config_, "audio", "input_device", std::string(""));
+                cfg::mConfig, "audio", "input_device", std::string(""));
         vector_audio::shared::configOutputDeviceName
             = toml::find_or<std::string>(
-                cfg::config_, "audio", "output_device", std::string(""));
+                cfg::mConfig, "audio", "output_device", std::string(""));
         vector_audio::shared::configSpeakerDeviceName
             = toml::find_or<std::string>(
-                cfg::config_, "audio", "speaker_device", std::string(""));
+                cfg::mConfig, "audio", "speaker_device", std::string(""));
         vector_audio::shared::headsetOutputChannel
-            = toml::find_or<int>(cfg::config_, "audio", "headset_channel", 0);
+            = toml::find_or<int>(cfg::mConfig, "audio", "headset_channel", 0);
 
         vector_audio::shared::hardware = static_cast<afv_native::HardwareType>(
-            toml::find_or<int>(cfg::config_, "audio", "hardware_type", 0));
+            toml::find_or<int>(cfg::mConfig, "audio", "hardware_type", 0));
 
         vector_audio::shared::apiServerPort
-            = toml::find_or<int>(cfg::config_, "general", "api_port", 49080);
+            = toml::find_or<int>(cfg::mConfig, "general", "api_port", 49080);
     } catch (toml::exception& exc) {
         spdlog::error(
             "Failed to parse available configuration: {}", exc.what());
@@ -110,7 +88,7 @@ App::App()
     // Bind the callbacks from the client
     // std::bind(&App::_eventCallback, this, std::placeholders::_1,
     // std::placeholders::_2, std::placeholders::_3)
-    mClient_->RaiseClientEvent(
+    pClient->RaiseClientEvent(
         [this](auto&& event_type, auto&& data_one, auto&& data_two) {
             eventCallback(std::forward<decltype(event_type)>(event_type),
                 std::forward<decltype(data_one)>(data_one),
@@ -128,19 +106,19 @@ App::App()
     std::thread(&vector_audio::application::App::loadAirportsDatabaseAsync)
         .detach();
 
-    auto sound_path = Configuration::get_resource_folder()
+    auto soundPath = Configuration::get_resource_folder()
         / std::filesystem::path("disconnect.wav");
 
-    if (!disconnect_warning_soundbuffer_.loadFromFile(sound_path.string())) {
-        disconnect_warning_sound_available = false;
+    if (!pDisconnectWarningSoundbuffer.loadFromFile(soundPath.string())) {
+        disconnectWarningSoundAvailable = false;
         spdlog::error(
             "Could not load warning sound file, disconnection will be silent");
     }
 
-    sound_player_.setBuffer(disconnect_warning_soundbuffer_);
+    pSoundPlayer.setBuffer(pDisconnectWarningSoundbuffer);
 }
 
-App::~App() { delete mClient_; }
+App::~App() { delete pClient; }
 
 void App::loadAirportsDatabaseAsync()
 {
@@ -148,7 +126,7 @@ void App::loadAirportsDatabaseAsync()
     // log it.
 
     if (!std::filesystem::exists(
-            vector_audio::Configuration::airports_db_file_path_)) {
+            vector_audio::Configuration::mAirportsDBFilePath)) {
         spdlog::warn("Could not find airport database json file");
         return;
     }
@@ -156,7 +134,7 @@ void App::loadAirportsDatabaseAsync()
     try {
         // We do performance analysis here
         auto t1 = std::chrono::high_resolution_clock::now();
-        std::ifstream f(vector_audio::Configuration::airports_db_file_path_);
+        std::ifstream f(vector_audio::Configuration::mAirportsDBFilePath);
         nlohmann::json data = nlohmann::json::parse(f);
 
         // Loop through all the icaos
@@ -169,11 +147,11 @@ void App::loadAirportsDatabaseAsync()
 
             // Assumption: The user will not have time to connect by the time
             // this is loaded, hence should be fine re concurrency
-            ns::Airport::All.insert(std::make_pair(obj.key(), ar));
+            ns::Airport::mAll.insert(std::make_pair(obj.key(), ar));
         }
 
         auto t2 = std::chrono::high_resolution_clock::now();
-        spdlog::info("Loaded {} airports in {}", ns::Airport::All.size(),
+        spdlog::info("Loaded {} airports in {}", ns::Airport::mAll.size(),
             std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1));
     } catch (nlohmann::json::exception& ex) {
         spdlog::warn("Could parse airport database: {}", ex.what());
@@ -184,7 +162,7 @@ void App::loadAirportsDatabaseAsync()
 void App::buildSDKServer()
 {
     try {
-        mSDKServer_ = restinio::run_async<>(restinio::own_io_context(),
+        pSDKServer = restinio::run_async<>(restinio::own_io_context(),
             restinio::server_settings_t<> {}
                 .port(vector_audio::shared::apiServerPort)
                 .address("0.0.0.0")
@@ -193,7 +171,7 @@ void App::buildSDKServer()
                         && req->header().request_target() == "/transmitting") {
 
                         const std::lock_guard<std::mutex> lock(
-                            vector_audio::shared::transmitting_mutex);
+                            vector_audio::shared::transmittingMutex);
                         return req->create_response()
                             .set_body(vector_audio::shared::
                                     currentlyTransmittingApiData)
@@ -201,22 +179,23 @@ void App::buildSDKServer()
                     }
                     if (restinio::http_method_get() == req->header().method()
                         && req->header().request_target() == "/rx") {
-                        std::vector<shared::StationElement> bar;
+                        std::vector<ns::Station> bar;
 
                         // copy only positive numbers:
-                        std::copy_if(shared::FetchedStations.begin(),
-                            shared::FetchedStations.end(),
+                        std::copy_if(shared::fetchedStations.begin(),
+                            shared::fetchedStations.end(),
                             std::back_inserter(bar),
-                            [this](const shared::StationElement& s) {
-                                if (!mClient_->IsVoiceConnected())
+                            [this](const ns::Station& s) {
+                                if (!pClient->IsVoiceConnected())
                                     return false;
-                                return mClient_->GetRxState(s.freq);
+                                return pClient->GetRxState(s.getFrequencyHz());
                             });
 
                         std::string out;
                         if (!bar.empty()) {
                             for (auto& f : bar) {
-                                out += f.callsign + ":" + f.human_freq + ",";
+                                out += f.getCallsign() + ":"
+                                    + f.getHumanFrequency() + ",";
                             }
                         }
 
@@ -228,22 +207,23 @@ void App::buildSDKServer()
                     }
                     if (restinio::http_method_get() == req->header().method()
                         && req->header().request_target() == "/tx") {
-                        std::vector<shared::StationElement> bar;
+                        std::vector<ns::Station> bar;
 
                         // copy only positive numbers:
-                        std::copy_if(shared::FetchedStations.begin(),
-                            shared::FetchedStations.end(),
+                        std::copy_if(shared::fetchedStations.begin(),
+                            shared::fetchedStations.end(),
                             std::back_inserter(bar),
-                            [this](const shared::StationElement& s) {
-                                if (!mClient_->IsVoiceConnected())
+                            [this](const ns::Station& s) {
+                                if (!pClient->IsVoiceConnected())
                                     return false;
-                                return mClient_->GetTxState(s.freq);
+                                return pClient->GetTxState(s.getFrequencyHz());
                             });
 
                         std::string out;
                         if (!bar.empty()) {
                             for (auto& f : bar) {
-                                out += f.callsign + ":" + f.human_freq + ",";
+                                out += f.getCallsign() + ":"
+                                    + f.getHumanFrequency() + ",";
                             }
                         }
 
@@ -276,16 +256,13 @@ void App::eventCallback(
                 = *reinterpret_cast<std::map<std::string, unsigned int>*>(
                     data2);
 
-            if (mClient_->IsVoiceConnected()) {
+            if (pClient->IsVoiceConnected()) {
                 for (auto s : stations) {
-                    if (!util::isValid8_33kHzChannel(s.second)) {
-                        s.second = util::round8_33kHzChannel(s.second);
-                    }
-                    shared::StationElement el
-                        = shared::StationElement::build(s.first, s.second);
+                    s.second = util::cleanUpFrequency(s.second);
+                    ns::Station el = ns::Station::build(s.first, s.second);
 
-                    if (!frequencyExists(el.freq))
-                        shared::FetchedStations.push_back(el);
+                    if (!frequencyExists(el.getFrequencyHz()))
+                        shared::fetchedStations.push_back(el);
                 }
             }
         }
@@ -295,12 +272,13 @@ void App::eventCallback(
         if (data != nullptr) {
             // We just refresh the transceiver count in our display
             std::string station = *reinterpret_cast<std::string*>(data);
-            auto it = std::find_if(shared::FetchedStations.begin(),
-                shared::FetchedStations.end(),
-                [station](const auto& fs) { return fs.callsign == station; });
-            if (it != shared::FetchedStations.end())
-                it->transceivers
-                    = mClient_->GetTransceiverCountForStation(station);
+            auto it = std::find_if(shared::fetchedStations.begin(),
+                shared::fetchedStations.end(), [station](const auto& fs) {
+                    return fs.getCallsign() == station;
+                });
+            if (it != shared::fetchedStations.end())
+                it->setTransceiverCount(
+                    pClient->GetTransceiverCountForStation(station));
         }
     }
 
@@ -383,26 +361,26 @@ void App::eventCallback(
 
     if (evt == afv_native::ClientEventType::VoiceServerDisconnected) {
 
-        if (!manuallyDisconnected_) {
+        if (!pManuallyDisconnected) {
             playErrorSound();
         }
 
-        manuallyDisconnected_ = false;
+        pManuallyDisconnected = false;
         // disconnectAndCleanup();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerError) {
-        int err_code = *reinterpret_cast<int*>(data);
-        errorModal("Voice server returned error " + std::to_string(err_code)
+        int errCode = *reinterpret_cast<int*>(data);
+        errorModal("Voice server returned error " + std::to_string(errCode)
             + ", please check the log file.");
         disconnectAndCleanup();
         playErrorSound();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerChannelError) {
-        int err_code = *reinterpret_cast<int*>(data);
+        int errCode = *reinterpret_cast<int*>(data);
         errorModal("Voice server returned channel error "
-            + std::to_string(err_code) + ", please check the log file.");
+            + std::to_string(errCode) + ", please check the log file.");
         disconnectAndCleanup();
         playErrorSound();
     }
@@ -426,11 +404,11 @@ void App::eventCallback(
 
                 station.second = util::cleanUpFrequency(station.second);
 
-                shared::StationElement el = shared::StationElement::build(
-                    station.first, station.second);
+                ns::Station el
+                    = ns::Station::build(station.first, station.second);
 
-                if (!frequencyExists(el.freq))
-                    shared::FetchedStations.push_back(el);
+                if (!frequencyExists(el.getFrequencyHz()))
+                    shared::fetchedStations.push_back(el);
             } else {
                 errorModal("Could not find station in database.");
                 spdlog::warn(
@@ -444,12 +422,12 @@ void App::eventCallback(
 void App::render_frame()
 {
     // AFV stuff
-    if (mClient_) {
-        vector_audio::shared::mPeak = mClient_->GetInputPeak();
-        vector_audio::shared::mVu = mClient_->GetInputVu();
+    if (pClient) {
+        vector_audio::shared::mPeak = pClient->GetInputPeak();
+        vector_audio::shared::mVu = pClient->GetInputVu();
 
         // Set the Ptt if required, input based on event
-        if (mClient_->IsVoiceConnected()
+        if (pClient->IsVoiceConnected()
             && (shared::ptt != sf::Keyboard::Scan::Unknown
                 || shared::joyStickId != -1)) {
             if (shared::isPttOpen) {
@@ -464,7 +442,7 @@ void App::render_frame()
                     }
                 }
 
-                mClient_->SetPtt(shared::isPttOpen);
+                pClient->SetPtt(shared::isPttOpen);
             } else {
                 if (shared::joyStickId != -1) {
                     if (sf::Joystick::isButtonPressed(
@@ -477,45 +455,45 @@ void App::render_frame()
                     }
                 }
 
-                mClient_->SetPtt(shared::isPttOpen);
+                pClient->SetPtt(shared::isPttOpen);
             }
         }
 
-        if (mClient_->IsAPIConnected() && shared::FetchedStations.empty()
+        if (pClient->IsAPIConnected() && shared::fetchedStations.empty()
             && !shared::bootUpVccs) {
             // We force add the current user frequency
             shared::bootUpVccs = true;
 
             // We replaced double _ which may be used during frequency
             // handovers, but are not defined in database
-            std::string clean_callsign = vector_audio::util::ReplaceString(
+            std::string cleanCallsign = vector_audio::util::ReplaceString(
                 shared::session::callsign, "__", "_");
 
-            shared::StationElement el = shared::StationElement::build(
-                clean_callsign, shared::session::frequency);
-            if (!frequencyExists(el.freq))
-                shared::FetchedStations.push_back(el);
+            ns::Station el
+                = ns::Station::build(cleanCallsign, shared::session::frequency);
+            if (!frequencyExists(el.getFrequencyHz()))
+                shared::fetchedStations.push_back(el);
 
-            this->mClient_->AddFrequency(
-                shared::session::frequency, clean_callsign);
-            mClient_->SetEnableInputFilters(vector_audio::shared::mInputFilter);
-            mClient_->SetEnableOutputEffects(
+            this->pClient->AddFrequency(
+                shared::session::frequency, cleanCallsign);
+            pClient->SetEnableInputFilters(vector_audio::shared::mInputFilter);
+            pClient->SetEnableOutputEffects(
                 vector_audio::shared::mOutputEffects);
-            this->mClient_->UseTransceiversFromStation(
-                clean_callsign, shared::session::frequency);
-            this->mClient_->SetRx(shared::session::frequency, true);
+            this->pClient->UseTransceiversFromStation(
+                cleanCallsign, shared::session::frequency);
+            this->pClient->SetRx(shared::session::frequency, true);
             if (shared::session::facility > 0) {
-                this->mClient_->SetTx(shared::session::frequency, true);
-                this->mClient_->SetXc(shared::session::frequency, true);
+                this->pClient->SetTx(shared::session::frequency, true);
+                this->pClient->SetXc(shared::session::frequency, true);
             }
-            this->mClient_->FetchStationVccs(clean_callsign);
-            mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+            this->pClient->FetchStationVccs(cleanCallsign);
+            this->pClient->SetRadiosGain(shared::radioGain / 100.0F);
         }
     }
 
     // The live Received callsign data
-    std::vector<std::string> received_callsigns;
-    std::vector<std::string> live_received_callsigns;
+    std::vector<std::string> receivedCallsigns;
+    std::vector<std::string> liveReceivedCallsigns;
 
     ImGui::SetNextWindowPos(ImVec2(0.0F, 0.0F));
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -526,14 +504,14 @@ void App::render_frame()
 
     // Callsign Field
     ImGui::PushItemWidth(100.0F);
-    std::string padded_callsign = shared::session::callsign;
-    std::string not_connected = "Not connected";
-    if (padded_callsign.length() < not_connected.length()) {
-        padded_callsign.insert(padded_callsign.end(),
-            not_connected.size() - padded_callsign.size(), ' ');
+    std::string paddedCallsign = shared::session::callsign;
+    std::string notConnected = "Not connected";
+    if (paddedCallsign.length() < notConnected.length()) {
+        paddedCallsign.insert(paddedCallsign.end(),
+            notConnected.size() - paddedCallsign.size(), ' ');
     }
     ImGui::TextUnformatted(
-        std::string("Callsign: ").append(padded_callsign).c_str());
+        std::string("Callsign: ").append(paddedCallsign).c_str());
     ImGui::PopItemWidth();
     ImGui::SameLine();
     ImGui::Text("|");
@@ -542,16 +520,16 @@ void App::render_frame()
 
     // Connect button logic
 
-    if (!mClient_->IsVoiceConnected() && !mClient_->IsAPIConnected()) {
-        bool ready_to_connect = (!shared::session::is_connected
-                                    && dataHandler_->isSlurperAvailable())
-            || shared::session::is_connected;
-        style::push_disabled_on(!ready_to_connect);
+    if (!pClient->IsVoiceConnected() && !pClient->IsAPIConnected()) {
+        bool readyToConnect = (!shared::session::isConnected
+                                  && pDataHandler->isSlurperAvailable())
+            || shared::session::isConnected;
+        style::push_disabled_on(!readyToConnect);
 
         if (ImGui::Button("Connect")) {
 
-            if (!vector_audio::shared::session::is_connected
-                && dataHandler_->isSlurperAvailable()) {
+            if (!vector_audio::shared::session::isConnected
+                && pDataHandler->isSlurperAvailable()) {
                 // We manually call the slurper here in case that we do not have
                 // a connection yet Although this will block the whole program,
                 // it is not an issue in this case As the user does not need to
@@ -559,54 +537,53 @@ void App::render_frame()
                 // fails once will not be retried and will default to datafile
                 // only
 
-                vector_audio::shared::session::is_connected
-                    = dataHandler_->getConnectionStatusWithSlurper();
+                vector_audio::shared::session::isConnected
+                    = pDataHandler->getConnectionStatusWithSlurper();
             }
 
-            if (vector_audio::shared::session::is_connected) {
-                if (mClient_->IsAudioRunning()) {
-                    mClient_->StopAudio();
+            if (vector_audio::shared::session::isConnected) {
+                if (pClient->IsAudioRunning()) {
+                    pClient->StopAudio();
                 }
-                if (mClient_->IsAPIConnected()) {
-                    mClient_->Disconnect(); // Force a disconnect of API
+                if (pClient->IsAPIConnected()) {
+                    pClient->Disconnect(); // Force a disconnect of API
                 }
 
-                mClient_->SetAudioApi(findAudioAPIorDefault());
-                mClient_->SetAudioInputDevice(
-                    findHeadsetInputDeviceOrDefault());
-                mClient_->SetAudioOutputDevice(
+                pClient->SetAudioApi(findAudioAPIorDefault());
+                pClient->SetAudioInputDevice(findHeadsetInputDeviceOrDefault());
+                pClient->SetAudioOutputDevice(
                     findHeadsetOutputDeviceOrDefault());
-                mClient_->SetAudioSpeakersOutputDevice(
+                pClient->SetAudioSpeakersOutputDevice(
                     findSpeakerOutputDeviceOrDefault());
-                mClient_->SetHardware(vector_audio::shared::hardware);
-                mClient_->SetHeadsetOutputChannel(
+                pClient->SetHardware(vector_audio::shared::hardware);
+                pClient->SetHeadsetOutputChannel(
                     vector_audio::shared::headsetOutputChannel);
 
-                if (!dataHandler_->isSlurperAvailable()) {
-                    std::string client_icao
+                if (!pDataHandler->isSlurperAvailable()) {
+                    std::string clientIcao
                         = vector_audio::shared::session::callsign.substr(0,
                             vector_audio::shared::session::callsign.find('_'));
                     // We use the airport database for this
-                    if (ns::Airport::All.find(client_icao)
-                        != ns::Airport::All.end()) {
-                        auto client_airport = ns::Airport::All.at(client_icao);
+                    if (ns::Airport::mAll.find(clientIcao)
+                        != ns::Airport::mAll.end()) {
+                        auto clientAirport = ns::Airport::mAll.at(clientIcao);
 
                         // We pad the elevation by 10 meters to simulate the
                         // client being in a tower
-                        mClient_->SetClientPosition(client_airport.lat,
-                            client_airport.lon, client_airport.elevation + 33,
-                            client_airport.elevation + 33);
+                        pClient->SetClientPosition(clientAirport.lat,
+                            clientAirport.lon, clientAirport.elevation + 33,
+                            clientAirport.elevation + 33);
 
                         spdlog::info("Found client position in database at "
                                      "lat:{}, lon:{}, elev:{}",
-                            client_airport.lat, client_airport.lon,
-                            client_airport.elevation);
+                            clientAirport.lat, clientAirport.lon,
+                            clientAirport.elevation);
                     } else {
                         spdlog::warn(
                             "Client position is unknown, setting default.");
 
                         // Default position is over Paris somewhere
-                        mClient_->SetClientPosition(
+                        pClient->SetClientPosition(
                             48.967860, 2.442000, 300, 300);
                     }
                 } else {
@@ -614,17 +591,17 @@ void App::render_frame()
                         "Found client position from slurper at lat:{}, lon:{}",
                         vector_audio::shared::session::latitude,
                         vector_audio::shared::session::longitude);
-                    mClient_->SetClientPosition(
+                    pClient->SetClientPosition(
                         vector_audio::shared::session::latitude,
                         vector_audio::shared::session::longitude, 300, 300);
                 }
 
-                mClient_->SetCredentials(
-                    std::to_string(vector_audio::shared::vatsim_cid),
-                    vector_audio::shared::vatsim_password);
-                mClient_->SetCallsign(vector_audio::shared::session::callsign);
-                mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
-                if (!mClient_->Connect()) {
+                pClient->SetCredentials(
+                    std::to_string(vector_audio::shared::vatsimCid),
+                    vector_audio::shared::vatsimPassword);
+                pClient->SetCallsign(vector_audio::shared::session::callsign);
+                pClient->SetRadiosGain(shared::radioGain / 100.0F);
+                if (!pClient->Connect()) {
                     spdlog::error(
                         "Failed to connect: afv_lib says API is connected.");
                 };
@@ -632,7 +609,7 @@ void App::render_frame()
                 errorModal("Not connected to VATSIM!");
             }
         }
-        style::pop_disabled_on(!ready_to_connect);
+        style::pop_disabled_on(!readyToConnect);
     } else {
         ImGui::PushStyleColor(
             ImGuiCol_Button, ImColor::HSV(4 / 7.0F, 0.6F, 0.6F).Value);
@@ -642,11 +619,11 @@ void App::render_frame()
             ImGuiCol_ButtonActive, ImColor::HSV(4 / 7.0F, 0.8F, 0.8F).Value);
 
         // Auto disconnect if we need
-        auto pressed_disconnect = ImGui::Button("Disconnect");
-        if (pressed_disconnect || !shared::session::is_connected) {
+        auto pressedDisconnect = ImGui::Button("Disconnect");
+        if (pressedDisconnect || !shared::session::isConnected) {
 
-            if (pressed_disconnect) {
-                manuallyDisconnected_ = true;
+            if (pressedDisconnect) {
+                pManuallyDisconnected = true;
             }
 
             disconnectAndCleanup();
@@ -657,27 +634,27 @@ void App::render_frame()
     ImGui::SameLine();
 
     // Settings modal
-    style::push_disabled_on(mClient_->IsAPIConnected());
-    if (ImGui::Button("Settings") && !mClient_->IsAPIConnected()) {
+    style::push_disabled_on(pClient->IsAPIConnected());
+    if (ImGui::Button("Settings") && !pClient->IsAPIConnected()) {
         // Update all available data
-        vector_audio::shared::availableAudioAPI = mClient_->GetAudioApis();
+        vector_audio::shared::availableAudioAPI = pClient->GetAudioApis();
         vector_audio::shared::availableInputDevices
-            = mClient_->GetAudioInputDevices(vector_audio::shared::mAudioApi);
+            = pClient->GetAudioInputDevices(vector_audio::shared::mAudioApi);
         vector_audio::shared::availableOutputDevices
-            = mClient_->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
+            = pClient->GetAudioOutputDevices(vector_audio::shared::mAudioApi);
         ImGui::OpenPopup("Settings Panel");
     }
-    style::pop_disabled_on(mClient_->IsAPIConnected());
+    style::pop_disabled_on(pClient->IsAPIConnected());
 
     vector_audio::modals::Settings::render(
-        mClient_, [this]() -> void { playErrorSound(); });
+        pClient, [this]() -> void { playErrorSound(); });
 
     {
         ImGui::SetNextWindowSize(ImVec2(300, -1));
         if (ImGui::BeginPopupModal("Error", nullptr,
                 ImGuiWindowFlags_AlwaysAutoResize
                     | ImGuiWindowFlags_NoResize)) {
-            vector_audio::util::TextCentered(lastErrorModalMessage_);
+            vector_audio::util::TextCentered(pLastErrorModalMessage);
 
             ImGui::NewLine();
             if (ImGui::Button("Ok", ImVec2(-FLT_MIN, 0))) {
@@ -692,22 +669,22 @@ void App::render_frame()
     const ImVec4 red(1.0, 0.0, 0.0, 1.0);
     const ImVec4 yellow(1.0, 1.0, 0.0, 1.0);
     const ImVec4 green(0.0, 1.0, 0.0, 1.0);
-    ImGui::TextColored(mClient_->IsAPIConnected() ? green : red, "API");
+    ImGui::TextColored(pClient->IsAPIConnected() ? green : red, "API");
     ImGui::SameLine();
     ImGui::Text("|");
     ImGui::SameLine();
-    ImGui::TextColored(mClient_->IsVoiceConnected() ? green : red, "Voice");
+    ImGui::TextColored(pClient->IsVoiceConnected() ? green : red, "Voice");
     ImGui::SameLine();
     ImGui::Text("|");
     ImGui::SameLine();
     // Status about datasource
 
-    if (dataHandler_->isSlurperAvailable()) {
+    if (pDataHandler->isSlurperAvailable()) {
         ImGui::TextColored(green, "Slurper");
         /*if (ImGui::IsItemClicked()) {
             shared::slurper::is_unavailable = true;
         }*/
-    } else if (dataHandler_->isDatafileAvailable()) {
+    } else if (pDataHandler->isDatafileAvailable()) {
         ImGui::TextColored(yellow, "Datafile");
     } else {
         ImGui::TextColored(red, "No VATSIM Data");
@@ -734,18 +711,18 @@ void App::render_frame()
     if (ImGui::BeginTable("stations_table", 3, flags,
             ImVec2(ImGui::GetContentRegionAvail().x * 0.8F, 0.0F))) {
         int counter = -1;
-        for (auto& el : shared::FetchedStations) {
+        for (auto& el : shared::fetchedStations) {
             if (counter == -1 || counter == 4) {
                 counter = 1;
                 ImGui::TableNextRow();
             }
             ImGui::TableSetColumnIndex(counter - 1);
 
-            float half_height = ImGui::GetContentRegionAvail().x * 0.25F;
-            ImVec2 half_size
-                = ImVec2(ImGui::GetContentRegionAvail().x * 0.50F, half_height);
-            ImVec2 quarter_size
-                = ImVec2(ImGui::GetContentRegionAvail().x * 0.25F, half_height);
+            float halfHeight = ImGui::GetContentRegionAvail().x * 0.25F;
+            ImVec2 halfSize
+                = ImVec2(ImGui::GetContentRegionAvail().x * 0.50F, halfHeight);
+            ImVec2 quarterSize
+                = ImVec2(ImGui::GetContentRegionAvail().x * 0.25F, halfHeight);
 
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.F);
             ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.F);
@@ -753,106 +730,113 @@ void App::render_frame()
 
             // Polling all data
 
-            bool rx_state = mClient_->GetRxState(el.freq);
-            bool rx_active = mClient_->GetRxActive(el.freq);
-            bool tx_state = mClient_->GetTxState(el.freq);
-            bool tx_active = mClient_->GetTxActive(el.freq);
-            bool xc_state = mClient_->GetXcState(el.freq);
-            bool is_on_speaker = !mClient_->GetOnHeadset(el.freq);
-            bool freq_active = mClient_->IsFrequencyActive(el.freq)
-                && (rx_state || tx_state || xc_state);
+            bool rxState = pClient->GetRxState(el.getFrequencyHz());
+            bool rxActive = pClient->GetRxActive(el.getFrequencyHz());
+            bool txState = pClient->GetTxState(el.getFrequencyHz());
+            bool txActive = pClient->GetTxActive(el.getFrequencyHz());
+            bool xcState = pClient->GetXcState(el.getFrequencyHz());
+            bool isOnSpeaker = !pClient->GetOnHeadset(el.getFrequencyHz());
+            bool freqActive = pClient->IsFrequencyActive(el.getFrequencyHz())
+                && (rxState || txState || xcState);
 
             //
             // Frequency button
             //
-            if (freq_active)
+            if (freqActive)
                 vector_audio::style::button_green();
             // Disable the hover colour for this item
             ImGui::PushStyleColor(
                 ImGuiCol_ButtonHovered, ImColor(14, 17, 22).Value);
-            size_t callsign_size = el.callsign.length() / 2;
-            std::string padded_freq
-                = std::string(callsign_size
-                          - std::min(callsign_size, el.human_freq.length() / 2),
+            size_t callsignSize = el.getCallsign().length() / 2;
+            std::string paddedFreq
+                = std::string(callsignSize
+                          - std::min(callsignSize,
+                              el.getHumanFrequency().length() / 2),
                       ' ')
-                + el.human_freq;
-            std::string btn_text = el.callsign + "\n" + padded_freq;
-            if (ImGui::Button(btn_text.c_str(), half_size))
-                ImGui::OpenPopup(el.callsign.c_str());
+                + el.getHumanFrequency();
+            std::string btnText = el.getCallsign() + "\n" + paddedFreq;
+            if (ImGui::Button(btnText.c_str(), halfSize))
+                ImGui::OpenPopup(el.getCallsign().c_str());
             ImGui::SameLine(0, 0.01);
             ImGui::PopStyleColor();
 
             //
             // Frequency management popup
             //
-            if (ImGui::BeginPopup(el.callsign.c_str())) {
-                ImGui::TextUnformatted(el.callsign.c_str());
+            if (ImGui::BeginPopup(el.getCallsign().c_str())) {
+                ImGui::TextUnformatted(el.getCallsign().c_str());
                 ImGui::Separator();
                 if (ImGui::Selectable(std::string("Force Refresh##")
-                                          .append(el.callsign)
+                                          .append(el.getCallsign())
                                           .c_str())) {
-                    mClient_->FetchTransceiverInfo(el.callsign);
+                    pClient->FetchTransceiverInfo(el.getCallsign());
                 }
-                if (ImGui::Selectable(
-                        std::string("Delete##").append(el.callsign).c_str())) {
-                    mClient_->RemoveFrequency(el.freq);
-                    shared::FetchedStations.erase(
-                        std::remove_if(shared::FetchedStations.begin(),
-                            shared::FetchedStations.end(),
-                            [el](shared::StationElement const& p) {
-                                return el.freq == p.freq;
+                if (ImGui::Selectable(std::string("Delete##")
+                                          .append(el.getCallsign())
+                                          .c_str())) {
+                    pClient->RemoveFrequency(el.getFrequencyHz());
+                    shared::fetchedStations.erase(
+                        std::remove_if(shared::fetchedStations.begin(),
+                            shared::fetchedStations.end(),
+                            [el](ns::Station const& p) {
+                                return el.getFrequencyHz()
+                                    == p.getFrequencyHz();
                             }),
-                        shared::FetchedStations.end());
+                        shared::fetchedStations.end());
                 }
                 ImGui::EndPopup();
             }
 
-            if (freq_active)
+            if (freqActive)
                 vector_audio::style::button_reset_colour();
 
             //
             // RX Button
             //
-            if (rx_state) {
+            if (rxState) {
                 // Set button colour
-                rx_active ? vector_audio::style::button_yellow()
-                          : vector_audio::style::button_green();
+                rxActive ? vector_audio::style::button_yellow()
+                         : vector_audio::style::button_green();
 
-                auto received_cld = mClient_->LastTransmitOnFreq(el.freq);
-                if (!received_cld.empty()
-                    && std::find(received_callsigns.begin(),
-                           received_callsigns.end(), received_cld)
-                        == received_callsigns.end()) {
-                    received_callsigns.push_back(received_cld);
+                auto receivedCld
+                    = pClient->LastTransmitOnFreq(el.getFrequencyHz());
+                if (!receivedCld.empty()
+                    && std::find(receivedCallsigns.begin(),
+                           receivedCallsigns.end(), receivedCld)
+                        == receivedCallsigns.end()) {
+                    receivedCallsigns.push_back(receivedCld);
                 }
 
                 // Here we filter not the last callsigns that transmitted, but
                 // only the ones that are currently transmitting
-                if (rx_active && !received_cld.empty()
-                    && std::find(live_received_callsigns.begin(),
-                           live_received_callsigns.end(), received_cld)
-                        == live_received_callsigns.end()) {
-                    live_received_callsigns.push_back(received_cld);
+                if (rxActive && !receivedCld.empty()
+                    && std::find(liveReceivedCallsigns.begin(),
+                           liveReceivedCallsigns.end(), receivedCld)
+                        == liveReceivedCallsigns.end()) {
+                    liveReceivedCallsigns.push_back(receivedCld);
                 }
             }
 
-            if (ImGui::Button(std::string("RX##").append(el.callsign).c_str(),
-                    half_size)) {
-                if (freq_active) {
-                    mClient_->SetRx(el.freq, !rx_state);
+            if (ImGui::Button(
+                    std::string("RX##").append(el.getCallsign()).c_str(),
+                    halfSize)) {
+                if (freqActive) {
+                    pClient->SetRx(el.getFrequencyHz(), !rxState);
                 } else {
-                    mClient_->AddFrequency(el.freq, el.callsign);
-                    mClient_->SetEnableInputFilters(
+                    pClient->AddFrequency(
+                        el.getFrequencyHz(), el.getCallsign());
+                    pClient->SetEnableInputFilters(
                         vector_audio::shared::mInputFilter);
-                    mClient_->SetEnableOutputEffects(
+                    pClient->SetEnableOutputEffects(
                         vector_audio::shared::mOutputEffects);
-                    mClient_->UseTransceiversFromStation(el.callsign, el.freq);
-                    mClient_->SetRx(el.freq, true);
-                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                    pClient->UseTransceiversFromStation(
+                        el.getCallsign(), el.getFrequencyHz());
+                    pClient->SetRx(el.getFrequencyHz(), true);
+                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
                 }
             }
 
-            if (rx_state)
+            if (rxState)
                 vector_audio::style::button_reset_colour();
 
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 3);
@@ -863,29 +847,32 @@ void App::render_frame()
             // XC
             //
 
-            if (xc_state)
+            if (xcState)
                 vector_audio::style::button_green();
 
-            if (ImGui::Button(std::string("XC##").append(el.callsign).c_str(),
-                    quarter_size)
+            if (ImGui::Button(
+                    std::string("XC##").append(el.getCallsign()).c_str(),
+                    quarterSize)
                 && shared::session::facility > 0) {
-                if (freq_active) {
-                    mClient_->SetXc(el.freq, !xc_state);
+                if (freqActive) {
+                    pClient->SetXc(el.getFrequencyHz(), !xcState);
                 } else {
-                    mClient_->AddFrequency(el.freq, el.callsign);
-                    mClient_->SetEnableInputFilters(
+                    pClient->AddFrequency(
+                        el.getFrequencyHz(), el.getCallsign());
+                    pClient->SetEnableInputFilters(
                         vector_audio::shared::mInputFilter);
-                    mClient_->SetEnableOutputEffects(
+                    pClient->SetEnableOutputEffects(
                         vector_audio::shared::mOutputEffects);
-                    mClient_->UseTransceiversFromStation(el.callsign, el.freq);
-                    mClient_->SetTx(el.freq, true);
-                    mClient_->SetRx(el.freq, true);
-                    mClient_->SetXc(el.freq, true);
-                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                    pClient->UseTransceiversFromStation(
+                        el.getCallsign(), el.getFrequencyHz());
+                    pClient->SetTx(el.getFrequencyHz(), true);
+                    pClient->SetRx(el.getFrequencyHz(), true);
+                    pClient->SetXc(el.getFrequencyHz(), true);
+                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
                 }
             }
 
-            if (xc_state)
+            if (xcState)
                 vector_audio::style::button_reset_colour();
 
             ImGui::SameLine(0, 0.01);
@@ -894,24 +881,24 @@ void App::render_frame()
             // Speaker device
             //
 
-            if (is_on_speaker)
+            if (isOnSpeaker)
                 vector_audio::style::button_green();
 
-            std::string transceiver_count
-                = std::to_string(std::min(el.transceivers, 999));
-            if (transceiver_count.size() < 3)
-                transceiver_count.insert(0, 3 - transceiver_count.size(), ' ');
+            std::string transceiverCount
+                = std::to_string(std::min(el.getTransceiverCount(), 999));
+            if (transceiverCount.size() < 3)
+                transceiverCount.insert(0, 3 - transceiverCount.size(), ' ');
 
-            std::string speaker_string
-                = el.transceivers == -1 ? "   " : transceiver_count;
-            speaker_string.append("\nSPK##");
-            speaker_string.append(el.callsign);
-            if (ImGui::Button(speaker_string.c_str(), quarter_size)) {
-                if (freq_active)
-                    mClient_->SetOnHeadset(el.freq, is_on_speaker);
+            std::string speakerString
+                = el.getTransceiverCount() == -1 ? "   " : transceiverCount;
+            speakerString.append("\nSPK##");
+            speakerString.append(el.getCallsign());
+            if (ImGui::Button(speakerString.c_str(), quarterSize)) {
+                if (freqActive)
+                    pClient->SetOnHeadset(el.getFrequencyHz(), isOnSpeaker);
             }
 
-            if (is_on_speaker)
+            if (isOnSpeaker)
                 vector_audio::style::button_reset_colour();
 
             ImGui::SameLine(0, 0.01);
@@ -920,29 +907,32 @@ void App::render_frame()
             // TX
             //
 
-            if (tx_state)
-                tx_active ? vector_audio::style::button_yellow()
-                          : vector_audio::style::button_green();
+            if (txState)
+                txActive ? vector_audio::style::button_yellow()
+                         : vector_audio::style::button_green();
 
             if (ImGui::Button(
-                    std::string("TX##").append(el.callsign).c_str(), half_size)
+                    std::string("TX##").append(el.getCallsign()).c_str(),
+                    halfSize)
                 && shared::session::facility > 0) {
-                if (freq_active) {
-                    mClient_->SetTx(el.freq, !tx_state);
+                if (freqActive) {
+                    pClient->SetTx(el.getFrequencyHz(), !txState);
                 } else {
-                    mClient_->AddFrequency(el.freq, el.callsign);
-                    mClient_->SetEnableInputFilters(
+                    pClient->AddFrequency(
+                        el.getFrequencyHz(), el.getCallsign());
+                    pClient->SetEnableInputFilters(
                         vector_audio::shared::mInputFilter);
-                    mClient_->SetEnableOutputEffects(
+                    pClient->SetEnableOutputEffects(
                         vector_audio::shared::mOutputEffects);
-                    mClient_->UseTransceiversFromStation(el.callsign, el.freq);
-                    mClient_->SetTx(el.freq, true);
-                    mClient_->SetRx(el.freq, true);
-                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                    pClient->UseTransceiversFromStation(
+                        el.getCallsign(), el.getFrequencyHz());
+                    pClient->SetTx(el.getFrequencyHz(), true);
+                    pClient->SetRx(el.getFrequencyHz(), true);
+                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
                 }
             }
 
-            if (tx_state)
+            if (txState)
                 vector_audio::style::button_reset_colour();
 
             ImGui::PopStyleColor();
@@ -966,41 +956,39 @@ void App::render_frame()
     ImGui::PushItemWidth(-1.0);
     ImGui::Text("Add station");
 
-    style::push_disabled_on(!mClient_->IsVoiceConnected());
-    if (ImGui::InputText("Callsign##Auto", &shared::station_auto_add_callsign,
+    style::push_disabled_on(!pClient->IsVoiceConnected());
+    if (ImGui::InputText("Callsign##Auto", &shared::stationAutoAddCallsign,
             ImGuiInputTextFlags_EnterReturnsTrue
                 | ImGuiInputTextFlags_AutoSelectAll
                 | ImGuiInputTextFlags_CharsUppercase)
         || ImGui::Button("Add", ImVec2(-FLT_MIN, 0.0))) {
-        if (mClient_->IsVoiceConnected()) {
-            if (!util::startsWith(shared::station_auto_add_callsign, "!")
-                && !util::startsWith(shared::station_auto_add_callsign, "#")) {
-                mClient_->GetStation(shared::station_auto_add_callsign);
-                mClient_->FetchStationVccs(shared::station_auto_add_callsign);
-            } else if (util::startsWith(
-                           shared::station_auto_add_callsign, "!")) {
+        if (pClient->IsVoiceConnected()) {
+            if (!absl::StartsWith(shared::stationAutoAddCallsign, "!")
+                && !absl::StartsWith(shared::stationAutoAddCallsign, "#")) {
+                pClient->GetStation(shared::stationAutoAddCallsign);
+                pClient->FetchStationVccs(shared::stationAutoAddCallsign);
+            } else if (absl::StartsWith(shared::stationAutoAddCallsign, "!")) {
                 double latitude;
                 double longitude;
-                shared::station_auto_add_callsign
-                    = shared::station_auto_add_callsign.substr(1);
+                shared::stationAutoAddCallsign
+                    = shared::stationAutoAddCallsign.substr(1);
 
                 if (!frequencyExists(shared::kUnicomFrequency)) {
-                    if (dataHandler_->getPilotPositionWithAnything(
-                            shared::station_auto_add_callsign, latitude,
+                    if (pDataHandler->getPilotPositionWithAnything(
+                            shared::stationAutoAddCallsign, latitude,
                             longitude)) {
 
-                        shared::StationElement el
-                            = shared::StationElement::build(
-                                shared::station_auto_add_callsign,
+                        ns::Station el
+                            = ns::Station::build(shared::stationAutoAddCallsign,
                                 shared::kUnicomFrequency);
 
-                        shared::FetchedStations.push_back(el);
-                        mClient_->SetClientPosition(
+                        shared::fetchedStations.push_back(el);
+                        pClient->SetClientPosition(
                             latitude, longitude, 1000, 1000);
-                        mClient_->AddFrequency(shared::kUnicomFrequency,
-                            shared::station_auto_add_callsign);
-                        mClient_->SetRx(shared::kUnicomFrequency, true);
-                        mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                        pClient->AddFrequency(shared::kUnicomFrequency,
+                            shared::stationAutoAddCallsign);
+                        pClient->SetRx(shared::kUnicomFrequency, true);
+                        pClient->SetRadiosGain(shared::radioGain / 100.0F);
 
                     } else {
                         errorModal("Could not find pilot connected under that "
@@ -1013,38 +1001,37 @@ void App::render_frame()
             } else {
                 double latitude;
                 double longitude;
-                shared::station_auto_add_callsign
-                    = shared::station_auto_add_callsign.substr(1);
+                shared::stationAutoAddCallsign
+                    = shared::stationAutoAddCallsign.substr(1);
 
                 double frequency = 0;
                 try {
                     frequency
-                        = std::stoi(shared::station_auto_add_callsign) * 1000;
+                        = std::stoi(shared::stationAutoAddCallsign) * 1000;
                 } catch (...) {
                     errorModal("Failed to parse frequency, format is #123456");
                 }
 
                 if (!frequencyExists(frequency) && frequency != 0) {
-                    shared::StationElement el = shared::StationElement::build(
-                        shared::station_auto_add_callsign, frequency);
+                    ns::Station el = ns::Station::build(
+                        shared::stationAutoAddCallsign, frequency);
 
-                    shared::FetchedStations.push_back(el);
-                    mClient_->SetClientPosition(
-                        latitude, longitude, 1000, 1000);
-                    mClient_->AddFrequency(frequency, "MANUAL");
-                    mClient_->SetRx(frequency, true);
-                    mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+                    shared::fetchedStations.push_back(el);
+                    pClient->SetClientPosition(latitude, longitude, 1000, 1000);
+                    pClient->AddFrequency(frequency, "MANUAL");
+                    pClient->SetRx(frequency, true);
+                    pClient->SetRadiosGain(shared::radioGain / 100.0F);
                 } else {
                     errorModal("The same frequency is already active, please "
                                "delete it first.");
                 }
             }
 
-            shared::station_auto_add_callsign = "";
+            shared::stationAutoAddCallsign = "";
         }
     }
     ImGui::PopItemWidth();
-    style::pop_disabled_on(!mClient_->IsVoiceConnected());
+    style::pop_disabled_on(!pClient->IsVoiceConnected());
 
     ImGui::NewLine();
 
@@ -1052,25 +1039,25 @@ void App::render_frame()
 
     ImGui::PushItemWidth(-1.0);
     ImGui::Text("Radio Gain");
-    style::push_disabled_on(!mClient_->IsVoiceConnected());
+    style::push_disabled_on(!pClient->IsVoiceConnected());
     if (ImGui::SliderInt(
-            "##Radio Gain", &shared::RadioGain, 0, 200, "%.3i %%")) {
-        if (mClient_->IsVoiceConnected())
-            mClient_->SetRadiosGain(shared::RadioGain / 100.0F);
+            "##Radio Gain", &shared::radioGain, 0, 200, "%.3i %%")) {
+        if (pClient->IsVoiceConnected())
+            pClient->SetRadiosGain(shared::radioGain / 100.0F);
     }
     ImGui::PopItemWidth();
-    style::pop_disabled_on(!mClient_->IsVoiceConnected());
+    style::pop_disabled_on(!pClient->IsVoiceConnected());
 
     ImGui::NewLine();
 
-    std::string rx_list = "Last RX: ";
-    rx_list.append(received_callsigns.empty()
+    std::string rxList = "Last RX: ";
+    rxList.append(receivedCallsigns.empty()
             ? ""
-            : std::accumulate(++received_callsigns.begin(),
-                received_callsigns.end(), *received_callsigns.begin(),
+            : std::accumulate(++receivedCallsigns.begin(),
+                receivedCallsigns.end(), *receivedCallsigns.begin(),
                 [](auto& a, auto& b) { return a + ", " + b; }));
     ImGui::PushItemWidth(-1.0);
-    ImGui::TextWrapped("%s", rx_list.c_str());
+    ImGui::TextWrapped("%s", rxList.c_str());
     ImGui::PopItemWidth();
 
     ImGui::NewLine();
@@ -1086,29 +1073,27 @@ void App::render_frame()
 
     ImGui::EndGroup();
 
-    if (showErrorModal_) {
+    if (pShowErrorModal) {
         ImGui::OpenPopup("Error");
-        showErrorModal_ = false;
+        pShowErrorModal = false;
     }
 
     // Clear out the old API data every 500ms
-    auto current_time = std::chrono::high_resolution_clock::now();
+    auto currentTime = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::milliseconds>(
-            current_time - shared::currentlyTransmittingApiTimer)
+            currentTime - shared::currentlyTransmittingApiTimer)
             .count()
         >= 300) {
-        const std::lock_guard<std::mutex> lock(
-            vector_audio::shared::transmitting_mutex);
+        const std::lock_guard<std::mutex> lock(shared::transmittingMutex);
         shared::currentlyTransmittingApiData = "";
 
         shared::currentlyTransmittingApiData.append(
-            live_received_callsigns.empty()
+            liveReceivedCallsigns.empty()
                 ? ""
-                : std::accumulate(++live_received_callsigns.begin(),
-                    live_received_callsigns.end(),
-                    *live_received_callsigns.begin(),
+                : std::accumulate(++liveReceivedCallsigns.begin(),
+                    liveReceivedCallsigns.end(), *liveReceivedCallsigns.begin(),
                     [](auto& a, auto& b) { return a + "," + b; }));
-        shared::currentlyTransmittingApiTimer = current_time;
+        shared::currentlyTransmittingApiTimer = currentTime;
     }
 
     ImGui::End();
@@ -1116,31 +1101,40 @@ void App::render_frame()
 
 void App::errorModal(std::string message)
 {
-    this->showErrorModal_ = true;
-    lastErrorModalMessage_ = std::move(message);
+    this->pShowErrorModal = true;
+    this->pLastErrorModalMessage = std::move(message);
 }
 
 bool App::frequencyExists(int freq)
 {
-    return std::find_if(shared::FetchedStations.begin(),
-               shared::FetchedStations.end(),
-               [&freq](const auto& obj) { return obj.freq == freq; })
-        != shared::FetchedStations.end();
+    return std::find_if(shared::fetchedStations.begin(),
+               shared::fetchedStations.end(),
+               [&freq](
+                   const auto& obj) { return obj.getFrequencyHz() == freq; })
+        != shared::fetchedStations.end();
 }
 void App::disconnectAndCleanup()
 {
-    if (!mClient_) {
+    if (!pClient) {
         return;
     }
 
-    mClient_->Disconnect();
-    mClient_->StopAudio();
+    pClient->Disconnect();
+    pClient->StopAudio();
 
-    for (const auto& f : shared::FetchedStations)
-        mClient_->RemoveFrequency(f.freq);
+    for (const auto& f : shared::fetchedStations)
+        pClient->RemoveFrequency(f.getFrequencyHz());
 
-    shared::FetchedStations.clear();
+    shared::fetchedStations.clear();
     shared::bootUpVccs = false;
 }
 
+void App::playErrorSound()
+{
+    if (!disconnectWarningSoundAvailable) {
+        return;
+    }
+    // Load the warning sound for disconnection
+    pSoundPlayer.play();
+};
 } // namespace vector_audio::application

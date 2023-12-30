@@ -11,6 +11,7 @@
         "spdlog",
         "restinio",
         "neargye-semver",
-        "sfml"
+        "sfml",
+        "abseil"
     ]
   }
