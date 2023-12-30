@@ -57,6 +57,8 @@ namespace afv_native {
         InputDeviceError,
         AudioDisabled,
         AudioDeviceStoppedError, // data is a pointer to a std::string of the relevant device name
+        RxStarted,
+        RxStopped,
     };
 
     namespace afv {
