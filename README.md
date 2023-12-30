@@ -48,6 +48,10 @@ The status of available endpoints is refreshed every 15 minutes.
 
 No.
 
+### Can I add a frequency manually if it does not exist in the database?
+
+The AFV facility manager manual is clear that ALL stations must be added. If your vACC has not done so, please ensure they do. VectorAudio follows the database definition of frequencies and does not allow for the addition of custom frequencies at this moment.
+
 ### I have an issue with VectorAudio
 
 Read this document entirely first. If you can't find the answer to your problem, please [open an issue](https://github.com/pierr3/VectorAudio/issues/new) on GitHub, attaching relevant lines from the vector_audio.log file that should be in the same folder as the executable.
