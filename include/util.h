@@ -28,32 +28,6 @@ inline static std::string getHardwareName(
     return "Unknown Hardware";
 }
 
-template <class T>
-struct IsMap {
-    static constexpr bool kValue = false;
-};
-
-template<class Key,class Value>
-struct IsMap<std::map<Key,Value>> {
-    static constexpr bool kValue = true;
-};
-
-template <class T, class U>
-inline static bool checkIfValueInMap(const T& testValue, const U& map)
-{
-    if (!IsMap<U>::kValue) {
-        return false; // Prevent usage of this function is U is not a map
-    }
-
-    for (auto [key, value] : map) {
-        if (testValue == value) {
-            return true;
-        }
-    };
-
-    return false;
-};
-
 inline static afv_native::PlaybackChannel OutputChannelToAfvPlaybackChannel(
     int outputChannel)
 {

@@ -52,6 +52,10 @@ No.
 
 The AFV facility manager manual is clear that ALL stations must be added. If your vACC has not done so, please ensure they do. VectorAudio follows the database definition of frequencies and does not allow for the addition of custom frequencies at this moment.
 
+### Can I extend VectorAudio using a plugin/is there an SDK?
+
+Yes! Have a look [in the wiki](https://github.com/pierr3/VectorAudio/wiki/Using-the-SDK). If you need additional features, please open an issue with a detailed request, I'll be happy to look at it with no guarantees.
+
 ### I have an issue with VectorAudio
 
 Read this document entirely first. If you can't find the answer to your problem, please [open an issue](https://github.com/pierr3/VectorAudio/issues/new) on GitHub, attaching relevant lines from the vector_audio.log file that should be in the same folder as the executable.
