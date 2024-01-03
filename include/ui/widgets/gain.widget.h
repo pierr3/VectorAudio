@@ -2,7 +2,7 @@
 #include "afv-native/atcClientWrapper.h"
 #include "imgui.h"
 #include "shared.h"
-#include "style.h"
+#include "ui/style.h"
 
 #include <string>
 #include <vector>
@@ -11,7 +11,7 @@ namespace vector_audio::ui::widgets {
 class GainWidget {
 
 public:
-    static void Draw(afv_native::api::atcClient* pClient)
+    static void Draw(const std::shared_ptr<afv_native::api::atcClient>& pClient)
     {
         ImGui::PushItemWidth(-1.0);
         ImGui::Text("Radio Gain");

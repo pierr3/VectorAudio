@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "imgui_stdlib.h"
 #include "shared.h"
-#include "style.h"
+#include "ui/style.h"
 
 #include <functional>
 #include <string>
@@ -13,7 +13,7 @@ namespace vector_audio::ui::widgets {
 class AddStationWidget {
 
 public:
-    static void Draw(afv_native::api::atcClient* pClient,
+    static void Draw(const std::shared_ptr<afv_native::api::atcClient>& pClient,
         const std::function<void()>& addCallback)
     {
         ImGui::PushItemWidth(-1.0);

@@ -80,7 +80,7 @@ include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${NEARGYE_SEMVER_INCLUDE_DIRS})
 
 if (APPLE)
-    set(APPLE_EXTRA_LIBS src/osx_resources.mm src/window_manager.mm)
+    set(APPLE_EXTRA_LIBS src/native/osx_resources.mm src/native/window_manager.mm)
 endif()
 
 if(WIN32)
@@ -100,10 +100,11 @@ add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 src/application.cpp
                 src/config.cpp
                 src/updater.cpp
-                src/window_manager.cpp
+                src/native/window_manager.cpp
                 src/data_file_handler.cpp
                 src/ui/modals/settings.cpp
-                src/single_instance.cpp
+                src/native/single_instance.cpp
+                src/sdk.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS}
                 vector_audio.rc)

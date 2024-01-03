@@ -1,4 +1,4 @@
-#include "window_manager.h"
+#include "native/window_manager.h"
 
 #import <Cocoa/Cocoa.h>
 

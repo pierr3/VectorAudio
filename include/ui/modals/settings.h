@@ -5,7 +5,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "shared.h"
-#include "style.h"
+#include "ui/style.h"
 #include "util.h"
 
 #include <imgui_stdlib.h>
@@ -16,7 +16,7 @@
 namespace vector_audio::ui::modals {
 class Settings {
 public:
-    static void render(afv_native::api::atcClient* mClient,
+    static void render(const std::shared_ptr<afv_native::api::atcClient>& mClient,
         const std::function<void()>& playAlertSound);
 };
 }

@@ -2,11 +2,12 @@
 #include "imgui.h"
 #include "radioSimulation.h"
 #include "shared.h"
+
+#include <afv-native/hardwareType.h>
+#include <algorithm>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <afv-native/hardwareType.h>
-#include <algorithm>
 #include <string>
 #include <utility>
 
@@ -27,12 +28,40 @@ inline static std::string getHardwareName(
     return "Unknown Hardware";
 }
 
-inline static afv_native::PlaybackChannel OutputChannelToAfvPlaybackChannel(int outputChannel) {
+template <class T>
+struct IsMap {
+    static constexpr bool kValue = false;
+};
+
+template<class Key,class Value>
+struct IsMap<std::map<Key,Value>> {
+    static constexpr bool kValue = true;
+};
+
+template <class T, class U>
+inline static bool checkIfValueInMap(const T& testValue, const U& map)
+{
+    if (!IsMap<U>::kValue) {
+        return false; // Prevent usage of this function is U is not a map
+    }
+
+    for (auto [key, value] : map) {
+        if (testValue == value) {
+            return true;
+        }
+    };
+
+    return false;
+};
+
+inline static afv_native::PlaybackChannel OutputChannelToAfvPlaybackChannel(
+    int outputChannel)
+{
     if (outputChannel == 1)
         return afv_native::PlaybackChannel::Left;
     if (outputChannel == 2)
         return afv_native::PlaybackChannel::Right;
-    
+
     return afv_native::PlaybackChannel::Both;
 }
 

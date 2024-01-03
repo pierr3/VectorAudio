@@ -1,5 +1,4 @@
 #include "application.h"
-#include "ui/widgets/networkstatus.widget.h"
 
 namespace vector_audio::application {
 using util::TextURL;
@@ -14,7 +13,7 @@ App::App()
                     subsystem, lineOut);
             });
 
-        pClient = new afv_native::api::atcClient(
+        pClient = std::make_shared<afv_native::api::atcClient>(
             shared::kClientName, Configuration::get_resource_folder().string());
 
         // Fetch all available devices on start
@@ -29,6 +28,8 @@ App::App()
             "Could not create AFV client interface: {}", ex.what());
         return;
     }
+
+    pSDK = std::make_unique<SDK>(pClient);
 
     // Load all from config
     try {
@@ -98,7 +99,7 @@ App::App()
         = std::chrono::high_resolution_clock::now();
 
     // Start the SDK server
-    buildSDKServer();
+    auto _ = pSDK->start(); // Todo: display error if possible
 
     // Load the airport database async
     std::thread(&application::App::loadAirportsDatabaseAsync).detach();
@@ -115,7 +116,11 @@ App::App()
     pSoundPlayer.setBuffer(pDisconnectWarningSoundbuffer);
 }
 
-App::~App() { delete pClient; }
+App::~App()
+{
+    pSDK.reset();
+    pClient.reset();
+}
 
 void App::loadAirportsDatabaseAsync()
 {
@@ -152,91 +157,6 @@ void App::loadAirportsDatabaseAsync()
     } catch (nlohmann::json::exception& ex) {
         spdlog::warn("Could parse airport database: {}", ex.what());
         return;
-    }
-}
-
-void App::buildSDKServer()
-{
-    try {
-        pSDKServer = restinio::run_async<>(restinio::own_io_context(),
-            restinio::server_settings_t<> {}
-                .port(shared::apiServerPort)
-                .address("0.0.0.0")
-                .request_handler([&](auto req) {
-                    if (restinio::http_method_get() == req->header().method()
-                        && req->header().request_target() == "/transmitting") {
-
-                        const std::lock_guard<std::mutex> lock(
-                            shared::transmittingMutex);
-                        return req->create_response()
-                            .set_body(shared::currentlyTransmittingApiData)
-                            .done();
-                    }
-                    if (restinio::http_method_get() == req->header().method()
-                        && req->header().request_target() == "/rx") {
-                        std::vector<ns::Station> bar;
-
-                        // copy only positive numbers:
-                        std::copy_if(shared::fetchedStations.begin(),
-                            shared::fetchedStations.end(),
-                            std::back_inserter(bar),
-                            [this](const ns::Station& s) {
-                                if (!pClient->IsVoiceConnected())
-                                    return false;
-                                return pClient->GetRxState(s.getFrequencyHz());
-                            });
-
-                        std::string out;
-                        if (!bar.empty()) {
-                            for (auto& f : bar) {
-                                out += f.getCallsign() + ":"
-                                    + f.getHumanFrequency() + ",";
-                            }
-                        }
-
-                        if (out.back() == ',') {
-                            out.pop_back();
-                        }
-
-                        return req->create_response().set_body(out).done();
-                    }
-                    if (restinio::http_method_get() == req->header().method()
-                        && req->header().request_target() == "/tx") {
-                        std::vector<ns::Station> bar;
-
-                        // copy only positive numbers:
-                        std::copy_if(shared::fetchedStations.begin(),
-                            shared::fetchedStations.end(),
-                            std::back_inserter(bar),
-                            [this](const ns::Station& s) {
-                                if (!pClient->IsVoiceConnected())
-                                    return false;
-                                return pClient->GetTxState(s.getFrequencyHz());
-                            });
-
-                        std::string out;
-                        if (!bar.empty()) {
-                            for (auto& f : bar) {
-                                out += f.getCallsign() + ":"
-                                    + f.getHumanFrequency() + ",";
-                            }
-                        }
-
-                        if (out.back() == ',') {
-                            out.pop_back();
-                        }
-
-                        return req->create_response().set_body(out).done();
-                    }
-
-                    return req->create_response()
-                        .set_body(shared::kClientName)
-                        .done();
-                }),
-            16U);
-    } catch (std::exception& ex) {
-        spdlog::error("Failed to created SDK http server, is the port in use?");
-        spdlog::error("%{}", ex.what());
     }
 }
 
@@ -930,23 +850,7 @@ void App::render_frame()
         pShowErrorModal = false;
     }
 
-    // Clear out the old API data every 500ms
-    auto currentTime = std::chrono::high_resolution_clock::now();
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(
-            currentTime - shared::currentlyTransmittingApiTimer)
-            .count()
-        >= 300) {
-        const std::lock_guard<std::mutex> lock(shared::transmittingMutex);
-        shared::currentlyTransmittingApiData = "";
-
-        shared::currentlyTransmittingApiData.append(
-            liveReceivedCallsigns.empty()
-                ? ""
-                : std::accumulate(++liveReceivedCallsigns.begin(),
-                    liveReceivedCallsigns.end(), *liveReceivedCallsigns.begin(),
-                    [](auto& a, auto& b) { return a + "," + b; }));
-        shared::currentlyTransmittingApiTimer = currentTime;
-    }
+    SDK::loopCleanup(liveReceivedCallsigns);
 
     ImGui::End();
 }

@@ -4,7 +4,7 @@
 #include <filesystem>
 
 #ifdef SFML_SYSTEM_MACOS
-#include "osx_resources.h"
+#include "native/osx_resources.h"
 #endif
 
 #ifdef SFML_SYSTEM_WINDOWS

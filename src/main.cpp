@@ -16,11 +16,11 @@
 #include "imgui-SFML.h"
 #include "imgui.h"
 #include "shared.h"
-#include "single_instance.h"
+#include "native/single_instance.h"
 #include "spdlog/spdlog.h"
-#include "style.h"
+#include "ui/style.h"
 #include "updater.h"
-#include "window_manager.h"
+#include "native/window_manager.h"
 
 // Main code
 int main(int, char**)

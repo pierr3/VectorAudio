@@ -3,7 +3,7 @@
 #include "data_file_handler.h"
 #include "imgui.h"
 #include "shared.h"
-#include "style.h"
+#include "ui/style.h"
 
 #include <string>
 #include <vector>
@@ -13,7 +13,7 @@ class NetworkStatusWidget {
 
 public:
     static void Draw(
-        afv_native::api::atcClient* pClient, vatsim::DataHandler* pDataHandler)
+        const std::shared_ptr<afv_native::api::atcClient>& pClient, vatsim::DataHandler* pDataHandler)
     {
 
         ImGui::TextColored(pClient->IsAPIConnected() ? kGreen : kRed, "API");
