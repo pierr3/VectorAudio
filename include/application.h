@@ -8,7 +8,7 @@
 #include "imgui_stdlib.h"
 #include "ns/airport.h"
 #include "radioSimulation.h"
-#include "sdk.h"
+#include "sdk/sdk.h"
 #include "shared.h"
 #include "ui/modals/settings.h"
 #include "ui/style.h"

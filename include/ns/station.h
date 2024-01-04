@@ -1,5 +1,7 @@
 #pragma once
 
+#include <nlohmann/detail/macro_scope.hpp>
+#include <nlohmann/json.hpp>
 #include <string>
 
 namespace ns {
@@ -24,6 +26,8 @@ public:
 
         return s;
     }
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Station, pFrequencyHz);
 
 protected:
     int pFrequencyHz;

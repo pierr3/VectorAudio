@@ -1,5 +1,9 @@
 #include "application.h"
 
+#include "afv-native/event.h"
+
+#include <optional>
+
 namespace vector_audio::application {
 using util::TextURL;
 
@@ -308,6 +312,27 @@ void App::eventCallback(
         playErrorSound();
     }
 
+    if (evt == afv_native::ClientEventType::PilotRxOpen) {
+        // Bug in that this applies to RX to all station types, including ATC, not only pilots
+        if (data != nullptr && data2 != nullptr) {
+            int frequency = *reinterpret_cast<int*>(data);
+            std::string callsign = *reinterpret_cast<std::string*>(data2);
+            spdlog::debug("Pilot {} opened RX", callsign);
+            pSDK->handleAFVEventForWebsocket(
+                sdk::types::Event::kRxBegin, callsign, frequency);
+        }
+    }
+
+    if (evt == afv_native::ClientEventType::PilotRxClosed) {
+        if (data != nullptr && data2 != nullptr) {
+            int frequency = *reinterpret_cast<int*>(data);
+            std::string callsign = *reinterpret_cast<std::string*>(data2);
+            spdlog::debug("Pilot {} closed RX", callsign);
+            pSDK->handleAFVEventForWebsocket(
+                sdk::types::Event::kRxEnd, callsign, frequency);
+        }
+    }
+
     if (evt == afv_native::ClientEventType::StationDataReceived) {
         if (data != nullptr && data2 != nullptr) {
             // We just refresh the transceiver count in our display
@@ -400,6 +425,9 @@ void App::render_frame()
                 this->pClient->SetTx(shared::session::frequency, true);
                 this->pClient->SetXc(shared::session::frequency, true);
             }
+            this->pSDK->handleAFVEventForWebsocket(
+                sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                std::nullopt);
             this->pClient->FetchStationVccs(cleanCallsign);
             this->pClient->SetRadioGainAll(shared::radioGain / 100.0F);
         }
@@ -663,6 +691,9 @@ void App::render_frame()
                                     == p.getFrequencyHz();
                             }),
                         shared::fetchedStations.end());
+                    this->pSDK->handleAFVEventForWebsocket(
+                        sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                        std::nullopt);
                 }
                 ImGui::EndPopup();
             }
@@ -711,6 +742,9 @@ void App::render_frame()
                     pClient->SetRx(el.getFrequencyHz(), true);
                     pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
+                this->pSDK->handleAFVEventForWebsocket(
+                    sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                    std::nullopt);
             }
 
             if (rxState)
@@ -745,6 +779,10 @@ void App::render_frame()
                     pClient->SetXc(el.getFrequencyHz(), true);
                     pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
+
+                this->pSDK->handleAFVEventForWebsocket(
+                    sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                    std::nullopt);
             }
 
             if (xcState)
@@ -802,6 +840,9 @@ void App::render_frame()
                     pClient->SetRx(el.getFrequencyHz(), true);
                     pClient->SetRadioGainAll(shared::radioGain / 100.0F);
                 }
+                this->pSDK->handleAFVEventForWebsocket(
+                    sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                    std::nullopt);
             }
 
             if (txState)
