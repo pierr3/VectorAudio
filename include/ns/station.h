@@ -27,7 +27,7 @@ public:
         return s;
     }
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Station, pFrequencyHz);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Station, pCallsign, pFrequencyHz);
 
 protected:
     int pFrequencyHz;

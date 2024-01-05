@@ -62,5 +62,5 @@ public:
 // @value the frequency state update information including rx, tx, and xc
 // stations
 // JSON: {"type": "kFrequencyStateUpdate", "value": {"rx":
-// [{"pFrequencyHz": 118775000}], "tx": [{"pFrequencyHz": 119775000}], "xc":
-// [{"pFrequencyHz": 121500000}]}}
+// [{"pFrequencyHz": 118775000, "pCallsign": "EDDF_S_TWR"}], "tx": [{"pFrequencyHz": 119775000, "pCallsign": "EDDF_S_TWR"}], "xc":
+// [{"pFrequencyHz": 121500000, "pCallsign": "EDDF_S_TWR"}]}}
