@@ -42,14 +42,14 @@ public:
 
 } // namespace vector_audio::sdk
 
-// Example of kPilotRxOpen message:
+// Example of kRxBegin message:
 // @type the type of the message
 // @value the callsign of the station (pilot or ATC) who started transmitting the radio, and
 // the frequency which is being transmitted on
 // JSON: {"type": "kRxBegin", "value": {"callsign": "AFR001",
 // "pFrequencyHz": 123000000}}
 
-// Example of kPilotRxClose message:
+// Example of kRxEnd message:
 // @type the type of the message
 // @value the callsign of the station (pilot or ATC) who stopped transmitting the radio, and
 // the frequency which was being transmitted on

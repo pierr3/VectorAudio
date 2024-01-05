@@ -54,7 +54,7 @@ The AFV facility manager manual is clear that ALL stations must be added. If you
 
 ### Can I extend VectorAudio using a plugin/is there an SDK?
 
-Yes! Have a look [in the wiki](https://github.com/pierr3/VectorAudio/wiki/Using-the-SDK). If you need additional features, please open an issue with a detailed request, I'll be happy to look at it with no guarantees.
+Yes! Have a look [in the wiki](https://github.com/pierr3/VectorAudio/wiki/Using-the-SDK). VectorAudio offers a WebSocket and HTTP SDK. If you need additional features, please open an issue with a detailed request, I'll be happy to look at it with no guarantees.
 
 ### I have an issue with VectorAudio
 
