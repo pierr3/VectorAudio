@@ -1,26 +1,25 @@
-#include <cstdio>
-
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <filesystem>
-#include <memory>
-#include <string>
-#include <thread>
-#include <random>
-
 #include "application.h"
 #include "config.h"
 #include "data_file_handler.h"
 #include "imgui-SFML.h"
 #include "imgui.h"
-#include "shared.h"
 #include "native/single_instance.h"
+#include "native/window_manager.h"
+#include "shared.h"
 #include "spdlog/spdlog.h"
 #include "ui/style.h"
 #include "updater.h"
-#include "native/window_manager.h"
+
+#include <cstdio>
+#include <filesystem>
+#include <memory>
+#include <random>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <string>
+#include <thread>
 
 // Main code
 int main(int, char**)
@@ -45,10 +44,13 @@ int main(int, char**)
     std::string iconName = "icon_mac.png";
 #endif
 
-    if (!image.loadFromFile((vector_audio::Configuration::get_resource_folder() / iconName).string())) {
+    if (!image.loadFromFile(
+            (vector_audio::Configuration::get_resource_folder() / iconName)
+                .string())) {
         spdlog::error("Could not load application icon");
     } else {
-        window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
+        window.setIcon(
+            image.getSize().x, image.getSize().y, image.getPixelsPtr());
     }
 
     if (!ImGui::SFML::Init(window, false)) {
@@ -67,7 +69,8 @@ int main(int, char**)
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
 
-    std::filesystem::path p = vector_audio::Configuration::get_resource_folder() / std::filesystem::path("JetBrainsMono-Regular.ttf");
+    std::filesystem::path p = vector_audio::Configuration::get_resource_folder()
+        / std::filesystem::path("JetBrainsMono-Regular.ttf");
     io.Fonts->AddFontFromFileTTF(p.string().c_str(), 18.0);
 
     if (!ImGui::SFML::UpdateFontTexture()) {
@@ -94,12 +97,12 @@ int main(int, char**)
         // Poll and handle events (inputs, window resize, etc.)
         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
         // tell if dear imgui wants to use your inputs.
-        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to
-        // your main application.
+        // - When io.WantCaptureMouse is true, do not dispatch mouse input data
+        // to your main application.
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input
-        // data to your main application. Generally you may always pass all inputs
-        // to dear imgui, and hide them from your application based on those two
-        // flags.
+        // data to your main application. Generally you may always pass all
+        // inputs to dear imgui, and hide them from your application based on
+        // those two flags.
         sf::Event event;
         while (window.pollEvent(event)) {
             ImGui::SFML::ProcessEvent(window, event);
@@ -109,13 +112,45 @@ int main(int, char**)
             } else if (event.type == sf::Event::KeyPressed) {
                 // Capture the new Ptt key
                 if (vector_audio::shared::capturePttFlag) {
+                    vector_audio::shared::fallbackPtt
+                        = sf::Keyboard::Key::Unknown; // Reset fallback
                     vector_audio::shared::ptt = event.key.scancode;
+
+                    if (vector_audio::shared::ptt
+                        == sf::Keyboard::Scan::Unknown) {
+                        spdlog::warn("Unknown scancode key when trying to "
+                                     "register PTT, falling back to key code");
+                        auto fallbackKey
+                            = event.key.code; // Fallback to key code
+                        if (fallbackKey != sf::Keyboard::Key::Unknown) {
+
+                            vector_audio::shared::ptt
+                                = sf::Keyboard::delocalize(fallbackKey);
+                            vector_audio::shared::fallbackPtt = fallbackKey;
+                            auto keyName = static_cast<std::string>(
+                                sf::Keyboard::getDescription(
+                                    vector_audio::shared::ptt));
+                            spdlog::info("Registered PTT key through "
+                                         "delocalized logical key: {}",
+                                keyName);
+
+                        } else {
+                            spdlog::error(
+                                "Could not register PTT key, even with "
+                                "fallback.");
+                        }
+                    }
 
                     vector_audio::shared::joyStickId = -1;
                     vector_audio::shared::joyStickPtt = -1;
-                    vector_audio::Configuration::mConfig["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::mConfig["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::mConfig["user"]["joyStickId"]
+                        = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
+                        = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::mConfig["user"]["ptt"]
+                        = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::mConfig["user"]["fallbackPtt"]
+                        = static_cast<int>(vector_audio::shared::fallbackPtt);
                     vector_audio::Configuration::write_config_async();
                     vector_audio::shared::capturePttFlag = false;
                 }
@@ -123,20 +158,28 @@ int main(int, char**)
 
                 if (vector_audio::shared::capturePttFlag) {
                     vector_audio::shared::ptt = sf::Keyboard::Scan::Unknown;
+                    vector_audio::shared::fallbackPtt
+                        = sf::Keyboard::Key::Unknown;
 
-                    vector_audio::shared::joyStickId = event.joystickButton.joystickId;
-                    vector_audio::shared::joyStickPtt = event.joystickButton.button;
+                    vector_audio::shared::joyStickId
+                        = event.joystickButton.joystickId;
+                    vector_audio::shared::joyStickPtt
+                        = event.joystickButton.button;
 
-                    vector_audio::Configuration::mConfig["user"]["joyStickId"] = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"] = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::mConfig["user"]["ptt"] = static_cast<int>(vector_audio::shared::ptt);
+                    vector_audio::Configuration::mConfig["user"]["joyStickId"]
+                        = vector_audio::shared::joyStickId;
+                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
+                        = vector_audio::shared::joyStickPtt;
+                    vector_audio::Configuration::mConfig["user"]["ptt"]
+                        = static_cast<int>(vector_audio::shared::ptt);
                     vector_audio::Configuration::write_config_async();
                     vector_audio::shared::capturePttFlag = false;
                 }
             }
 
             if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
-                vector_audio::setAlwaysOnTop(window, vector_audio::shared::keepWindowOnTop);
+                vector_audio::setAlwaysOnTop(
+                    window, vector_audio::shared::keepWindowOnTop);
                 alwaysOnTop = vector_audio::shared::keepWindowOnTop;
             }
         }

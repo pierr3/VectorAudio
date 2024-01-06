@@ -46,6 +46,7 @@ inline int headsetOutputChannel = 0;
 inline bool capturePttFlag = false;
 
 inline sf::Keyboard::Scancode ptt = sf::Keyboard::Scan::Unknown;
+inline sf::Keyboard::Key fallbackPtt = sf::Keyboard::Unknown;
 inline int joyStickId = -1;
 inline int joyStickPtt = -1;
 inline bool isPttOpen = false;

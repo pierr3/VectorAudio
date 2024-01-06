@@ -1,6 +1,7 @@
 #include "application.h"
 
 #include "afv-native/event.h"
+#include "shared.h"
 
 #include <optional>
 
@@ -55,6 +56,10 @@ App::App()
         shared::ptt = static_cast<sf::Keyboard::Scancode>(
             toml::find_or<int>(cfg::mConfig, "user", "ptt",
                 static_cast<int>(sf::Keyboard::Scan::Unknown)));
+
+        shared::fallbackPtt = static_cast<sf::Keyboard::Key>(
+            toml::find_or<int>(cfg::mConfig, "user", "fallbackPtt",
+                static_cast<int>(sf::Keyboard::Key::Unknown)));
 
         shared::joyStickId = static_cast<int>(
             toml::find_or<int>(cfg::mConfig, "user", "joyStickId", -1));
@@ -313,7 +318,8 @@ void App::eventCallback(
     }
 
     if (evt == afv_native::ClientEventType::PilotRxOpen) {
-        // Bug in that this applies to RX to all station types, including ATC, not only pilots
+        // Bug in that this applies to RX to all station types, including ATC,
+        // not only pilots
         if (data != nullptr && data2 != nullptr) {
             int frequency = *reinterpret_cast<int*>(data);
             std::string callsign = *reinterpret_cast<std::string*>(data2);
@@ -377,7 +383,11 @@ void App::render_frame()
                         shared::isPttOpen = false;
                     }
                 } else {
-                    if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
+                    if (shared::fallbackPtt != sf::Keyboard::Unknown) {
+                        if (!sf::Keyboard::isKeyPressed(shared::fallbackPtt)) {
+                            shared::isPttOpen = false;
+                        }
+                    } else if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
                         shared::isPttOpen = false;
                     }
                 }
@@ -390,7 +400,11 @@ void App::render_frame()
                         shared::isPttOpen = true;
                     }
                 } else {
-                    if (sf::Keyboard::isKeyPressed(shared::ptt)) {
+                    if (shared::fallbackPtt != sf::Keyboard::Unknown) {
+                        if (sf::Keyboard::isKeyPressed(shared::fallbackPtt)) {
+                            shared::isPttOpen = true;
+                        }
+                    } else if (sf::Keyboard::isKeyPressed(shared::ptt)) {
                         shared::isPttOpen = true;
                     }
                 }

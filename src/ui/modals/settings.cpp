@@ -1,6 +1,9 @@
 #include "ui/modals/settings.h"
+#include <SFML/Window/Keyboard.hpp>
 
-void vector_audio::ui::modals::Settings::render(const std::shared_ptr<afv_native::api::atcClient>& mClient, const std::function<void()>& playAlertSound)
+void vector_audio::ui::modals::Settings::render(
+    const std::shared_ptr<afv_native::api::atcClient>& mClient,
+    const std::function<void()>& playAlertSound)
 {
     // Settings modal definition
     if (ImGui::BeginPopupModal("Settings Panel")) {
@@ -163,7 +166,7 @@ void vector_audio::ui::modals::Settings::render(const std::shared_ptr<afv_native
             if (shared::ptt == sf::Keyboard::Scan::Unknown
                 && shared::joyStickId == -1) {
                 pttKeyName = "Not set";
-            } else if (shared::ptt != -1) {
+            } else if (shared::ptt != sf::Keyboard::Scan::Unknown) {
                 pttKeyName
                     = "Key: " + sf::Keyboard::getDescription(shared::ptt);
             } else if (shared::joyStickId != -1) {
@@ -314,8 +317,7 @@ void vector_audio::ui::modals::Settings::render(const std::shared_ptr<afv_native
                 "Optional: You can choose whether to play the\nsound in your "
                 "right, left, or both ears.");
 
-            std::string channelsDisplay[]
-                = { "Left + Right", "Left", "Right" };
+            std::string channelsDisplay[] = { "Left + Right", "Left", "Right" };
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo("##Channel Setup",
@@ -399,7 +401,7 @@ void vector_audio::ui::modals::Settings::render(const std::shared_ptr<afv_native
             ImGui::NewLine();
 
             if (ImGui::Button("Test alert sound")) {
-               playAlertSound();
+                playAlertSound();
             }
             ImGui::SameLine();
             vector_audio::util::HelpMarker(
