@@ -1,4 +1,7 @@
 #include "ui/modals/settings.h"
+
+#include "shared.h"
+
 #include <SFML/Window/Keyboard.hpp>
 
 void vector_audio::ui::modals::Settings::render(
@@ -166,9 +169,14 @@ void vector_audio::ui::modals::Settings::render(
             if (shared::ptt == sf::Keyboard::Scan::Unknown
                 && shared::joyStickId == -1) {
                 pttKeyName = "Not set";
-            } else if (shared::ptt != sf::Keyboard::Scan::Unknown) {
-                pttKeyName
-                    = "Key: " + sf::Keyboard::getDescription(shared::ptt);
+            } else if (shared::ptt != sf::Keyboard::Scan::Unknown
+                || shared::fallbackPtt != sf::Keyboard::Unknown) {
+                auto keyDesc = sf::Keyboard::getDescription(shared::ptt);
+                if (keyDesc == "Unknown") {
+                    pttKeyName = "Key set";
+                } else {
+                    pttKeyName = "Key set: " + keyDesc;
+                }
             } else if (shared::joyStickId != -1) {
                 pttKeyName = fmt::format("Joystick {} Button {}",
                     shared::joyStickId, shared::joyStickPtt);
