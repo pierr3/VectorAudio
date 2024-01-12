@@ -105,6 +105,7 @@ add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 src/ui/modals/settings.cpp
                 src/native/single_instance.cpp
                 src/sdk/sdk.cpp
+                src/native/win32_key_util.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS}
                 vector_audio.rc)

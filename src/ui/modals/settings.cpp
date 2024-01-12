@@ -171,7 +171,11 @@ void vector_audio::ui::modals::Settings::render(
                 pttKeyName = "Not set";
             } else if (shared::ptt != sf::Keyboard::Scan::Unknown
                 || shared::fallbackPtt != sf::Keyboard::Unknown) {
-                auto keyDesc = sf::Keyboard::getDescription(shared::ptt);
+                    #ifdef SFML_SYSTEM_WINDOWS
+                        auto keyDesc = vector_audio::native::win32::get_key_description(shared::ptt);
+                    #else
+                        auto keyDesc = sf::Keyboard::getDescription(shared::ptt);
+                    #endif
                 if (keyDesc == "Unknown") {
                     pttKeyName = "Key set";
                 } else {
