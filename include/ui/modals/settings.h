@@ -7,6 +7,7 @@
 #include "shared.h"
 #include "ui/style.h"
 #include "util.h"
+#include "native/win32_key_util.h"
 
 #include <imgui_stdlib.h>
 #include <SFML/System/String.hpp>
@@ -16,7 +17,8 @@
 namespace vector_audio::ui::modals {
 class Settings {
 public:
-    static void render(const std::shared_ptr<afv_native::api::atcClient>& mClient,
+    static void render(
+        const std::shared_ptr<afv_native::api::atcClient>& mClient,
         const std::function<void()>& playAlertSound);
 };
 }

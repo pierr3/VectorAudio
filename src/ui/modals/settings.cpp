@@ -1,9 +1,5 @@
 #include "ui/modals/settings.h"
 
-#include "shared.h"
-
-#include <SFML/Window/Keyboard.hpp>
-
 void vector_audio::ui::modals::Settings::render(
     const std::shared_ptr<afv_native::api::atcClient>& mClient,
     const std::function<void()>& playAlertSound)
@@ -171,11 +167,12 @@ void vector_audio::ui::modals::Settings::render(
                 pttKeyName = "Not set";
             } else if (shared::ptt != sf::Keyboard::Scan::Unknown
                 || shared::fallbackPtt != sf::Keyboard::Unknown) {
-                    #ifdef SFML_SYSTEM_WINDOWS
-                        auto keyDesc = vector_audio::native::win32::get_key_description(shared::ptt);
-                    #else
-                        auto keyDesc = sf::Keyboard::getDescription(shared::ptt);
-                    #endif
+#ifdef SFML_SYSTEM_WINDOWS
+                auto keyDesc = vector_audio::native::win32::get_key_description(
+                    shared::ptt);
+#else
+                auto keyDesc = sf::Keyboard::getDescription(shared::ptt);
+#endif
                 if (keyDesc == "Unknown") {
                     pttKeyName = "Key set";
                 } else {
