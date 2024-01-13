@@ -16,7 +16,6 @@ public:
      */
     static inline bool isValid8_33kHzChannel(int fKHz)
     {
-        fKHz = fKHz / 100;
         const int lastDigits = static_cast<int>(fKHz) % 100;
         return fKHz % 5 == 0 && lastDigits != 20 && lastDigits != 45
             && lastDigits != 70 && lastDigits != 95;
@@ -29,7 +28,7 @@ public:
      */
     static inline int round8_33kHzChannel(int fKHz)
     {
-        fKHz = fKHz / 100;
+        fKHz = fKHz / 1000;
         if (!isValid8_33kHzChannel(fKHz)) {
             const int diff = static_cast<int>(fKHz) % 5;
             int lower = fKHz - diff;
@@ -48,6 +47,6 @@ public:
             fKHz = lowerDiff < upperDiff ? lower : upper;
             fKHz = std::clamp(fKHz, 118000, 136990);
         }
-        return fKHz * 100;
+        return fKHz * 1000;
     }
 };

@@ -48,7 +48,7 @@ App::App()
         shared::vatsimCid
             = toml::find_or<int>(cfg::mConfig, "user", "vatsim_id", 999999);
         shared::vatsimPassword = toml::find_or<std::string>(
-            cfg::mConfig, "user", "vatsimPassword", std::string("password"));
+            cfg::mConfig, "user", "vatsim_password", std::string("password"));
 
         shared::keepWindowOnTop = toml::find_or<bool>(
             cfg::mConfig, "user", "keepWindowOnTop", false);
