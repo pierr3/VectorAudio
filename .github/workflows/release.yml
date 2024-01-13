@@ -38,7 +38,7 @@ jobs:
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
-          cmake --build build/ --config Release
+          cmake --build build/ --config ${{ env.BUILD_TYPE }}
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh libafv_native.so
@@ -66,7 +66,7 @@ jobs:
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
-          cmake --build build/ --config Release
+          cmake --build build/ --config ${{ env.BUILD_TYPE }}
       - name: Prepare windows installer
         run: |
           python collect_licenses.py
@@ -114,7 +114,7 @@ jobs:
           cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
       - name: Build cmake (intel)
         run: |
-          cmake --build build_intel/ --config Release
+          cmake --build build_intel/ --config ${{ env.BUILD_TYPE }}
       - name: Cleanup intel build
         run: |
           cp build_intel/vector_audio.app/Contents/MacOS/vector_audio build/vector_audio.intel
@@ -124,7 +124,7 @@ jobs:
           cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx
       - name: Build cmake (arm64)
         run: |
-          cmake --build build_arm64/ --config Release
+          cmake --build build_arm64/ --config ${{ env.BUILD_TYPE }}
       - name: Cleanup arm64 build
         run: |
           cp build_arm64/vector_audio.app/Contents/MacOS/vector_audio build/vector_audio.arm
@@ -135,14 +135,6 @@ jobs:
       - name: Bundle OSX
         run: |
           ./bundle_osx.sh
-      - name: Sign binary
-        uses: lando/code-sign-action@v2
-        with:
-          file: build/VectorAudio.app
-          certificate-data: ${{ secrets.APPLE_CERT_DATA }}
-          certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
-          apple-team-id: ${{ secrets.APPLE_TEAM_ID }}
-          options: --deep --timestamp --force
       - name: Create DMG
         run: |
           brew install create-dmg
@@ -154,6 +146,7 @@ jobs:
           certificate-data: ${{ secrets.APPLE_CERT_DATA }}
           certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
           apple-team-id: ${{ secrets.APPLE_TEAM_ID }}
+          options: --deep --timestamp --force
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
