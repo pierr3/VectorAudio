@@ -56,3 +56,4 @@ resources/libafv_native.framework/libafv_native
 .cache
 
 *.rc
+*.dmg

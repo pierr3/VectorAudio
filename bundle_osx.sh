@@ -41,7 +41,7 @@ lipo -create lib/macos/libafv_native.dylib -output resources/libafv_native.frame
 install_name_tool -change @rpath/libafv_native.dylib @loader_path/../Frameworks/libafv_native.framework/libafv_native build/VectorAudio.app/Contents/MacOS/vector_audio
 cp -R resources/libafv_native.framework/ build/VectorAudio.app/Contents/Frameworks/libafv_native.framework
 
-xattr -cr build/VectorAudio.app
+xattr -c build/VectorAudio.app
 if [ $# -eq 1 ]; then
   codesign --force --deep --timestamp -s "Developer ID Application" build/VectorAudio.app
 fi
