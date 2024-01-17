@@ -130,7 +130,10 @@ jobs:
       - name: Install native dependencies
         run: |
           brew install pkg-config llvm
-          brew link llvm
+          sudo brew link llvm
+          echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/runner/.bash_profile
+          export LDFLAGS="-L/usr/local/opt/llvm/lib"
+          export CPPFLAGS="-I/usr/local/opt/llvm/include"
       - name: Run build script
         run: |
           ./manual_osx_build.sh 1
