@@ -12,27 +12,26 @@ namespace vector_audio::ui::widgets {
 class NetworkStatusWidget {
 
 public:
-    static void Draw(
-        const std::shared_ptr<afv_native::api::atcClient>& pClient, vatsim::DataHandler* pDataHandler)
+    static void Draw(bool isVoiceConnected, bool isSlurperAvailable,
+        bool isDatafileAvailable)
     {
 
-        ImGui::TextColored(pClient->IsAPIConnected() ? kGreen : kRed, "API");
+        ImGui::TextColored(isVoiceConnected ? kGreen : kRed, "API");
         ImGui::SameLine();
         ImGui::Text("|");
         ImGui::SameLine();
-        ImGui::TextColored(
-            pClient->IsVoiceConnected() ? kGreen : kRed, "Voice");
+        ImGui::TextColored(isVoiceConnected ? kGreen : kRed, "Voice");
         ImGui::SameLine();
         ImGui::Text("|");
         ImGui::SameLine();
         // Status about datasource
 
-        if (pDataHandler->isSlurperAvailable()) {
+        if (isSlurperAvailable) {
             ImGui::TextColored(kGreen, "Slurper");
             /*if (ImGui::IsItemClicked()) {
                 shared::slurper::is_unavailable = true;
             }*/
-        } else if (pDataHandler->isDatafileAvailable()) {
+        } else if (isDatafileAvailable) {
             ImGui::TextColored(kYellow, "Datafile");
         } else {
             ImGui::TextColored(kRed, "No VATSIM Data");

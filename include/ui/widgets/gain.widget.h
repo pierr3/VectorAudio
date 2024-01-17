@@ -11,18 +11,19 @@ namespace vector_audio::ui::widgets {
 class GainWidget {
 
 public:
-    static void Draw(const std::shared_ptr<afv_native::api::atcClient>& pClient)
+    static void Draw(bool isVoiceConnected, std::function<void()> callback)
     {
         ImGui::PushItemWidth(-1.0);
         ImGui::Text("Radio Gain");
-        style::push_disabled_on(!pClient->IsVoiceConnected());
+        style::push_disabled_on(isVoiceConnected);
         if (ImGui::SliderInt(
                 "##Radio Gain", &shared::radioGain, 0, 200, "%.3i %%")) {
-            if (pClient->IsVoiceConnected())
-                pClient->SetRadioGainAll(shared::radioGain / 100.0F);
+            if (isVoiceConnected) {
+                std::invoke(callback);
+            }
         }
         ImGui::PopItemWidth();
-        style::pop_disabled_on(!pClient->IsVoiceConnected());
+        style::pop_disabled_on(isVoiceConnected);
     }
 };
 }

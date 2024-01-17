@@ -55,8 +55,6 @@ inline std::vector<ns::Station> fetchedStations;
 inline bool bootUpVccs = false;
 
 // Temp inputs
-inline std::string stationAddCallsign;
-inline std::string stationAutoAddCallsign;
 inline float stationAddFrequency = 118.0;
 
 inline afv_native::HardwareType hardware

@@ -387,9 +387,9 @@ void vector_audio::ui::modals::Settings::render(
                 : "Start Mic Test";
             if (ImGui::Button(audioTestButtonText, ImVec2(-1.0F, 0.0F))) {
 
-                if (mClient->IsAudioRunning())
+                if (mClient->IsAudioRunning()) {
                     mClient->StopAudio();
-                else {
+                } else {
                     mClient->SetAudioApi(vector_audio::shared::mAudioApi);
                     mClient->SetAudioInputDevice(
                         vector_audio::shared::configInputDeviceName);
@@ -451,8 +451,10 @@ void vector_audio::ui::modals::Settings::render(
                     = vector_audio::shared::headsetOutputChannel;
 
                 vector_audio::Configuration::write_config_async();
-                if (mClient->IsAudioRunning())
+                if (mClient->IsAudioRunning()) {
                     mClient->StopAudio();
+                }
+
                 ImGui::CloseCurrentPopup();
 
                 shared::capturePttFlag = false;

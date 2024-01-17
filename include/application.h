@@ -59,7 +59,7 @@ private:
 
     void playErrorSound();
 
-    void addNewStation();
+    void addNewStation(std::string callsign);
 
     // Used in another thread
     static void loadAirportsDatabaseAsync();
@@ -67,7 +67,7 @@ private:
     bool pShowErrorModal = false;
     std::string pLastErrorModalMessage;
 
-    std::unique_ptr<vector_audio::vatsim::DataHandler> pDataHandler;
+    std::unique_ptr<vatsim::DataHandler> pDataHandler;
 
     bool pManuallyDisconnected = false;
     sf::SoundBuffer pDisconnectWarningSoundbuffer;

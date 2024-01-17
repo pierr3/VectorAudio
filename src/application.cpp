@@ -4,6 +4,7 @@
 #include "shared.h"
 
 #include <optional>
+#include <utility>
 
 namespace vector_audio::application {
 using util::TextURL;
@@ -599,8 +600,7 @@ void App::render_frame()
     }
     style::pop_disabled_on(pClient->IsAPIConnected());
 
-    ui::modals::Settings::render(
-        pClient, [this]() -> void { playErrorSound(); });
+    ui::modals::Settings::render(pClient, [&]() -> void { playErrorSound(); });
 
     {
         ImGui::SetNextWindowSize(ImVec2(300, -1));
@@ -619,7 +619,9 @@ void App::render_frame()
 
     ImGui::SameLine();
 
-    ui::widgets::NetworkStatusWidget::Draw(pClient, pDataHandler.get());
+    ui::widgets::NetworkStatusWidget::Draw(pClient->IsVoiceConnected(),
+        pDataHandler->isSlurperAvailable(),
+        pDataHandler->isDatafileAvailable());
     ImGui::NewLine();
 
     //
@@ -881,10 +883,13 @@ void App::render_frame()
     ImGui::BeginGroup();
 
     ui::widgets::AddStationWidget::Draw(
-        pClient, [this]() -> void { addNewStation(); });
+        pClient->IsVoiceConnected(), [&](std::string stationCallsign) -> void {
+            addNewStation(std::move(stationCallsign));
+        });
     ImGui::NewLine();
 
-    ui::widgets::GainWidget::Draw(pClient);
+    ui::widgets::GainWidget::Draw(pClient->IsVoiceConnected(),
+        [&]() { pClient->SetRadioGainAll(shared::radioGain / 100.0F); });
     ImGui::NewLine();
 
     ui::widgets::LastRxWidget::Draw(receivedCallsigns);
@@ -950,29 +955,28 @@ void App::playErrorSound()
     pSoundPlayer.play();
 };
 
-void App::addNewStation()
+void App::addNewStation(std::string stationCallsign)
 {
-    if (!absl::StartsWith(shared::stationAutoAddCallsign, "!")
-        && !absl::StartsWith(shared::stationAutoAddCallsign, "#")) {
-        pClient->GetStation(shared::stationAutoAddCallsign);
-        pClient->FetchStationVccs(shared::stationAutoAddCallsign);
-    } else if (absl::StartsWith(shared::stationAutoAddCallsign, "!")) {
+    if (!absl::StartsWith(stationCallsign, "!")
+        && !absl::StartsWith(stationCallsign, "#")) {
+        pClient->GetStation(stationCallsign);
+        pClient->FetchStationVccs(stationCallsign);
+    } else if (absl::StartsWith(stationCallsign, "!")) {
         double latitude = 0.0;
         double longitude = 0.0;
-        shared::stationAutoAddCallsign
-            = shared::stationAutoAddCallsign.substr(1);
+        stationCallsign = stationCallsign.substr(1);
 
         if (!frequencyExists(shared::kUnicomFrequency)) {
             if (pDataHandler->getPilotPositionWithAnything(
-                    shared::stationAutoAddCallsign, latitude, longitude)) {
+                    stationCallsign, latitude, longitude)) {
 
                 ns::Station el = ns::Station::build(
-                    shared::stationAutoAddCallsign, shared::kUnicomFrequency);
+                    stationCallsign, shared::kUnicomFrequency);
 
                 shared::fetchedStations.push_back(el);
                 pClient->SetClientPosition(latitude, longitude, 1000, 1000);
                 pClient->AddFrequency(
-                    shared::kUnicomFrequency, shared::stationAutoAddCallsign);
+                    shared::kUnicomFrequency, stationCallsign);
                 pClient->SetRx(shared::kUnicomFrequency, true);
                 pClient->SetRadioGainAll(shared::radioGain / 100.0F);
 
@@ -987,19 +991,17 @@ void App::addNewStation()
     } else {
         double latitude = 0.0;
         double longitude = 0.0;
-        shared::stationAutoAddCallsign
-            = shared::stationAutoAddCallsign.substr(1);
+        stationCallsign = stationCallsign.substr(1);
 
         int frequency = 0;
         try {
-            frequency = std::stoi(shared::stationAutoAddCallsign) * 1000;
+            frequency = std::stoi(stationCallsign) * 1000;
         } catch (...) {
             errorModal("Failed to parse frequency, format is #123456");
         }
 
         if (!frequencyExists(frequency) && frequency != 0) {
-            ns::Station el
-                = ns::Station::build(shared::stationAutoAddCallsign, frequency);
+            ns::Station el = ns::Station::build(stationCallsign, frequency);
 
             shared::fetchedStations.push_back(el);
             pClient->SetClientPosition(latitude, longitude, 1000, 1000);
@@ -1011,7 +1013,5 @@ void App::addNewStation()
                        "delete it first.");
         }
     }
-
-    shared::stationAutoAddCallsign = "";
 }
 } // namespace application
