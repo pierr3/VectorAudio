@@ -39,7 +39,7 @@ jobs:
           sudo apt install libfuse2
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
           cmake --build build/ --config ${{ env.BUILD_TYPE }}
@@ -73,10 +73,10 @@ jobs:
         run: |
           $ver = Get-Content .\VERSION_BETA -Raw
           echo "RELEASE_VERSION=v$ver" >> $GITHUB_ENV
-          type VERSION_BETA > VERSION
+          cat $ver > .\VERSION
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
           cmake --build build/ --config ${{ env.BUILD_TYPE }}
@@ -122,21 +122,18 @@ jobs:
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
           cat VERSION_BETA > VERSION
+      - name: Installing codesign certificates
+        uses: apple-actions/import-codesign-certs@v2
+        with: 
+          p12-file-base64: ${{ secrets.APPLE_CERT_DATA }}
+          p12-password: ${{ secrets.APPLE_CERT_PASSWORD }}
       - name: Install native dependencies
         run: |
           brew install pkg-config
       - name: Run build script
         run: |
-          ./manual_osx_build.sh
+          ./manual_osx_build.sh 1
           mv VectorAudio-Universal.dmg VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg
-      - name: Sign DMG
-        uses: lando/code-sign-action@v2
-        with:
-          file: VectorAudio-${{ env.RELEASE_VERSION }}-Universal.dmg
-          certificate-data: ${{ secrets.APPLE_CERT_DATA }}
-          certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
-          apple-team-id: ${{ secrets.APPLE_TEAM_ID }}
-          options: --deep --timestamp --force
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
