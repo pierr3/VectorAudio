@@ -20,7 +20,7 @@
             "name": "(lldb) Launch",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/resources/vector_audio",
+            "program": "${workspaceFolder}/build/vector_audio.app/Contents/MacOS/vector_audio",
             "args": [],
             "preRunCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],
             "initCommands": ["settings set platform.plugin.darwin.ignored-exceptions EXC_BAD_INSTRUCTION", "process handle SIGILL -n false -p true -s false"],

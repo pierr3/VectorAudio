@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <restinio/router/express.hpp>
 #include <restinio/traits.hpp>
@@ -82,8 +83,8 @@ void SDK::handleAFVEventForWebsocket(sdk::types::Event event,
     }
 
     if (event == sdk::types::Event::kRxBegin && callsign && frequencyHz) {
-        nlohmann::json jsonMessage = WebsocketMessage::buildMessage(
-            WebsocketMessageType::kRxBegin);
+        nlohmann::json jsonMessage
+            = WebsocketMessage::buildMessage(WebsocketMessageType::kRxBegin);
         jsonMessage["value"]["callsign"] = *callsign;
         jsonMessage["value"]["pFrequencyHz"] = *frequencyHz;
         this->broadcastOnWebsocket(jsonMessage.dump());
@@ -91,8 +92,8 @@ void SDK::handleAFVEventForWebsocket(sdk::types::Event event,
     }
 
     if (event == sdk::types::Event::kRxEnd && callsign && frequencyHz) {
-        nlohmann::json jsonMessage = WebsocketMessage::buildMessage(
-            WebsocketMessageType::kRxEnd);
+        nlohmann::json jsonMessage
+            = WebsocketMessage::buildMessage(WebsocketMessageType::kRxEnd);
         jsonMessage["value"]["callsign"] = *callsign;
         jsonMessage["value"]["pFrequencyHz"] = *frequencyHz;
         this->broadcastOnWebsocket(jsonMessage.dump());
@@ -106,6 +107,8 @@ void SDK::handleAFVEventForWebsocket(sdk::types::Event event,
         std::vector<ns::Station> rxBar;
         std::vector<ns::Station> txBar;
         std::vector<ns::Station> xcBar;
+
+        // std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
 
         std::copy_if(shared::fetchedStations.begin(),
             shared::fetchedStations.end(), std::back_inserter(rxBar),
@@ -259,8 +262,12 @@ restinio::request_handling_status_t SDK::handleWebSocketSDKCall(
     this->pWsRegistry.emplace(wsh->connection_id(), wsh);
 
     // Upon connection, send the status of frequencies straight away
-    this->handleAFVEventForWebsocket(
-        sdk::types::Event::kFrequencyStateUpdate, std::nullopt, std::nullopt);
+    {
+        std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+        this->handleAFVEventForWebsocket(
+            sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+            std::nullopt);
+    }
 
     return restinio::request_accepted();
 };

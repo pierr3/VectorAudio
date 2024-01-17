@@ -54,6 +54,7 @@ inline int joyStickId = -1;
 inline int joyStickPtt = -1;
 inline bool isPttOpen = false;
 
+inline std::mutex fetchedStationMutex;
 inline std::vector<ns::Station> fetchedStations;
 inline bool bootUpVccs = false;
 

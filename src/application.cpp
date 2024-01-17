@@ -191,8 +191,12 @@ void App::eventCallback(
                     s.second = util::cleanUpFrequency(s.second);
                     ns::Station el = ns::Station::build(s.first, s.second);
 
-                    if (!frequencyExists(el.getFrequencyHz()))
-                        shared::fetchedStations.push_back(el);
+                    {
+                        std::lock_guard<std::mutex> lock(
+                            shared::fetchedStationMutex);
+                        if (!frequencyExists(el.getFrequencyHz()))
+                            shared::fetchedStations.push_back(el);
+                    }
                 }
             }
         }
@@ -201,6 +205,7 @@ void App::eventCallback(
     if (evt == afv_native::ClientEventType::StationTransceiversUpdated) {
         if (data != nullptr) {
             // We just refresh the transceiver count in our display
+            std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
             std::string station = *reinterpret_cast<std::string*>(data);
             auto it = std::find_if(shared::fetchedStations.begin(),
                 shared::fetchedStations.end(), [station](const auto& fs) {
@@ -359,8 +364,12 @@ void App::eventCallback(
                 ns::Station el
                     = ns::Station::build(station.first, station.second);
 
-                if (!frequencyExists(el.getFrequencyHz()))
-                    shared::fetchedStations.push_back(el);
+                {
+                    std::lock_guard<std::mutex> lock(
+                        shared::fetchedStationMutex);
+                    if (!frequencyExists(el.getFrequencyHz()))
+                        shared::fetchedStations.push_back(el);
+                }
             } else {
                 errorModal("Could not find station in database.");
                 spdlog::warn(
@@ -419,37 +428,41 @@ void App::render_frame()
             }
         }
 
-        if (pClient->IsAPIConnected() && shared::fetchedStations.empty()
-            && !shared::bootUpVccs) {
-            // We force add the current user frequency
-            shared::bootUpVccs = true;
+        {
+            std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
 
-            // We replaced double _ which may be used during frequency
-            // handovers, but are not defined in database
-            std::string cleanCallsign
-                = util::ReplaceString(shared::session::callsign, "__", "_");
+            if (pClient->IsAPIConnected() && shared::fetchedStations.empty()
+                && !shared::bootUpVccs) {
+                // We force add the current user frequency
+                shared::bootUpVccs = true;
 
-            ns::Station el
-                = ns::Station::build(cleanCallsign, shared::session::frequency);
-            if (!frequencyExists(el.getFrequencyHz()))
-                shared::fetchedStations.push_back(el);
+                // We replaced double _ which may be used during frequency
+                // handovers, but are not defined in database
+                std::string cleanCallsign
+                    = util::ReplaceString(shared::session::callsign, "__", "_");
 
-            this->pClient->AddFrequency(
-                shared::session::frequency, cleanCallsign);
-            pClient->SetEnableInputFilters(shared::mInputFilter);
-            pClient->SetEnableOutputEffects(shared::mOutputEffects);
-            this->pClient->UseTransceiversFromStation(
-                cleanCallsign, shared::session::frequency);
-            this->pClient->SetRx(shared::session::frequency, true);
-            if (shared::session::facility > 0) {
-                this->pClient->SetTx(shared::session::frequency, true);
-                this->pClient->SetXc(shared::session::frequency, true);
+                ns::Station el = ns::Station::build(
+                    cleanCallsign, shared::session::frequency);
+                if (!frequencyExists(el.getFrequencyHz()))
+                    shared::fetchedStations.push_back(el);
+
+                this->pClient->AddFrequency(
+                    shared::session::frequency, cleanCallsign);
+                pClient->SetEnableInputFilters(shared::mInputFilter);
+                pClient->SetEnableOutputEffects(shared::mOutputEffects);
+                this->pClient->UseTransceiversFromStation(
+                    cleanCallsign, shared::session::frequency);
+                this->pClient->SetRx(shared::session::frequency, true);
+                if (shared::session::facility > 0) {
+                    this->pClient->SetTx(shared::session::frequency, true);
+                    this->pClient->SetXc(shared::session::frequency, true);
+                }
+                this->pSDK->handleAFVEventForWebsocket(
+                    sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
+                    std::nullopt);
+                this->pClient->FetchStationVccs(cleanCallsign);
+                this->pClient->SetRadioGainAll(shared::radioGain / 100.0F);
             }
-            this->pSDK->handleAFVEventForWebsocket(
-                sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
-                std::nullopt);
-            this->pClient->FetchStationVccs(cleanCallsign);
-            this->pClient->SetRadioGainAll(shared::radioGain / 100.0F);
         }
     }
 
@@ -646,6 +659,8 @@ void App::render_frame()
     if (ImGui::BeginTable("stations_table", 3, flags,
             ImVec2(ImGui::GetContentRegionAvail().x * 0.8F, 0.0F))) {
         int counter = -1;
+
+        std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
         for (auto& el : shared::fetchedStations) {
             if (counter == -1 || counter == 4) {
                 counter = 1;
@@ -710,14 +725,16 @@ void App::render_frame()
                                           .append(el.getCallsign())
                                           .c_str())) {
                     pClient->RemoveFrequency(el.getFrequencyHz());
-                    shared::fetchedStations.erase(
-                        std::remove_if(shared::fetchedStations.begin(),
-                            shared::fetchedStations.end(),
-                            [el](ns::Station const& p) {
-                                return el.getFrequencyHz()
-                                    == p.getFrequencyHz();
-                            }),
-                        shared::fetchedStations.end());
+
+                        shared::fetchedStations.erase(
+                            std::remove_if(shared::fetchedStations.begin(),
+                                shared::fetchedStations.end(),
+                                [el](ns::Station const& p) {
+                                    return el.getFrequencyHz()
+                                        == p.getFrequencyHz();
+                                }),
+                            shared::fetchedStations.end());
+                    
                     this->pSDK->handleAFVEventForWebsocket(
                         sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
                         std::nullopt);
@@ -950,6 +967,7 @@ void App::disconnectAndCleanup()
     pClient->Disconnect();
     pClient->StopAudio();
 
+    std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
     for (const auto& f : shared::fetchedStations)
         pClient->RemoveFrequency(f.getFrequencyHz());
 
@@ -977,6 +995,8 @@ void App::addNewStation(std::string stationCallsign)
         double longitude = 0.0;
         stationCallsign = stationCallsign.substr(1);
 
+        std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+
         if (!frequencyExists(shared::kUnicomFrequency)) {
             if (pDataHandler->getPilotPositionWithAnything(
                     stationCallsign, latitude, longitude)) {
@@ -984,7 +1004,9 @@ void App::addNewStation(std::string stationCallsign)
                 ns::Station el = ns::Station::build(
                     stationCallsign, shared::kUnicomFrequency);
 
-                shared::fetchedStations.push_back(el);
+                if (!frequencyExists(el.getFrequencyHz()))
+                    shared::fetchedStations.push_back(el);
+
                 pClient->SetClientPosition(latitude, longitude,
                     shared::defaultSUPTransceiverPositionElevation,
                     shared::defaultSUPTransceiverPositionElevation);
@@ -1013,10 +1035,14 @@ void App::addNewStation(std::string stationCallsign)
             errorModal("Failed to parse frequency, format is #123456");
         }
 
+        std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+
         if (!frequencyExists(frequency) && frequency != 0) {
             ns::Station el = ns::Station::build(stationCallsign, frequency);
 
-            shared::fetchedStations.push_back(el);
+            if (!frequencyExists(el.getFrequencyHz()))
+                shared::fetchedStations.push_back(el);
+
             pClient->SetClientPosition(latitude, longitude,
                 shared::defaultSUPTransceiverPositionElevation,
                 shared::defaultSUPTransceiverPositionElevation);
