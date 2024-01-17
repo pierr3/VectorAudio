@@ -219,72 +219,71 @@ void App::eventCallback(
 
     if (evt == afv_native::ClientEventType::APIServerError) {
         // We got an error from the API server, we can display this to the user
-        if (data != nullptr) {
-            afv_native::afv::APISessionError err
-                = *reinterpret_cast<afv_native::afv::APISessionError*>(data);
+        if (data == nullptr) {
+            return;
+        }
 
-            if (err == afv_native::afv::APISessionError::BadPassword
-                || err
-                    == afv_native::afv::APISessionError::RejectedCredentials) {
-                errorModal("Could not login to VATSIM.\nInvalid "
-                           "Credentials.\nCheck your password/cid!");
+        afv_native::afv::APISessionError err
+            = *reinterpret_cast<afv_native::afv::APISessionError*>(data);
 
-                spdlog::error("Got invalid credential errors from AFV API: "
-                              "HTTP 403 or 401");
-            }
+        if (err == afv_native::afv::APISessionError::BadPassword
+            || err == afv_native::afv::APISessionError::RejectedCredentials) {
+            errorModal("Could not login to VATSIM.\nInvalid "
+                       "Credentials.\nCheck your password/cid!");
 
-            if (err == afv_native::afv::APISessionError::ConnectionError) {
-                errorModal("Could not login to VATSIM.\nConnection "
-                           "Error.\nCheck your internet connection.");
+            spdlog::error("Got invalid credential errors from AFV API: "
+                          "HTTP 403 or 401");
+        }
 
-                spdlog::error("Got connection error from AFV API: local socket "
-                              "or curl error");
-                disconnectAndCleanup();
-                playErrorSound();
-            }
+        if (err == afv_native::afv::APISessionError::ConnectionError) {
+            errorModal("Could not login to VATSIM.\nConnection "
+                       "Error.\nCheck your internet connection.");
 
-            if (err
-                == afv_native::afv::APISessionError::
-                    BadRequestOrClientIncompatible) {
-                errorModal("Could not login to VATSIM.\n Bad Request or Client "
-                           "Incompatible.");
+            spdlog::error("Got connection error from AFV API: local socket "
+                          "or curl error");
+            disconnectAndCleanup();
+            playErrorSound();
+        }
 
-                spdlog::error("Got connection error from AFV API: HTTP 400 - "
-                              "Bad Request or Client Incompatible");
-                disconnectAndCleanup();
-                playErrorSound();
-            }
+        if (err
+            == afv_native::afv::APISessionError::
+                BadRequestOrClientIncompatible) {
+            errorModal("Could not login to VATSIM.\n Bad Request or Client "
+                       "Incompatible.");
 
-            if (err == afv_native::afv::APISessionError::InvalidAuthToken) {
-                errorModal("Could not login to VATSIM.\n Invalid Auth Token.");
+            spdlog::error("Got connection error from AFV API: HTTP 400 - "
+                          "Bad Request or Client Incompatible");
+            disconnectAndCleanup();
+            playErrorSound();
+        }
 
-                spdlog::error("Got connection error from AFV API: Invalid Auth "
-                              "Token Local Parse Error.");
-                disconnectAndCleanup();
-                playErrorSound();
-            }
+        if (err == afv_native::afv::APISessionError::InvalidAuthToken) {
+            errorModal("Could not login to VATSIM.\n Invalid Auth Token.");
 
-            if (err
-                == afv_native::afv::APISessionError::
-                    AuthTokenExpiryTimeInPast) {
-                errorModal("Could not login to VATSIM.\n Auth Token has "
-                           "expired.\n Check your system clock.");
+            spdlog::error("Got connection error from AFV API: Invalid Auth "
+                          "Token Local Parse Error.");
+            disconnectAndCleanup();
+            playErrorSound();
+        }
 
-                spdlog::error("Got connection error from AFV API: Auth Token "
-                              "Expiry in the past");
-                disconnectAndCleanup();
-                playErrorSound();
-            }
+        if (err
+            == afv_native::afv::APISessionError::AuthTokenExpiryTimeInPast) {
+            errorModal("Could not login to VATSIM.\n Auth Token has "
+                       "expired.\n Check your system clock.");
 
-            if (err == afv_native::afv::APISessionError::OtherRequestError) {
-                errorModal("Could not login to VATSIM.\n Unknown Error.");
+            spdlog::error("Got connection error from AFV API: Auth Token "
+                          "Expiry in the past");
+            disconnectAndCleanup();
+            playErrorSound();
+        }
 
-                spdlog::error(
-                    "Got connection error from AFV API: Unknown Error");
+        if (err == afv_native::afv::APISessionError::OtherRequestError) {
+            errorModal("Could not login to VATSIM.\n Unknown Error.");
 
-                disconnectAndCleanup();
-                playErrorSound();
-            }
+            spdlog::error("Got connection error from AFV API: Unknown Error");
+
+            disconnectAndCleanup();
+            playErrorSound();
         }
     }
 
@@ -726,15 +725,15 @@ void App::render_frame()
                                           .c_str())) {
                     pClient->RemoveFrequency(el.getFrequencyHz());
 
-                        shared::fetchedStations.erase(
-                            std::remove_if(shared::fetchedStations.begin(),
-                                shared::fetchedStations.end(),
-                                [el](ns::Station const& p) {
-                                    return el.getFrequencyHz()
-                                        == p.getFrequencyHz();
-                                }),
-                            shared::fetchedStations.end());
-                    
+                    shared::fetchedStations.erase(
+                        std::remove_if(shared::fetchedStations.begin(),
+                            shared::fetchedStations.end(),
+                            [el](ns::Station const& p) {
+                                return el.getFrequencyHz()
+                                    == p.getFrequencyHz();
+                            }),
+                        shared::fetchedStations.end());
+
                     this->pSDK->handleAFVEventForWebsocket(
                         sdk::types::Event::kFrequencyStateUpdate, std::nullopt,
                         std::nullopt);
@@ -922,6 +921,10 @@ void App::render_frame()
 
     ui::widgets::LastRxWidget::Draw(receivedCallsigns);
     ImGui::NewLine();
+    ImGui::NewLine();
+
+    // Beta
+    Updater::draw_beta_hint();
 
     // Version
     ImGui::TextUnformatted(shared::kClientName.c_str());

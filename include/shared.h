@@ -5,6 +5,7 @@
 #include <chrono>
 #include <map>
 #include <mutex>
+#include <neargye/semver.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <string>
@@ -34,8 +35,6 @@ inline int defaultSUPTransceiverPositionElevation = 1000;
 inline int airportTransceiverElevationOffset = 33;
 inline bool keepWindowOnTop = false;
 
-const int kMinVhf = 118000000; // 118.000
-const int kMaxVhf = 136975000; // 136.975
 const int kObsFrequency = 199998000; // 199.998
 const int kUnicomFrequency = 122800000;
 
@@ -56,7 +55,12 @@ inline bool isPttOpen = false;
 
 inline std::mutex fetchedStationMutex;
 inline std::vector<ns::Station> fetchedStations;
+
 inline bool bootUpVccs = false;
+
+inline bool isBetaAvailable = false;
+inline bool isUsingBeta = false;
+inline std::string betaVersion;
 
 // Temp inputs
 inline float stationAddFrequency = 118.0;

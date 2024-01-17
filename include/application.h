@@ -17,6 +17,7 @@
 #include "ui/widgets/lastrx.widget.h"
 #include "ui/widgets/networkstatus.widget.h"
 #include "util.h"
+#include "updater.h"
 
 #include <algorithm>
 #include <cstddef>

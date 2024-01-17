@@ -1,4 +1,6 @@
 #include "updater.h"
+#include "shared.h"
+
 
 namespace vector_audio {
 
@@ -15,25 +17,51 @@ Updater::Updater()
         return;
     }
 
-    if (res->status == 200) {
-        semver::version currentVersion;
-
-        try {
-            currentVersion = semver::version { std::string(VECTOR_VERSION) };
-            pNewVersion = semver::version { res->body };
-        } catch (std::invalid_argument& ex) {
-            spdlog::critical(
-                "Cannot parse updater version, please update manually!");
-            spdlog::critical(ex.what());
-            return;
-        }
-
-        if (currentVersion < pNewVersion) {
-            pNeedUpdate = true;
-        }
-    } else {
+    if (res->status != 200) {
         spdlog::critical(
             "Updater endpoint did not return ok, please update manually!");
+
+        return;
+    }
+
+    // isBetaAvailable
+
+    semver::version currentVersion;
+
+    try {
+        currentVersion = semver::version { std::string(VECTOR_VERSION) };
+
+        if (absl::StrContains(res->body, ',')) {
+            // There is a beta available
+            pIsBetaAvailable = true;
+            std::vector<std::string> split = absl::StrSplit(res->body, ',');
+            pNewVersion = semver::version { split[0] };
+            pBetaVersion = semver::version { split[1] };
+            pIsBetaAvailable = true;
+        } else {
+            // No beta available
+            pIsBetaAvailable = false;
+            pNewVersion = semver::version { res->body };
+        }
+    } catch (std::invalid_argument& ex) {
+        spdlog::critical(
+            "Cannot parse updater version, please update manually!");
+        spdlog::critical(ex.what());
+        return;
+    }
+
+    if (pIsBetaAvailable) {
+        if (pBetaVersion == currentVersion) {
+            // We are using the beta version
+            shared::isUsingBeta = true;
+        } else {
+            shared::isBetaAvailable = true;
+        }
+        shared::betaVersion = pBetaVersion.to_string();
+    }
+
+    if (pNewVersion > currentVersion) {
+        pNeedUpdate = true;
     }
 }
 
@@ -48,7 +76,7 @@ bool Updater::need_update() const
 
 void Updater::draw()
 {
-    ImGui::Begin("VectorAudio Updater", NULL,
+    ImGui::Begin("VectorAudio Updater", nullptr,
         ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove
             | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
             | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
@@ -62,10 +90,31 @@ void Updater::draw()
     ImGui::Separator();
 
     if (ImGui::Button("Download from GitHub")) {
-        util::PlatformOpen(pArtefactFileUrl);
+        util::PlatformOpen(mArtefactFileUrl);
     }
 
     ImGui::End();
 }
 
+void Updater::draw_beta_hint()
+{
+    if (shared::isUsingBeta) {
+        ImGui::NewLine();
+
+        ImGui::TextColored(ImColor(30, 140, 45).Value,
+            "You are using a\nbeta version.\n"
+            "Please report "
+            "any\n"
+            "issue you\nencounter!");
+
+        ImGui::NewLine();
+
+    } else if (shared::isBetaAvailable) {
+        ImGui::NewLine();
+        ImGui::TextColored(ImColor(30, 140, 45).Value,
+            "New beta version\navailable!\n(%s)", shared::betaVersion.c_str());
+        util::TextURL("Download here", mAllReleasesUrl);
+        ImGui::NewLine();
+    }
+}
 } // namespace vector_audio
