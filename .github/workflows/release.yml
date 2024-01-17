@@ -11,7 +11,6 @@ concurrency:
 
 env:
   BUILD_TYPE: Release
-  VECTOR_SECRET: Dev
 
 jobs:
   build-linux:
@@ -30,7 +29,7 @@ jobs:
         if: github.event.release.prerelease == true
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
-          echo `cat VERSION_BETA` > VERSION
+          cat VERSION_BETA > VERSION
       - name: Install SFML dependencies
         run: |
           sudo apt-get update
@@ -72,8 +71,9 @@ jobs:
       - name: Set env (pre-release)
         if: github.event.release.prerelease == true
         run: |
-          echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
-          echo `cat VERSION_BETA` > VERSION
+          $ver = Get-Content .\VERSION_BETA -Raw
+          echo "RELEASE_VERSION=v$ver" >> $GITHUB_ENV
+          type VERSION_BETA > VERSION
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -121,7 +121,7 @@ jobs:
         if: github.event.release.prerelease == true
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
-          echo `cat VERSION_BETA` > VERSION
+          cat VERSION_BETA > VERSION
       - name: Install native dependencies
         run: |
           brew install pkg-config
