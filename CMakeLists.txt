@@ -97,18 +97,18 @@ add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
-                src/application.cpp
-                src/config.cpp
-                src/updater.cpp
-                src/native/window_manager.cpp
-                src/data_file_handler.cpp
-                src/ui/modals/settings.cpp
-                src/native/single_instance.cpp
-                src/sdk/sdk.cpp
-                src/native/win32_key_util.cpp
+                ${CMAKE_SOURCE_DIR}/src/application.cpp
+                ${CMAKE_SOURCE_DIR}/src/config.cpp
+                ${CMAKE_SOURCE_DIR}/src/updater.cpp
+                ${CMAKE_SOURCE_DIR}/src/native/window_manager.cpp
+                ${CMAKE_SOURCE_DIR}/src/data_file_handler.cpp
+                ${CMAKE_SOURCE_DIR}/src/ui/modals/settings.cpp
+                ${CMAKE_SOURCE_DIR}/src/native/single_instance.cpp
+                ${CMAKE_SOURCE_DIR}/src/sdk/sdk.cpp
+                ${CMAKE_SOURCE_DIR}/src/native/win32_key_util.cpp
                 ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago/platform_folders.cpp
                 ${APPLE_EXTRA_LIBS}
-                vector_audio.rc)
+                ${CMAKE_SOURCE_DIR}/vector_audio.rc)
 
 
 if (WIN32)

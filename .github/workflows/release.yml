@@ -129,7 +129,8 @@ jobs:
           p12-password: ${{ secrets.APPLE_CERT_PASSWORD }}
       - name: Install native dependencies
         run: |
-          brew install pkg-config
+          brew install pkg-config llvm
+          brew link llvm
       - name: Run build script
         run: |
           ./manual_osx_build.sh 1
