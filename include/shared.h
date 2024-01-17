@@ -29,6 +29,9 @@ inline float mPeak = 60.0F;
 inline float mVu = 60.0F;
 inline int vatsimCid;
 inline std::string vatsimPassword;
+inline int defaultTransceiverPositionElevation = 300;
+inline int defaultSUPTransceiverPositionElevation = 1000;
+inline int airportTransceiverElevationOffset = 33;
 inline bool keepWindowOnTop = false;
 
 const int kMinVhf = 118000000; // 118.000

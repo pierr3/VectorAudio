@@ -84,6 +84,11 @@ App::App()
         shared::headsetOutputChannel
             = toml::find_or<int>(cfg::mConfig, "audio", "headset_channel", 0);
 
+        shared::defaultTransceiverPositionElevation = toml::find_or<int>(
+            cfg::mConfig, "general", "default_transceiver_elevation", 300);
+        shared::defaultSUPTransceiverPositionElevation = toml::find_or<int>(
+            cfg::mConfig, "general", "default_sup_transceiver_elevation", 1000);
+
         shared::hardware = static_cast<afv_native::HardwareType>(
             toml::find_or<int>(cfg::mConfig, "audio", "hardware_type", 0));
 
@@ -528,8 +533,11 @@ void App::render_frame()
                         // We pad the elevation by 10 meters to simulate the
                         // client being in a tower
                         pClient->SetClientPosition(clientAirport.lat,
-                            clientAirport.lon, clientAirport.elevation + 33,
-                            clientAirport.elevation + 33);
+                            clientAirport.lon,
+                            clientAirport.elevation
+                                + shared::airportTransceiverElevationOffset,
+                            clientAirport.elevation
+                                + shared::airportTransceiverElevationOffset);
 
                         spdlog::info("Found client position in database at "
                                      "lat:{}, lon:{}, elev:{}",
@@ -540,15 +548,18 @@ void App::render_frame()
                             "Client position is unknown, setting default.");
 
                         // Default position is over Paris somewhere
-                        pClient->SetClientPosition(
-                            48.967860, 2.442000, 300, 300);
+                        pClient->SetClientPosition(48.967860, 2.442000,
+                            shared::defaultTransceiverPositionElevation,
+                            shared::defaultTransceiverPositionElevation);
                     }
                 } else {
                     spdlog::info(
                         "Found client position from slurper at lat:{}, lon:{}",
                         shared::session::latitude, shared::session::longitude);
                     pClient->SetClientPosition(shared::session::latitude,
-                        shared::session::longitude, 300, 300);
+                        shared::session::longitude,
+                        shared::defaultTransceiverPositionElevation,
+                        shared::defaultTransceiverPositionElevation);
                 }
 
                 pClient->SetCredentials(
@@ -974,7 +985,9 @@ void App::addNewStation(std::string stationCallsign)
                     stationCallsign, shared::kUnicomFrequency);
 
                 shared::fetchedStations.push_back(el);
-                pClient->SetClientPosition(latitude, longitude, 1000, 1000);
+                pClient->SetClientPosition(latitude, longitude,
+                    shared::defaultSUPTransceiverPositionElevation,
+                    shared::defaultSUPTransceiverPositionElevation);
                 pClient->AddFrequency(
                     shared::kUnicomFrequency, stationCallsign);
                 pClient->SetRx(shared::kUnicomFrequency, true);
@@ -1004,7 +1017,9 @@ void App::addNewStation(std::string stationCallsign)
             ns::Station el = ns::Station::build(stationCallsign, frequency);
 
             shared::fetchedStations.push_back(el);
-            pClient->SetClientPosition(latitude, longitude, 1000, 1000);
+            pClient->SetClientPosition(latitude, longitude,
+                shared::defaultSUPTransceiverPositionElevation,
+                shared::defaultSUPTransceiverPositionElevation);
             pClient->AddFrequency(frequency, "MANUAL");
             pClient->SetRx(frequency, true);
             pClient->SetRadioGainAll(shared::radioGain / 100.0F);
