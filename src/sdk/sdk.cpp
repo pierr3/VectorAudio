@@ -1,12 +1,5 @@
 #include "sdk/sdk.h"
 
-#include <algorithm>
-#include <memory>
-#include <mutex>
-#include <optional>
-#include <restinio/router/express.hpp>
-#include <restinio/traits.hpp>
-
 namespace vector_audio {
 
 SDK::SDK(const std::shared_ptr<afv_native::api::atcClient>& clientPtr)
@@ -24,7 +17,6 @@ SDK::~SDK()
     this->pSDKServer->stop();
     this->pSDKServer.reset();
     this->pRouter.reset();
-    this->pClient.reset();
 }
 
 bool SDK::start()
@@ -52,13 +44,9 @@ void SDK::loopCleanup(const std::vector<std::string>& liveReceivedCallsigns)
     }
 
     const std::lock_guard<std::mutex> lock(shared::transmittingMutex);
-    shared::currentlyTransmittingApiData = "";
+    shared::currentlyTransmittingApiData
+        = absl::StrJoin(liveReceivedCallsigns, ",");
 
-    shared::currentlyTransmittingApiData.append(liveReceivedCallsigns.empty()
-            ? ""
-            : std::accumulate(++liveReceivedCallsigns.begin(),
-                liveReceivedCallsigns.end(), *liveReceivedCallsigns.begin(),
-                [](auto& a, auto& b) { return a + "," + b; }));
     shared::currentlyTransmittingApiTimer = currentTime;
 }
 
@@ -104,33 +92,31 @@ void SDK::handleAFVEventForWebsocket(sdk::types::Event event,
         nlohmann::json jsonMessage = WebsocketMessage::buildMessage(
             WebsocketMessageType::kFrequencyStateUpdate);
 
-        std::vector<ns::Station> rxBar;
-        std::vector<ns::Station> txBar;
-        std::vector<ns::Station> xcBar;
-
         // std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+        // Lock needed outside of this function due to it being called somewhere
+        // where the mutex is already locked
 
-        std::copy_if(shared::fetchedStations.begin(),
-            shared::fetchedStations.end(), std::back_inserter(rxBar),
-            [this](const ns::Station& s) {
-                return pClient->GetRxState(s.getFrequencyHz());
-            });
+        auto rxBar = shared::fetchedStations
+            | std::ranges::views::filter([this](const ns::Station& s) {
+                  return pClient->GetRxState(s.getFrequencyHz());
+              });
 
-        std::copy_if(shared::fetchedStations.begin(),
-            shared::fetchedStations.end(), std::back_inserter(txBar),
-            [this](const ns::Station& s) {
-                return pClient->GetTxState(s.getFrequencyHz());
-            });
+        auto txBar = shared::fetchedStations
+            | std::ranges::views::filter([this](const ns::Station& s) {
+                  return pClient->GetTxState(s.getFrequencyHz());
+              });
 
-        std::copy_if(shared::fetchedStations.begin(),
-            shared::fetchedStations.end(), std::back_inserter(xcBar),
-            [this](const ns::Station& s) {
-                return pClient->GetXcState(s.getFrequencyHz());
-            });
+        auto xcBar = shared::fetchedStations
+            | std::ranges::views::filter([this](const ns::Station& s) {
+                  return pClient->GetXcState(s.getFrequencyHz());
+              });
 
-        jsonMessage["value"]["rx"] = rxBar;
-        jsonMessage["value"]["tx"] = txBar;
-        jsonMessage["value"]["xc"] = txBar;
+        jsonMessage["value"]["rx"] = std::move(
+            std::vector<ns::Station> { rxBar.begin(), rxBar.end() });
+        jsonMessage["value"]["tx"] = std::move(
+            std::vector<ns::Station> { txBar.begin(), txBar.end() });
+        jsonMessage["value"]["xc"] = std::move(
+            std::vector<ns::Station> { xcBar.begin(), xcBar.end() });
 
         this->broadcastOnWebsocket(jsonMessage.dump());
 
@@ -183,24 +169,26 @@ restinio::request_handling_status_t SDK::handleTransmittingSDKCall(
 restinio::request_handling_status_t SDK::handleRxSDKCall(
     const restinio::request_handle_t& req)
 {
-    std::vector<ns::Station> bar;
-
-    std::copy_if(shared::fetchedStations.begin(), shared::fetchedStations.end(),
-        std::back_inserter(bar), [this](const ns::Station& s) {
-            if (!pClient->IsVoiceConnected())
-                return false;
-            return pClient->GetRxState(s.getFrequencyHz());
-        });
-
-    std::string out;
-    if (!bar.empty()) {
-        for (auto& f : bar) {
-            out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
-        }
+    if (!pClient->IsVoiceConnected()) {
+        return req->create_response().set_body("").done();
     }
 
-    if (out.back() == ',') {
-        out.pop_back();
+    std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+
+    auto bar = shared::fetchedStations
+        | std::ranges::views::filter([this](const ns::Station& s) {
+              return pClient->GetRxState(s.getFrequencyHz());
+          });
+
+    std::string out;
+    for (const auto& f : bar) {
+        out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
+    }
+
+    if (!out.empty()) {
+        if (out.back() == ',') {
+            out.pop_back();
+        }
     }
 
     return req->create_response().set_body(out).done();
@@ -209,24 +197,26 @@ restinio::request_handling_status_t SDK::handleRxSDKCall(
 restinio::request_handling_status_t SDK::handleTxSDKCall(
     const restinio::request_handle_t& req)
 {
-    std::vector<ns::Station> bar;
-
-    std::copy_if(shared::fetchedStations.begin(), shared::fetchedStations.end(),
-        std::back_inserter(bar), [this](const ns::Station& s) {
-            if (!pClient->IsVoiceConnected())
-                return false;
-            return pClient->GetTxState(s.getFrequencyHz());
-        });
-
-    std::string out;
-    if (!bar.empty()) {
-        for (auto& f : bar) {
-            out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
-        }
+    if (!pClient->IsVoiceConnected()) {
+        return req->create_response().set_body("").done();
     }
 
-    if (out.back() == ',') {
-        out.pop_back();
+    std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
+
+    auto bar = shared::fetchedStations
+        | std::ranges::views::filter([this](const ns::Station& s) {
+              return pClient->GetTxState(s.getFrequencyHz());
+          });
+
+    std::string out;
+    for (const auto& f : bar) {
+        out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
+    }
+
+    if (!out.empty()) {
+        if (out.back() == ',') {
+            out.pop_back();
+        }
     }
 
     return req->create_response().set_body(out).done();
