@@ -24,10 +24,10 @@ jobs:
         with:
           python-version: "3.10"
       - name: Set env (release)
-        if: "!github.event.prerelease"
+        if: github.event.release.prerelease == false
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Set env (pre-release)
-        if: "github.event.prerelease"
+        if: github.event.release.prerelease == true
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
           echo `cat VERSION_BETA` > VERSION
@@ -67,10 +67,10 @@ jobs:
         with:
           python-version: "3.10"
       - name: Set env (release)
-        if: "!github.event.prerelease"
+        if: github.event.release.prerelease == false
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Set env (pre-release)
-        if: "github.event.prerelease"
+        if: github.event.release.prerelease == true
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
           echo `cat VERSION_BETA` > VERSION
@@ -115,10 +115,10 @@ jobs:
         with:
           python-version: "3.10"
       - name: Set env (release)
-        if: "!github.event.prerelease"
+        if: github.event.release.prerelease == false
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Set env (pre-release)
-        if: "github.event.prerelease"
+        if: github.event.release.prerelease == true
         run: |
           echo "RELEASE_VERSION=v`cat VERSION_BETA`" >> $GITHUB_ENV
           echo `cat VERSION_BETA` > VERSION
