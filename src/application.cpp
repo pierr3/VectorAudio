@@ -927,7 +927,7 @@ void App::render_frame()
     Updater::draw_beta_hint();
 
     // Version
-    ImGui::TextUnformatted(shared::kClientName.c_str());
+    ImGui::TextUnformatted(VECTOR_VERSION);
 
     // Licenses
 

@@ -31,8 +31,8 @@ Updater::Updater()
 
     try {
         std::string cleanBody = res->body;
-        absl::StripAsciiWhitespace(&res->body);
-        pNewVersion = semver::version { res->body };
+        absl::StripAsciiWhitespace(&cleanBody);
+        pNewVersion = semver::version { cleanBody };
     } catch (std::invalid_argument& ex) {
         spdlog::critical(
             "Cannot parse updater version, please update manually!");
@@ -48,14 +48,14 @@ Updater::Updater()
     // isBetaAvailable
     auto betaRes = pCli.Get(pBetaVersionUrl);
 
-    if (res->status == 200) {
+    if (res->status != 200) {
         spdlog::warn("Cannot access updater beta endpoint!");
         return;
     }
 
     try {
         std::string cleanBody = betaRes->body;
-        absl::StripAsciiWhitespace(&betaRes->body);
+        absl::StripAsciiWhitespace(&cleanBody);
         pBetaVersion = semver::version { cleanBody };
     } catch (std::invalid_argument& ex) {
         spdlog::warn("Cannot parse updater beta version!");
@@ -63,7 +63,7 @@ Updater::Updater()
         return;
     }
 
-    if (pBetaVersion == currentVersion) {
+    if (pBetaVersion <= currentVersion && currentVersion != pNewVersion) {
         // We are using the beta version
         shared::isUsingBeta = true;
         shared::betaVersionString = pBetaVersion.to_string();
@@ -109,7 +109,7 @@ void Updater::draw_beta_hint()
     if (shared::isUsingBeta) {
         ImGui::NewLine();
 
-        ImGui::TextColored(ImColor(30, 140, 45).Value,
+        ImGui::TextColored(ImColor(74, 159, 224).Value,
             "You are using a\nbeta version.\n"
             "Please report "
             "any\n"
