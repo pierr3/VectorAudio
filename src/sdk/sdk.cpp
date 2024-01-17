@@ -96,27 +96,30 @@ void SDK::handleAFVEventForWebsocket(sdk::types::Event event,
         // Lock needed outside of this function due to it being called somewhere
         // where the mutex is already locked
 
-        auto rxBar = shared::fetchedStations
-            | std::ranges::views::filter([this](const ns::Station& s) {
-                  return pClient->GetRxState(s.getFrequencyHz());
-              });
+        std::vector<ns::Station> rxBar;
+        for (const auto& s : shared::fetchedStations) {
+            if (pClient->GetRxState(s.getFrequencyHz())) {
+                rxBar.push_back(s);
+            }
+        }
 
-        auto txBar = shared::fetchedStations
-            | std::ranges::views::filter([this](const ns::Station& s) {
-                  return pClient->GetTxState(s.getFrequencyHz());
-              });
+        std::vector<ns::Station> txBar;
+        for (const auto& s : shared::fetchedStations) {
+            if (pClient->GetTxState(s.getFrequencyHz())) {
+                txBar.push_back(s);
+            }
+        }
 
-        auto xcBar = shared::fetchedStations
-            | std::ranges::views::filter([this](const ns::Station& s) {
-                  return pClient->GetXcState(s.getFrequencyHz());
-              });
+        std::vector<ns::Station> xcBar;
+        for (const auto& s : shared::fetchedStations) {
+            if (pClient->GetXcState(s.getFrequencyHz())) {
+                xcBar.push_back(s);
+            }
+        }
 
-        jsonMessage["value"]["rx"] = std::move(
-            std::vector<ns::Station> { rxBar.begin(), rxBar.end() });
-        jsonMessage["value"]["tx"] = std::move(
-            std::vector<ns::Station> { txBar.begin(), txBar.end() });
-        jsonMessage["value"]["xc"] = std::move(
-            std::vector<ns::Station> { xcBar.begin(), xcBar.end() });
+        jsonMessage["value"]["rx"] = std::move(rxBar);
+        jsonMessage["value"]["tx"] = std::move(txBar);
+        jsonMessage["value"]["xc"] = std::move(xcBar);
 
         this->broadcastOnWebsocket(jsonMessage.dump());
 
@@ -175,13 +178,11 @@ restinio::request_handling_status_t SDK::handleRxSDKCall(
 
     std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
 
-    auto bar = shared::fetchedStations
-        | std::ranges::views::filter([this](const ns::Station& s) {
-              return pClient->GetRxState(s.getFrequencyHz());
-          });
-
     std::string out;
-    for (const auto& f : bar) {
+    for (const auto& f : shared::fetchedStations) {
+        if (!pClient->GetRxState(f.getFrequencyHz())) {
+            continue;
+        }
         out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
     }
 
@@ -203,13 +204,11 @@ restinio::request_handling_status_t SDK::handleTxSDKCall(
 
     std::lock_guard<std::mutex> lock(shared::fetchedStationMutex);
 
-    auto bar = shared::fetchedStations
-        | std::ranges::views::filter([this](const ns::Station& s) {
-              return pClient->GetTxState(s.getFrequencyHz());
-          });
-
     std::string out;
-    for (const auto& f : bar) {
+    for (const auto& f : shared::fetchedStations) {
+        if (!pClient->GetTxState(f.getFrequencyHz())) {
+            continue;
+        }
         out += f.getCallsign() + ":" + f.getHumanFrequency() + ",";
     }
 

@@ -13,7 +13,6 @@
 #include <memory>
 #include <mutex>
 #include <optional>
-#include <ranges>
 #include <restinio/all.hpp>
 #include <restinio/common_types.hpp>
 #include <restinio/http_headers.hpp>
