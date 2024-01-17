@@ -1,6 +1,8 @@
 #include "updater.h"
+
 #include "shared.h"
 
+#include <spdlog/spdlog.h>
 
 namespace vector_audio {
 
@@ -24,25 +26,13 @@ Updater::Updater()
         return;
     }
 
-    // isBetaAvailable
-
-    semver::version currentVersion;
+    semver::version currentVersion
+        = semver::version { std::string(VECTOR_VERSION) };
 
     try {
-        currentVersion = semver::version { std::string(VECTOR_VERSION) };
-
-        if (absl::StrContains(res->body, ',')) {
-            // There is a beta available
-            pIsBetaAvailable = true;
-            std::vector<std::string> split = absl::StrSplit(res->body, ',');
-            pNewVersion = semver::version { split[0] };
-            pBetaVersion = semver::version { split[1] };
-            pIsBetaAvailable = true;
-        } else {
-            // No beta available
-            pIsBetaAvailable = false;
-            pNewVersion = semver::version { res->body };
-        }
+        std::string cleanBody = res->body;
+        absl::StripAsciiWhitespace(&res->body);
+        pNewVersion = semver::version { res->body };
     } catch (std::invalid_argument& ex) {
         spdlog::critical(
             "Cannot parse updater version, please update manually!");
@@ -50,18 +40,36 @@ Updater::Updater()
         return;
     }
 
-    if (pIsBetaAvailable) {
-        if (pBetaVersion == currentVersion) {
-            // We are using the beta version
-            shared::isUsingBeta = true;
-        } else {
-            shared::isBetaAvailable = true;
-        }
-        shared::betaVersion = pBetaVersion.to_string();
-    }
-
     if (pNewVersion > currentVersion) {
         pNeedUpdate = true;
+        return; // We don't check for beta as this is a mandatory update
+    }
+
+    // isBetaAvailable
+    auto betaRes = pCli.Get(pBetaVersionUrl);
+
+    if (res->status == 200) {
+        spdlog::warn("Cannot access updater beta endpoint!");
+        return;
+    }
+
+    try {
+        std::string cleanBody = betaRes->body;
+        absl::StripAsciiWhitespace(&betaRes->body);
+        pBetaVersion = semver::version { cleanBody };
+    } catch (std::invalid_argument& ex) {
+        spdlog::warn("Cannot parse updater beta version!");
+        spdlog::warn(ex.what());
+        return;
+    }
+
+    if (pBetaVersion == currentVersion) {
+        // We are using the beta version
+        shared::isUsingBeta = true;
+        shared::betaVersionString = pBetaVersion.to_string();
+    } else if (pBetaVersion > currentVersion) {
+        shared::isBetaAvailable = true;
+        shared::betaVersionString = pBetaVersion.to_string();
     }
 }
 
@@ -112,7 +120,8 @@ void Updater::draw_beta_hint()
     } else if (shared::isBetaAvailable) {
         ImGui::NewLine();
         ImGui::TextColored(ImColor(30, 140, 45).Value,
-            "New beta version\navailable!\n(%s)", shared::betaVersion.c_str());
+            "New beta version\navailable!\n(%s)",
+            shared::betaVersionString.c_str());
         util::TextURL("Download here", mAllReleasesUrl);
         ImGui::NewLine();
     }

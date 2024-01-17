@@ -36,7 +36,8 @@ private:
     bool pIsBetaAvailable = false;
 
     std::string pBaseUrl = "https://raw.githubusercontent.com";
-    std::string pVersionUrl = "/pierr3/VectorAudio/main/VERSION_API";
+    std::string pVersionUrl = "/pierr3/VectorAudio/main/VERSION";
+    std::string pBetaVersionUrl = "/pierr3/VectorAudio/main/VERSION_BETA";
     semver::version pNewVersion;
     semver::version pBetaVersion;
 

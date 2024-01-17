@@ -60,7 +60,7 @@ inline bool bootUpVccs = false;
 
 inline bool isBetaAvailable = false;
 inline bool isUsingBeta = false;
-inline std::string betaVersion;
+inline std::string betaVersionString;
 
 // Temp inputs
 inline float stationAddFrequency = 118.0;
