@@ -19,7 +19,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install SFML dependencies
@@ -28,14 +28,14 @@ jobs:
           sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       - name: Build cmake
         run: |
           cmake --build build/
   build-osx-x86:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install native dependencies
@@ -43,14 +43,14 @@ jobs:
           brew install pkg-config
       - name: Configure cmake (intel)
         run: |
-          cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
+          cmake -S . -B build_intel/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DVCPKG_TARGET_TRIPLET=x64-osx
       - name: Build cmake (intel)
         run: |
           cmake --build build_intel/
   build-osx-arm64:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install native dependencies
@@ -58,19 +58,19 @@ jobs:
           brew install pkg-config
       - name: Configure cmake (arm64)
         run: |
-          cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx
+          cmake -S . -B build_arm64/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_OSX_ARCHITECTURES=arm64 -DVCPKG_TARGET_TRIPLET=arm64-osx
       - name: Build cmake (arm64)
         run: |
           cmake --build build_arm64/
   build-windows-x64:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVCPKG_TARGET_TRIPLET=x64-windows
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVCPKG_TARGET_TRIPLET=x64-windows
       - name: Build cmake
         run: |
           cmake --build build/

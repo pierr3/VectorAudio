@@ -16,7 +16,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-python@v4
@@ -59,7 +59,7 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-python@v4
@@ -72,11 +72,14 @@ jobs:
         if: github.event.release.prerelease == true
         run: |
           $ver = Get-Content .\VERSION_BETA -Raw
+          echo $ver
           echo "RELEASE_VERSION=v$ver" >> $GITHUB_ENV
-          cat .\VERSION_BETA > .\VERSION
+          type VERSION_BETA > VERSION
+          type VERSION
+          echo ${{ env.RELEASE_VERSION }}
       - name: Configure cmake
         run: |
-          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVCPKG_TARGET_TRIPLET=x64-windows
       - name: Build cmake
         run: |
           cmake --build build/ --config ${{ env.BUILD_TYPE }}
@@ -108,7 +111,7 @@ jobs:
   build-osx:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-python@v4
