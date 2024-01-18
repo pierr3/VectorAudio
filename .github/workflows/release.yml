@@ -73,7 +73,7 @@ jobs:
         run: |
           $ver = Get-Content .\VERSION_BETA -Raw
           echo "RELEASE_VERSION=v$ver" >> $GITHUB_ENV
-          cat $ver > .\VERSION
+          cat .\VERSION_BETA > .\VERSION
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
