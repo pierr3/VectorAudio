@@ -12,6 +12,7 @@
         "restinio",
         "neargye-semver",
         "sfml",
-        "abseil"
+        "abseil",
+        "http-parser"
     ]
   }

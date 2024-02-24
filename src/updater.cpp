@@ -26,10 +26,11 @@ Updater::Updater()
         return;
     }
 
-    semver::version currentVersion
-        = semver::version { std::string(VECTOR_VERSION) };
+    semver::version currentVersion;
 
     try {
+        currentVersion = semver::version { std::string(VECTOR_VERSION) };
+        
         std::string cleanBody = res->body;
         absl::StripAsciiWhitespace(&cleanBody);
         pNewVersion = semver::version { cleanBody };
@@ -48,7 +49,7 @@ Updater::Updater()
     // isBetaAvailable
     auto betaRes = pCli.Get(pBetaVersionUrl);
 
-    if (res->status != 200) {
+    if (betaRes->status != 200) {
         spdlog::warn("Cannot access updater beta endpoint!");
         return;
     }

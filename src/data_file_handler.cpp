@@ -347,6 +347,9 @@ bool vector_audio::vatsim::DataHandler::getPilotPositionWithSlurper(
         auto lines = absl::StrSplit(res, '\n');
         for (const auto& line : lines) {
             std::vector<std::string> splits = absl::StrSplit(line, ',');
+            if (splits.size() < 7) {
+                continue;
+            }
 
             if (splits[2] == "pilot") {
                 latitude = std::stod(splits[5]);

@@ -47,10 +47,10 @@ namespace afv_native {
         PttClosed,
         StationAliasesUpdated,
         StationTransceiversUpdated,
-        RxOpen,      // data is a pointer to an unsigned int containing the frequency
-        RxClosed,    // data is a pointer to an unsigned int containing the frequency
-        PilotRxOpen, // data is a pointer to an unsigned int containing the frequency, data2 is pointer to char* containing callsign
-        PilotRxClosed, // data is a pointer to an unsigned int containing the frequency, data2 is pointer to char* containing callsign
+        FrequencyRxBegin,      // data is a pointer to an unsigned int containing the frequency
+        FrequencyRxEnd,    // data is a pointer to an unsigned int containing the frequency
+        StationRxBegin, // data is a pointer to an unsigned int containing the frequency, data2 is pointer to char* containing callsign
+        StationRxEnd, // data is a pointer to an unsigned int containing the frequency, data2 is pointer to char* containing callsign
         AudioError,
         VccsReceived,
         StationDataReceived,

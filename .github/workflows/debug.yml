@@ -40,7 +40,6 @@ jobs:
       - name: Bundle Linux
         run: |
           ./bundle_linux.sh libafv_natived.so
-
       - name: Rename installer
         run: |
           mv VectorAudio-x86_64.AppImage VectorAudio-DEBUG-x86_64.AppImage
@@ -71,7 +70,7 @@ jobs:
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=debug -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DVECTOR_SECRET=${{ env.VECTOR_SECRET }}
       - name: Build cmake
         run: |
-          cmake --build build/ --config Release
+          cmake --build build/ --config ${{ env.BUILD_TYPE }}
       - name: Prepare windows installer
         run: |
           python collect_licenses.py
@@ -127,9 +126,14 @@ jobs:
       - name: Build cmake (intel)
         run: |
           cmake --build build/
+      - name: Installing codesign certificates
+        uses: apple-actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.APPLE_CERT_DATA }}
+          p12-password: ${{ secrets.APPLE_CERT_PASSWORD }}
       - name: Bundle OSX
         run: |
-          ./bundle_osx.sh
+          ./bundle_osx.sh 1
       - name: Create DMG
         run: |
           brew install create-dmg

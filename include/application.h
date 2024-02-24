@@ -16,8 +16,8 @@
 #include "ui/widgets/gain.widget.h"
 #include "ui/widgets/lastrx.widget.h"
 #include "ui/widgets/networkstatus.widget.h"
-#include "util.h"
 #include "updater.h"
+#include "util.h"
 
 #include <algorithm>
 #include <cstddef>
@@ -52,6 +52,9 @@ private:
     void errorModal(std::string message);
 
     std::shared_ptr<afv_native::api::atcClient> pClient;
+
+    void eventCallbackWrapper(
+        afv_native::ClientEventType evt, void* data, void* data2);
 
     void eventCallback(
         afv_native::ClientEventType evt, void* data, void* data2);

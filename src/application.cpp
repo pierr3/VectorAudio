@@ -3,6 +3,7 @@
 #include "afv-native/event.h"
 #include "shared.h"
 
+#include <mutex>
 #include <optional>
 #include <utility>
 
@@ -99,12 +100,9 @@ App::App()
             "Failed to parse available configuration: {}", exc.what());
     }
 
-    // Bind the callbacks from the client
-    // std::bind(&App::_eventCallback, this, std::placeholders::_1,
-    // std::placeholders::_2, std::placeholders::_3)
     pClient->RaiseClientEvent(
         [this](auto&& event_type, auto&& data_one, auto&& data_two) {
-            eventCallback(std::forward<decltype(event_type)>(event_type),
+            eventCallbackWrapper(std::forward<decltype(event_type)>(event_type),
                 std::forward<decltype(data_one)>(data_one),
                 std::forward<decltype(data_two)>(data_two));
         });
@@ -172,6 +170,20 @@ void App::loadAirportsDatabaseAsync()
     } catch (nlohmann::json::exception& ex) {
         spdlog::warn("Could parse airport database: {}", ex.what());
         return;
+    }
+}
+
+void App::eventCallbackWrapper(
+    afv_native::ClientEventType evt, void* data, void* data2)
+{
+    try {
+        this->eventCallback(evt, data, data2);
+    } catch (const std::bad_cast& e) {
+        spdlog::error("Bad cast in eventCallback: {}", e.what());
+    } catch (const std::exception& e) {
+        spdlog::error("Exception in eventCallback: {}", e.what());
+    } catch (...) {
+        spdlog::error("Unknown error in eventCallback");
     }
 }
 
@@ -327,7 +339,7 @@ void App::eventCallback(
         playErrorSound();
     }
 
-    if (evt == afv_native::ClientEventType::PilotRxOpen) {
+    if (evt == afv_native::ClientEventType::StationRxBegin) {
         // Bug in that this applies to RX to all station types, including ATC,
         // not only pilots
         if (data != nullptr && data2 != nullptr) {
@@ -339,7 +351,7 @@ void App::eventCallback(
         }
     }
 
-    if (evt == afv_native::ClientEventType::PilotRxClosed) {
+    if (evt == afv_native::ClientEventType::StationRxEnd) {
         if (data != nullptr && data2 != nullptr) {
             int frequency = *reinterpret_cast<int*>(data);
             std::string callsign = *reinterpret_cast<std::string*>(data2);
@@ -750,6 +762,8 @@ void App::render_frame()
             if (rxState) {
                 // Set button colour
                 rxActive ? style::button_yellow() : style::button_green();
+
+                std::lock_guard<std::mutex> lock(shared::transmittingMutex);
 
                 auto receivedCld
                     = pClient->LastTransmitOnFreq(el.getFrequencyHz());

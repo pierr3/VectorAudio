@@ -34,7 +34,7 @@ bool SDK::start()
 
 void SDK::loopCleanup(const std::vector<std::string>& liveReceivedCallsigns)
 {
-    // Clear out the old API data every 500ms
+    // Clear out the old API data every 300ms
     auto currentTime = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::milliseconds>(
             currentTime - shared::currentlyTransmittingApiTimer)
