@@ -11,7 +11,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <neargye/semver.hpp>
+#include <semver.hpp>
 #include <string>
 #include <thread>
 

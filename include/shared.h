@@ -1,11 +1,12 @@
 #pragma once
 #include "ns/station.h"
+#include "semver.hpp"
 
+#include <SDL_audio.h>
 #include <afv-native/hardwareType.h>
 #include <chrono>
 #include <map>
 #include <mutex>
-#include <neargye/semver.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <string>
@@ -48,7 +49,6 @@ inline int headsetOutputChannel = 0;
 inline bool capturePttFlag = false;
 
 inline sf::Keyboard::Scancode ptt = sf::Keyboard::Scan::Unknown;
-inline sf::Keyboard::Key fallbackPtt = sf::Keyboard::Unknown;
 inline int joyStickId = -1;
 inline int joyStickPtt = -1;
 inline bool isPttOpen = false;
@@ -61,6 +61,12 @@ inline bool bootUpVccs = false;
 inline bool isBetaAvailable = false;
 inline bool isUsingBeta = false;
 inline std::string betaVersionString;
+
+// Disconnect sound
+inline SDL_AudioSpec pDisconnectSoundWavSpec;
+inline Uint32 pDisconnectSoundWavLength;
+inline Uint8* pDisconnectSoundWavBuffer;
+inline SDL_AudioDeviceID pDeviceId;
 
 // Temp inputs
 inline float stationAddFrequency = 118.0;

@@ -19,6 +19,7 @@
 #include "updater.h"
 #include "util.h"
 
+#include <SDL_audio.h>
 #include <algorithm>
 #include <cstddef>
 #include <fstream>
@@ -28,10 +29,6 @@
 #include <map>
 #include <memory>
 #include <numeric>
-#include <SFML/Audio.hpp>
-#include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Window/Joystick.hpp>
 #include <shared_mutex>
 #include <spdlog/spdlog.h>
 #include <string>
@@ -61,7 +58,7 @@ private:
 
     void disconnectAndCleanup();
 
-    void playErrorSound();
+    static void playErrorSound();
 
     void addNewStation(std::string callsign);
 
@@ -74,8 +71,6 @@ private:
     std::unique_ptr<vatsim::DataHandler> pDataHandler;
 
     bool pManuallyDisconnected = false;
-    sf::SoundBuffer pDisconnectWarningSoundbuffer;
-    sf::Sound pSoundPlayer;
 
     std::unique_ptr<SDK> pSDK;
 };

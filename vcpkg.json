@@ -13,6 +13,8 @@
         "neargye-semver",
         "sfml",
         "abseil",
-        "http-parser"
+        "http-parser",
+        "sdl2",
+        "sdl2-image"
     ]
   }

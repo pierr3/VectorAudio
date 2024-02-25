@@ -1,8 +1,10 @@
 #include "application.h"
 #include "config.h"
 #include "data_file_handler.h"
-#include "imgui-SFML.h"
 #include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
+#include "keyboardUtil.h"
 #include "native/single_instance.h"
 #include "native/window_manager.h"
 #include "shared.h"
@@ -14,6 +16,10 @@
 #include <filesystem>
 #include <memory>
 #include <random>
+#include <SDL.h>
+#include <SDL_events.h>
+#include <SDL_image.h>
+#include <SDL_video.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
@@ -33,28 +39,69 @@ int main(int, char**)
     }
 
     vector_audio::Configuration::build_logger();
-    sf::RenderWindow window(sf::VideoMode(800, 600), "VectorAudio");
-    window.setFramerateLimit(30);
 
-    auto image = sf::Image {};
+    SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS, "1");
 
-#ifdef SFML_SYSTEM_WINDOWS
-    std::string iconName = "icon_win.png";
-#else
-    std::string iconName = "icon_mac.png";
-#endif
-
-    if (!image.loadFromFile(
-            (vector_audio::Configuration::get_resource_folder() / iconName)
-                .string())) {
-        spdlog::error("Could not load application icon");
-    } else {
-        window.setIcon(
-            image.getSize().x, image.getSize().y, image.getPixelsPtr());
+    // Setup SDL
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER
+            | SDL_INIT_AUDIO | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK)
+        != 0) {
+        printf("Error: %s\n", SDL_GetError());
+        return -1;
     }
 
-    if (!ImGui::SFML::Init(window, false)) {
-        spdlog::critical("Could not initialise ImGui SFML");
+#ifdef SDL_HINT_IME_SHOW_UI
+    SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
+#endif
+
+    // Create window with SDL_Renderer graphics context
+    auto windowFlags = static_cast<SDL_WindowFlags>(
+        SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    SDL_Window* window = SDL_CreateWindow("VectorAudio", SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED, 800, 600, windowFlags);
+    if (window == nullptr) {
+        printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
+        return -1;
+    }
+    SDL_Renderer* renderer = SDL_CreateRenderer(
+        window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+
+    if (renderer == nullptr) {
+        SDL_Log("Error creating SDL_Renderer!");
+        return 0;
+    }
+
+#ifdef SFML_SYSTEM_WINDOWS
+    std::string iconPath
+        = vector_audio::Configuration::get_resource_folder() / "icon_win.png";
+#else
+    std::string iconPath
+        = vector_audio::Configuration::get_resource_folder() / "icon_mac.png";
+#endif
+
+    SDL_Surface* icon = IMG_Load(iconPath.c_str());
+    if (icon != NULL) {
+        SDL_SetWindowIcon(window, icon);
+    } else {
+        spdlog::warn("Failed to load app icon: {}", IMG_GetError());
+    }
+
+    auto soundPath = vector_audio::Configuration::get_resource_folder()
+        / std::filesystem::path("disconnect.wav");
+
+    if (std::filesystem::exists(soundPath)) {
+        auto* ret = SDL_LoadWAV(soundPath.c_str(),
+            &vector_audio::shared::pDisconnectSoundWavSpec,
+            &vector_audio::shared::pDisconnectSoundWavBuffer,
+            &vector_audio::shared::pDisconnectSoundWavLength);
+        if (ret == nullptr) {
+            disconnectWarningSoundAvailable = false;
+            spdlog::error(
+                "Could not load disconnect sound file: {}", SDL_GetError());
+        }
+    } else {
+        disconnectWarningSoundAvailable = false;
+        spdlog::warn("Disconnect sound file not found: {}", soundPath.c_str());
     }
 
     // Setup Dear ImGui context
@@ -62,25 +109,27 @@ int main(int, char**)
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
-    // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable
-    // Keyboard Controls io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; //
-    // Enable Gamepad Controls
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
 
-    std::filesystem::path p = vector_audio::Configuration::get_resource_folder()
+    ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+    ImGui_ImplSDLRenderer2_Init(renderer);
+
+    std::filesystem::path fontPath
+        = vector_audio::Configuration::get_resource_folder()
         / std::filesystem::path("JetBrainsMono-Regular.ttf");
-    io.Fonts->AddFontFromFileTTF(p.string().c_str(), 18.0);
-
-    if (!ImGui::SFML::UpdateFontTexture()) {
-        spdlog::critical("Could not update font textures");
-    };
-
-    // Our state
+    if (std::filesystem::exists(fontPath)) {
+        io.Fonts->AddFontFromFileTTF(fontPath.string().c_str(), 18.0);
+    } else {
+        spdlog::warn(
+            "Failed to load font, file not found: {}", fontPath.string());
+    }
 
     vector_audio::style::apply_style();
     vector_audio::Configuration::build_config();
+
+    ImVec4 clearColor = ImVec4(0.45F, 0.55F, 0.60F, 1.00F);
 
     spdlog::info("Starting VectorAudio...");
 
@@ -89,102 +138,76 @@ int main(int, char**)
     auto currentApp = std::make_unique<vector_audio::application::App>();
 
     bool alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+
     vector_audio::setAlwaysOnTop(window, alwaysOnTop);
 
     // Main loop
-    sf::Clock deltaClock;
-    while (window.isOpen()) {
-        // Poll and handle events (inputs, window resize, etc.)
-        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to
-        // tell if dear imgui wants to use your inputs.
-        // - When io.WantCaptureMouse is true, do not dispatch mouse input data
-        // to your main application.
-        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input
-        // data to your main application. Generally you may always pass all
-        // inputs to dear imgui, and hide them from your application based on
-        // those two flags.
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            ImGui::SFML::ProcessEvent(window, event);
+    bool done = false;
+    while (!done) {
 
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            } else if (event.type == sf::Event::KeyPressed) {
-                // Capture the new Ptt key
-                if (vector_audio::shared::capturePttFlag) {
-                    vector_audio::shared::fallbackPtt
-                        = sf::Keyboard::Key::Unknown; // Reset fallback
-                    vector_audio::shared::ptt = event.key.scancode;
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            ImGui_ImplSDL2_ProcessEvent(&event);
+            if (event.type == SDL_QUIT)
+                done = true;
+            if (event.type == SDL_WINDOWEVENT
+                && event.window.event == SDL_WINDOWEVENT_CLOSE
+                && event.window.windowID == SDL_GetWindowID(window))
+                done = true;
 
-                    if (vector_audio::shared::ptt
-                        == sf::Keyboard::Scan::Unknown) {
-                        spdlog::warn("Unknown scancode key when trying to "
-                                     "register PTT, falling back to key code");
-                        auto fallbackKey
-                            = event.key.code; // Fallback to key code
-                        if (fallbackKey != sf::Keyboard::Key::Unknown) {
+            if (event.type == SDL_KEYDOWN
+                && vector_audio::shared::capturePttFlag) {
+                auto keyPressed = event.key.keysym.scancode;
 
-                            vector_audio::shared::ptt
-                                = sf::Keyboard::delocalize(fallbackKey);
-                            vector_audio::shared::fallbackPtt = fallbackKey;
-                            auto keyName = static_cast<std::string>(
-                                sf::Keyboard::getDescription(
-                                    vector_audio::shared::ptt));
-                            spdlog::info("Registered PTT key through "
-                                         "delocalized logical key: {}",
-                                keyName);
-
-                        } else {
-                            spdlog::error(
-                                "Could not register PTT key, even with "
-                                "fallback.");
-                        }
-                    }
-
-                    vector_audio::shared::joyStickId = -1;
-                    vector_audio::shared::joyStickPtt = -1;
-                    vector_audio::Configuration::mConfig["user"]["joyStickId"]
-                        = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
-                        = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::mConfig["user"]["ptt"]
-                        = static_cast<int>(vector_audio::shared::ptt);
-                    vector_audio::Configuration::mConfig["user"]["fallbackPtt"]
-                        = static_cast<int>(vector_audio::shared::fallbackPtt);
-                    vector_audio::Configuration::write_config_async();
-                    vector_audio::shared::capturePttFlag = false;
+                vector_audio::shared::ptt
+                    = KeyboardUtil::convertFromSDLToSFML(keyPressed);
+                if (vector_audio::shared::ptt
+                    == sf::Keyboard::Scancode::Unknown) {
+                    spdlog::warn("Unknown scancode key when trying to"
+                                 "register PTT, falling back to key"
+                                 "code");
                 }
-            } else if (event.type == sf::Event::JoystickButtonPressed) {
 
-                if (vector_audio::shared::capturePttFlag) {
-                    vector_audio::shared::ptt = sf::Keyboard::Scan::Unknown;
-                    vector_audio::shared::fallbackPtt
-                        = sf::Keyboard::Key::Unknown;
-
-                    vector_audio::shared::joyStickId
-                        = event.joystickButton.joystickId;
-                    vector_audio::shared::joyStickPtt
-                        = event.joystickButton.button;
-
-                    vector_audio::Configuration::mConfig["user"]["joyStickId"]
-                        = vector_audio::shared::joyStickId;
-                    vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
-                        = vector_audio::shared::joyStickPtt;
-                    vector_audio::Configuration::mConfig["user"]["ptt"]
-                        = static_cast<int>(vector_audio::shared::ptt);
-                    vector_audio::Configuration::write_config_async();
-                    vector_audio::shared::capturePttFlag = false;
-                }
+                vector_audio::shared::joyStickId = -1;
+                vector_audio::shared::joyStickPtt = -1;
+                vector_audio::Configuration::mConfig["user"]["joyStickId"]
+                    = vector_audio::shared::joyStickId;
+                vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
+                    = vector_audio::shared::joyStickPtt;
+                vector_audio::Configuration::mConfig["user"]["ptt"]
+                    = static_cast<int>(vector_audio::shared::ptt);
+                vector_audio::Configuration::write_config_async();
+                vector_audio::shared::capturePttFlag = false;
             }
 
-            if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
-                vector_audio::setAlwaysOnTop(
-                    window, vector_audio::shared::keepWindowOnTop);
-                alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+            if (event.type == SDL_JOYBUTTONDOWN
+                && vector_audio::shared::capturePttFlag) {
+                vector_audio::shared::ptt = sf::Keyboard::Scancode::Unknown;
+
+                vector_audio::shared::joyStickId = event.jbutton.which;
+                vector_audio::shared::joyStickPtt = event.jbutton.button;
+
+                vector_audio::Configuration::mConfig["user"]["joyStickId"]
+                    = vector_audio::shared::joyStickId;
+                vector_audio::Configuration::mConfig["user"]["joyStickPtt"]
+                    = vector_audio::shared::joyStickPtt;
+                vector_audio::Configuration::mConfig["user"]["ptt"]
+                    = static_cast<int>(vector_audio::shared::ptt);
+                vector_audio::Configuration::write_config_async();
+                vector_audio::shared::capturePttFlag = false;
             }
         }
 
-        ImGui::SFML::Update(window, deltaClock.restart());
+        if (vector_audio::shared::keepWindowOnTop != alwaysOnTop) {
+            vector_audio::setAlwaysOnTop(
+                window, vector_audio::shared::keepWindowOnTop);
+            alwaysOnTop = vector_audio::shared::keepWindowOnTop;
+        }
+
+        // Start the Dear ImGui frame
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
 
         if (!updaterInstance->need_update())
             currentApp->render_frame();
@@ -193,13 +216,35 @@ int main(int, char**)
 
         // ImGui::ShowDemoWindow(NULL);
 
-        // Rendering
-        window.clear();
-        ImGui::SFML::Render(window);
-        window.display();
+        ImGui::Render();
+        SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x,
+            io.DisplayFramebufferScale.y);
+        SDL_SetRenderDrawColor(renderer, static_cast<Uint8>(clearColor.x * 255),
+            static_cast<Uint8>(clearColor.y * 255),
+            static_cast<Uint8>(clearColor.z * 255),
+            static_cast<Uint8>(clearColor.w * 255));
+        SDL_RenderClear(renderer);
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+        SDL_RenderPresent(renderer);
     }
 
-    ImGui::SFML::Shutdown();
+    if (currentApp) {
+        currentApp.reset();
+    }
+
+    // Cleanup
+    ImGui_ImplSDLRenderer2_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
+    if (vector_audio::shared::pDeviceId != 0) {
+        SDL_CloseAudioDevice(vector_audio::shared::pDeviceId);
+        SDL_FreeWAV(vector_audio::shared::pDisconnectSoundWavBuffer);
+    }
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
 }

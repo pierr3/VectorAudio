@@ -2,9 +2,12 @@
 
 #include "afv-native/event.h"
 #include "shared.h"
+#include "util.h"
 
+#include <filesystem>
 #include <mutex>
 #include <optional>
+#include <SDL_joystick.h>
 #include <utility>
 
 namespace vector_audio::application {
@@ -58,10 +61,6 @@ App::App()
         shared::ptt = static_cast<sf::Keyboard::Scancode>(
             toml::find_or<int>(cfg::mConfig, "user", "ptt",
                 static_cast<int>(sf::Keyboard::Scan::Unknown)));
-
-        shared::fallbackPtt = static_cast<sf::Keyboard::Key>(
-            toml::find_or<int>(cfg::mConfig, "user", "fallbackPtt",
-                static_cast<int>(sf::Keyboard::Key::Unknown)));
 
         shared::joyStickId = static_cast<int>(
             toml::find_or<int>(cfg::mConfig, "user", "joyStickId", -1));
@@ -117,20 +116,24 @@ App::App()
     // Load the airport database async
     std::thread(&application::App::loadAirportsDatabaseAsync).detach();
 
-    auto soundPath = Configuration::get_resource_folder()
-        / std::filesystem::path("disconnect.wav");
-
-    if (!pDisconnectWarningSoundbuffer.loadFromFile(soundPath.string())) {
-        disconnectWarningSoundAvailable = false;
-        spdlog::error(
-            "Could not load warning sound file, disconnection will be silent");
+    if (disconnectWarningSoundAvailable) {
+        shared::pDeviceId = SDL_OpenAudioDevice(
+            vector_audio::shared::configOutputDeviceName.c_str(), 0,
+            &shared::pDisconnectSoundWavSpec, NULL, 0);
+        if (shared::pDeviceId == 0) {
+            disconnectWarningSoundAvailable = false;
+            spdlog::error(
+                "Could not open audio device for disconnect sound: {}",
+                SDL_GetError());
+        }
     }
-
-    pSoundPlayer.setBuffer(pDisconnectWarningSoundbuffer);
 }
 
 App::~App()
 {
+    if (pClient && pClient->IsAPIConnected()) {
+        disconnectAndCleanup();
+    }
     pSDK.reset();
     pClient.reset();
 }
@@ -404,16 +407,14 @@ void App::render_frame()
                 || shared::joyStickId != -1)) {
             if (shared::isPttOpen) {
                 if (shared::joyStickId != -1) {
-                    if (!sf::Joystick::isButtonPressed(
-                            shared::joyStickId, shared::joyStickPtt)) {
+                    auto jButton = SDL_JoystickGetButton(
+                        SDL_JoystickFromInstanceID(shared::joyStickId),
+                        shared::joyStickPtt);
+                    if (jButton == 0) {
                         shared::isPttOpen = false;
                     }
                 } else {
-                    if (shared::fallbackPtt != sf::Keyboard::Unknown) {
-                        if (!sf::Keyboard::isKeyPressed(shared::fallbackPtt)) {
-                            shared::isPttOpen = false;
-                        }
-                    } else if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
+                    if (!sf::Keyboard::isKeyPressed(shared::ptt)) {
                         shared::isPttOpen = false;
                     }
                 }
@@ -421,16 +422,14 @@ void App::render_frame()
                 pClient->SetPtt(shared::isPttOpen);
             } else {
                 if (shared::joyStickId != -1) {
-                    if (sf::Joystick::isButtonPressed(
-                            shared::joyStickId, shared::joyStickPtt)) {
+                    auto jButton = SDL_JoystickGetButton(
+                        SDL_JoystickFromInstanceID(shared::joyStickId),
+                        shared::joyStickPtt);
+                    if (jButton == 1) {
                         shared::isPttOpen = true;
                     }
                 } else {
-                    if (shared::fallbackPtt != sf::Keyboard::Unknown) {
-                        if (sf::Keyboard::isKeyPressed(shared::fallbackPtt)) {
-                            shared::isPttOpen = true;
-                        }
-                    } else if (sf::Keyboard::isKeyPressed(shared::ptt)) {
+                    if (sf::Keyboard::isKeyPressed(shared::ptt)) {
                         shared::isPttOpen = true;
                     }
                 }
@@ -997,8 +996,14 @@ void App::playErrorSound()
     if (!disconnectWarningSoundAvailable) {
         return;
     }
-    // Load the warning sound for disconnection
-    pSoundPlayer.play();
+
+    int success = SDL_QueueAudio(shared::pDeviceId,
+        shared::pDisconnectSoundWavBuffer, shared::pDisconnectSoundWavLength);
+    if (success < 0) {
+        spdlog::error("Failed to queue disconnect sound: {}", SDL_GetError());
+        return;
+    }
+    SDL_PauseAudioDevice(shared::pDeviceId, 0);
 };
 
 void App::addNewStation(std::string stationCallsign)

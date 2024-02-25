@@ -110,6 +110,7 @@ inline static void apply_style()
 {
     ImGui::GetStyle().FrameRounding = 4.0F;
     ImGui::GetStyle().GrabRounding = 4.0F;
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0F);
 
     ImVec4* colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_Text] = ImVec4(0.95F, 0.96F, 0.98F, 1.00F);

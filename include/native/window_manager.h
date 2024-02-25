@@ -1,7 +1,7 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <SDL.h>
 
 namespace vector_audio {
-	void setAlwaysOnTop(sf::RenderWindow& window, bool alwaysOnTop);
+	void setAlwaysOnTop(SDL_Window* window, bool alwaysOnTop);
 }

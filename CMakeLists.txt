@@ -66,21 +66,22 @@ find_package(toml11 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(restinio CONFIG REQUIRED)
-find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
+find_package(semver CONFIG REQUIRED)
 find_package(Threads REQUIRED)
 find_package(absl CONFIG REQUIRED)
-find_package(SFML COMPONENTS system window graphics audio CONFIG REQUIRED)
+find_package(SFML COMPONENTS window system CONFIG REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
 
 set(APPLE_EXTRA_LIBS "")
 
 include_directories(    ${CMAKE_SOURCE_DIR}/include
                         ${CMAKE_SOURCE_DIR}/extern/imgui
                         ${CMAKE_SOURCE_DIR}/extern/PlatformFolders/sago
-                        ${OPENGL_INCLUDE_DIR}
-                        ${NEARGYE_SEMVER_INCLUDE_DIRS})
+                        ${OPENGL_INCLUDE_DIR})
 
 if (APPLE)
-    set(APPLE_EXTRA_LIBS src/native/osx_resources.mm src/native/window_manager.mm)
+    set(APPLE_EXTRA_LIBS src/native/osx_resources.mm)
 endif()
 
 if(WIN32)
@@ -94,9 +95,10 @@ add_executable(vector_audio ${GUI_TYPE} src/main.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_tables.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_draw.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_widgets.cpp
-                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui-SFML.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_demo.cpp
                 ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_stdlib.cpp
+                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_sdlrenderer2.cpp
+                ${CMAKE_SOURCE_DIR}/extern/imgui/imgui_impl_sdl2.cpp
                 ${CMAKE_SOURCE_DIR}/src/application.cpp
                 ${CMAKE_SOURCE_DIR}/src/config.cpp
                 ${CMAKE_SOURCE_DIR}/src/updater.cpp
@@ -162,14 +164,18 @@ endif()
 target_link_libraries(vector_audio
     PRIVATE
     OpenSSL::SSL OpenSSL::Crypto 
-    sfml-system sfml-window sfml-graphics sfml-audio
+    sfml-system sfml-window
     toml11::toml11
+    semver::semver
     ${LIB_AFV}
     nlohmann_json nlohmann_json::nlohmann_json
     restinio::restinio
     httplib::httplib
     Threads::Threads
     absl::strings
+    $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+    $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+    $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
     ${OPENGL_LIBRARY})
 
 if (WIN32)

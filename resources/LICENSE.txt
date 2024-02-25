@@ -1487,7 +1487,7 @@ Sound Effect by <a href="https://pixabay.com/users/universfield-28281460/?utm_so
 libflac_arm64-osx
 
 Copyright (C) 2000-2009  Josh Coalson
-Copyright (C) 2011-2022  Xiph.Org Foundation
+Copyright (C) 2011-2023  Xiph.Org Foundation
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
@@ -1569,27 +1569,34 @@ SOFTWARE.
 
 egl-registry_arm64-osx
 
-<?xml version="1.0" encoding="UTF-8"?>
-<para xmlns="http://docbook.org/ns/docbook" version="5.0">
-    <refsect3 xml:id="copyright">
-        <!-- <title>Copyright</title> -->
-        <imageobject>
-            <imagedata fileref="KhronosLogo.jpg" format="jpg"/>
-        </imageobject>
-        <para>
-            Copyright &#169; 2003-2014 The Khronos Group Inc.
-            Permission is hereby granted, free of charge, to any person obtaining a
-            copy of this software and/or associated documentation files (the
-            "Materials"), to deal in the Materials without restriction, including
-            without limitation the rights to use, copy, modify, merge, publish,
-            distribute, sublicense, and/or sell copies of the Materials, and to
-            permit persons to whom the Materials are furnished to do so, subject to
-            the condition that this copyright notice and permission notice shall be included
-            in all copies or substantial portions of the Materials.
-        </para>
-    </refsect3>
-</para>
+## include/KHR/khrplatform.h
 
+Copyright (c) 2008-2018 The Khronos Group Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and/or associated documentation files (the
+"Materials"), to deal in the Materials without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Materials, and to
+permit persons to whom the Materials are furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Materials.
+
+THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+
+## include/EGL/*
+## share/opengl/egl.xml
+
+Copyright 2013-2020 The Khronos Group Inc.
+SPDX-License-Identifier: Apache-2.0
 
 
 opengl-registry_x64-osx
@@ -2106,80 +2113,8 @@ bzip2/libbzip2 version 1.0.8 of 13 July 2019
 
 opengl-registry_arm64-osx
 
-# Copyright 2013-2020 The Khronos Group Inc.
-# SPDX-License-Identifier: Apache-2.0
-
-# Generator scripts and options
-# GENOPTS can be e.g. '-noprotect'
-
-PYFILES = genheaders.py reg.py
-GENOPTS =
-GENHEADERS = ./genheaders.py $(GENOPTS)
-
-# Generate all headers for GL / GLES / WGL / GLX
-# Different headers depend on different XML registry files
-# The $(GENHEADERS) script has targets for the additional headers
-#   $(API)/GL/gl.h
-#   $(API)/GL/glx.h
-#   $(API)/GL/wgl.h
-# but these are experimental and not supported by Khronos. OpenGL
-# drivers and SDKs provided by OS vendors and IHVs include their own
-# platform-specific versions of these headers, where appropriate.
-
-API	   = ../api
-GLHEADERS  = $(API)/GL/glext.h \
-	     $(API)/GL/glcorearb.h \
-	     $(API)/GLES/gl.h \
-	     $(API)/GLES/glext.h \
-	     $(API)/GLES2/gl2.h \
-	     $(API)/GLES2/gl2ext.h \
-	     $(API)/GLES3/gl3.h \
-	     $(API)/GLSC2/glsc2.h \
-	     $(API)/GLSC2/glsc2ext.h
-
-GLXHEADERS = $(API)/GL/glxext.h
-WGLHEADERS = $(API)/GL/wglext.h \
-	     $(API)/GL/wgl.h
-ALLHEADERS = $(GLHEADERS) $(GLXHEADERS) $(WGLHEADERS)
-
-# Generated files to clean up
-TEXDIRT = readme.aux readme.idx readme.ilg readme.ind readme.log readme.toc readme.out
-PYDIRT	= diag.txt dumpReg.txt errwarn.txt reg.pyc
-
-default: $(ALLHEADERS)
-
-$(GLHEADERS): gl.xml $(PYFILES)
-	$(GENHEADERS) $@
-
-$(GLXHEADERS): glx.xml $(PYFILES)
-	$(GENHEADERS) $@ -registry glx.xml
-
-$(WGLHEADERS): wgl.xml $(PYFILES)
-	$(GENHEADERS) $@ -registry wgl.xml
-
-# Generate Relax NG XML schema from Compact schema
-
-registry.rng: registry.rnc
-	trang registry.rnc registry.rng
-
-# Verify all registry XML files against the schema
-
-validate:
-	jing -c registry.rnc gl.xml
-	jing -c registry.rnc glx.xml
-	jing -c registry.rnc wgl.xml
-
-# Documentation target
-
-readme.pdf: readme.tex
-	touch readme.ind
-	pdflatex readme.tex
-	pdflatex readme.tex
-	makeindex readme.idx
-	pdflatex readme.tex
-
-clean:
-	-rm -f $(PYDIRT) $(TEXDIRT)
+The files installed by the `opengl-registry` port are using different licenses.
+Each file defines its license in a comment at the top of the file.
 
 
 http-parser_arm64-osx
@@ -2203,6 +2138,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE. 
+
+
+expected-lite_arm64-osx
+
+Boost Software License - Version 1.0 - August 17th, 2003
+
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of the software and accompanying documentation covered by
+this license (the "Software") to use, reproduce, display, distribute,
+execute, and transmit the Software, and to prepare derivative works of the
+Software, and to permit third-parties to whom the Software is furnished to
+do so, all subject to the following:
+
+The copyright notices in the Software and this entire statement, including
+the above license grant, this restriction and the following disclaimer,
+must be included in all copies of the Software, in whole or in part, and
+all derivative works of the Software, unless such copies or derivative
+works are solely in the form of machine-executable object code generated by
+a source language processor.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
 
 
 toml11_arm64-osx
@@ -2255,6 +2217,28 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+sdl2_arm64-osx
+
+Copyright (C) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+  
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+  
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required. 
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+
 
 
 openal-soft_x64-osx
@@ -3403,6 +3387,32 @@ Copyright notice:
   jloup@gzip.org          madler@alumni.caltech.edu
 
 
+llhttp_arm64-osx
+
+This software is licensed under the MIT License.
+
+Copyright Fedor Indutny, 2018.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 bzip2_x64-osx
 
 
@@ -3457,8 +3467,8 @@ COPYRIGHT NOTICE, DISCLAIMER, and LICENSE
 PNG Reference Library License version 2
 ---------------------------------------
 
- * Copyright (c) 1995-2022 The PNG Reference Library Authors.
- * Copyright (c) 2018-2022 Cosmin Truta.
+ * Copyright (c) 1995-2023 The PNG Reference Library Authors.
+ * Copyright (c) 2018-2023 Cosmin Truta.
  * Copyright (c) 2000-2002, 2004, 2006-2018 Glenn Randers-Pehrson.
  * Copyright (c) 1996-1997 Andreas Dilger.
  * Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.
@@ -3777,6 +3787,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+sdl2-image_arm64-osx
+
+Copyright (C) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+
+
 spdlog_arm64-osx
 
 The MIT License (MIT)
@@ -3803,7 +3834,7 @@ THE SOFTWARE.
 
 -- NOTE: Third party dependency used by this software --
 This software depends on the fmt lib (MIT License),
-and users must comply to its license: https://github.com/fmtlib/fmt/blob/master/LICENSE.rst
+and users must comply to its license: https://raw.githubusercontent.com/fmtlib/fmt/master/LICENSE
 
 
 
@@ -4450,9 +4481,11 @@ THE SOFTWARE.
 
 curl_arm64-osx
 
+COPYING:
+
 COPYRIGHT AND PERMISSION NOTICE
 
-Copyright (c) 1996 - 2023, Daniel Stenberg, <daniel@haxx.se>, and many
+Copyright (c) 1996 - 2024, Daniel Stenberg, <daniel@haxx.se>, and many
 contributors, see the THANKS file.
 
 All rights reserved.
@@ -4472,6 +4505,74 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 Except as contained in this notice, the name of a copyright holder shall not
 be used in advertising or otherwise to promote the sale, use or other dealings
 in this Software without prior written authorization of the copyright holder.
+
+
+krb5.c Notice:
+
+/* GSSAPI/krb5 support for FTP - loosely based on old krb4.c
+ *
+ * Copyright (c) 1995, 1996, 1997, 1998, 1999 Kungliga Tekniska Högskolan
+ * (Royal Institute of Technology, Stockholm, Sweden).
+ * Copyright (C) Daniel Stenberg
+ * All rights reserved.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the Institute nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.  */
+
+
+
+inet_ntop.c and inet_pton.c Notice:
+
+/*
+ * Copyright (C) 1996-2022  Internet Software Consortium.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM
+ * DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL
+ * INTERNET SOFTWARE CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT,
+ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING
+ * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+ * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+ * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ *
+ * SPDX-License-Identifier: ISC
+ */
+/*
+ * Original code by Paul Vixie. "curlified" by Gisle Vanem.
+ */
+
+
+
 
 
 cpp-httplib_x64-osx
@@ -4591,11 +4692,15 @@ The contributed  BDF and PCF  drivers come  with a license  similar to
 that  of the  X Window  System.   It is  compatible to  the above  two
 licenses (see files `src/bdf/README`  and `src/pcf/README`).  The same
 holds   for   the   source    code   files   `src/base/fthash.c`   and
-`include/freetype/internal/fthash.h`; they wer part  of the BDF driver
+`include/freetype/internal/fthash.h`; they were part of the BDF driver
 in earlier FreeType versions.
 
 The gzip  module uses the  zlib license (see  `src/gzip/zlib.h`) which
 too is compatible to the above two licenses.
+
+The files `src/autofit/ft-hb.c` and `src/autofit/ft-hb.h` contain code
+taken almost  verbatim from the  HarfBuzz file `hb-ft.cc`,  which uses
+the 'Old MIT' license, compatible to the above two licenses.
 
 The  MD5 checksum  support  (only used  for  debugging in  development
 builds) is in the public domain.

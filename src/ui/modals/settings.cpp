@@ -165,8 +165,7 @@ void vector_audio::ui::modals::Settings::render(
             if (shared::ptt == sf::Keyboard::Scan::Unknown
                 && shared::joyStickId == -1) {
                 pttKeyName = "Not set";
-            } else if (shared::ptt != sf::Keyboard::Scan::Unknown
-                || shared::fallbackPtt != sf::Keyboard::Unknown) {
+            } else if (shared::ptt != sf::Keyboard::Scan::Unknown) {
 #ifdef SFML_SYSTEM_WINDOWS
                 auto keyDesc = vector_audio::native::win32::get_key_description(
                     shared::ptt);
@@ -313,6 +312,23 @@ void vector_audio::ui::modals::Settings::render(
                         vector_audio::Configuration::mConfig["audio"]
                                                             ["output_device"]
                             = vector_audio::shared::configOutputDeviceName;
+
+                        if (disconnectWarningSoundAvailable) {
+                            if (shared::pDeviceId != 0) {
+                                SDL_CloseAudioDevice(shared::pDeviceId);
+                            }
+                            shared::pDeviceId = SDL_OpenAudioDevice(
+                                vector_audio::shared::configOutputDeviceName
+                                    .c_str(),
+                                0, &shared::pDisconnectSoundWavSpec, NULL, 0);
+                        }
+
+                        if (shared::pDeviceId == 0) {
+                            disconnectWarningSoundAvailable = false;
+                            spdlog::error("Could not open audio device for "
+                                          "disconnect sound: {}",
+                                SDL_GetError());
+                        }
                     }
                 }
 
