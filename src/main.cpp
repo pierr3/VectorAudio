@@ -90,7 +90,7 @@ int main(int, char**)
         / std::filesystem::path("disconnect.wav");
 
     if (std::filesystem::exists(soundPath)) {
-        auto* ret = SDL_LoadWAV(soundPath.c_str(),
+        auto* ret = SDL_LoadWAV(soundPath.string().c_str(),
             &vector_audio::shared::pDisconnectSoundWavSpec,
             &vector_audio::shared::pDisconnectSoundWavBuffer,
             &vector_audio::shared::pDisconnectSoundWavLength);
