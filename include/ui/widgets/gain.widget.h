@@ -15,7 +15,7 @@ public:
     {
         ImGui::PushItemWidth(-1.0);
         ImGui::Text("Radio Gain");
-        style::push_disabled_on(isVoiceConnected);
+        style::push_disabled_on(!isVoiceConnected);
         if (ImGui::SliderInt(
                 "##Radio Gain", &shared::radioGain, 0, 200, "%.3i %%")) {
             if (isVoiceConnected) {
@@ -23,7 +23,7 @@ public:
             }
         }
         ImGui::PopItemWidth();
-        style::pop_disabled_on(isVoiceConnected);
+        style::pop_disabled_on(!isVoiceConnected);
     }
 };
 }

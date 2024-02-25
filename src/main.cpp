@@ -101,7 +101,7 @@ int main(int, char**)
         }
     } else {
         disconnectWarningSoundAvailable = false;
-        spdlog::warn("Disconnect sound file not found: {}", soundPath.c_str());
+        spdlog::warn("Disconnect sound file not found: {}", soundPath.string().c_str());
     }
 
     // Setup Dear ImGui context
