@@ -73,10 +73,10 @@ int main(int, char**)
 
 #ifdef SFML_SYSTEM_WINDOWS
     std::string iconPath
-        = vector_audio::Configuration::get_resource_folder() / "icon_win.png";
+        = (vector_audio::Configuration::get_resource_folder() / std::filesystem::path("icon_win.png")).string();
 #else
     std::string iconPath
-        = vector_audio::Configuration::get_resource_folder() / "icon_mac.png";
+        = (vector_audio::Configuration::get_resource_folder() / std::filesystem::path("icon_mac.png")).string();
 #endif
 
     SDL_Surface* icon = IMG_Load(iconPath.c_str());
