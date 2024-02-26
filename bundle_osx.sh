@@ -43,5 +43,5 @@ cp -R resources/libafv_native.framework/ build/VectorAudio.app/Contents/Framewor
 
 xattr -cr build/VectorAudio.app
 if [ $# -eq 1 ]; then
-  codesign --timestamp -s "Developer ID Application" build/VectorAudio.app
+  codesign --deep --timestamp -s "Developer ID Application" build/VectorAudio.app
 fi
