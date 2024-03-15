@@ -29,11 +29,10 @@ jobs:
           cat VERSION_BETA > VERSION
       - name: Install SFML dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config desktop-file-utils
           sudo add-apt-repository universe
           sudo apt-get update
-          sudo apt install libfuse2
+          sudo apt-get install libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev libxcursor-dev freeglut3-dev pkg-config desktop-file-utils libfuse2 cmake ninja build-essentials
+          sudo apt-get upgrade
       - name: Configure cmake
         run: |
           cmake -S . -B build/ -DVCPKG_BUILD_TYPE=release -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
