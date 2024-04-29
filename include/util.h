@@ -168,37 +168,45 @@ inline static int findAudioAPIorDefault()
     return -1;
 }
 
-inline static std::string findHeadsetInputDeviceOrDefault()
-{
-    if (std::find(vector_audio::shared::availableInputDevices.begin(),
-            vector_audio::shared::availableInputDevices.end(),
-            vector_audio::shared::configInputDeviceName)
-        != vector_audio::shared::availableInputDevices.end())
-        return vector_audio::shared::configInputDeviceName;
-
-    return vector_audio::shared::availableInputDevices.front();
-}
-
 inline static bool disconnectWarningSoundAvailable = true;
 
-inline static std::string findHeadsetOutputDeviceOrDefault()
+inline static std::string findGenericDeviceOrDefault(
+    const std::vector<afv_native::api::AudioInterface>& deviceList,
+    const std::string& deviceId)
 {
-    if (std::find(vector_audio::shared::availableOutputDevices.begin(),
-            vector_audio::shared::availableOutputDevices.end(),
-            vector_audio::shared::configOutputDeviceName)
-        != vector_audio::shared::availableOutputDevices.end())
-        return vector_audio::shared::configOutputDeviceName;
+    for (const auto& device : deviceList) {
+        if (device.id == deviceId)
+            return device.id;
+    }
 
-    return vector_audio::shared::availableOutputDevices.front();
+    for (const auto& device : deviceList) {
+        if (device.isDefault)
+            return device.id;
+    }
+
+    if (deviceList.empty())
+        return "";
+
+    return deviceList.front().id;
+}
+
+inline static std::string findHeadsetInputDeviceIdOrDefault()
+{
+    return findGenericDeviceOrDefault(
+        vector_audio::shared::availableInputDevices,
+        vector_audio::shared::configInputDeviceId);
+}
+
+inline static std::string findHeadsetOutputDeviceIdOrDefault()
+{
+    return findGenericDeviceOrDefault(
+        vector_audio::shared::availableOutputDevices,
+        vector_audio::shared::configOutputDeviceId);
 }
 
 inline static std::string findSpeakerOutputDeviceOrDefault()
 {
-    if (std::find(vector_audio::shared::availableOutputDevices.begin(),
-            vector_audio::shared::availableOutputDevices.end(),
-            vector_audio::shared::configSpeakerDeviceName)
-        != vector_audio::shared::availableOutputDevices.end())
-        return vector_audio::shared::configSpeakerDeviceName;
-
-    return vector_audio::shared::availableOutputDevices.front();
+    return findGenericDeviceOrDefault(
+        vector_audio::shared::availableOutputDevices,
+        vector_audio::shared::configSpeakerDeviceId);
 }

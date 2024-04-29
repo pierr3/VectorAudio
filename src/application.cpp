@@ -75,11 +75,11 @@ App::App()
                 shared::mAudioApi = driver.first;
         }
 
-        shared::configInputDeviceName = toml::find_or<std::string>(
+        shared::configInputDeviceId = toml::find_or<std::string>(
             cfg::mConfig, "audio", "input_device", std::string(""));
-        shared::configOutputDeviceName = toml::find_or<std::string>(
+        shared::configOutputDeviceId = toml::find_or<std::string>(
             cfg::mConfig, "audio", "output_device", std::string(""));
-        shared::configSpeakerDeviceName = toml::find_or<std::string>(
+        shared::configSpeakerDeviceId = toml::find_or<std::string>(
             cfg::mConfig, "audio", "speaker_device", std::string(""));
         shared::headsetOutputChannel
             = toml::find_or<int>(cfg::mConfig, "audio", "headset_channel", 0);
@@ -118,7 +118,7 @@ App::App()
 
     if (disconnectWarningSoundAvailable) {
         shared::pDeviceId = SDL_OpenAudioDevice(
-            vector_audio::shared::configOutputDeviceName.c_str(), 0,
+            vector_audio::shared::configOutputDeviceId.c_str(), 0,
             &shared::pDisconnectSoundWavSpec, NULL, 0);
         if (shared::pDeviceId == 0) {
             disconnectWarningSoundAvailable = false;
@@ -303,9 +303,10 @@ void App::eventCallback(
     }
 
     if (evt == afv_native::ClientEventType::AudioError) {
-        errorModal("Error starting audio devices.\nPlease check "
-                   "your log file for details.\nCheck your audio config!");
-        disconnectAndCleanup();
+        spdlog::error("Error starting audio devices.");
+        // errorModal("Error starting audio devices.\nPlease check "
+        //            "your log file for details.\nCheck your audio config!");
+        // disconnectAndCleanup();
     }
 
     if (evt == afv_native::ClientEventType::VoiceServerDisconnected) {
@@ -335,9 +336,11 @@ void App::eventCallback(
     }
 
     if (evt == afv_native::ClientEventType::AudioDeviceStoppedError) {
-        errorModal("The audio device " + *reinterpret_cast<std::string*>(data)
-            + " has stopped working"
-              ", check if it is still physically connected.");
+        spdlog::error("An audio device has stopped working");
+        // errorModal("The audio device " +
+        // *reinterpret_cast<std::string*>(data)
+        //     + " has stopped working"
+        //       ", check if it is still physically connected.");
         disconnectAndCleanup();
         playErrorSound();
     }
@@ -535,9 +538,9 @@ void App::render_frame()
                 }
 
                 pClient->SetAudioApi(findAudioAPIorDefault());
-                pClient->SetAudioInputDevice(findHeadsetInputDeviceOrDefault());
+                pClient->SetAudioInputDevice(findHeadsetInputDeviceIdOrDefault());
                 pClient->SetAudioOutputDevice(
-                    findHeadsetOutputDeviceOrDefault());
+                    findHeadsetOutputDeviceIdOrDefault());
                 pClient->SetAudioSpeakersOutputDevice(
                     findSpeakerOutputDeviceOrDefault());
                 pClient->SetHardware(shared::hardware);

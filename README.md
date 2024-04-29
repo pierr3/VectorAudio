@@ -2,6 +2,12 @@
 
 A cross-platform Audio-For-VATSIM ATC Client for macOS, Windows and Linux support (audio only)
 
+## NOTE
+
+***GOING FORWARD, VECTORAUDIO WILL NOT BE ACTIVELY DEVELOPPED. HEAD OVER TO ITS REPLACEMENT, [TrackAudio](https://github.com/pierr3/TrackAudio) FOR FUTURE UPDATES AND AN IMPROVED EXPERIENCE WITH MORE FEATURES AND STABILITY.***
+
+## Screenshot
+
 ![screengrab of application](https://raw.githubusercontent.com/pierr3/VectorAudio/main/splash.png)
 
 ## Releases

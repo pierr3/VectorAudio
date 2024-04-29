@@ -274,18 +274,19 @@ void vector_audio::ui::modals::Settings::render(
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo("##Input Device",
-                    vector_audio::shared::configInputDeviceName.c_str())) {
+                    vector_audio::shared::configInputDeviceId.c_str())) {
 
                 auto mAudioDrivers
                     = vector_audio::shared::availableInputDevices;
-                for (const auto& driver : mAudioDrivers) {
-                    if (ImGui::Selectable(driver.c_str(),
-                            vector_audio::shared::configInputDeviceName
-                                == driver)) {
-                        vector_audio::shared::configInputDeviceName = driver;
+                for (const auto& interface : mAudioDrivers) {
+                    if (ImGui::Selectable(interface.name.c_str(),
+                            vector_audio::shared::configInputDeviceId
+                                == interface.id)) {
+                        vector_audio::shared::configInputDeviceId
+                            = interface.id;
                         vector_audio::Configuration::mConfig["audio"]
                                                             ["input_device"]
-                            = vector_audio::shared::configInputDeviceName;
+                            = vector_audio::shared::configInputDeviceId;
                     }
                 }
 
@@ -300,25 +301,26 @@ void vector_audio::ui::modals::Settings::render(
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo("##Headset Device",
-                    vector_audio::shared::configOutputDeviceName.c_str())) {
+                    vector_audio::shared::configOutputDeviceId.c_str())) {
 
                 auto mAudioDrivers
                     = vector_audio::shared::availableOutputDevices;
-                for (const auto& driver : mAudioDrivers) {
-                    if (ImGui::Selectable(driver.c_str(),
-                            vector_audio::shared::configOutputDeviceName
-                                == driver)) {
-                        vector_audio::shared::configOutputDeviceName = driver;
+                for (const auto& interface : mAudioDrivers) {
+                    if (ImGui::Selectable(interface.name.c_str(),
+                            vector_audio::shared::configOutputDeviceId
+                                == interface.id)) {
+                        vector_audio::shared::configOutputDeviceId
+                            = interface.id;
                         vector_audio::Configuration::mConfig["audio"]
                                                             ["output_device"]
-                            = vector_audio::shared::configOutputDeviceName;
+                            = vector_audio::shared::configOutputDeviceId;
 
                         if (disconnectWarningSoundAvailable) {
                             if (shared::pDeviceId != 0) {
                                 SDL_CloseAudioDevice(shared::pDeviceId);
                             }
                             shared::pDeviceId = SDL_OpenAudioDevice(
-                                vector_audio::shared::configOutputDeviceName
+                                vector_audio::shared::configOutputDeviceId
                                     .c_str(),
                                 0, &shared::pDisconnectSoundWavSpec, NULL, 0);
                         }
@@ -376,18 +378,19 @@ void vector_audio::ui::modals::Settings::render(
 
             ImGui::PushItemWidth(-1.0F);
             if (ImGui::BeginCombo("##Speaker Device",
-                    vector_audio::shared::configSpeakerDeviceName.c_str())) {
+                    vector_audio::shared::configSpeakerDeviceId.c_str())) {
 
                 auto mAudioDrivers
                     = vector_audio::shared::availableOutputDevices;
-                for (const auto& driver : mAudioDrivers) {
-                    if (ImGui::Selectable(driver.c_str(),
-                            vector_audio::shared::configSpeakerDeviceName
-                                == driver)) {
-                        vector_audio::shared::configSpeakerDeviceName = driver;
+                for (const auto& interface : mAudioDrivers) {
+                    if (ImGui::Selectable(interface.name.c_str(),
+                            vector_audio::shared::configSpeakerDeviceId
+                                == interface.id)) {
+                        vector_audio::shared::configSpeakerDeviceId
+                            = interface.id;
                         vector_audio::Configuration::mConfig["audio"]
                                                             ["speaker_device"]
-                            = vector_audio::shared::configSpeakerDeviceName;
+                            = vector_audio::shared::configSpeakerDeviceId;
                     }
                 }
 
@@ -406,13 +409,10 @@ void vector_audio::ui::modals::Settings::render(
                 if (mClient->IsAudioRunning()) {
                     mClient->StopAudio();
                 } else {
-                    mClient->SetAudioApi(vector_audio::shared::mAudioApi);
-                    mClient->SetAudioInputDevice(
-                        vector_audio::shared::configInputDeviceName);
-                    mClient->SetAudioOutputDevice(
-                        vector_audio::shared::configOutputDeviceName);
-                    mClient->SetAudioSpeakersOutputDevice(
-                        vector_audio::shared::configSpeakerDeviceName);
+                    mClient->SetAudioApi(-1);
+                    mClient->SetAudioInputDevice("");
+                    mClient->SetAudioOutputDevice("");
+                    mClient->SetAudioSpeakersOutputDevice("");
                     mClient->StartAudio();
                 }
             }

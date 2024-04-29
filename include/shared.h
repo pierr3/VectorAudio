@@ -1,4 +1,5 @@
 #pragma once
+#include "afv-native/atcClientWrapper.h"
 #include "ns/station.h"
 #include "semver.hpp"
 
@@ -41,9 +42,9 @@ const int kUnicomFrequency = 122800000;
 
 inline unsigned int mAudioApi = -1;
 inline std::string configAudioApi;
-inline std::string configInputDeviceName;
-inline std::string configOutputDeviceName;
-inline std::string configSpeakerDeviceName;
+inline std::string configInputDeviceId;
+inline std::string configOutputDeviceId;
+inline std::string configSpeakerDeviceId;
 inline int headsetOutputChannel = 0;
 
 inline bool capturePttFlag = false;
@@ -81,8 +82,8 @@ inline int radioGain = 100;
 
 // Temp settings for config window
 inline std::map<unsigned int, std::string> availableAudioAPI;
-inline std::vector<std::string> availableInputDevices;
-inline std::vector<std::string> availableOutputDevices;
+inline std::vector<afv_native::api::AudioInterface> availableInputDevices;
+inline std::vector<afv_native::api::AudioInterface> availableOutputDevices;
 
 inline static std::mutex transmittingMutex;
 inline static std::string currentlyTransmittingApiData;

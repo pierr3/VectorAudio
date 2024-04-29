@@ -44,7 +44,7 @@ int main(int, char**)
 
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER
-            | SDL_INIT_AUDIO | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK)
+             | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK)
         != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
